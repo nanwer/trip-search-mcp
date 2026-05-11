@@ -1,0 +1,10 @@
+{
+  "errors": [
+    {
+      "code": 38187,
+      "title": "Invalid HTTP header",
+      "detail": "Missing or invalid bearer token",
+      "status": 401
+    }
+  ]
+}

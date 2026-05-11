@@ -1,0 +1,151 @@
+{
+  "meta": {"count": 2},
+  "data": [
+    {
+      "type": "flight-offer",
+      "id": "1",
+      "source": "GDS",
+      "instantTicketingRequired": false,
+      "nonHomogeneous": false,
+      "oneWay": false,
+      "lastTicketingDate": "2026-05-15",
+      "numberOfBookableSeats": 7,
+      "itineraries": [
+        {
+          "duration": "PT11H15M",
+          "segments": [
+            {
+              "id": "1",
+              "carrierCode": "AY",
+              "number": "15",
+              "aircraft": {"code": "359"},
+              "departure": {"iataCode": "HEL", "terminal": "2", "at": "2026-05-18T15:30:00"},
+              "arrival": {"iataCode": "JFK", "terminal": "1", "at": "2026-05-18T17:45:00"},
+              "duration": "PT9H15M",
+              "numberOfStops": 0,
+              "blacklistedInEU": false
+            },
+            {
+              "id": "2",
+              "carrierCode": "AA",
+              "number": "423",
+              "aircraft": {"code": "738"},
+              "departure": {"iataCode": "JFK", "terminal": "8", "at": "2026-05-18T20:00:00"},
+              "arrival": {"iataCode": "IAD", "at": "2026-05-18T21:30:00"},
+              "duration": "PT1H30M",
+              "numberOfStops": 0,
+              "operating": {"carrierCode": "AA"},
+              "blacklistedInEU": false
+            }
+          ]
+        },
+        {
+          "duration": "PT10H45M",
+          "segments": [
+            {
+              "id": "3",
+              "carrierCode": "AA",
+              "number": "424",
+              "aircraft": {"code": "738"},
+              "departure": {"iataCode": "IAD", "at": "2026-05-29T07:00:00"},
+              "arrival": {"iataCode": "JFK", "terminal": "8", "at": "2026-05-29T08:30:00"},
+              "duration": "PT1H30M",
+              "numberOfStops": 0,
+              "blacklistedInEU": false
+            },
+            {
+              "id": "4",
+              "carrierCode": "AY",
+              "number": "16",
+              "aircraft": {"code": "359"},
+              "departure": {"iataCode": "JFK", "terminal": "1", "at": "2026-05-29T11:00:00"},
+              "arrival": {"iataCode": "HEL", "terminal": "2", "at": "2026-05-30T03:45:00"},
+              "duration": "PT8H45M",
+              "numberOfStops": 0,
+              "blacklistedInEU": false
+            }
+          ]
+        }
+      ],
+      "price": {
+        "currency": "USD",
+        "total": "742.18",
+        "base": "523.00",
+        "fees": [{"amount": "0.00", "type": "SUPPLIER"}],
+        "grandTotal": "742.18"
+      },
+      "pricingOptions": {"fareType": ["PUBLISHED"], "includedCheckedBagsOnly": true},
+      "validatingAirlineCodes": ["AY"],
+      "travelerPricings": [
+        {
+          "travelerId": "1",
+          "fareOption": "STANDARD",
+          "travelerType": "ADULT",
+          "price": {"currency": "USD", "total": "742.18", "base": "523.00"},
+          "fareDetailsBySegment": [
+            {"segmentId": "1", "cabin": "ECONOMY", "fareBasis": "VLOWFI", "class": "V", "includedCheckedBags": {"quantity": 1}},
+            {"segmentId": "2", "cabin": "ECONOMY", "fareBasis": "VLOWFI", "class": "V", "includedCheckedBags": {"quantity": 1}},
+            {"segmentId": "3", "cabin": "ECONOMY", "fareBasis": "VLOWFI", "class": "V", "includedCheckedBags": {"quantity": 1}},
+            {"segmentId": "4", "cabin": "ECONOMY", "fareBasis": "VLOWFI", "class": "V", "includedCheckedBags": {"quantity": 1}}
+          ]
+        }
+      ]
+    },
+    {
+      "type": "flight-offer",
+      "id": "2",
+      "source": "GDS",
+      "lastTicketingDate": "2026-05-15",
+      "numberOfBookableSeats": 4,
+      "itineraries": [
+        {
+          "duration": "PT10H30M",
+          "segments": [
+            {
+              "id": "10",
+              "carrierCode": "AY",
+              "number": "17",
+              "aircraft": {"code": "359"},
+              "departure": {"iataCode": "HEL", "terminal": "2", "at": "2026-05-18T13:00:00"},
+              "arrival": {"iataCode": "IAD", "at": "2026-05-18T17:30:00"},
+              "duration": "PT10H30M",
+              "numberOfStops": 0,
+              "blacklistedInEU": false
+            }
+          ]
+        },
+        {
+          "duration": "PT8H45M",
+          "segments": [
+            {
+              "id": "11",
+              "carrierCode": "AY",
+              "number": "18",
+              "aircraft": {"code": "359"},
+              "departure": {"iataCode": "IAD", "at": "2026-05-29T19:00:00"},
+              "arrival": {"iataCode": "HEL", "terminal": "2", "at": "2026-05-30T11:45:00"},
+              "duration": "PT8H45M",
+              "numberOfStops": 0,
+              "blacklistedInEU": false
+            }
+          ]
+        }
+      ],
+      "price": {"currency": "USD", "total": "920.00", "base": "680.00", "grandTotal": "920.00"},
+      "pricingOptions": {"fareType": ["PUBLISHED"], "includedCheckedBagsOnly": false},
+      "validatingAirlineCodes": ["AY"],
+      "travelerPricings": [
+        {
+          "travelerId": "1",
+          "fareOption": "STANDARD",
+          "travelerType": "ADULT",
+          "price": {"currency": "USD", "total": "920.00", "base": "680.00"},
+          "fareDetailsBySegment": [
+            {"segmentId": "10", "cabin": "ECONOMY", "fareBasis": "MLOWFI", "class": "M"},
+            {"segmentId": "11", "cabin": "ECONOMY", "fareBasis": "MLOWFI", "class": "M"}
+          ]
+        }
+      ]
+    }
+  ]
+}
