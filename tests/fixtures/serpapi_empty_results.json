@@ -1,0 +1,12 @@
+{
+  "search_metadata": {"status": "Success"},
+  "search_parameters": {
+    "engine": "google_flights",
+    "departure_id": "INV",
+    "arrival_id": "KUO",
+    "outbound_date": "2026-05-18",
+    "type": "2",
+    "adults": 1,
+    "currency": "USD"
+  }
+}

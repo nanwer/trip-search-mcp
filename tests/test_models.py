@@ -4,7 +4,6 @@ import pytest
 from pydantic import ValidationError
 
 from flights_mcp.models import (
-    AmadeusSearchResponse,
     CabinClass,
     FlightOffer,
     Itinerary,
@@ -20,17 +19,29 @@ NEXT_WEEK = TODAY + timedelta(days=7)
 
 
 def test_accepts_valid_round_trip():
+    # Round-trip max_results is capped at 5 because each result requires a
+    # follow-up call to fetch the return leg — see ROUND_TRIP_MAX_RESULTS.
     m = SearchFlightsInput(
         origin="HEL",
         destination="IAD",
         departure_date=TOMORROW.isoformat(),
         return_date=NEXT_WEEK.isoformat(),
         adults=2,
+        max_results=3,
     )
     assert m.origin == "HEL"
     assert m.cabin_class is CabinClass.ECONOMY
     assert m.currency == "USD"
-    assert m.max_results == 20
+    assert m.max_results == 3
+
+
+def test_accepts_valid_one_way_with_defaults():
+    m = SearchFlightsInput(
+        origin="HEL",
+        destination="IAD",
+        departure_date=TOMORROW.isoformat(),
+    )
+    assert m.max_results == 20  # one-way keeps the looser default
 
 
 def test_rejects_lowercase_iata():
@@ -76,7 +87,7 @@ def test_rejects_infants_exceeding_adults():
 
 
 def test_rejects_total_travelers_above_amadeus_limit():
-    # adults+children+infants must fit within Amadeus's 9-passenger search cap.
+    # adults+children+infants must fit within the provider's 9-passenger search cap.
     with pytest.raises(ValidationError):
         SearchFlightsInput(
             origin="HEL",
@@ -205,48 +216,47 @@ def test_itinerary_rejects_empty_segments():
 
 
 # ---------------------------------------------------------------------------
-# Task 6: raw Amadeus response models
+# Round-trip max_results cap (migration constraint)
 # ---------------------------------------------------------------------------
 
 
-def test_amadeus_search_response_parses_minimal_payload():
-    payload = {
-        "meta": {"count": 1},
-        "data": [{
-            "type": "flight-offer",
-            "id": "1",
-            "source": "GDS",
-            "lastTicketingDate": "2026-05-15",
-            "numberOfBookableSeats": 7,
-            "itineraries": [{
-                "duration": "PT10H30M",
-                "segments": [{
-                    "id": "1",
-                    "carrierCode": "AY",
-                    "number": "15",
-                    "departure": {"iataCode": "HEL", "at": "2026-05-18T15:30:00"},
-                    "arrival": {"iataCode": "JFK", "at": "2026-05-18T17:45:00"},
-                    "numberOfStops": 0,
-                }],
-            }],
-            "price": {"currency": "USD", "total": "850.50", "base": "700.00"},
-            "validatingAirlineCodes": ["AY"],
-            "travelerPricings": [{
-                "travelerId": "1",
-                "fareOption": "STANDARD",
-                "travelerType": "ADULT",
-                "price": {"currency": "USD", "total": "850.50", "base": "700.00"},
-                "fareDetailsBySegment": [{
-                    "segmentId": "1",
-                    "cabin": "ECONOMY",
-                    "fareBasis": "VLOWFI",
-                    "class": "V",
-                }],
-            }],
-        }],
-    }
-    parsed = AmadeusSearchResponse.model_validate(payload)
-    assert parsed.meta.count == 1
-    assert parsed.data[0].id == "1"
-    assert parsed.data[0].itineraries[0].segments[0].carrier_code == "AY"
-    assert parsed.data[0].price.total == "850.50"
+def test_round_trip_rejects_max_results_above_cap():
+    # Round-trip burns one upstream call per result; capped at 5.
+    with pytest.raises(ValidationError):
+        SearchFlightsInput(
+            origin="HEL",
+            destination="IAD",
+            departure_date=TOMORROW.isoformat(),
+            return_date=NEXT_WEEK.isoformat(),
+            max_results=6,
+        )
+
+
+def test_round_trip_accepts_max_results_at_cap():
+    m = SearchFlightsInput(
+        origin="HEL",
+        destination="IAD",
+        departure_date=TOMORROW.isoformat(),
+        return_date=NEXT_WEEK.isoformat(),
+        max_results=5,
+    )
+    assert m.max_results == 5
+
+
+def test_one_way_keeps_50_results_cap():
+    # One-way is a single upstream call; the 50 ceiling from Field(le=50) applies.
+    m = SearchFlightsInput(
+        origin="HEL",
+        destination="IAD",
+        departure_date=TOMORROW.isoformat(),
+        max_results=50,
+    )
+    assert m.max_results == 50
+
+    with pytest.raises(ValidationError):
+        SearchFlightsInput(
+            origin="HEL",
+            destination="IAD",
+            departure_date=TOMORROW.isoformat(),
+            max_results=51,
+        )

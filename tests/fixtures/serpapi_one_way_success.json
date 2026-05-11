@@ -1,0 +1,60 @@
+{
+  "search_metadata": {"status": "Success"},
+  "search_parameters": {
+    "engine": "google_flights",
+    "departure_id": "HEL",
+    "arrival_id": "IAD",
+    "outbound_date": "2026-05-18",
+    "type": "2",
+    "adults": 1,
+    "currency": "USD"
+  },
+  "best_flights": [
+    {
+      "type": "One way",
+      "total_duration": 630,
+      "price": 460,
+      "booking_token": "ONE_WAY_TOKEN_A",
+      "flights": [
+        {
+          "departure_airport": {"id": "HEL", "name": "Helsinki Airport", "time": "2026-05-18 13:00"},
+          "arrival_airport":   {"id": "IAD", "name": "Dulles International", "time": "2026-05-18 17:30"},
+          "duration": 630,
+          "airline": "Finnair",
+          "flight_number": "AY 17",
+          "travel_class": "Economy"
+        }
+      ],
+      "layovers": []
+    }
+  ],
+  "other_flights": [
+    {
+      "type": "One way",
+      "total_duration": 720,
+      "price": 410,
+      "booking_token": "ONE_WAY_TOKEN_B",
+      "flights": [
+        {
+          "departure_airport": {"id": "HEL", "name": "Helsinki Airport", "time": "2026-05-18 09:00"},
+          "arrival_airport":   {"id": "AMS", "name": "Schiphol", "time": "2026-05-18 10:30"},
+          "duration": 150,
+          "airline": "KLM",
+          "flight_number": "KL 1170",
+          "travel_class": "Economy"
+        },
+        {
+          "departure_airport": {"id": "AMS", "name": "Schiphol", "time": "2026-05-18 12:00"},
+          "arrival_airport":   {"id": "IAD", "name": "Dulles International", "time": "2026-05-18 14:30"},
+          "duration": 510,
+          "airline": "KLM",
+          "flight_number": "KL 651",
+          "travel_class": "Economy"
+        }
+      ],
+      "layovers": [
+        {"duration": 90, "id": "AMS", "name": "Schiphol"}
+      ]
+    }
+  ]
+}

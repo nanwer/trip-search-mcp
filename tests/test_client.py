@@ -1,187 +1,230 @@
 import httpx
 import pytest
 
-from flights_mcp.amadeus.client import AmadeusClient
 from flights_mcp.errors import ErrorCode, ToolError
 from flights_mcp.models import SearchFlightsInput
+from flights_mcp.serpapi.client import SerpAPIClient
 
 
-def _make_client(handler):
+def _make_client(handler) -> SerpAPIClient:
     transport = httpx.MockTransport(handler)
-    client = httpx.AsyncClient(transport=transport)
-    return AmadeusClient(
-        http=client,
-        base_url="https://test.api.amadeus.com",
-        client_id="id",
-        client_secret="sec",
-    )
+    http = httpx.AsyncClient(transport=transport)
+    return SerpAPIClient(http=http, api_key="fake-key")
 
 
-def _token_response() -> httpx.Response:
-    return httpx.Response(200, json={"access_token": "tok-1", "expires_in": 1800})
+def _ok(body: dict) -> httpx.Response:
+    return httpx.Response(200, json=body)
 
 
-async def test_search_returns_normalized_offers(synthetic_round_trip):
-    def handler(request: httpx.Request) -> httpx.Response:
-        if request.url.path.endswith("/oauth2/token"):
-            return _token_response()
-        return httpx.Response(200, json=synthetic_round_trip)
-
-    client = _make_client(handler)
-    inp = SearchFlightsInput(
-        origin="HEL", destination="IAD",
-        departure_date="2026-05-18", return_date="2026-05-29", adults=1,
-    )
-    offers = await client.search(inp)
-    assert len(offers) == 2
-    assert offers[0].offer_id == "1"
+# ----- one-way path ----------------------------------------------------------
 
 
-async def test_search_passes_max_param_to_amadeus(synthetic_round_trip):
+async def test_one_way_returns_normalized_offers(serpapi_one_way):
     captured = {}
 
     def handler(request: httpx.Request) -> httpx.Response:
-        if request.url.path.endswith("/oauth2/token"):
-            return _token_response()
         captured["params"] = dict(request.url.params)
-        return httpx.Response(200, json=synthetic_round_trip)
+        return _ok(serpapi_one_way)
 
     client = _make_client(handler)
-    inp = SearchFlightsInput(
-        origin="HEL", destination="IAD",
-        departure_date="2026-05-18", return_date="2026-05-29",
-        max_results=10,
+    params = SearchFlightsInput(
+        origin="HEL", destination="IAD", departure_date="2026-05-18",
     )
-    await client.search(inp)
-    assert captured["params"]["max"] == "10"
+    offers = await client.search(params)
+    assert len(offers) == 2
+    assert captured["params"]["type"] == "2"
+    assert captured["params"]["sort_by"] == "1"
+    assert captured["params"]["api_key"] == "fake-key"
 
 
-async def test_search_empty_data_raises_no_results(empty_results):
+async def test_one_way_empty_results_raises_no_results(serpapi_empty_results):
     def handler(request: httpx.Request) -> httpx.Response:
-        if request.url.path.endswith("/oauth2/token"):
-            return _token_response()
-        return httpx.Response(200, json=empty_results)
+        return _ok(serpapi_empty_results)
 
     client = _make_client(handler)
-    inp = SearchFlightsInput(origin="HEL", destination="IAD", departure_date="2026-05-18")
+    params = SearchFlightsInput(
+        origin="HEL", destination="IAD", departure_date="2026-05-18",
+    )
     with pytest.raises(ToolError) as exc:
-        await client.search(inp)
+        await client.search(params)
     assert exc.value.code is ErrorCode.NO_RESULTS
 
 
-async def test_search_429_with_quota_message_maps_to_quota_exceeded():
+async def test_one_way_respects_max_results(serpapi_one_way):
     def handler(request: httpx.Request) -> httpx.Response:
-        if request.url.path.endswith("/oauth2/token"):
-            return _token_response()
-        return httpx.Response(429, json={"errors": [{"code": 38194, "detail": "Monthly quota exceeded"}]})
+        return _ok(serpapi_one_way)
 
     client = _make_client(handler)
-    inp = SearchFlightsInput(origin="HEL", destination="IAD", departure_date="2026-05-18")
-    with pytest.raises(ToolError) as exc:
-        await client.search(inp)
-    assert exc.value.code is ErrorCode.QUOTA_EXCEEDED
-    assert exc.value.retryable is False  # quota is not retryable until next month
+    params = SearchFlightsInput(
+        origin="HEL", destination="IAD", departure_date="2026-05-18", max_results=1,
+    )
+    offers = await client.search(params)
+    assert len(offers) == 1
 
 
-async def test_search_429_transient_maps_to_rate_limited():
+# ----- round-trip path -------------------------------------------------------
+
+
+async def test_round_trip_makes_one_plus_n_calls(
+    serpapi_round_trip_outbound, serpapi_round_trip_return,
+):
+    """Two outbound options + max_results=2 → 1 outbound call + 2 return calls = 3 total."""
+    call_log = []
+
     def handler(request: httpx.Request) -> httpx.Response:
-        if request.url.path.endswith("/oauth2/token"):
-            return _token_response()
-        return httpx.Response(429, json={"errors": [{"detail": "Too many requests"}]})
+        params = dict(request.url.params)
+        call_log.append(params)
+        if "departure_token" in params:
+            return _ok(serpapi_round_trip_return)
+        return _ok(serpapi_round_trip_outbound)
 
     client = _make_client(handler)
-    inp = SearchFlightsInput(origin="HEL", destination="IAD", departure_date="2026-05-18")
+    params = SearchFlightsInput(
+        origin="HEL", destination="IAD",
+        departure_date="2026-05-18", return_date="2026-05-29", max_results=2,
+    )
+    offers = await client.search(params)
+
+    assert len(offers) == 2
+    assert len(call_log) == 3  # 1 outbound + 2 return-leg fetches
+    assert "departure_token" not in call_log[0]
+    assert call_log[1]["departure_token"] == "OUTBOUND_TOKEN_A"
+    assert call_log[2]["departure_token"] == "OUTBOUND_TOKEN_B"
+
+
+async def test_round_trip_max_results_clamps_to_outbound_options(
+    serpapi_round_trip_outbound, serpapi_round_trip_return,
+):
+    """If max_results > available outbound options, only existing options are expanded."""
+    def handler(request: httpx.Request) -> httpx.Response:
+        if "departure_token" in dict(request.url.params):
+            return _ok(serpapi_round_trip_return)
+        return _ok(serpapi_round_trip_outbound)
+
+    client = _make_client(handler)
+    params = SearchFlightsInput(
+        origin="HEL", destination="IAD",
+        departure_date="2026-05-18", return_date="2026-05-29", max_results=5,
+    )
+    offers = await client.search(params)
+    # Outbound fixture only has 2 options total (1 best + 1 other).
+    assert len(offers) == 2
+
+
+async def test_round_trip_no_outbound_options_raises_no_results(serpapi_empty_results):
+    def handler(request: httpx.Request) -> httpx.Response:
+        return _ok(serpapi_empty_results)
+
+    client = _make_client(handler)
+    params = SearchFlightsInput(
+        origin="HEL", destination="IAD",
+        departure_date="2026-05-18", return_date="2026-05-29", max_results=3,
+    )
     with pytest.raises(ToolError) as exc:
-        await client.search(inp)
+        await client.search(params)
+    assert exc.value.code is ErrorCode.NO_RESULTS
+
+
+async def test_round_trip_outbound_exists_but_no_returns(
+    serpapi_round_trip_outbound, serpapi_empty_results,
+):
+    """If every outbound has no matching return, surface NO_RESULTS."""
+    def handler(request: httpx.Request) -> httpx.Response:
+        if "departure_token" in dict(request.url.params):
+            return _ok(serpapi_empty_results)
+        return _ok(serpapi_round_trip_outbound)
+
+    client = _make_client(handler)
+    params = SearchFlightsInput(
+        origin="HEL", destination="IAD",
+        departure_date="2026-05-18", return_date="2026-05-29", max_results=3,
+    )
+    with pytest.raises(ToolError) as exc:
+        await client.search(params)
+    assert exc.value.code is ErrorCode.NO_RESULTS
+
+
+# ----- error mapping ---------------------------------------------------------
+
+
+async def test_search_401_maps_to_auth_failed():
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(401, json={"error": "Invalid API key"})
+
+    client = _make_client(handler)
+    params = SearchFlightsInput(
+        origin="HEL", destination="IAD", departure_date="2026-05-18",
+    )
+    with pytest.raises(ToolError) as exc:
+        await client.search(params)
+    assert exc.value.code is ErrorCode.AUTH_FAILED
+
+
+async def test_search_429_maps_to_rate_limited():
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(429, text="Too Many Requests")
+
+    client = _make_client(handler)
+    params = SearchFlightsInput(
+        origin="HEL", destination="IAD", departure_date="2026-05-18",
+    )
+    with pytest.raises(ToolError) as exc:
+        await client.search(params)
     assert exc.value.code is ErrorCode.RATE_LIMITED
     assert exc.value.retryable is True
 
 
 async def test_search_5xx_maps_to_upstream_error():
     def handler(request: httpx.Request) -> httpx.Response:
-        if request.url.path.endswith("/oauth2/token"):
-            return _token_response()
         return httpx.Response(503)
 
     client = _make_client(handler)
-    inp = SearchFlightsInput(origin="HEL", destination="IAD", departure_date="2026-05-18")
+    params = SearchFlightsInput(
+        origin="HEL", destination="IAD", departure_date="2026-05-18",
+    )
     with pytest.raises(ToolError) as exc:
-        await client.search(inp)
+        await client.search(params)
     assert exc.value.code is ErrorCode.UPSTREAM_ERROR
     assert exc.value.retryable is True
+
+
+async def test_search_body_error_invalid_key_maps_to_auth_failed(serpapi_auth_failed_body):
+    """SerpAPI sometimes returns a 200 with an `error` string in the body."""
+    def handler(request: httpx.Request) -> httpx.Response:
+        return _ok(serpapi_auth_failed_body)
+
+    client = _make_client(handler)
+    params = SearchFlightsInput(
+        origin="HEL", destination="IAD", departure_date="2026-05-18",
+    )
+    with pytest.raises(ToolError) as exc:
+        await client.search(params)
+    assert exc.value.code is ErrorCode.AUTH_FAILED
+
+
+async def test_search_body_error_quota_maps_to_quota_exceeded():
+    def handler(request: httpx.Request) -> httpx.Response:
+        return _ok({"error": "Your account has run out of searches for the month."})
+
+    client = _make_client(handler)
+    params = SearchFlightsInput(
+        origin="HEL", destination="IAD", departure_date="2026-05-18",
+    )
+    with pytest.raises(ToolError) as exc:
+        await client.search(params)
+    assert exc.value.code is ErrorCode.QUOTA_EXCEEDED
+    assert exc.value.retryable is False
 
 
 async def test_search_malformed_body_maps_to_upstream_error():
     def handler(request: httpx.Request) -> httpx.Response:
-        if request.url.path.endswith("/oauth2/token"):
-            return _token_response()
-        return httpx.Response(200, content=b"<html>gateway error</html>")
+        return httpx.Response(200, content=b"<html>not json</html>")
 
     client = _make_client(handler)
-    inp = SearchFlightsInput(origin="HEL", destination="IAD", departure_date="2026-05-18")
+    params = SearchFlightsInput(
+        origin="HEL", destination="IAD", departure_date="2026-05-18",
+    )
     with pytest.raises(ToolError) as exc:
-        await client.search(inp)
-    assert exc.value.code is ErrorCode.UPSTREAM_ERROR
-    assert exc.value.retryable is True
-
-
-async def test_search_quota_detected_by_code_even_when_detail_lacks_keyword():
-    """Amadeus's prose varies by region; the numeric code must be sufficient."""
-    def handler(request: httpx.Request) -> httpx.Response:
-        if request.url.path.endswith("/oauth2/token"):
-            return _token_response()
-        return httpx.Response(429, json={"errors": [{"code": 38194, "detail": "Limit reached"}]})
-
-    client = _make_client(handler)
-    inp = SearchFlightsInput(origin="HEL", destination="IAD", departure_date="2026-05-18")
-    with pytest.raises(ToolError) as exc:
-        await client.search(inp)
-    assert exc.value.code is ErrorCode.QUOTA_EXCEEDED
-
-
-async def test_search_malformed_offer_does_not_escape_as_raw_exception():
-    """A structurally invalid offer must surface as ToolError(UPSTREAM_ERROR),
-    not a raw IndexError/KeyError leaking through the tool boundary."""
-    # Empty validatingAirlineCodes would crash normalize_offers without the guard.
-    malformed = {
-        "meta": {"count": 1},
-        "data": [{
-            "type": "flight-offer",
-            "id": "1",
-            "source": "GDS",
-            "lastTicketingDate": "2026-05-15",
-            "numberOfBookableSeats": 7,
-            "itineraries": [{
-                "duration": "PT10H30M",
-                "segments": [{
-                    "id": "1",
-                    "carrierCode": "AY",
-                    "number": "15",
-                    "departure": {"iataCode": "HEL", "at": "2026-05-18T15:30:00"},
-                    "arrival": {"iataCode": "IAD", "at": "2026-05-19T01:00:00"},
-                    "numberOfStops": 0,
-                }],
-            }],
-            "price": {"currency": "USD", "total": "742.18", "base": "523.00"},
-            "validatingAirlineCodes": [],  # empty — normalize indexes [0]
-            "travelerPricings": [{
-                "travelerId": "1", "fareOption": "STANDARD", "travelerType": "ADULT",
-                "price": {"currency": "USD", "total": "742.18", "base": "523.00"},
-                "fareDetailsBySegment": [
-                    {"segmentId": "1", "cabin": "ECONOMY", "fareBasis": "VLOWFI", "class": "V"},
-                ],
-            }],
-        }],
-    }
-
-    def handler(request: httpx.Request) -> httpx.Response:
-        if request.url.path.endswith("/oauth2/token"):
-            return _token_response()
-        return httpx.Response(200, json=malformed)
-
-    client = _make_client(handler)
-    inp = SearchFlightsInput(origin="HEL", destination="IAD", departure_date="2026-05-18")
-    with pytest.raises(ToolError) as exc:
-        await client.search(inp)
+        await client.search(params)
     assert exc.value.code is ErrorCode.UPSTREAM_ERROR
     assert exc.value.retryable is True

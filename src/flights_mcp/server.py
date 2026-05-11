@@ -8,9 +8,9 @@ from typing import Any
 import httpx
 from fastmcp import FastMCP
 
-from flights_mcp.amadeus.client import AmadeusClient, base_url_for_env
 from flights_mcp.cache import TTLCache
 from flights_mcp.logging_config import configure_logging, log_event
+from flights_mcp.serpapi.client import SerpAPIClient
 from flights_mcp.tools.search_flights import TOOL_DESCRIPTION, search_flights
 
 _logger = configure_logging()
@@ -21,29 +21,21 @@ def _require_env(name: str) -> str:
     if not value:
         raise RuntimeError(
             f"Required environment variable {name!r} is not set. "
-            "Copy .env.example to .env and fill in Amadeus credentials, "
-            "or export the variables in your shell before running the server."
+            "Copy .env.example to .env and fill in the SerpAPI key, "
+            "or export the variable in your shell before running the server."
         )
     return value
 
 
-def _build_amadeus() -> AmadeusClient:
-    client_id = _require_env("AMADEUS_CLIENT_ID")
-    client_secret = _require_env("AMADEUS_CLIENT_SECRET")
-    env = os.environ.get("AMADEUS_ENV", "test")
+def _build_client() -> SerpAPIClient:
+    api_key = _require_env("SERPAPI_KEY")
     # AsyncClient is intentionally not closed — process lifetime matches mcp.run().
     http = httpx.AsyncClient(timeout=httpx.Timeout(20.0))
-    return AmadeusClient(
-        http=http,
-        base_url=base_url_for_env(env),
-        client_id=client_id,
-        client_secret=client_secret,
-    )
+    return SerpAPIClient(http=http, api_key=api_key)
 
 
-_AMADEUS = _build_amadeus()
+_CLIENT = _build_client()
 _CACHE = TTLCache(ttl_seconds=int(os.environ.get("CACHE_TTL_SECONDS", "300")))
-_ENV = os.environ.get("AMADEUS_ENV", "test")
 
 mcp = FastMCP("flights-mcp")
 
@@ -60,12 +52,11 @@ async def search_flights_tool(
     cabin_class: str = "ECONOMY",
     currency: str = "USD",
     non_stop_only: bool = False,
-    max_results: int = 20,
+    max_results: int | None = None,
 ) -> dict[str, Any]:
     return await search_flights(
-        amadeus=_AMADEUS,
+        client=_CLIENT,
         cache=_CACHE,
-        env=_ENV,
         origin=origin,
         destination=destination,
         departure_date=departure_date,
@@ -81,7 +72,7 @@ async def search_flights_tool(
 
 
 def main() -> None:
-    log_event(_logger, "server.start", env=_ENV)
+    log_event(_logger, "server.start")
     mcp.run()
 
 

@@ -1,0 +1,61 @@
+{
+  "search_metadata": {"status": "Success"},
+  "search_parameters": {
+    "engine": "google_flights",
+    "departure_id": "HEL",
+    "arrival_id": "IAD",
+    "outbound_date": "2026-05-18",
+    "return_date": "2026-05-29",
+    "type": "1",
+    "adults": 1,
+    "currency": "USD"
+  },
+  "best_flights": [
+    {
+      "type": "Round trip",
+      "total_duration": 680,
+      "price": 742,
+      "departure_token": "OUTBOUND_TOKEN_A",
+      "flights": [
+        {
+          "departure_airport": {"id": "HEL", "name": "Helsinki Airport", "time": "2026-05-18 15:30"},
+          "arrival_airport":   {"id": "JFK", "name": "John F. Kennedy", "time": "2026-05-18 17:45"},
+          "duration": 555,
+          "airline": "Finnair",
+          "flight_number": "AY 15",
+          "travel_class": "Economy"
+        },
+        {
+          "departure_airport": {"id": "JFK", "name": "John F. Kennedy", "time": "2026-05-18 18:15"},
+          "arrival_airport":   {"id": "IAD", "name": "Dulles International", "time": "2026-05-18 19:45"},
+          "duration": 90,
+          "airline": "American Airlines",
+          "flight_number": "AA 423",
+          "travel_class": "Economy"
+        }
+      ],
+      "layovers": [
+        {"duration": 30, "id": "JFK", "name": "John F. Kennedy"}
+      ]
+    }
+  ],
+  "other_flights": [
+    {
+      "type": "Round trip",
+      "total_duration": 630,
+      "price": 920,
+      "departure_token": "OUTBOUND_TOKEN_B",
+      "flights": [
+        {
+          "departure_airport": {"id": "HEL", "name": "Helsinki Airport", "time": "2026-05-18 13:00"},
+          "arrival_airport":   {"id": "IAD", "name": "Dulles International", "time": "2026-05-18 17:30"},
+          "duration": 630,
+          "airline": "Finnair",
+          "flight_number": "AY 17",
+          "travel_class": "Economy"
+        }
+      ],
+      "layovers": []
+    }
+  ]
+}

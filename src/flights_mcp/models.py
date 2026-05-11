@@ -1,8 +1,9 @@
-"""Pydantic models for tool I/O and internal Amadeus parsing.
+"""Pydantic models for tool I/O.
 
 Input validation enforces IATA format, date sanity, passenger constraints, and
 enum membership at the boundary — Claude's malformed input never reaches the
-Amadeus client.
+provider client. Output models are provider-neutral; the SerpAPI parsing types
+live in `flights_mcp.serpapi.raw`.
 """
 from __future__ import annotations
 
@@ -10,7 +11,7 @@ from datetime import date, datetime, timezone
 from enum import Enum
 from typing import Annotated
 
-from pydantic import BaseModel, ConfigDict, Field, StringConstraints, field_validator, model_validator
+from pydantic import BaseModel, Field, StringConstraints, field_validator, model_validator
 
 
 class CabinClass(str, Enum):
@@ -24,6 +25,12 @@ IataCode = Annotated[str, StringConstraints(pattern=r"^[A-Z]{3}$", strip_whitesp
 IataAirlineCode = Annotated[str, StringConstraints(pattern=r"^[A-Z0-9]{2,3}$", strip_whitespace=False)]
 IsoDate = Annotated[str, StringConstraints(pattern=r"^\d{4}-\d{2}-\d{2}$")]
 IsoCurrency = Annotated[str, StringConstraints(pattern=r"^[A-Z]{3}$")]
+
+# Provider-imposed caps. SerpAPI's Google Flights endpoint returns ~9 outbound
+# options per call; round-trips need a follow-up call per outbound to fetch the
+# matching return leg, so we cap round-trip max_results to keep the upstream
+# quota math predictable. One-way uses a single call and inherits the looser cap.
+ROUND_TRIP_MAX_RESULTS = 5
 
 
 class SearchFlightsInput(BaseModel):
@@ -67,11 +74,26 @@ class SearchFlightsInput(BaseModel):
         return self
 
     @model_validator(mode="after")
-    def _total_travelers_within_amadeus_limit(self) -> "SearchFlightsInput":
+    def _total_travelers_within_provider_limit(self) -> "SearchFlightsInput":
+        # Google Flights (via SerpAPI) accepts up to 9 travelers per search;
+        # the same limit holds across most GDS feeds.
         total = self.adults + self.children + self.infants
         if total > 9:
             raise ValueError(
-                f"total travelers ({total}) exceeds the Amadeus limit of 9 per search"
+                f"total travelers ({total}) exceeds the per-search limit of 9"
+            )
+        return self
+
+    @model_validator(mode="after")
+    def _round_trip_max_results_cap(self) -> "SearchFlightsInput":
+        # Round-trip needs 1 + N upstream calls (one outbound, N return-leg
+        # follow-ups). Cap N at 5 so a single search never burns more than ~6
+        # SerpAPI calls. One-way is single-call and stays at the looser 50 cap.
+        if self.return_date is not None and self.max_results > ROUND_TRIP_MAX_RESULTS:
+            raise ValueError(
+                f"max_results {self.max_results} exceeds the round-trip cap of "
+                f"{ROUND_TRIP_MAX_RESULTS} (set max_results <= {ROUND_TRIP_MAX_RESULTS} "
+                "for round-trip searches, or omit return_date for a one-way search)"
             )
         return self
 
@@ -95,9 +117,6 @@ class Itinerary(BaseModel):
 
 class FlightOffer(BaseModel):
     offer_id: str
-    # TODO: switch monetary fields to Decimal once Task 8's normalizer is in place.
-    # Amadeus returns prices as strings ("742.18"); float is fine for pass-through
-    # but loses precision under arithmetic. Decimal(str(raw)) is the correct path.
     total_price: float
     currency: IsoCurrency
     price_per_adult: float
@@ -113,73 +132,3 @@ class FlightOffer(BaseModel):
 
 class SearchFlightsResult(BaseModel):
     results: list[FlightOffer]
-
-
-# ---------------------------------------------------------------------------
-# Task 6: raw Amadeus response models (used by normalize.py in Task 8)
-# ---------------------------------------------------------------------------
-
-
-class _AmadeusModel(BaseModel):
-    model_config = ConfigDict(populate_by_name=True, extra="ignore")
-
-
-class AmadeusEndpoint(_AmadeusModel):
-    iata_code: str = Field(alias="iataCode")
-    at: str  # local-airport time, no offset
-    terminal: str | None = None
-
-
-class AmadeusSegment(_AmadeusModel):
-    id: str
-    carrier_code: str = Field(alias="carrierCode")
-    number: str
-    departure: AmadeusEndpoint
-    arrival: AmadeusEndpoint
-    number_of_stops: int = Field(alias="numberOfStops", default=0)
-    operating: dict | None = None
-
-
-class AmadeusItinerary(_AmadeusModel):
-    duration: str
-    segments: list[AmadeusSegment]
-
-
-class AmadeusPrice(_AmadeusModel):
-    currency: str
-    total: str
-    base: str | None = None
-
-
-class AmadeusFareDetail(_AmadeusModel):
-    segment_id: str = Field(alias="segmentId")
-    cabin: str
-    fare_basis: str = Field(alias="fareBasis")
-    class_: str = Field(alias="class")
-    included_checked_bags: dict | None = Field(alias="includedCheckedBags", default=None)
-
-
-class AmadeusTravelerPricing(_AmadeusModel):
-    traveler_id: str = Field(alias="travelerId")
-    traveler_type: str = Field(alias="travelerType")
-    price: AmadeusPrice
-    fare_details_by_segment: list[AmadeusFareDetail] = Field(alias="fareDetailsBySegment")
-
-
-class AmadeusFlightOfferRaw(_AmadeusModel):
-    id: str
-    last_ticketing_date: str | None = Field(alias="lastTicketingDate", default=None)
-    number_of_bookable_seats: int | None = Field(alias="numberOfBookableSeats", default=None)
-    itineraries: list[AmadeusItinerary]
-    price: AmadeusPrice
-    validating_airline_codes: list[str] = Field(alias="validatingAirlineCodes")
-    traveler_pricings: list[AmadeusTravelerPricing] = Field(alias="travelerPricings")
-
-
-class AmadeusMeta(_AmadeusModel):
-    count: int
-
-
-class AmadeusSearchResponse(_AmadeusModel):
-    meta: AmadeusMeta
-    data: list[AmadeusFlightOfferRaw]

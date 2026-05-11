@@ -1,6 +1,6 @@
 # Flight Search MCP
 
-Local-first MCP server wrapping the Amadeus Flight Offers Search API.
+Local-first MCP server wrapping Google Flights data via SerpAPI.
 
 Exposes one tool, `search_flights`, that returns a ranked list of flight offers
 for a route and date range. Phase 1 runs on stdio for development; Phase 2
@@ -18,7 +18,9 @@ pip install -e ".[dev]"
 
 ### 2. Configure
 
-Copy `.env.example` to `.env` and fill in your Amadeus Self-Service credentials.
+Sign up at <https://serpapi.com> and grab an API key. The free tier covers
+100 searches/month — plenty for personal trip planning. Copy `.env.example`
+to `.env` and paste the key in.
 
 ```bash
 cp .env.example .env
@@ -27,9 +29,7 @@ cp .env.example .env
 
 | Variable | Required | Notes |
 |---|---|---|
-| `AMADEUS_CLIENT_ID` | yes | From the Amadeus Self-Service workspace. |
-| `AMADEUS_CLIENT_SECRET` | yes | From the same workspace. |
-| `AMADEUS_ENV` | yes | `test` or `production`. |
+| `SERPAPI_KEY` | yes | From <https://serpapi.com/manage-api-key>. |
 | `LOG_FILE_PATH` | no | Default `~/.flights-mcp/logs/flight-search.log`. Must be absolute. |
 | `LOG_LEVEL` | no | Default `INFO`. |
 | `CACHE_TTL_SECONDS` | no | Default `300`. |
@@ -67,9 +67,10 @@ Inspector will show the `search_flights` tool. Call it with:
 }
 ```
 
-Expect a `results` array. If you see `{"error": {"code": "no_results", ...}}`
-in the test environment, the route may not be in Amadeus's cached subset — try
-JFK, LAX, LHR, CDG, or any pair from amadeus4dev/data-collection.
+Expect a `results` array with up to 3 round-trip offers (`max_results` is
+capped at 5 for round-trip queries to keep upstream API costs predictable;
+default is 3). For one-way queries omit `return_date` and you can ask for up
+to 50 results in a single call.
 
 ## Architecture
 
@@ -78,29 +79,35 @@ See [SPEC.md](./SPEC.md) for the full functional spec.
 ```
 search_flights() (MCP tool)
     │
-    ├── SearchFlightsInput (Pydantic validation)
+    ├── SearchFlightsInput (Pydantic validation, round-trip cap enforcement)
     ├── TTLCache (canonical-key, 5-min TTL)
-    └── AmadeusClient
-            ├── TokenCache (OAuth, async-lock-protected refresh)
-            ├── GET /v2/shopping/flight-offers
-            └── normalize_offers() → list[FlightOffer]
+    └── SerpAPIClient
+            ├── 1 GET /search?engine=google_flights        (one-way OR outbound)
+            ├── N GET /search?...&departure_token=...      (round-trip return legs)
+            └── normalize → list[FlightOffer]
 ```
+
+For a round-trip search, SerpAPI's Google Flights endpoint returns a list of
+outbound options each carrying a `departure_token`. To assemble each
+round-trip offer we make a follow-up call per outbound to fetch its matching
+return leg — so a round-trip search costs `1 + max_results` upstream calls,
+which is why round-trip `max_results` is capped at 5.
 
 ## Phase 1 scope
 
 In:
 - Single tool, `search_flights`
 - stdio transport
-- Test-env Amadeus integration
+- SerpAPI Google Flights integration (one-way + round-trip)
 - Structured error contract
-- Local-time-with-IATA timestamp contract
-- Response caching, token caching with refresh lock
+- Local-time-with-IATA timestamp contract (ISO 8601, no offset)
+- Response caching
 
 Out (deferred):
 - HTTP transport, Cloudflare Tunnel (Phase 2)
 - Auth (Phase 2)
 - `airport_search`, `flight_price_confirm`, `fare_calendar` (Phase 3–4)
-- Booking — Self-Service cannot issue tickets, ever
+- Booking — this server returns search results only
 
 ## Project layout
 
@@ -112,8 +119,8 @@ src/flights_mcp/
 ├── models.py              Pydantic I/O models
 ├── cache.py               TTL response cache
 ├── tools/search_flights.py
-└── amadeus/
+└── serpapi/
     ├── client.py          HTTP layer + error mapping
-    ├── normalize.py       Raw → clean
-    └── token.py           OAuth + async refresh lock
+    ├── normalize.py       SerpAPI raw → clean output models
+    └── raw.py             Pydantic types for parsing SerpAPI's response
 ```

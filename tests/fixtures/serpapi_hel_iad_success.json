@@ -1,0 +1,1036 @@
+{
+  "search_metadata": {
+    "id": "6a0235dd97c19f02a0866841",
+    "status": "Success",
+    "json_endpoint": "https://serpapi.com/searches/7bpvxtVEAYJd0t0Lr5h_4g/6a0235dd97c19f02a0866841.json",
+    "created_at": "2026-05-11 20:02:37 UTC",
+    "processed_at": "2026-05-11 20:02:37 UTC",
+    "google_flights_url": "https://www.google.com/travel/flights?hl=en&gl=us&curr=USD&tfs=CBwQAhoeEgoyMDI2LTA1LTE4agcIARIDSEVMcgcIARIDSUFEGh4SCjIwMjYtMDUtMjlqBwgBEgNJQURyBwgBEgNIRUxAAUgBcAGYAQE&tfu=EgIIAQ",
+    "raw_html_file": "https://serpapi.com/searches/7bpvxtVEAYJd0t0Lr5h_4g/6a0235dd97c19f02a0866841.html",
+    "prettify_html_file": "https://serpapi.com/searches/7bpvxtVEAYJd0t0Lr5h_4g/6a0235dd97c19f02a0866841.prettify",
+    "total_time_taken": 1.72
+  },
+  "search_parameters": {
+    "engine": "google_flights",
+    "hl": "en",
+    "gl": "us",
+    "type": "1",
+    "departure_id": "HEL",
+    "arrival_id": "IAD",
+    "outbound_date": "2026-05-18",
+    "return_date": "2026-05-29",
+    "adults": 1,
+    "currency": "USD"
+  },
+  "best_flights": [
+    {
+      "flights": [
+        {
+          "departure_airport": {
+            "name": "Helsinki Airport",
+            "id": "HEL",
+            "time": "2026-05-18 15:00"
+          },
+          "arrival_airport": {
+            "name": "Keflav\u00edk International Airport",
+            "id": "KEF",
+            "time": "2026-05-18 15:40"
+          },
+          "duration": 220,
+          "airplane": "Boeing 737MAX 8 Passenger",
+          "airline": "Icelandair",
+          "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/FI.png",
+          "travel_class": "Economy",
+          "flight_number": "FI 343",
+          "legroom": "31 in",
+          "extensions": [
+            "Average legroom (31 in)",
+            "Wi-Fi for a fee",
+            "In-seat USB outlet",
+            "On-demand video",
+            "Carbon emissions estimate: 190 kg"
+          ]
+        },
+        {
+          "departure_airport": {
+            "name": "Keflav\u00edk International Airport",
+            "id": "KEF",
+            "time": "2026-05-18 16:50"
+          },
+          "arrival_airport": {
+            "name": "Dulles International Airport",
+            "id": "IAD",
+            "time": "2026-05-18 19:20"
+          },
+          "duration": 390,
+          "airplane": "Boeing 737MAX 8 Passenger",
+          "airline": "Icelandair",
+          "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/FI.png",
+          "travel_class": "Economy",
+          "flight_number": "FI 645",
+          "legroom": "31 in",
+          "extensions": [
+            "Average legroom (31 in)",
+            "Wi-Fi for a fee",
+            "In-seat USB outlet",
+            "On-demand video",
+            "Carbon emissions estimate: 332 kg"
+          ]
+        }
+      ],
+      "layovers": [
+        {
+          "duration": 70,
+          "name": "Keflav\u00edk International Airport",
+          "id": "KEF"
+        }
+      ],
+      "total_duration": 680,
+      "carbon_emissions": {
+        "this_flight": 523000,
+        "typical_for_this_route": 583000,
+        "difference_percent": -10
+      },
+      "price": 784,
+      "type": "Round trip",
+      "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/FI.png",
+      "departure_token": "WyJDalJJTkRObk9IcGZhbmt6WW1kQlFWVnNNMEZDUnkwdExTMHRMUzB0ZEdKaVkzb3hOa0ZCUVVGQlIyOURUbVEwUmxkSlJIRkJFZ3RHU1RNME0zeEdTVFkwTlJvTENKWGtCQkFDR2dOVlUwUTRISENWNUFRPSIsW1siSEVMIiwiMjAyNi0wNS0xOCIsIktFRiIsbnVsbCwiRkkiLCIzNDMiXSxbIktFRiIsIjIwMjYtMDUtMTgiLCJJQUQiLG51bGwsIkZJIiwiNjQ1Il1dXQ=="
+    },
+    {
+      "flights": [
+        {
+          "departure_airport": {
+            "name": "Helsinki Airport",
+            "id": "HEL",
+            "time": "2026-05-18 07:00"
+          },
+          "arrival_airport": {
+            "name": "Amsterdam Airport Schiphol",
+            "id": "AMS",
+            "time": "2026-05-18 08:30"
+          },
+          "duration": 150,
+          "airplane": "Airbus A321neo",
+          "airline": "KLM",
+          "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/KL.png",
+          "travel_class": "Economy",
+          "flight_number": "KL 1248",
+          "ticket_also_sold_by": [
+            "Air France",
+            "Delta"
+          ],
+          "legroom": "29 in",
+          "extensions": [
+            "Below average legroom (29 in)",
+            "Free Wi-Fi",
+            "In-seat USB outlet",
+            "Carbon emissions estimate: 100 kg"
+          ]
+        },
+        {
+          "departure_airport": {
+            "name": "Amsterdam Airport Schiphol",
+            "id": "AMS",
+            "time": "2026-05-18 13:15"
+          },
+          "arrival_airport": {
+            "name": "Dulles International Airport",
+            "id": "IAD",
+            "time": "2026-05-18 15:35"
+          },
+          "duration": 500,
+          "airplane": "Boeing 787",
+          "airline": "KLM",
+          "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/KL.png",
+          "travel_class": "Economy",
+          "flight_number": "KL 651",
+          "ticket_also_sold_by": [
+            "Air France",
+            "Delta"
+          ],
+          "legroom": "31 in",
+          "extensions": [
+            "Average legroom (31 in)",
+            "Wi-Fi for a fee",
+            "In-seat power & USB outlets",
+            "On-demand video",
+            "Carbon emissions estimate: 325 kg"
+          ]
+        }
+      ],
+      "layovers": [
+        {
+          "duration": 285,
+          "name": "Amsterdam Airport Schiphol",
+          "id": "AMS"
+        }
+      ],
+      "total_duration": 935,
+      "carbon_emissions": {
+        "this_flight": 426000,
+        "typical_for_this_route": 583000,
+        "difference_percent": -27
+      },
+      "price": 821,
+      "type": "Round trip",
+      "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/KL.png",
+      "departure_token": "WyJDalJJTkRObk9IcGZhbmt6WW1kQlFWVnNNMEZDUnkwdExTMHRMUzB0ZEdKaVkzb3hOa0ZCUVVGQlIyOURUbVEwUmxkSlJIRkJFZ3hMVERFeU5EaDhTMHcyTlRFYUN3aVpnUVVRQWhvRFZWTkVPQnh3bVlFRiIsW1siSEVMIiwiMjAyNi0wNS0xOCIsIkFNUyIsbnVsbCwiS0wiLCIxMjQ4Il0sWyJBTVMiLCIyMDI2LTA1LTE4IiwiSUFEIixudWxsLCJLTCIsIjY1MSJdXV0="
+    },
+    {
+      "flights": [
+        {
+          "departure_airport": {
+            "name": "Helsinki Airport",
+            "id": "HEL",
+            "time": "2026-05-18 12:35"
+          },
+          "arrival_airport": {
+            "name": "Dallas Fort Worth International Airport",
+            "id": "DFW",
+            "time": "2026-05-18 15:05"
+          },
+          "duration": 630,
+          "airplane": "Airbus A350",
+          "airline": "Finnair",
+          "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/AY.png",
+          "travel_class": "Economy",
+          "flight_number": "AY 19",
+          "ticket_also_sold_by": [
+            "British Airways",
+            "American"
+          ],
+          "legroom": "31 in",
+          "extensions": [
+            "Average legroom (31 in)",
+            "Wi-Fi for a fee",
+            "In-seat USB outlet",
+            "On-demand video",
+            "Carbon emissions estimate: 547 kg"
+          ]
+        },
+        {
+          "departure_airport": {
+            "name": "Dallas Fort Worth International Airport",
+            "id": "DFW",
+            "time": "2026-05-18 19:29"
+          },
+          "arrival_airport": {
+            "name": "Dulles International Airport",
+            "id": "IAD",
+            "time": "2026-05-18 23:26"
+          },
+          "duration": 177,
+          "airplane": "Boeing 737MAX 8 Passenger",
+          "airline": "American",
+          "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/AA.png",
+          "travel_class": "Economy",
+          "flight_number": "AA 2856",
+          "legroom": "30 in",
+          "extensions": [
+            "Average legroom (30 in)",
+            "Free Wi-Fi",
+            "In-seat power & USB outlets",
+            "Stream media to your device",
+            "Carbon emissions estimate: 131 kg"
+          ]
+        }
+      ],
+      "layovers": [
+        {
+          "duration": 264,
+          "name": "Dallas Fort Worth International Airport",
+          "id": "DFW"
+        }
+      ],
+      "total_duration": 1071,
+      "carbon_emissions": {
+        "this_flight": 679000,
+        "typical_for_this_route": 583000,
+        "difference_percent": 16
+      },
+      "price": 852,
+      "type": "Round trip",
+      "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/multi.png",
+      "departure_token": "WyJDalJJTkRObk9IcGZhbmt6WW1kQlFWVnNNMEZDUnkwdExTMHRMUzB0ZEdKaVkzb3hOa0ZCUVVGQlIyOURUbVEwUmxkSlJIRkJFZ3RCV1RFNWZFRkJNamcxTmhvTENLdVpCUkFDR2dOVlUwUTRISENybVFVPSIsW1siSEVMIiwiMjAyNi0wNS0xOCIsIkRGVyIsbnVsbCwiQVkiLCIxOSJdLFsiREZXIiwiMjAyNi0wNS0xOCIsIklBRCIsbnVsbCwiQUEiLCIyODU2Il1dXQ=="
+    },
+    {
+      "flights": [
+        {
+          "departure_airport": {
+            "name": "Helsinki Airport",
+            "id": "HEL",
+            "time": "2026-05-18 11:15"
+          },
+          "arrival_airport": {
+            "name": "Copenhagen Airport",
+            "id": "CPH",
+            "time": "2026-05-18 11:55"
+          },
+          "duration": 100,
+          "airplane": "Airbus A320neo",
+          "airline": "Scandinavian Airlines",
+          "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/SK.png",
+          "travel_class": "Economy",
+          "flight_number": "SK 1707",
+          "ticket_also_sold_by": [
+            "Delta"
+          ],
+          "legroom": "29 in",
+          "extensions": [
+            "Below average legroom (29 in)",
+            "In-seat USB outlet",
+            "Carbon emissions estimate: 82 kg"
+          ],
+          "plane_and_crew_by": "Sas Connect"
+        },
+        {
+          "departure_airport": {
+            "name": "Copenhagen Airport",
+            "id": "CPH",
+            "time": "2026-05-18 14:25"
+          },
+          "arrival_airport": {
+            "name": "Dulles International Airport",
+            "id": "IAD",
+            "time": "2026-05-18 17:00"
+          },
+          "duration": 515,
+          "airplane": "Airbus A350",
+          "airline": "Scandinavian Airlines",
+          "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/SK.png",
+          "travel_class": "Economy",
+          "flight_number": "SK 925",
+          "ticket_also_sold_by": [
+            "Delta"
+          ],
+          "legroom": "31 in",
+          "extensions": [
+            "Average legroom (31 in)",
+            "Wi-Fi for a fee",
+            "In-seat USB outlet",
+            "On-demand video",
+            "Carbon emissions estimate: 451 kg"
+          ]
+        }
+      ],
+      "layovers": [
+        {
+          "duration": 150,
+          "name": "Copenhagen Airport",
+          "id": "CPH"
+        }
+      ],
+      "total_duration": 765,
+      "carbon_emissions": {
+        "this_flight": 533000,
+        "typical_for_this_route": 583000,
+        "difference_percent": -9
+      },
+      "price": 1046,
+      "type": "Round trip",
+      "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/SK.png",
+      "departure_token": "WyJDalJJTkRObk9IcGZhbmt6WW1kQlFWVnNNMEZDUnkwdExTMHRMUzB0ZEdKaVkzb3hOa0ZCUVVGQlIyOURUbVEwUmxkSlJIRkJFZ3hUU3pFM01EZDhVMHM1TWpVYUN3amVzQVlRQWhvRFZWTkVPQnh3M3JBRyIsW1siSEVMIiwiMjAyNi0wNS0xOCIsIkNQSCIsbnVsbCwiU0siLCIxNzA3Il0sWyJDUEgiLCIyMDI2LTA1LTE4IiwiSUFEIixudWxsLCJTSyIsIjkyNSJdXV0="
+    }
+  ],
+  "other_flights": [
+    {
+      "flights": [
+        {
+          "departure_airport": {
+            "name": "Helsinki Airport",
+            "id": "HEL",
+            "time": "2026-05-18 06:10"
+          },
+          "arrival_airport": {
+            "name": "Copenhagen Airport",
+            "id": "CPH",
+            "time": "2026-05-18 06:50"
+          },
+          "duration": 100,
+          "airplane": "Airbus A320neo",
+          "airline": "Scandinavian Airlines",
+          "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/SK.png",
+          "travel_class": "Economy",
+          "flight_number": "SK 1705",
+          "ticket_also_sold_by": [
+            "Delta"
+          ],
+          "legroom": "29 in",
+          "extensions": [
+            "Below average legroom (29 in)",
+            "In-seat USB outlet",
+            "Carbon emissions estimate: 82 kg"
+          ],
+          "plane_and_crew_by": "Sas Connect"
+        },
+        {
+          "departure_airport": {
+            "name": "Copenhagen Airport",
+            "id": "CPH",
+            "time": "2026-05-18 14:25"
+          },
+          "arrival_airport": {
+            "name": "Dulles International Airport",
+            "id": "IAD",
+            "time": "2026-05-18 17:00"
+          },
+          "duration": 515,
+          "airplane": "Airbus A350",
+          "airline": "Scandinavian Airlines",
+          "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/SK.png",
+          "travel_class": "Economy",
+          "flight_number": "SK 925",
+          "ticket_also_sold_by": [
+            "Delta"
+          ],
+          "legroom": "31 in",
+          "extensions": [
+            "Average legroom (31 in)",
+            "Wi-Fi for a fee",
+            "In-seat USB outlet",
+            "On-demand video",
+            "Carbon emissions estimate: 451 kg"
+          ]
+        }
+      ],
+      "layovers": [
+        {
+          "duration": 455,
+          "name": "Copenhagen Airport",
+          "id": "CPH"
+        }
+      ],
+      "total_duration": 1070,
+      "carbon_emissions": {
+        "this_flight": 533000,
+        "typical_for_this_route": 583000,
+        "difference_percent": -9
+      },
+      "price": 984,
+      "type": "Round trip",
+      "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/SK.png",
+      "departure_token": "WyJDalJJTkRObk9IcGZhbmt6WW1kQlFWVnNNMEZDUnkwdExTMHRMUzB0ZEdKaVkzb3hOa0ZCUVVGQlIyOURUbVEwUmxkSlJIRkJFZ3hUU3pFM01EVjhVMHM1TWpVYUN3ajkvd1VRQWhvRFZWTkVPQnh3L2Y4RiIsW1siSEVMIiwiMjAyNi0wNS0xOCIsIkNQSCIsbnVsbCwiU0siLCIxNzA1Il0sWyJDUEgiLCIyMDI2LTA1LTE4IiwiSUFEIixudWxsLCJTSyIsIjkyNSJdXV0="
+    },
+    {
+      "flights": [
+        {
+          "departure_airport": {
+            "name": "Helsinki Airport",
+            "id": "HEL",
+            "time": "2026-05-18 06:55"
+          },
+          "arrival_airport": {
+            "name": "Frankfurt Airport",
+            "id": "FRA",
+            "time": "2026-05-18 08:30"
+          },
+          "duration": 155,
+          "airplane": "Airbus A321neo",
+          "airline": "Lufthansa",
+          "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/LH.png",
+          "travel_class": "Economy",
+          "flight_number": "LH 853",
+          "ticket_also_sold_by": [
+            "United"
+          ],
+          "legroom": "29 in",
+          "extensions": [
+            "Below average legroom (29 in)",
+            "In-seat USB outlet",
+            "Carbon emissions estimate: 122 kg"
+          ]
+        },
+        {
+          "departure_airport": {
+            "name": "Frankfurt Airport",
+            "id": "FRA",
+            "time": "2026-05-18 10:30"
+          },
+          "arrival_airport": {
+            "name": "Dulles International Airport",
+            "id": "IAD",
+            "time": "2026-05-18 13:35"
+          },
+          "duration": 545,
+          "airplane": "Airbus A340",
+          "airline": "Lufthansa",
+          "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/LH.png",
+          "travel_class": "Economy",
+          "flight_number": "LH 416",
+          "ticket_also_sold_by": [
+            "United"
+          ],
+          "legroom": "31 in",
+          "extensions": [
+            "Average legroom (31 in)",
+            "Wi-Fi for a fee",
+            "In-seat power & USB outlets",
+            "On-demand video",
+            "Carbon emissions estimate: 416 kg"
+          ]
+        }
+      ],
+      "layovers": [
+        {
+          "duration": 120,
+          "name": "Frankfurt Airport",
+          "id": "FRA"
+        }
+      ],
+      "total_duration": 820,
+      "carbon_emissions": {
+        "this_flight": 539000,
+        "typical_for_this_route": 583000,
+        "difference_percent": -8
+      },
+      "price": 1233,
+      "type": "Round trip",
+      "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/LH.png",
+      "departure_token": "WyJDalJJTkRObk9IcGZhbmt6WW1kQlFWVnNNMEZDUnkwdExTMHRMUzB0ZEdKaVkzb3hOa0ZCUVVGQlIyOURUbVEwUmxkSlJIRkJFZ3RNU0RnMU0zeE1TRFF4TmhvTENLSERCeEFDR2dOVlUwUTRISENod3djPSIsW1siSEVMIiwiMjAyNi0wNS0xOCIsIkZSQSIsbnVsbCwiTEgiLCI4NTMiXSxbIkZSQSIsIjIwMjYtMDUtMTgiLCJJQUQiLG51bGwsIkxIIiwiNDE2Il1dXQ=="
+    },
+    {
+      "flights": [
+        {
+          "departure_airport": {
+            "name": "Helsinki Airport",
+            "id": "HEL",
+            "time": "2026-05-18 12:50"
+          },
+          "arrival_airport": {
+            "name": "Munich International Airport",
+            "id": "MUC",
+            "time": "2026-05-18 14:25"
+          },
+          "duration": 155,
+          "airplane": "Airbus A320neo",
+          "airline": "Lufthansa City Airlines",
+          "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/VL.png",
+          "travel_class": "Economy",
+          "flight_number": "VL 2461",
+          "ticket_also_sold_by": [
+            "Lufthansa"
+          ],
+          "legroom": "29 in",
+          "extensions": [
+            "Below average legroom (29 in)",
+            "In-seat USB outlet",
+            "Carbon emissions estimate: 121 kg"
+          ]
+        },
+        {
+          "departure_airport": {
+            "name": "Munich International Airport",
+            "id": "MUC",
+            "time": "2026-05-18 16:20"
+          },
+          "arrival_airport": {
+            "name": "Dulles International Airport",
+            "id": "IAD",
+            "time": "2026-05-18 19:25"
+          },
+          "duration": 545,
+          "airplane": "Airbus A380",
+          "airline": "Lufthansa",
+          "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/LH.png",
+          "travel_class": "Economy",
+          "flight_number": "LH 414",
+          "ticket_also_sold_by": [
+            "United"
+          ],
+          "legroom": "31 in",
+          "extensions": [
+            "Average legroom (31 in)",
+            "Wi-Fi for a fee",
+            "In-seat USB outlet",
+            "On-demand video",
+            "Carbon emissions estimate: 494 kg"
+          ],
+          "often_delayed_by_over_30_min": true
+        }
+      ],
+      "layovers": [
+        {
+          "duration": 115,
+          "name": "Munich International Airport",
+          "id": "MUC"
+        }
+      ],
+      "total_duration": 815,
+      "carbon_emissions": {
+        "this_flight": 616000,
+        "typical_for_this_route": 583000,
+        "difference_percent": 6
+      },
+      "price": 1246,
+      "type": "Round trip",
+      "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/multi.png",
+      "departure_token": "WyJDalJJTkRObk9IcGZhbmt6WW1kQlFWVnNNMEZDUnkwdExTMHRMUzB0ZEdKaVkzb3hOa0ZCUVVGQlIyOURUbVEwUmxkSlJIRkJFZ3hXVERJME5qRjhURWcwTVRRYUN3aXF6UWNRQWhvRFZWTkVPQnh3cXMwSCIsW1siSEVMIiwiMjAyNi0wNS0xOCIsIk1VQyIsbnVsbCwiVkwiLCIyNDYxIl0sWyJNVUMiLCIyMDI2LTA1LTE4IiwiSUFEIixudWxsLCJMSCIsIjQxNCJdXV0="
+    },
+    {
+      "flights": [
+        {
+          "departure_airport": {
+            "name": "Helsinki Airport",
+            "id": "HEL",
+            "time": "2026-05-18 06:00"
+          },
+          "arrival_airport": {
+            "name": "Munich International Airport",
+            "id": "MUC",
+            "time": "2026-05-18 07:35"
+          },
+          "duration": 155,
+          "airplane": "Airbus A320neo",
+          "airline": "Lufthansa City Airlines",
+          "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/VL.png",
+          "travel_class": "Economy",
+          "flight_number": "VL 2467",
+          "ticket_also_sold_by": [
+            "Lufthansa"
+          ],
+          "legroom": "29 in",
+          "extensions": [
+            "Below average legroom (29 in)",
+            "In-seat USB outlet",
+            "Carbon emissions estimate: 121 kg"
+          ]
+        },
+        {
+          "departure_airport": {
+            "name": "Munich International Airport",
+            "id": "MUC",
+            "time": "2026-05-18 12:00"
+          },
+          "arrival_airport": {
+            "name": "Dulles International Airport",
+            "id": "IAD",
+            "time": "2026-05-18 15:00"
+          },
+          "duration": 540,
+          "airplane": "Boeing 787",
+          "airline": "United",
+          "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/UA.png",
+          "travel_class": "Economy",
+          "flight_number": "UA 109",
+          "ticket_also_sold_by": [
+            "Lufthansa"
+          ],
+          "legroom": "31 in",
+          "extensions": [
+            "Average legroom (31 in)",
+            "Wi-Fi for a fee",
+            "In-seat power & USB outlets",
+            "On-demand video",
+            "Carbon emissions estimate: 402 kg"
+          ]
+        }
+      ],
+      "layovers": [
+        {
+          "duration": 265,
+          "name": "Munich International Airport",
+          "id": "MUC"
+        }
+      ],
+      "total_duration": 960,
+      "carbon_emissions": {
+        "this_flight": 524000,
+        "typical_for_this_route": 583000,
+        "difference_percent": -10
+      },
+      "price": 1329,
+      "type": "Round trip",
+      "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/multi.png",
+      "departure_token": "WyJDalJJTkRObk9IcGZhbmt6WW1kQlFWVnNNMEZDUnkwdExTMHRMUzB0ZEdKaVkzb3hOa0ZCUVVGQlIyOURUbVEwUmxkSlJIRkJFZ3hXVERJME5qZDhWVUV4TURrYUN3amRqUWdRQWhvRFZWTkVPQnh3M1kwSSIsW1siSEVMIiwiMjAyNi0wNS0xOCIsIk1VQyIsbnVsbCwiVkwiLCIyNDY3Il0sWyJNVUMiLCIyMDI2LTA1LTE4IiwiSUFEIixudWxsLCJVQSIsIjEwOSJdXV0="
+    },
+    {
+      "flights": [
+        {
+          "departure_airport": {
+            "name": "Helsinki Airport",
+            "id": "HEL",
+            "time": "2026-05-18 14:05"
+          },
+          "arrival_airport": {
+            "name": "Heathrow Airport",
+            "id": "LHR",
+            "time": "2026-05-18 15:10"
+          },
+          "duration": 185,
+          "airplane": "Airbus A321 (Sharklets)",
+          "airline": "Finnair",
+          "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/AY.png",
+          "travel_class": "Economy",
+          "flight_number": "AY 1335",
+          "ticket_also_sold_by": [
+            "British Airways"
+          ],
+          "legroom": "30 in",
+          "extensions": [
+            "Average legroom (30 in)",
+            "Wi-Fi for a fee",
+            "Carbon emissions estimate: 188 kg"
+          ]
+        },
+        {
+          "departure_airport": {
+            "name": "Heathrow Airport",
+            "id": "LHR",
+            "time": "2026-05-18 17:05"
+          },
+          "arrival_airport": {
+            "name": "Dulles International Airport",
+            "id": "IAD",
+            "time": "2026-05-18 20:20"
+          },
+          "duration": 495,
+          "airplane": "Boeing 777",
+          "airline": "British Airways",
+          "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/BA.png",
+          "travel_class": "Economy",
+          "flight_number": "BA 293",
+          "ticket_also_sold_by": [
+            "Finnair"
+          ],
+          "legroom": "31 in",
+          "extensions": [
+            "Average legroom (31 in)",
+            "Wi-Fi for a fee",
+            "In-seat USB outlet",
+            "On-demand video",
+            "Carbon emissions estimate: 379 kg"
+          ]
+        }
+      ],
+      "layovers": [
+        {
+          "duration": 115,
+          "name": "Heathrow Airport",
+          "id": "LHR"
+        }
+      ],
+      "total_duration": 795,
+      "carbon_emissions": {
+        "this_flight": 568000,
+        "typical_for_this_route": 583000,
+        "difference_percent": -3
+      },
+      "price": 1811,
+      "type": "Round trip",
+      "airline_logo": "https://www.gstatic.com/flights/airline_logos/70px/multi.png",
+      "departure_token": "WyJDalJJTkRObk9IcGZhbmt6WW1kQlFWVnNNMEZDUnkwdExTMHRMUzB0ZEdKaVkzb3hOa0ZCUVVGQlIyOURUbVEwUmxkSlJIRkJFZ3hCV1RFek16VjhRa0V5T1RNYUN3amNoZ3NRQWhvRFZWTkVPQnh3M0lZTCIsW1siSEVMIiwiMjAyNi0wNS0xOCIsIkxIUiIsbnVsbCwiQVkiLCIxMzM1Il0sWyJMSFIiLCIyMDI2LTA1LTE4IiwiSUFEIixudWxsLCJCQSIsIjI5MyJdXV0="
+    }
+  ],
+  "price_insights": {
+    "lowest_price": 784,
+    "price_level": "typical",
+    "typical_price_range": [
+      620,
+      1450
+    ],
+    "price_history": [
+      [
+        1773266400,
+        480
+      ],
+      [
+        1773352800,
+        507
+      ],
+      [
+        1773439200,
+        506
+      ],
+      [
+        1773525600,
+        504
+      ],
+      [
+        1773612000,
+        504
+      ],
+      [
+        1773698400,
+        503
+      ],
+      [
+        1773784800,
+        506
+      ],
+      [
+        1773871200,
+        508
+      ],
+      [
+        1773957600,
+        505
+      ],
+      [
+        1774044000,
+        510
+      ],
+      [
+        1774130400,
+        510
+      ],
+      [
+        1774216800,
+        510
+      ],
+      [
+        1774303200,
+        508
+      ],
+      [
+        1774389600,
+        511
+      ],
+      [
+        1774476000,
+        511
+      ],
+      [
+        1774562400,
+        620
+      ],
+      [
+        1774648800,
+        677
+      ],
+      [
+        1774735200,
+        740
+      ],
+      [
+        1774818000,
+        706
+      ],
+      [
+        1774904400,
+        703
+      ],
+      [
+        1774990800,
+        735
+      ],
+      [
+        1775077200,
+        743
+      ],
+      [
+        1775163600,
+        743
+      ],
+      [
+        1775250000,
+        740
+      ],
+      [
+        1775336400,
+        739
+      ],
+      [
+        1775422800,
+        668
+      ],
+      [
+        1775509200,
+        668
+      ],
+      [
+        1775595600,
+        706
+      ],
+      [
+        1775682000,
+        715
+      ],
+      [
+        1775768400,
+        712
+      ],
+      [
+        1775854800,
+        714
+      ],
+      [
+        1775941200,
+        679
+      ],
+      [
+        1776027600,
+        682
+      ],
+      [
+        1776114000,
+        676
+      ],
+      [
+        1776200400,
+        754
+      ],
+      [
+        1776286800,
+        714
+      ],
+      [
+        1776373200,
+        715
+      ],
+      [
+        1776459600,
+        647
+      ],
+      [
+        1776546000,
+        682
+      ],
+      [
+        1776632400,
+        684
+      ],
+      [
+        1776718800,
+        685
+      ],
+      [
+        1776805200,
+        720
+      ],
+      [
+        1776891600,
+        681
+      ],
+      [
+        1776978000,
+        612
+      ],
+      [
+        1777064400,
+        680
+      ],
+      [
+        1777150800,
+        680
+      ],
+      [
+        1777237200,
+        709
+      ],
+      [
+        1777323600,
+        678
+      ],
+      [
+        1777410000,
+        677
+      ],
+      [
+        1777496400,
+        675
+      ],
+      [
+        1777582800,
+        704
+      ],
+      [
+        1777669200,
+        703
+      ],
+      [
+        1777755600,
+        704
+      ],
+      [
+        1777842000,
+        686
+      ],
+      [
+        1777928400,
+        659
+      ],
+      [
+        1778014800,
+        659
+      ],
+      [
+        1778101200,
+        677
+      ],
+      [
+        1778187600,
+        693
+      ],
+      [
+        1778274000,
+        665
+      ],
+      [
+        1778360400,
+        665
+      ],
+      [
+        1778446800,
+        784
+      ]
+    ]
+  },
+  "airports": [
+    {
+      "departure": [
+        {
+          "airport": {
+            "id": "HEL",
+            "name": "Helsinki Airport"
+          },
+          "city": "Helsinki",
+          "country": "Finland",
+          "country_code": "FI",
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS05kTtTqSlcsoKJL9WW_52u7gLgMRutIuCrOUmZqI-DAdWvfve-Bw9F57t6UbjnTkbdUKnnimkHebexw",
+          "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIuW5WgVjD2DLfglhlGhmaPXv6vbFWDXtT7bV0rLq50lOR-ufQ0Fojd_Sd5xud7KTMHldsgxlJqLNyiN74A_HnBKSm1nbfpCeXN04RCsI"
+        }
+      ],
+      "arrival": [
+        {
+          "airport": {
+            "id": "IAD",
+            "name": "Dulles International Airport"
+          },
+          "city": "Washington",
+          "country": "United States",
+          "country_code": "US",
+          "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRG0OK4wTkRsqDVobvhtBOPZMDsUETpgJ7jPzOA--4D-HL-0BVkyp4S9gvw7CBWMKyfFVS0lLRn7pmR-Q",
+          "thumbnail": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRMLLOliMVP16YVOyMBlzc0Gmxx-R5fU2bSGBN2tw9x-6tWr0q5I3bRnaMOot3V_SMDxjwVNjxd3aIlFxHtZL0Yc8rVnZAQAs2upGkhIZ0"
+        }
+      ]
+    },
+    {
+      "departure": [
+        {
+          "airport": {
+            "id": "IAD",
+            "name": "Dulles International Airport"
+          },
+          "city": "Washington",
+          "country": "United States",
+          "country_code": "US",
+          "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRG0OK4wTkRsqDVobvhtBOPZMDsUETpgJ7jPzOA--4D-HL-0BVkyp4S9gvw7CBWMKyfFVS0lLRn7pmR-Q",
+          "thumbnail": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRMLLOliMVP16YVOyMBlzc0Gmxx-R5fU2bSGBN2tw9x-6tWr0q5I3bRnaMOot3V_SMDxjwVNjxd3aIlFxHtZL0Yc8rVnZAQAs2upGkhIZ0"
+        }
+      ],
+      "arrival": [
+        {
+          "airport": {
+            "id": "HEL",
+            "name": "Helsinki Airport"
+          },
+          "city": "Helsinki",
+          "country": "Finland",
+          "country_code": "FI",
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS05kTtTqSlcsoKJL9WW_52u7gLgMRutIuCrOUmZqI-DAdWvfve-Bw9F57t6UbjnTkbdUKnnimkHebexw",
+          "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIuW5WgVjD2DLfglhlGhmaPXv6vbFWDXtT7bV0rLq50lOR-ufQ0Fojd_Sd5xud7KTMHldsgxlJqLNyiN74A_HnBKSm1nbfpCeXN04RCsI"
+        }
+      ]
+    }
+  ]
+}
