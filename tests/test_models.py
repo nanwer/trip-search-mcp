@@ -95,3 +95,88 @@ def test_cabin_class_enum():
         cabin_class="BUSINESS",
     )
     assert m.cabin_class is CabinClass.BUSINESS
+
+
+# ---------------------------------------------------------------------------
+# Task 5: output models
+# ---------------------------------------------------------------------------
+from flights_mcp.models import FlightOffer, Itinerary, Segment, SearchFlightsResult
+
+
+def _make_segment(**overrides):
+    base = dict(
+        airline="AY",
+        flight_number="AY15",
+        departure_airport="HEL",
+        departure_time_local="2026-05-18T15:30:00",
+        arrival_airport="JFK",
+        arrival_time_local="2026-05-18T17:45:00",
+        cabin="ECONOMY",
+        booking_class="V",
+    )
+    base.update(overrides)
+    return Segment(**base)
+
+
+def test_segment_round_trips():
+    s = _make_segment()
+    assert s.airline == "AY"
+    assert s.departure_time_local == "2026-05-18T15:30:00"
+
+
+def test_itinerary_holds_segments():
+    it = Itinerary(duration="PT10H30M", stops=1, segments=[_make_segment(), _make_segment(flight_number="AY99")])
+    assert it.stops == 1
+    assert len(it.segments) == 2
+
+
+def test_flight_offer_round_trip_shape():
+    it = Itinerary(duration="PT10H30M", stops=0, segments=[_make_segment()])
+    offer = FlightOffer(
+        offer_id="1",
+        total_price=850.50,
+        currency="USD",
+        price_per_adult=850.50,
+        airlines=["AY"],
+        validating_airline="AY",
+        outbound=it,
+        inbound=None,
+        seats_available=7,
+        last_ticketing_date="2026-05-15",
+        fare_basis="VLOWFI",
+        baggage_allowance="1 checked bag",
+    )
+    assert offer.inbound is None
+    assert offer.baggage_allowance == "1 checked bag"
+
+
+def test_flight_offer_allows_null_optional_fields():
+    it = Itinerary(duration="PT10H30M", stops=0, segments=[_make_segment()])
+    offer = FlightOffer(
+        offer_id="1",
+        total_price=850.50,
+        currency="USD",
+        price_per_adult=850.50,
+        airlines=["AY"],
+        validating_airline="AY",
+        outbound=it,
+        inbound=None,
+        seats_available=None,
+        last_ticketing_date=None,
+        fare_basis="VLOWFI",
+        baggage_allowance=None,
+    )
+    assert offer.seats_available is None
+    assert offer.last_ticketing_date is None
+    assert offer.baggage_allowance is None
+
+
+def test_search_flights_result_wraps_offers():
+    it = Itinerary(duration="PT10H30M", stops=0, segments=[_make_segment()])
+    offer = FlightOffer(
+        offer_id="1", total_price=850.5, currency="USD", price_per_adult=850.5,
+        airlines=["AY"], validating_airline="AY", outbound=it, inbound=None,
+        seats_available=None, last_ticketing_date=None, fare_basis="V", baggage_allowance=None,
+    )
+    result = SearchFlightsResult(results=[offer])
+    assert len(result.results) == 1

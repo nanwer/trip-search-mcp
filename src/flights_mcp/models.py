@@ -21,6 +21,7 @@ class CabinClass(str, Enum):
 
 
 IataCode = Annotated[str, StringConstraints(pattern=r"^[A-Z]{3}$", strip_whitespace=False)]
+IataAirlineCode = Annotated[str, StringConstraints(pattern=r"^[A-Z0-9]{2,3}$", strip_whitespace=False)]
 IsoDate = Annotated[str, StringConstraints(pattern=r"^\d{4}-\d{2}-\d{2}$")]
 IsoCurrency = Annotated[str, StringConstraints(pattern=r"^[A-Z]{3}$")]
 
@@ -73,3 +74,39 @@ class SearchFlightsInput(BaseModel):
                 f"total travelers ({total}) exceeds the Amadeus limit of 9 per search"
             )
         return self
+
+
+class Segment(BaseModel):
+    airline: IataAirlineCode
+    flight_number: str
+    departure_airport: IataCode
+    departure_time_local: str  # ISO 8601 datetime, no offset, local to departure_airport
+    arrival_airport: IataCode
+    arrival_time_local: str
+    cabin: CabinClass
+    booking_class: str
+
+
+class Itinerary(BaseModel):
+    duration: str  # ISO 8601 duration
+    stops: int = Field(ge=0)
+    segments: list[Segment]
+
+
+class FlightOffer(BaseModel):
+    offer_id: str
+    total_price: float
+    currency: IsoCurrency
+    price_per_adult: float
+    airlines: list[IataAirlineCode]
+    validating_airline: IataAirlineCode
+    outbound: Itinerary
+    inbound: Itinerary | None
+    seats_available: int | None
+    last_ticketing_date: str | None
+    fare_basis: str
+    baggage_allowance: str | None
+
+
+class SearchFlightsResult(BaseModel):
+    results: list[FlightOffer]
