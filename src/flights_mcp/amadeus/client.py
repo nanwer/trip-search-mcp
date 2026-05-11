@@ -64,7 +64,17 @@ class AmadeusClient:
                 f"Amadeus returned an unparseable response: {e}",
                 retryable=True,
             ) from e
-        offers = normalize_offers(parsed)
+        # Normalize can raise IndexError/ValueError/KeyError on structurally
+        # abnormal offers (empty validatingAirlineCodes, non-numeric price, etc).
+        # Convert those into a clean ToolError so the tool boundary contract holds.
+        try:
+            offers = normalize_offers(parsed)
+        except (IndexError, KeyError, ValueError, TypeError) as e:
+            raise ToolError(
+                ErrorCode.UPSTREAM_ERROR,
+                f"Amadeus returned a malformed offer: {e}",
+                retryable=True,
+            ) from e
         if not offers:
             raise ToolError(ErrorCode.NO_RESULTS, "Amadeus returned no offers.")
         return offers

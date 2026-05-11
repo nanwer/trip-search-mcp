@@ -137,3 +137,51 @@ async def test_search_quota_detected_by_code_even_when_detail_lacks_keyword():
     with pytest.raises(ToolError) as exc:
         await client.search(inp)
     assert exc.value.code is ErrorCode.QUOTA_EXCEEDED
+
+
+async def test_search_malformed_offer_does_not_escape_as_raw_exception():
+    """A structurally invalid offer must surface as ToolError(UPSTREAM_ERROR),
+    not a raw IndexError/KeyError leaking through the tool boundary."""
+    # Empty validatingAirlineCodes would crash normalize_offers without the guard.
+    malformed = {
+        "meta": {"count": 1},
+        "data": [{
+            "type": "flight-offer",
+            "id": "1",
+            "source": "GDS",
+            "lastTicketingDate": "2026-05-15",
+            "numberOfBookableSeats": 7,
+            "itineraries": [{
+                "duration": "PT10H30M",
+                "segments": [{
+                    "id": "1",
+                    "carrierCode": "AY",
+                    "number": "15",
+                    "departure": {"iataCode": "HEL", "at": "2026-05-18T15:30:00"},
+                    "arrival": {"iataCode": "IAD", "at": "2026-05-19T01:00:00"},
+                    "numberOfStops": 0,
+                }],
+            }],
+            "price": {"currency": "USD", "total": "742.18", "base": "523.00"},
+            "validatingAirlineCodes": [],  # empty — normalize indexes [0]
+            "travelerPricings": [{
+                "travelerId": "1", "fareOption": "STANDARD", "travelerType": "ADULT",
+                "price": {"currency": "USD", "total": "742.18", "base": "523.00"},
+                "fareDetailsBySegment": [
+                    {"segmentId": "1", "cabin": "ECONOMY", "fareBasis": "VLOWFI", "class": "V"},
+                ],
+            }],
+        }],
+    }
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.path.endswith("/oauth2/token"):
+            return _token_response()
+        return httpx.Response(200, json=malformed)
+
+    client = _make_client(handler)
+    inp = SearchFlightsInput(origin="HEL", destination="IAD", departure_date="2026-05-18")
+    with pytest.raises(ToolError) as exc:
+        await client.search(inp)
+    assert exc.value.code is ErrorCode.UPSTREAM_ERROR
+    assert exc.value.retryable is True
