@@ -94,3 +94,32 @@ async def test_5xx_raises_upstream_error():
         with pytest.raises(ToolError) as exc:
             await cache.get_token()
         assert exc.value.code is ErrorCode.UPSTREAM_ERROR
+
+
+async def test_expired_token_triggers_refresh(monkeypatch):
+    """After the cached token's _expires_at lapses, get_token() must re-fetch."""
+    call_count = {"n": 0}
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        call_count["n"] += 1
+        return httpx.Response(200, json={"access_token": f"tok-{call_count['n']}", "expires_in": 100})
+
+    transport = httpx.MockTransport(handler)
+    fake_clock = [1000.0]
+    monkeypatch.setattr("flights_mcp.amadeus.token.time.monotonic", lambda: fake_clock[0])
+
+    async with httpx.AsyncClient(transport=transport) as client:
+        # refresh_buffer_seconds=0 makes _expires_at exactly the upstream expires_in.
+        cache = TokenCache(
+            client=client, base_url="https://test.api.amadeus.com",
+            client_id="id", client_secret="sec", refresh_buffer_seconds=0,
+        )
+        first = await cache.get_token()
+        assert first == "tok-1"
+        assert call_count["n"] == 1
+
+        # Advance the clock past expiry; next call must refresh.
+        fake_clock[0] += 101
+        second = await cache.get_token()
+        assert second == "tok-2"
+        assert call_count["n"] == 2

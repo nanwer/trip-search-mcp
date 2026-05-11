@@ -9,20 +9,26 @@ import httpx
 from flights_mcp.errors import ErrorCode, ToolError
 
 _REFRESH_BUFFER_SECONDS = 60
+# Bounds the refresh round-trip. The lock is held for the duration of the call,
+# so an unbounded timeout would let a hung Amadeus endpoint stall every caller.
+_REFRESH_TIMEOUT = httpx.Timeout(connect=5.0, read=10.0, write=5.0, pool=5.0)
 
 
 class TokenCache:
     def __init__(self, *, client: httpx.AsyncClient, base_url: str,
-                 client_id: str, client_secret: str):
+                 client_id: str, client_secret: str,
+                 refresh_buffer_seconds: int = _REFRESH_BUFFER_SECONDS):
         self._client = client
         self._base_url = base_url.rstrip("/")
         self._client_id = client_id
         self._client_secret = client_secret
+        self._refresh_buffer = refresh_buffer_seconds
         self._token: str | None = None
         self._expires_at: float = 0.0
         self._lock = asyncio.Lock()
 
     async def get_token(self) -> str:
+        # Fast path: skip lock acquisition entirely if the token is still valid.
         if self._is_valid():
             return self._token  # type: ignore[return-value]
         async with self._lock:
@@ -45,6 +51,7 @@ class TokenCache:
                     "client_secret": self._client_secret,
                 },
                 headers={"Content-Type": "application/x-www-form-urlencoded"},
+                timeout=_REFRESH_TIMEOUT,
             )
         except httpx.HTTPError as e:
             raise ToolError(ErrorCode.UPSTREAM_ERROR, f"Token fetch network error: {e}") from e
@@ -63,4 +70,4 @@ class TokenCache:
         if not token or not isinstance(expires_in, int):
             raise ToolError(ErrorCode.UPSTREAM_ERROR, "Malformed token response.")
         self._token = token
-        self._expires_at = time.monotonic() + max(0, expires_in - _REFRESH_BUFFER_SECONDS)
+        self._expires_at = time.monotonic() + max(0, expires_in - self._refresh_buffer)
