@@ -1,18 +1,9 @@
-import json
-from pathlib import Path
-
 import httpx
 import pytest
 
 from flights_mcp.amadeus.client import AmadeusClient
 from flights_mcp.errors import ErrorCode, ToolError
 from flights_mcp.models import SearchFlightsInput
-
-FIXTURES = Path(__file__).parent / "fixtures"
-
-
-def _fixture(name: str) -> dict:
-    return json.loads((FIXTURES / name).read_text())
 
 
 def _make_client(handler):
@@ -89,6 +80,7 @@ async def test_search_429_with_quota_message_maps_to_quota_exceeded():
     with pytest.raises(ToolError) as exc:
         await client.search(inp)
     assert exc.value.code is ErrorCode.QUOTA_EXCEEDED
+    assert exc.value.retryable is False  # quota is not retryable until next month
 
 
 async def test_search_429_transient_maps_to_rate_limited():
@@ -102,6 +94,7 @@ async def test_search_429_transient_maps_to_rate_limited():
     with pytest.raises(ToolError) as exc:
         await client.search(inp)
     assert exc.value.code is ErrorCode.RATE_LIMITED
+    assert exc.value.retryable is True
 
 
 async def test_search_5xx_maps_to_upstream_error():
@@ -115,3 +108,32 @@ async def test_search_5xx_maps_to_upstream_error():
     with pytest.raises(ToolError) as exc:
         await client.search(inp)
     assert exc.value.code is ErrorCode.UPSTREAM_ERROR
+    assert exc.value.retryable is True
+
+
+async def test_search_malformed_body_maps_to_upstream_error():
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.path.endswith("/oauth2/token"):
+            return _token_response()
+        return httpx.Response(200, content=b"<html>gateway error</html>")
+
+    client = _make_client(handler)
+    inp = SearchFlightsInput(origin="HEL", destination="IAD", departure_date="2026-05-18")
+    with pytest.raises(ToolError) as exc:
+        await client.search(inp)
+    assert exc.value.code is ErrorCode.UPSTREAM_ERROR
+    assert exc.value.retryable is True
+
+
+async def test_search_quota_detected_by_code_even_when_detail_lacks_keyword():
+    """Amadeus's prose varies by region; the numeric code must be sufficient."""
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.path.endswith("/oauth2/token"):
+            return _token_response()
+        return httpx.Response(429, json={"errors": [{"code": 38194, "detail": "Limit reached"}]})
+
+    client = _make_client(handler)
+    inp = SearchFlightsInput(origin="HEL", destination="IAD", departure_date="2026-05-18")
+    with pytest.raises(ToolError) as exc:
+        await client.search(inp)
+    assert exc.value.code is ErrorCode.QUOTA_EXCEEDED

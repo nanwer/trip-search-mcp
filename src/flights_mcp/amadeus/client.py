@@ -5,7 +5,10 @@ is constructed internally because its lifecycle is identical to the client's.
 """
 from __future__ import annotations
 
+import json
+
 import httpx
+from pydantic import ValidationError
 
 from flights_mcp.amadeus.normalize import normalize_offers
 from flights_mcp.amadeus.token import TokenCache
@@ -14,6 +17,11 @@ from flights_mcp.models import AmadeusSearchResponse, FlightOffer, SearchFlights
 
 _BASE_URL_TEST = "https://test.api.amadeus.com"
 _BASE_URL_PROD = "https://api.amadeus.com"
+# Flight search is heavier than token fetch — give it a longer read window.
+_SEARCH_TIMEOUT = httpx.Timeout(connect=5.0, read=15.0, write=5.0, pool=5.0)
+# Amadeus's documented error code for monthly quota exhaustion. Detail prose is
+# unstable across regions; matching on the numeric code is the reliable signal.
+_QUOTA_EXCEEDED_CODE = 38194
 
 
 def base_url_for_env(env: str) -> str:
@@ -42,12 +50,20 @@ class AmadeusClient:
                 f"{self._base_url}/v2/shopping/flight-offers",
                 params=query,
                 headers={"Authorization": f"Bearer {token}"},
+                timeout=_SEARCH_TIMEOUT,
             )
         except httpx.HTTPError as e:
             raise ToolError(ErrorCode.UPSTREAM_ERROR, f"Search network error: {e}") from e
 
         self._raise_for_status(response)
-        parsed = AmadeusSearchResponse.model_validate(response.json())
+        try:
+            parsed = AmadeusSearchResponse.model_validate(response.json())
+        except (json.JSONDecodeError, ValidationError) as e:
+            raise ToolError(
+                ErrorCode.UPSTREAM_ERROR,
+                f"Amadeus returned an unparseable response: {e}",
+                retryable=True,
+            ) from e
         offers = normalize_offers(parsed)
         if not offers:
             raise ToolError(ErrorCode.NO_RESULTS, "Amadeus returned no offers.")
@@ -81,15 +97,24 @@ class AmadeusClient:
         if sc == 401:
             raise ToolError(ErrorCode.AUTH_FAILED, "Amadeus rejected credentials.")
         if sc == 429:
-            body_text = ""
+            is_quota = False
             try:
                 body = response.json()
-                body_text = " ".join(
-                    str(err.get("detail", "")) for err in body.get("errors", [])
-                ).lower()
-            except Exception:
+                errors = body.get("errors", []) or []
+                # Prefer Amadeus's numeric error code over prose; fall back to a
+                # keyword check on the detail text for older or alternate codes.
+                for err in errors:
+                    if err.get("code") == _QUOTA_EXCEEDED_CODE:
+                        is_quota = True
+                        break
+                if not is_quota:
+                    detail_text = " ".join(
+                        str(err.get("detail", "")) for err in errors
+                    ).lower()
+                    is_quota = "quota" in detail_text
+            except (json.JSONDecodeError, ValueError, AttributeError):
                 pass
-            if "quota" in body_text:
+            if is_quota:
                 raise ToolError(ErrorCode.QUOTA_EXCEEDED,
                                 "Amadeus monthly quota exhausted.", retryable=False)
             raise ToolError(ErrorCode.RATE_LIMITED,
