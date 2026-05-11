@@ -12,6 +12,9 @@ Claude:[calls search_flights, summarizes the cheapest options, asks if you want 
 
 ---
 
+For a verbose, step-by-step walkthrough including troubleshooting see
+[docs/SETUP.md](./docs/SETUP.md).
+
 ## Install (one-time, ~5 minutes)
 
 ### 1. Get a SerpAPI key
@@ -27,7 +30,7 @@ You need Python 3.12 or newer. The cleanest path is `uv`
 
 **Option A — `uv` (recommended):**
 ```bash
-git clone https://github.com/<you>/flights-mcp.git
+git clone https://github.com/nanwer/flights-mcp.git
 cd flights-mcp
 uv venv
 uv pip install -e .
@@ -35,7 +38,7 @@ uv pip install -e .
 
 **Option B — `pip`:**
 ```bash
-git clone https://github.com/<you>/flights-mcp.git
+git clone https://github.com/nanwer/flights-mcp.git
 cd flights-mcp
 python3.12 -m venv .venv
 source .venv/bin/activate
