@@ -212,6 +212,7 @@ class JsonLineFormatter(logging.Formatter):
         payload["level"] = record.levelname
         payload["logger"] = record.name
         payload["msg"] = record.getMessage()
+        payload.pop("exc", None)  # user-supplied "exc" cannot impersonate a traceback
         if record.exc_info:
             payload["exc"] = self.formatException(record.exc_info)
         return json.dumps(payload, default=str)
