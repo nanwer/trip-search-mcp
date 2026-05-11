@@ -10,7 +10,7 @@ from datetime import date, datetime, timezone
 from enum import Enum
 from typing import Annotated
 
-from pydantic import BaseModel, Field, StringConstraints, field_validator, model_validator
+from pydantic import BaseModel, ConfigDict, Field, StringConstraints, field_validator, model_validator
 
 
 class CabinClass(str, Enum):
@@ -118,8 +118,6 @@ class SearchFlightsResult(BaseModel):
 # ---------------------------------------------------------------------------
 # Task 6: raw Amadeus response models (used by normalize.py in Task 8)
 # ---------------------------------------------------------------------------
-
-from pydantic import ConfigDict  # noqa: E402 — grouped with its usage
 
 
 class _AmadeusModel(BaseModel):
