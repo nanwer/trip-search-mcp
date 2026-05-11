@@ -1,8 +1,6 @@
 """Translate verbose Amadeus offers into the clean tool output shape."""
 from __future__ import annotations
 
-from collections import OrderedDict
-
 from flights_mcp.models import (
     AmadeusFareDetail,
     AmadeusFlightOfferRaw,
@@ -13,6 +11,31 @@ from flights_mcp.models import (
     Itinerary,
     Segment,
 )
+
+# Carrier-specific cabin labels that don't match our enum directly.
+_CABIN_ALIASES = {
+    "COACH": CabinClass.ECONOMY,
+    "PREMIUM ECONOMY": CabinClass.PREMIUM_ECONOMY,
+    "BUSINESS_CLASS": CabinClass.BUSINESS,
+    "FIRST_CLASS": CabinClass.FIRST,
+}
+
+
+def _coerce_cabin(raw_cabin: str | None) -> CabinClass:
+    """Map an Amadeus cabin string onto our enum, falling back to ECONOMY.
+
+    The normalizer's contract is "never raise"; without this guard, a carrier
+    returning an unmodelled cabin label would crash the entire response.
+    """
+    if raw_cabin is None:
+        return CabinClass.ECONOMY
+    key = raw_cabin.upper().strip()
+    if key in _CABIN_ALIASES:
+        return _CABIN_ALIASES[key]
+    try:
+        return CabinClass(key)
+    except ValueError:
+        return CabinClass.ECONOMY
 
 
 def _baggage_summary(detail: AmadeusFareDetail | None) -> str | None:
@@ -35,7 +58,6 @@ def _normalize_itinerary(it: AmadeusItinerary, fares_by_segment_id: dict[str, Am
     segments: list[Segment] = []
     for seg in it.segments:
         fare = fares_by_segment_id.get(seg.id)
-        cabin = (fare.cabin if fare else "ECONOMY").upper()
         booking_class = fare.class_ if fare else ""
         segments.append(Segment(
             airline=seg.carrier_code,
@@ -44,7 +66,7 @@ def _normalize_itinerary(it: AmadeusItinerary, fares_by_segment_id: dict[str, Am
             departure_time_local=seg.departure.at,
             arrival_airport=seg.arrival.iata_code,
             arrival_time_local=seg.arrival.at,
-            cabin=CabinClass(cabin),
+            cabin=_coerce_cabin(fare.cabin if fare else None),
             booking_class=booking_class,
         ))
     stops = max(0, len(it.segments) - 1)
@@ -67,10 +89,11 @@ def _normalize_offer(raw: AmadeusFlightOfferRaw) -> FlightOffer:
     )
 
     # Operating carriers across all segments, preserving order, deduplicated.
-    airlines = OrderedDict()
-    for it in raw.itineraries:
-        for seg in it.segments:
-            airlines[seg.carrier_code] = None
+    airlines = list(dict.fromkeys(
+        seg.carrier_code
+        for it in raw.itineraries
+        for seg in it.segments
+    ))
 
     total_price = float(raw.price.total)
     price_per_adult = (
@@ -79,10 +102,10 @@ def _normalize_offer(raw: AmadeusFlightOfferRaw) -> FlightOffer:
         else total_price
     )
 
-    # Use the fare detail for the FIRST segment as the representative fare_basis
-    # and baggage summary. Multi-leg itineraries occasionally vary; capturing
-    # every variant is overkill for Phase 1.
-    representative_fare = next(iter(fares_by_segment_id.values()), None)
+    # Anchor representative fare to the first outbound segment, not dict
+    # insertion order — Amadeus doesn't document `fareDetailsBySegment` ordering.
+    first_outbound_seg_id = raw.itineraries[0].segments[0].id
+    representative_fare = fares_by_segment_id.get(first_outbound_seg_id)
     fare_basis = representative_fare.fare_basis if representative_fare else ""
     baggage = _baggage_summary(representative_fare)
 
@@ -91,7 +114,7 @@ def _normalize_offer(raw: AmadeusFlightOfferRaw) -> FlightOffer:
         total_price=total_price,
         currency=raw.price.currency,
         price_per_adult=price_per_adult,
-        airlines=list(airlines.keys()),
+        airlines=airlines,
         validating_airline=raw.validating_airline_codes[0],
         outbound=outbound,
         inbound=inbound,
