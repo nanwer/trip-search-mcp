@@ -90,3 +90,34 @@ async def test_second_identical_call_is_cache_hit(synthetic_round_trip):
     await search_flights(**kwargs)
     await search_flights(**kwargs)
     assert call_count["search"] == 1
+
+
+async def test_full_round_trip_matches_documented_shape(synthetic_round_trip):
+    amadeus = _make_amadeus(_token_or(synthetic_round_trip))
+    cache = TTLCache(ttl_seconds=300)
+
+    result = await search_flights(
+        amadeus=amadeus, cache=cache, env="test",
+        origin="HEL", destination="IAD",
+        departure_date="2026-05-18", return_date="2026-05-29", adults=1,
+    )
+    assert "results" in result and isinstance(result["results"], list)
+    offer = result["results"][0]
+    expected_keys = {
+        "offer_id", "total_price", "currency", "price_per_adult",
+        "airlines", "validating_airline", "outbound", "inbound",
+        "seats_available", "last_ticketing_date", "fare_basis", "baggage_allowance",
+    }
+    assert expected_keys.issubset(offer.keys())
+
+    outbound = offer["outbound"]
+    assert {"duration", "stops", "segments"}.issubset(outbound.keys())
+    seg = outbound["segments"][0]
+    assert {
+        "airline", "flight_number", "departure_airport", "departure_time_local",
+        "arrival_airport", "arrival_time_local", "cabin", "booking_class",
+    }.issubset(seg.keys())
+    # Time format contract: no offset, ISO datetime.
+    assert "+" not in seg["departure_time_local"]
+    assert "Z" not in seg["departure_time_local"]
+    assert "T" in seg["departure_time_local"]
