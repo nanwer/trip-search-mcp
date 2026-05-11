@@ -55,7 +55,24 @@ Results from identical searches are cached for up to 5 minutes. Prices may move 
 
 Dates must be today or future in UTC. The tool rejects past dates with an `invalid_input` error — if a user gives a date that may already be past in their local timezone, advance to the next valid day before calling.
 
-Several fields may be null because Google Flights does not always populate them. Most importantly, a null `baggage_allowance` means "the carrier did not return this information," not "no checked bag is included." Do not state that a fare excludes checked bags based on a null value. The same applies to `last_ticketing_date` and `seats_available` — both are commonly null with this data source."""
+Several fields may be null because Google Flights does not always populate them. Most importantly, a null `baggage_allowance` means "the carrier did not return this information," not "no checked bag is included." Do not state that a fare excludes checked bags based on a null value. The same applies to `last_ticketing_date` and `seats_available` — both are commonly null with this data source.
+
+PRE-CALL ELICITATION: Before calling this tool, ensure the user has expressed preferences on the following. If any are unspecified, ask the user before searching. Do not assume defaults; results vary materially based on these.
+
+- Baggage: carry-on only, or checked bag needed (affects fare class and final price)
+- Connections: non-stop preferred, or okay with stops
+- Time of day: red-eye okay, hard arrival deadlines, preferred departure window
+- Airline preferences: any airlines to prefer (loyalty programs) or avoid
+
+RESULT PRESENTATION: When returning 2 or more results to the user, render them as an interactive artifact rather than a text list. Each offer is a card showing:
+
+- Total price, prominent
+- Airlines (IATA codes)
+- Total trip duration and stop count for each leg
+- Departure and arrival times for outbound and inbound, labeled with airport codes
+- A "Book on Google Flights" button linking to the offer's booking_url, opening in a new tab
+
+Sort cards by price ascending. For a single result, prose is fine."""
 
 _logger = logging.getLogger("flights_mcp")
 

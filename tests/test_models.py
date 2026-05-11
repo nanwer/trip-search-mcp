@@ -148,6 +148,9 @@ def test_itinerary_holds_segments():
     assert len(it.segments) == 2
 
 
+_SAMPLE_BOOKING_URL = "https://www.google.com/travel/flights?q=Flights+from+HEL+to+IAD+on+2026-05-18"
+
+
 def test_flight_offer_round_trip_shape():
     it = Itinerary(duration="PT10H30M", stops=0, segments=[_make_segment()])
     offer = FlightOffer(
@@ -163,6 +166,7 @@ def test_flight_offer_round_trip_shape():
         last_ticketing_date="2026-05-15",
         fare_basis="VLOWFI",
         baggage_allowance="1 checked bag",
+        booking_url=_SAMPLE_BOOKING_URL,
     )
     assert offer.inbound is None
     assert offer.baggage_allowance == "1 checked bag"
@@ -183,6 +187,7 @@ def test_flight_offer_allows_null_optional_fields():
         last_ticketing_date=None,
         fare_basis="VLOWFI",
         baggage_allowance=None,
+        booking_url=_SAMPLE_BOOKING_URL,
     )
     assert offer.seats_available is None
     assert offer.last_ticketing_date is None
@@ -195,6 +200,7 @@ def test_search_flights_result_wraps_offers():
         offer_id="1", total_price=850.5, currency="USD", price_per_adult=850.5,
         airlines=["AY"], validating_airline="AY", outbound=it, inbound=None,
         seats_available=None, last_ticketing_date=None, fare_basis="V", baggage_allowance=None,
+        booking_url=_SAMPLE_BOOKING_URL,
     )
     result = SearchFlightsResult(results=[offer])
     assert len(result.results) == 1

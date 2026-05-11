@@ -4,6 +4,8 @@ Pure functions, no I/O. Called by `client.py` after each upstream HTTP call.
 """
 from __future__ import annotations
 
+from urllib.parse import quote_plus
+
 from flights_mcp.models import (
     CabinClass,
     FlightOffer,
@@ -11,6 +13,30 @@ from flights_mcp.models import (
     Segment,
 )
 from flights_mcp.serpapi.raw import SerpFlightOption, SerpSegment
+
+
+def booking_url_for(
+    origin: str,
+    destination: str,
+    departure_date: str,
+    return_date: str | None,
+) -> str:
+    """Build a Google Flights search URL pre-filled with the user's query.
+
+    For Phase 1 we link to the search results page rather than a specific
+    offer's booking page — SerpAPI's per-offer booking endpoint is out of
+    scope here. The URL is identical for all offers from the same search
+    because it only depends on the search inputs.
+    """
+    base = "https://www.google.com/travel/flights?q="
+    if return_date:
+        q = (
+            f"Flights from {origin} to {destination} "
+            f"on {departure_date} through {return_date}"
+        )
+    else:
+        q = f"Flights from {origin} to {destination} on {departure_date}"
+    return base + quote_plus(q)
 
 # Carrier-specific cabin labels that don't match our enum directly.
 _CABIN_ALIASES = {
@@ -137,12 +163,15 @@ def build_one_way_offers(
     currency: str,
     adults: int,
     limit: int,
+    booking_url: str,
 ) -> list[FlightOffer]:
     """Translate one-way outbound options into FlightOffers.
 
     No follow-up call is needed — each option is a complete offer with
     `inbound=None`. The price field is per-search (i.e. for the requested
-    passenger count); we derive `price_per_adult` by dividing.
+    passenger count); we derive `price_per_adult` by dividing. Every offer
+    carries the same `booking_url` (computed once by the caller from the
+    search inputs).
     """
     offers: list[FlightOffer] = []
     for option in options[:limit]:
@@ -166,6 +195,7 @@ def build_one_way_offers(
             last_ticketing_date=None,
             fare_basis="",
             baggage_allowance=None,
+            booking_url=booking_url,
         ))
     return offers
 
@@ -176,6 +206,7 @@ def build_round_trip_offer(
     *,
     currency: str,
     adults: int,
+    booking_url: str,
 ) -> FlightOffer:
     """Pair one outbound option with one return option into a single FlightOffer.
 
@@ -193,6 +224,7 @@ def build_round_trip_offer(
         total_price=total,
         currency=currency,
         price_per_adult=per_adult,
+        booking_url=booking_url,
         airlines=_dedupe_airlines(outbound, inbound),
         validating_airline=outbound.segments[0].airline,
         outbound=outbound,

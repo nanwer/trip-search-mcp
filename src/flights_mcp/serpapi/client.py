@@ -22,6 +22,7 @@ from pydantic import ValidationError
 from flights_mcp.errors import ErrorCode, ToolError
 from flights_mcp.models import FlightOffer, SearchFlightsInput
 from flights_mcp.serpapi.normalize import (
+    booking_url_for,
     build_one_way_offers,
     build_round_trip_offer,
 )
@@ -54,11 +55,15 @@ class SerpAPIClient:
     async def _search_one_way(self, params: SearchFlightsInput) -> list[FlightOffer]:
         outbound = await self._call(self._one_way_query(params))
         all_options = list(outbound.best_flights) + list(outbound.other_flights)
+        booking_url = booking_url_for(
+            params.origin, params.destination, params.departure_date, params.return_date,
+        )
         offers = build_one_way_offers(
             all_options,
             currency=params.currency,
             adults=params.adults,
             limit=params.max_results,
+            booking_url=booking_url,
         )
         if not offers:
             raise ToolError(ErrorCode.NO_RESULTS, "SerpAPI returned no flight options.")
@@ -95,6 +100,10 @@ class SerpAPIClient:
             return_exceptions=True,
         )
 
+        booking_url = booking_url_for(
+            params.origin, params.destination, params.departure_date, params.return_date,
+        )
+
         offers: list[FlightOffer] = []
         for outbound_option, resp in zip(candidates, return_resps):
             if isinstance(resp, ToolError):
@@ -115,6 +124,7 @@ class SerpAPIClient:
                 return_options[0],
                 currency=params.currency,
                 adults=params.adults,
+                booking_url=booking_url,
             ))
 
         if not offers:

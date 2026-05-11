@@ -128,6 +128,7 @@ class FlightOffer(BaseModel):
     last_ticketing_date: str | None
     fare_basis: str
     baggage_allowance: str | None
+    booking_url: str  # Google Flights URL with the search pre-filled. Always populated.
 
 
 class SearchFlightsResult(BaseModel):
