@@ -8,6 +8,7 @@ def test_error_code_values_match_spec():
     assert ErrorCode.RATE_LIMITED.value == "rate_limited"
     assert ErrorCode.UPSTREAM_ERROR.value == "upstream_error"
     assert ErrorCode.AUTH_FAILED.value == "auth_failed"
+    assert len(ErrorCode) == 6  # adding a code requires updating SPEC.md's error table
 
 
 def test_error_response_shape():
@@ -21,8 +22,15 @@ def test_error_response_shape():
     }
 
 
+def test_error_response_retryable_true():
+    out = error_response(ErrorCode.RATE_LIMITED, "Slow down.", retryable=True)
+    assert out["error"]["retryable"] is True
+
+
 def test_tool_error_carries_code_and_message():
     err = ToolError(ErrorCode.AUTH_FAILED, "bad creds")
     assert err.code == ErrorCode.AUTH_FAILED
     assert err.message == "bad creds"
     assert err.retryable is False
+    assert str(err) == "bad creds"
+    assert isinstance(err, Exception)
