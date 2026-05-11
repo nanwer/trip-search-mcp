@@ -5,6 +5,7 @@ The MCP-facing description string lives here too — it is what Claude reads.
 """
 from __future__ import annotations
 
+import copy
 import logging
 import time
 from typing import Any
@@ -19,6 +20,16 @@ from flights_mcp.models import SearchFlightsInput, SearchFlightsResult
 
 TOOL_NAME = "search_flights"
 
+# Operational severity for each upstream failure mode. AUTH_FAILED and
+# QUOTA_EXCEEDED need human action; RATE_LIMITED and UPSTREAM_ERROR are
+# usually transient.
+_LEVEL_FOR_CODE = {
+    ErrorCode.AUTH_FAILED: logging.ERROR,
+    ErrorCode.QUOTA_EXCEEDED: logging.ERROR,
+    ErrorCode.RATE_LIMITED: logging.WARNING,
+    ErrorCode.UPSTREAM_ERROR: logging.WARNING,
+}
+
 TOOL_DESCRIPTION = """\
 Search live flight offers for a given route and date range using the Amadeus GDS feed.
 
@@ -29,6 +40,8 @@ Times in the response are local to the departure or arrival airport, with the ai
 Origin and destination can be either airport IATA codes (IAD, DCA, BWI) or city IATA codes (WAS, LON, NYC). City codes return offers across all airports in that city; Amadeus handles the multi-airport expansion server-side.
 
 Results from identical searches are cached for up to 5 minutes. Prices may move within minutes, so a returned price may be up to 5 minutes old. If the user is about to act on a specific offer, re-run the search before committing to a number.
+
+Dates must be today or future in UTC. The tool rejects past dates with an `invalid_input` error — if a user gives a date that may already be past in their local timezone, advance to the next valid day before calling.
 
 Several fields are nullable because Amadeus does not always populate them. Most importantly, a null `baggage_allowance` means "the airline did not return this information," not "no checked bag is included." Do not state that a fare excludes checked bags based on a null value. The same applies to `last_ticketing_date` and `seats_available`."""
 
@@ -82,7 +95,8 @@ async def search_flights(
     cached = cache.get(key)
     if cached is not None:
         log_event(_logger, "tool.cache_hit", tool=TOOL_NAME, input=params.model_dump())
-        return cached
+        # Deep-copy so callers cannot mutate the cache entry in place.
+        return copy.deepcopy(cached)
 
     # 3. Amadeus call.
     started = time.monotonic()
@@ -96,7 +110,8 @@ async def search_flights(
                       input=params.model_dump(), elapsed_ms=elapsed_ms)
             return error_response(ErrorCode.NO_RESULTS, msg, retryable=False)
         log_event(_logger, "tool.amadeus_error", tool=TOOL_NAME,
-                  code=e.code.value, elapsed_ms=elapsed_ms)
+                  code=e.code.value, elapsed_ms=elapsed_ms,
+                  level=_LEVEL_FOR_CODE.get(e.code, logging.WARNING))
         return error_response(e.code, e.message, retryable=e.retryable)
 
     elapsed_ms = int((time.monotonic() - started) * 1000)
@@ -104,4 +119,5 @@ async def search_flights(
     cache.set(key, result)
     log_event(_logger, "tool.success", tool=TOOL_NAME, input=params.model_dump(),
               count=len(offers), elapsed_ms=elapsed_ms, cache_hit=False)
-    return result
+    # Return a copy too, for symmetry with the cache-hit branch.
+    return copy.deepcopy(result)
