@@ -3,10 +3,26 @@ or `python -m flights_mcp.server`."""
 from __future__ import annotations
 
 import os
+import warnings
 from typing import Any
 
 import httpx
-from fastmcp import FastMCP
+
+# FastMCP transitively imports authlib.jose, which emits an AuthlibDeprecation-
+# Warning at every interpreter start. authlib *replaces* the global warning
+# filter list on its own import, so the usual filterwarnings/catch_warnings
+# tricks don't stick. Intercept at the display layer instead — drop only its
+# own class by name so genuine deprecation warnings still surface.
+_original_showwarning = warnings.showwarning
+
+def _drop_authlib_deprecation(message, category, filename, lineno, file=None, line=None):
+    if category.__name__ == "AuthlibDeprecationWarning":
+        return
+    _original_showwarning(message, category, filename, lineno, file, line)
+
+warnings.showwarning = _drop_authlib_deprecation
+
+from fastmcp import FastMCP  # noqa: E402 — must follow the warning hook above
 
 from flights_mcp.cache import TTLCache
 from flights_mcp.logging_config import configure_logging, log_event

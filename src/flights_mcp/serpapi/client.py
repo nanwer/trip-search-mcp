@@ -13,6 +13,7 @@ One-way search is a single GET; the returned options are the offers.
 """
 from __future__ import annotations
 
+import asyncio
 import json
 
 import httpx
@@ -72,19 +73,43 @@ class SerpAPIClient:
         if not outbound_options:
             raise ToolError(ErrorCode.NO_RESULTS, "SerpAPI returned no outbound options.")
 
-        # Step 2: for each top outbound, fetch return options and pair the best.
-        offers: list[FlightOffer] = []
-        for outbound_option in outbound_options[: params.max_results]:
-            if not outbound_option.departure_token:
-                # SerpAPI omitted the token for this option — skip; we can't
-                # pair it with a return leg.
-                continue
-            return_resp = await self._call(
-                self._round_trip_return_query(params, outbound_option.departure_token)
+        # Step 2: fetch return options for each candidate outbound in parallel.
+        # SerpAPI's per-call latency is the dominant cost (3-5s each), so doing
+        # N return-leg fetches concurrently brings round-trip wall time down
+        # from ~N×latency to ~latency. The 5-call cap on max_results keeps the
+        # burst small enough that SerpAPI's per-second rate limit isn't a risk.
+        candidates = [
+            o for o in outbound_options[: params.max_results] if o.departure_token
+        ]
+        if not candidates:
+            raise ToolError(
+                ErrorCode.NO_RESULTS,
+                "SerpAPI returned outbound options but none had a departure_token.",
             )
-            return_options = list(return_resp.best_flights) + list(return_resp.other_flights)
+
+        return_resps = await asyncio.gather(
+            *(
+                self._call(self._round_trip_return_query(params, c.departure_token))
+                for c in candidates
+            ),
+            return_exceptions=True,
+        )
+
+        offers: list[FlightOffer] = []
+        for outbound_option, resp in zip(candidates, return_resps):
+            if isinstance(resp, ToolError):
+                # An auth/quota/rate-limit problem on any leg is global —
+                # surface the first one and abort the whole search.
+                raise resp
+            if isinstance(resp, BaseException):
+                raise ToolError(
+                    ErrorCode.UPSTREAM_ERROR,
+                    f"Return-leg fetch failed unexpectedly: {resp}",
+                    retryable=True,
+                ) from resp
+            return_options = list(resp.best_flights) + list(resp.other_flights)
             if not return_options:
-                continue  # this outbound has no available returns for the requested date
+                continue  # this outbound has no matching returns for the requested date
             offers.append(build_round_trip_offer(
                 outbound_option,
                 return_options[0],
