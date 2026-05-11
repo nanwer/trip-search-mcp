@@ -1,0 +1,28 @@
+from flights_mcp.errors import ErrorCode, ToolError, error_response
+
+
+def test_error_code_values_match_spec():
+    assert ErrorCode.NO_RESULTS.value == "no_results"
+    assert ErrorCode.INVALID_INPUT.value == "invalid_input"
+    assert ErrorCode.QUOTA_EXCEEDED.value == "quota_exceeded"
+    assert ErrorCode.RATE_LIMITED.value == "rate_limited"
+    assert ErrorCode.UPSTREAM_ERROR.value == "upstream_error"
+    assert ErrorCode.AUTH_FAILED.value == "auth_failed"
+
+
+def test_error_response_shape():
+    out = error_response(ErrorCode.NO_RESULTS, "No flights found.", retryable=False)
+    assert out == {
+        "error": {
+            "code": "no_results",
+            "message": "No flights found.",
+            "retryable": False,
+        }
+    }
+
+
+def test_tool_error_carries_code_and_message():
+    err = ToolError(ErrorCode.AUTH_FAILED, "bad creds")
+    assert err.code == ErrorCode.AUTH_FAILED
+    assert err.message == "bad creds"
+    assert err.retryable is False
