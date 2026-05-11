@@ -113,3 +113,75 @@ class FlightOffer(BaseModel):
 
 class SearchFlightsResult(BaseModel):
     results: list[FlightOffer]
+
+
+# ---------------------------------------------------------------------------
+# Task 6: raw Amadeus response models (used by normalize.py in Task 8)
+# ---------------------------------------------------------------------------
+
+from pydantic import ConfigDict  # noqa: E402 — grouped with its usage
+
+
+class _AmadeusModel(BaseModel):
+    model_config = ConfigDict(populate_by_name=True, extra="ignore")
+
+
+class AmadeusEndpoint(_AmadeusModel):
+    iata_code: str = Field(alias="iataCode")
+    at: str  # local-airport time, no offset
+    terminal: str | None = None
+
+
+class AmadeusSegment(_AmadeusModel):
+    id: str
+    carrier_code: str = Field(alias="carrierCode")
+    number: str
+    departure: AmadeusEndpoint
+    arrival: AmadeusEndpoint
+    number_of_stops: int = Field(alias="numberOfStops", default=0)
+    operating: dict | None = None
+
+
+class AmadeusItinerary(_AmadeusModel):
+    duration: str
+    segments: list[AmadeusSegment]
+
+
+class AmadeusPrice(_AmadeusModel):
+    currency: str
+    total: str
+    base: str | None = None
+
+
+class AmadeusFareDetail(_AmadeusModel):
+    segment_id: str = Field(alias="segmentId")
+    cabin: str
+    fare_basis: str = Field(alias="fareBasis")
+    class_: str = Field(alias="class")
+    included_checked_bags: dict | None = Field(alias="includedCheckedBags", default=None)
+
+
+class AmadeusTravelerPricing(_AmadeusModel):
+    traveler_id: str = Field(alias="travelerId")
+    traveler_type: str = Field(alias="travelerType")
+    price: AmadeusPrice
+    fare_details_by_segment: list[AmadeusFareDetail] = Field(alias="fareDetailsBySegment")
+
+
+class AmadeusFlightOfferRaw(_AmadeusModel):
+    id: str
+    last_ticketing_date: str | None = Field(alias="lastTicketingDate", default=None)
+    number_of_bookable_seats: int | None = Field(alias="numberOfBookableSeats", default=None)
+    itineraries: list[AmadeusItinerary]
+    price: AmadeusPrice
+    validating_airline_codes: list[str] = Field(alias="validatingAirlineCodes")
+    traveler_pricings: list[AmadeusTravelerPricing] = Field(alias="travelerPricings")
+
+
+class AmadeusMeta(_AmadeusModel):
+    count: int
+
+
+class AmadeusSearchResponse(_AmadeusModel):
+    meta: AmadeusMeta
+    data: list[AmadeusFlightOfferRaw]

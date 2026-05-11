@@ -4,6 +4,7 @@ import pytest
 from pydantic import ValidationError
 
 from flights_mcp.models import (
+    AmadeusSearchResponse,
     CabinClass,
     FlightOffer,
     Itinerary,
@@ -201,3 +202,51 @@ def test_itinerary_rejects_negative_stops():
 def test_itinerary_rejects_empty_segments():
     with pytest.raises(ValidationError):
         Itinerary(duration="PT10H30M", stops=0, segments=[])
+
+
+# ---------------------------------------------------------------------------
+# Task 6: raw Amadeus response models
+# ---------------------------------------------------------------------------
+
+
+def test_amadeus_search_response_parses_minimal_payload():
+    payload = {
+        "meta": {"count": 1},
+        "data": [{
+            "type": "flight-offer",
+            "id": "1",
+            "source": "GDS",
+            "lastTicketingDate": "2026-05-15",
+            "numberOfBookableSeats": 7,
+            "itineraries": [{
+                "duration": "PT10H30M",
+                "segments": [{
+                    "id": "1",
+                    "carrierCode": "AY",
+                    "number": "15",
+                    "departure": {"iataCode": "HEL", "at": "2026-05-18T15:30:00"},
+                    "arrival": {"iataCode": "JFK", "at": "2026-05-18T17:45:00"},
+                    "numberOfStops": 0,
+                }],
+            }],
+            "price": {"currency": "USD", "total": "850.50", "base": "700.00"},
+            "validatingAirlineCodes": ["AY"],
+            "travelerPricings": [{
+                "travelerId": "1",
+                "fareOption": "STANDARD",
+                "travelerType": "ADULT",
+                "price": {"currency": "USD", "total": "850.50", "base": "700.00"},
+                "fareDetailsBySegment": [{
+                    "segmentId": "1",
+                    "cabin": "ECONOMY",
+                    "fareBasis": "VLOWFI",
+                    "class": "V",
+                }],
+            }],
+        }],
+    }
+    parsed = AmadeusSearchResponse.model_validate(payload)
+    assert parsed.meta.count == 1
+    assert parsed.data[0].id == "1"
+    assert parsed.data[0].itineraries[0].segments[0].carrier_code == "AY"
+    assert parsed.data[0].price.total == "850.50"
