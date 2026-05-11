@@ -1,0 +1,1700 @@
+[
+  {
+    "kind": "tuple",
+    "items": [
+      {
+        "legs": [
+          {
+            "airline": "Icelandair",
+            "flight_number": "343",
+            "departure_airport": "Helsinki Vantaa Airport",
+            "arrival_airport": "Keflavik International Airport",
+            "departure_datetime": "2026-05-18T15:00:00",
+            "arrival_datetime": "2026-05-18T15:40:00",
+            "duration": 220
+          },
+          {
+            "airline": "Icelandair",
+            "flight_number": "645",
+            "departure_airport": "Keflavik International Airport",
+            "arrival_airport": "Washington Dulles International Airport",
+            "departure_datetime": "2026-05-18T16:50:00",
+            "arrival_datetime": "2026-05-18T19:20:00",
+            "duration": 390
+          }
+        ],
+        "price": 666.0,
+        "currency": "EUR",
+        "duration": 680,
+        "stops": 1
+      },
+      {
+        "legs": [
+          {
+            "airline": "Icelandair",
+            "flight_number": "644",
+            "departure_airport": "Washington Dulles International Airport",
+            "arrival_airport": "Keflavik International Airport",
+            "departure_datetime": "2026-05-29T20:30:00",
+            "arrival_datetime": "2026-05-30T06:25:00",
+            "duration": 355
+          },
+          {
+            "airline": "Icelandair",
+            "flight_number": "342",
+            "departure_airport": "Keflavik International Airport",
+            "arrival_airport": "Helsinki Vantaa Airport",
+            "departure_datetime": "2026-05-30T07:30:00",
+            "arrival_datetime": "2026-05-30T14:00:00",
+            "duration": 210
+          }
+        ],
+        "price": 666.0,
+        "currency": "EUR",
+        "duration": 630,
+        "stops": 1
+      }
+    ]
+  },
+  {
+    "kind": "tuple",
+    "items": [
+      {
+        "legs": [
+          {
+            "airline": "Icelandair",
+            "flight_number": "343",
+            "departure_airport": "Helsinki Vantaa Airport",
+            "arrival_airport": "Keflavik International Airport",
+            "departure_datetime": "2026-05-18T15:00:00",
+            "arrival_datetime": "2026-05-18T15:40:00",
+            "duration": 220
+          },
+          {
+            "airline": "Icelandair",
+            "flight_number": "645",
+            "departure_airport": "Keflavik International Airport",
+            "arrival_airport": "Washington Dulles International Airport",
+            "departure_datetime": "2026-05-18T16:50:00",
+            "arrival_datetime": "2026-05-18T19:20:00",
+            "duration": 390
+          }
+        ],
+        "price": 666.0,
+        "currency": "EUR",
+        "duration": 680,
+        "stops": 1
+      },
+      {
+        "legs": [
+          {
+            "airline": "Icelandair",
+            "flight_number": "648",
+            "departure_airport": "Washington Dulles International Airport",
+            "arrival_airport": "Keflavik International Airport",
+            "departure_datetime": "2026-05-29T23:20:00",
+            "arrival_datetime": "2026-05-30T09:10:00",
+            "duration": 350
+          },
+          {
+            "airline": "Icelandair",
+            "flight_number": "342",
+            "departure_airport": "Keflavik International Airport",
+            "arrival_airport": "Helsinki Vantaa Airport",
+            "departure_datetime": "2026-05-31T07:30:00",
+            "arrival_datetime": "2026-05-31T14:00:00",
+            "duration": 210
+          }
+        ],
+        "price": 731.0,
+        "currency": "EUR",
+        "duration": 1900,
+        "stops": 1
+      }
+    ]
+  },
+  {
+    "kind": "tuple",
+    "items": [
+      {
+        "legs": [
+          {
+            "airline": "Icelandair",
+            "flight_number": "343",
+            "departure_airport": "Helsinki Vantaa Airport",
+            "arrival_airport": "Keflavik International Airport",
+            "departure_datetime": "2026-05-18T15:00:00",
+            "arrival_datetime": "2026-05-18T15:40:00",
+            "duration": 220
+          },
+          {
+            "airline": "Icelandair",
+            "flight_number": "645",
+            "departure_airport": "Keflavik International Airport",
+            "arrival_airport": "Washington Dulles International Airport",
+            "departure_datetime": "2026-05-18T16:50:00",
+            "arrival_datetime": "2026-05-18T19:20:00",
+            "duration": 390
+          }
+        ],
+        "price": 666.0,
+        "currency": "EUR",
+        "duration": 680,
+        "stops": 1
+      },
+      {
+        "legs": [
+          {
+            "airline": "Icelandair",
+            "flight_number": "648",
+            "departure_airport": "Washington Dulles International Airport",
+            "arrival_airport": "Keflavik International Airport",
+            "departure_datetime": "2026-05-29T23:20:00",
+            "arrival_datetime": "2026-05-30T09:10:00",
+            "duration": 350
+          },
+          {
+            "airline": "Icelandair",
+            "flight_number": "308",
+            "departure_airport": "Keflavik International Airport",
+            "arrival_airport": "Stockholm-Arlanda Airport",
+            "departure_datetime": "2026-05-30T11:00:00",
+            "arrival_datetime": "2026-05-30T16:10:00",
+            "duration": 190
+          },
+          {
+            "airline": "Finnair",
+            "flight_number": "816",
+            "departure_airport": "Stockholm-Arlanda Airport",
+            "arrival_airport": "Helsinki Vantaa Airport",
+            "departure_datetime": "2026-05-30T17:40:00",
+            "arrival_datetime": "2026-05-30T19:40:00",
+            "duration": 60
+          }
+        ],
+        "price": 1274.0,
+        "currency": "EUR",
+        "duration": 800,
+        "stops": 2
+      }
+    ]
+  },
+  {
+    "kind": "tuple",
+    "items": [
+      {
+        "legs": [
+          {
+            "airline": "Icelandair",
+            "flight_number": "343",
+            "departure_airport": "Helsinki Vantaa Airport",
+            "arrival_airport": "Keflavik International Airport",
+            "departure_datetime": "2026-05-18T15:00:00",
+            "arrival_datetime": "2026-05-18T15:40:00",
+            "duration": 220
+          },
+          {
+            "airline": "Icelandair",
+            "flight_number": "645",
+            "departure_airport": "Keflavik International Airport",
+            "arrival_airport": "Washington Dulles International Airport",
+            "departure_datetime": "2026-05-18T16:50:00",
+            "arrival_datetime": "2026-05-18T19:20:00",
+            "duration": 390
+          }
+        ],
+        "price": 666.0,
+        "currency": "EUR",
+        "duration": 680,
+        "stops": 1
+      },
+      {
+        "legs": [
+          {
+            "airline": "Icelandair",
+            "flight_number": "648",
+            "departure_airport": "Washington Dulles International Airport",
+            "arrival_airport": "Keflavik International Airport",
+            "departure_datetime": "2026-05-29T23:20:00",
+            "arrival_datetime": "2026-05-30T09:10:00",
+            "duration": 350
+          },
+          {
+            "airline": "Icelandair",
+            "flight_number": "322",
+            "departure_airport": "Keflavik International Airport",
+            "arrival_airport": "Oslo Gardermoen Airport",
+            "departure_datetime": "2026-05-30T10:40:00",
+            "arrival_datetime": "2026-05-30T15:25:00",
+            "duration": 165
+          },
+          {
+            "airline": "Finnair",
+            "flight_number": "916",
+            "departure_airport": "Oslo Gardermoen Airport",
+            "arrival_airport": "Helsinki Vantaa Airport",
+            "departure_datetime": "2026-05-30T17:20:00",
+            "arrival_datetime": "2026-05-30T19:45:00",
+            "duration": 85
+          }
+        ],
+        "price": 1366.0,
+        "currency": "EUR",
+        "duration": 805,
+        "stops": 2
+      }
+    ]
+  },
+  {
+    "kind": "tuple",
+    "items": [
+      {
+        "legs": [
+          {
+            "airline": "KLM",
+            "flight_number": "1248",
+            "departure_airport": "Helsinki Vantaa Airport",
+            "arrival_airport": "Amsterdam Airport Schiphol",
+            "departure_datetime": "2026-05-18T07:00:00",
+            "arrival_datetime": "2026-05-18T08:30:00",
+            "duration": 150
+          },
+          {
+            "airline": "KLM",
+            "flight_number": "651",
+            "departure_airport": "Amsterdam Airport Schiphol",
+            "arrival_airport": "Washington Dulles International Airport",
+            "departure_datetime": "2026-05-18T13:15:00",
+            "arrival_datetime": "2026-05-18T15:35:00",
+            "duration": 500
+          }
+        ],
+        "price": 697.0,
+        "currency": "EUR",
+        "duration": 935,
+        "stops": 1
+      },
+      {
+        "legs": [
+          {
+            "airline": "Air France",
+            "flight_number": "51",
+            "departure_airport": "Washington Dulles International Airport",
+            "arrival_airport": "Charles de Gaulle International Airport",
+            "departure_datetime": "2026-05-29T18:15:00",
+            "arrival_datetime": "2026-05-30T08:00:00",
+            "duration": 465
+          },
+          {
+            "airline": "Air France",
+            "flight_number": "1070",
+            "departure_airport": "Charles de Gaulle International Airport",
+            "arrival_airport": "Helsinki Vantaa Airport",
+            "departure_datetime": "2026-05-30T12:40:00",
+            "arrival_datetime": "2026-05-30T16:40:00",
+            "duration": 180
+          }
+        ],
+        "price": 697.0,
+        "currency": "EUR",
+        "duration": 925,
+        "stops": 1
+      }
+    ]
+  },
+  {
+    "kind": "tuple",
+    "items": [
+      {
+        "legs": [
+          {
+            "airline": "KLM",
+            "flight_number": "1248",
+            "departure_airport": "Helsinki Vantaa Airport",
+            "arrival_airport": "Amsterdam Airport Schiphol",
+            "departure_datetime": "2026-05-18T07:00:00",
+            "arrival_datetime": "2026-05-18T08:30:00",
+            "duration": 150
+          },
+          {
+            "airline": "KLM",
+            "flight_number": "651",
+            "departure_airport": "Amsterdam Airport Schiphol",
+            "arrival_airport": "Washington Dulles International Airport",
+            "departure_datetime": "2026-05-18T13:15:00",
+            "arrival_datetime": "2026-05-18T15:35:00",
+            "duration": 500
+          }
+        ],
+        "price": 697.0,
+        "currency": "EUR",
+        "duration": 935,
+        "stops": 1
+      },
+      {
+        "legs": [
+          {
+            "airline": "KLM",
+            "flight_number": "652",
+            "departure_airport": "Washington Dulles International Airport",
+            "arrival_airport": "Amsterdam Airport Schiphol",
+            "departure_datetime": "2026-05-29T17:40:00",
+            "arrival_datetime": "2026-05-30T07:10:00",
+            "duration": 450
+          },
+          {
+            "airline": "KLM",
+            "flight_number": "1251",
+            "departure_airport": "Amsterdam Airport Schiphol",
+            "arrival_airport": "Helsinki Vantaa Airport",
+            "departure_datetime": "2026-05-30T09:45:00",
+            "arrival_datetime": "2026-05-30T13:05:00",
+            "duration": 140
+          }
+        ],
+        "price": 702.0,
+        "currency": "EUR",
+        "duration": 745,
+        "stops": 1
+      }
+    ]
+  },
+  {
+    "kind": "tuple",
+    "items": [
+      {
+        "legs": [
+          {
+            "airline": "KLM",
+            "flight_number": "1248",
+            "departure_airport": "Helsinki Vantaa Airport",
+            "arrival_airport": "Amsterdam Airport Schiphol",
+            "departure_datetime": "2026-05-18T07:00:00",
+            "arrival_datetime": "2026-05-18T08:30:00",
+            "duration": 150
+          },
+          {
+            "airline": "KLM",
+            "flight_number": "651",
+            "departure_airport": "Amsterdam Airport Schiphol",
+            "arrival_airport": "Washington Dulles International Airport",
+            "departure_datetime": "2026-05-18T13:15:00",
+            "arrival_datetime": "2026-05-18T15:35:00",
+            "duration": 500
+          }
+        ],
+        "price": 697.0,
+        "currency": "EUR",
+        "duration": 935,
+        "stops": 1
+      },
+      {
+        "legs": [
+          {
+            "airline": "KLM",
+            "flight_number": "652",
+            "departure_airport": "Washington Dulles International Airport",
+            "arrival_airport": "Amsterdam Airport Schiphol",
+            "departure_datetime": "2026-05-29T17:40:00",
+            "arrival_datetime": "2026-05-30T07:10:00",
+            "duration": 450
+          },
+          {
+            "airline": "KLM",
+            "flight_number": "1253",
+            "departure_airport": "Amsterdam Airport Schiphol",
+            "arrival_airport": "Helsinki Vantaa Airport",
+            "departure_datetime": "2026-05-30T14:20:00",
+            "arrival_datetime": "2026-05-30T17:40:00",
+            "duration": 140
+          }
+        ],
+        "price": 702.0,
+        "currency": "EUR",
+        "duration": 1020,
+        "stops": 1
+      }
+    ]
+  },
+  {
+    "kind": "tuple",
+    "items": [
+      {
+        "legs": [
+          {
+            "airline": "KLM",
+            "flight_number": "1248",
+            "departure_airport": "Helsinki Vantaa Airport",
+            "arrival_airport": "Amsterdam Airport Schiphol",
+            "departure_datetime": "2026-05-18T07:00:00",
+            "arrival_datetime": "2026-05-18T08:30:00",
+            "duration": 150
+          },
+          {
+            "airline": "KLM",
+            "flight_number": "651",
+            "departure_airport": "Amsterdam Airport Schiphol",
+            "arrival_airport": "Washington Dulles International Airport",
+            "departure_datetime": "2026-05-18T13:15:00",
+            "arrival_datetime": "2026-05-18T15:35:00",
+            "duration": 500
+          }
+        ],
+        "price": 697.0,
+        "currency": "EUR",
+        "duration": 935,
+        "stops": 1
+      },
+      {
+        "legs": [
+          {
+            "airline": "KLM",
+            "flight_number": "652",
+            "departure_airport": "Washington Dulles International Airport",
+            "arrival_airport": "Amsterdam Airport Schiphol",
+            "departure_datetime": "2026-05-29T17:40:00",
+            "arrival_datetime": "2026-05-30T07:10:00",
+            "duration": 450
+          },
+          {
+            "airline": "KLM",
+            "flight_number": "1255",
+            "departure_airport": "Amsterdam Airport Schiphol",
+            "arrival_airport": "Helsinki Vantaa Airport",
+            "departure_datetime": "2026-05-30T21:00:00",
+            "arrival_datetime": "2026-05-31T00:25:00",
+            "duration": 145
+          }
+        ],
+        "price": 702.0,
+        "currency": "EUR",
+        "duration": 1425,
+        "stops": 1
+      }
+    ]
+  },
+  {
+    "kind": "tuple",
+    "items": [
+      {
+        "legs": [
+          {
+            "airline": "KLM",
+            "flight_number": "1248",
+            "departure_airport": "Helsinki Vantaa Airport",
+            "arrival_airport": "Amsterdam Airport Schiphol",
+            "departure_datetime": "2026-05-18T07:00:00",
+            "arrival_datetime": "2026-05-18T08:30:00",
+            "duration": 150
+          },
+          {
+            "airline": "KLM",
+            "flight_number": "651",
+            "departure_airport": "Amsterdam Airport Schiphol",
+            "arrival_airport": "Washington Dulles International Airport",
+            "departure_datetime": "2026-05-18T13:15:00",
+            "arrival_datetime": "2026-05-18T15:35:00",
+            "duration": 500
+          }
+        ],
+        "price": 697.0,
+        "currency": "EUR",
+        "duration": 935,
+        "stops": 1
+      },
+      {
+        "legs": [
+          {
+            "airline": "Air France",
+            "flight_number": "53",
+            "departure_airport": "Washington Dulles International Airport",
+            "arrival_airport": "Charles de Gaulle International Airport",
+            "departure_datetime": "2026-05-29T21:45:00",
+            "arrival_datetime": "2026-05-30T11:15:00",
+            "duration": 450
+          },
+          {
+            "airline": "Air France",
+            "flight_number": "1070",
+            "departure_airport": "Charles de Gaulle International Airport",
+            "arrival_airport": "Helsinki Vantaa Airport",
+            "departure_datetime": "2026-05-30T12:40:00",
+            "arrival_datetime": "2026-05-30T16:40:00",
+            "duration": 180
+          }
+        ],
+        "price": 785.0,
+        "currency": "EUR",
+        "duration": 715,
+        "stops": 1
+      }
+    ]
+  },
+  {
+    "kind": "tuple",
+    "items": [
+      {
+        "legs": [
+          {
+            "airline": "KLM",
+            "flight_number": "1248",
+            "departure_airport": "Helsinki Vantaa Airport",
+            "arrival_airport": "Amsterdam Airport Schiphol",
+            "departure_datetime": "2026-05-18T07:00:00",
+            "arrival_datetime": "2026-05-18T08:30:00",
+            "duration": 150
+          },
+          {
+            "airline": "KLM",
+            "flight_number": "651",
+            "departure_airport": "Amsterdam Airport Schiphol",
+            "arrival_airport": "Washington Dulles International Airport",
+            "departure_datetime": "2026-05-18T13:15:00",
+            "arrival_datetime": "2026-05-18T15:35:00",
+            "duration": 500
+          }
+        ],
+        "price": 697.0,
+        "currency": "EUR",
+        "duration": 935,
+        "stops": 1
+      },
+      {
+        "legs": [
+          {
+            "airline": "Air France",
+            "flight_number": "53",
+            "departure_airport": "Washington Dulles International Airport",
+            "arrival_airport": "Charles de Gaulle International Airport",
+            "departure_datetime": "2026-05-29T21:45:00",
+            "arrival_datetime": "2026-05-30T11:15:00",
+            "duration": 450
+          },
+          {
+            "airline": "Air France",
+            "flight_number": "1740",
+            "departure_airport": "Charles de Gaulle International Airport",
+            "arrival_airport": "Amsterdam Airport Schiphol",
+            "departure_datetime": "2026-05-30T12:15:00",
+            "arrival_datetime": "2026-05-30T13:40:00",
+            "duration": 85
+          },
+          {
+            "airline": "KLM",
+            "flight_number": "1253",
+            "departure_airport": "Amsterdam Airport Schiphol",
+            "arrival_airport": "Helsinki Vantaa Airport",
+            "departure_datetime": "2026-05-30T14:20:00",
+            "arrival_datetime": "2026-05-30T17:40:00",
+            "duration": 140
+          }
+        ],
+        "price": 912.0,
+        "currency": "EUR",
+        "duration": 775,
+        "stops": 2
+      }
+    ]
+  },
+  {
+    "kind": "tuple",
+    "items": [
+      {
+        "legs": [
+          {
+            "airline": "KLM",
+            "flight_number": "1248",
+            "departure_airport": "Helsinki Vantaa Airport",
+            "arrival_airport": "Amsterdam Airport Schiphol",
+            "departure_datetime": "2026-05-18T07:00:00",
+            "arrival_datetime": "2026-05-18T08:30:00",
+            "duration": 150
+          },
+          {
+            "airline": "KLM",
+            "flight_number": "651",
+            "departure_airport": "Amsterdam Airport Schiphol",
+            "arrival_airport": "Washington Dulles International Airport",
+            "departure_datetime": "2026-05-18T13:15:00",
+            "arrival_datetime": "2026-05-18T15:35:00",
+            "duration": 500
+          }
+        ],
+        "price": 697.0,
+        "currency": "EUR",
+        "duration": 935,
+        "stops": 1
+      },
+      {
+        "legs": [
+          {
+            "airline": "Scandinavian Airlines",
+            "flight_number": "926",
+            "departure_airport": "Washington Dulles International Airport",
+            "arrival_airport": "Copenhagen Kastrup Airport",
+            "departure_datetime": "2026-05-29T20:20:00",
+            "arrival_datetime": "2026-05-30T10:10:00",
+            "duration": 470
+          },
+          {
+            "airline": "Scandinavian Airlines",
+            "flight_number": "1712",
+            "departure_airport": "Copenhagen Kastrup Airport",
+            "arrival_airport": "Helsinki Vantaa Airport",
+            "departure_datetime": "2026-05-30T12:45:00",
+            "arrival_datetime": "2026-05-30T15:20:00",
+            "duration": 95
+          }
+        ],
+        "price": 1004.0,
+        "currency": "EUR",
+        "duration": 720,
+        "stops": 1
+      }
+    ]
+  },
+  {
+    "kind": "tuple",
+    "items": [
+      {
+        "legs": [
+          {
+            "airline": "Finnair",
+            "flight_number": "19",
+            "departure_airport": "Helsinki Vantaa Airport",
+            "arrival_airport": "Dallas-Fort Worth International Airport",
+            "departure_datetime": "2026-05-18T12:35:00",
+            "arrival_datetime": "2026-05-18T15:05:00",
+            "duration": 630
+          },
+          {
+            "airline": "American Airlines",
+            "flight_number": "2856",
+            "departure_airport": "Dallas-Fort Worth International Airport",
+            "arrival_airport": "Washington Dulles International Airport",
+            "departure_datetime": "2026-05-18T19:29:00",
+            "arrival_datetime": "2026-05-18T23:26:00",
+            "duration": 177
+          }
+        ],
+        "price": 724.0,
+        "currency": "EUR",
+        "duration": 1071,
+        "stops": 1
+      },
+      {
+        "legs": [
+          {
+            "airline": "American Airlines",
+            "flight_number": "1906",
+            "departure_airport": "Washington Dulles International Airport",
+            "arrival_airport": "Dallas-Fort Worth International Airport",
+            "departure_datetime": "2026-05-29T11:59:00",
+            "arrival_datetime": "2026-05-29T14:16:00",
+            "duration": 197
+          },
+          {
+            "airline": "Finnair",
+            "flight_number": "20",
+            "departure_airport": "Dallas-Fort Worth International Airport",
+            "arrival_airport": "Helsinki Vantaa Airport",
+            "departure_datetime": "2026-05-29T16:50:00",
+            "arrival_datetime": "2026-05-30T10:45:00",
+            "duration": 595
+          }
+        ],
+        "price": 724.0,
+        "currency": "EUR",
+        "duration": 946,
+        "stops": 1
+      }
+    ]
+  },
+  {
+    "kind": "tuple",
+    "items": [
+      {
+        "legs": [
+          {
+            "airline": "Finnair",
+            "flight_number": "19",
+            "departure_airport": "Helsinki Vantaa Airport",
+            "arrival_airport": "Dallas-Fort Worth International Airport",
+            "departure_datetime": "2026-05-18T12:35:00",
+            "arrival_datetime": "2026-05-18T15:05:00",
+            "duration": 630
+          },
+          {
+            "airline": "American Airlines",
+            "flight_number": "2856",
+            "departure_airport": "Dallas-Fort Worth International Airport",
+            "arrival_airport": "Washington Dulles International Airport",
+            "departure_datetime": "2026-05-18T19:29:00",
+            "arrival_datetime": "2026-05-18T23:26:00",
+            "duration": 177
+          }
+        ],
+        "price": 724.0,
+        "currency": "EUR",
+        "duration": 1071,
+        "stops": 1
+      },
+      {
+        "legs": [
+          {
+            "airline": "British Airways",
+            "flight_number": "290",
+            "departure_airport": "Washington Dulles International Airport",
+            "arrival_airport": "London Heathrow Airport",
+            "departure_datetime": "2026-05-29T19:15:00",
+            "arrival_datetime": "2026-05-30T07:45:00",
+            "duration": 450
+          },
+          {
+            "airline": "Finnair",
+            "flight_number": "1336",
+            "departure_airport": "London Heathrow Airport",
+            "arrival_airport": "Helsinki Vantaa Airport",
+            "departure_datetime": "2026-05-30T16:10:00",
+            "arrival_datetime": "2026-05-30T21:00:00",
+            "duration": 170
+          }
+        ],
+        "price": 820.0,
+        "currency": "EUR",
+        "duration": 1125,
+        "stops": 1
+      }
+    ]
+  },
+  {
+    "kind": "tuple",
+    "items": [
+      {
+        "legs": [
+          {
+            "airline": "Finnair",
+            "flight_number": "19",
+            "departure_airport": "Helsinki Vantaa Airport",
+            "arrival_airport": "Dallas-Fort Worth International Airport",
+            "departure_datetime": "2026-05-18T12:35:00",
+            "arrival_datetime": "2026-05-18T15:05:00",
+            "duration": 630
+          },
+          {
+            "airline": "American Airlines",
+            "flight_number": "2856",
+            "departure_airport": "Dallas-Fort Worth International Airport",
+            "arrival_airport": "Washington Dulles International Airport",
+            "departure_datetime": "2026-05-18T19:29:00",
+            "arrival_datetime": "2026-05-18T23:26:00",
+            "duration": 177
+          }
+        ],
+        "price": 724.0,
+        "currency": "EUR",
+        "duration": 1071,
+        "stops": 1
+      },
+      {
+        "legs": [
+          {
+            "airline": "British Airways",
+            "flight_number": "292",
+            "departure_airport": "Washington Dulles International Airport",
+            "arrival_airport": "London Heathrow Airport",
+            "departure_datetime": "2026-05-29T22:25:00",
+            "arrival_datetime": "2026-05-30T10:50:00",
+            "duration": 445
+          },
+          {
+            "airline": "Finnair",
+            "flight_number": "1336",
+            "departure_airport": "London Heathrow Airport",
+            "arrival_airport": "Helsinki Vantaa Airport",
+            "departure_datetime": "2026-05-30T16:10:00",
+            "arrival_datetime": "2026-05-30T21:00:00",
+            "duration": 170
+          }
+        ],
+        "price": 820.0,
+        "currency": "EUR",
+        "duration": 935,
+        "stops": 1
+      }
+    ]
+  },
+  {
+    "kind": "tuple",
+    "items": [
+      {
+        "legs": [
+          {
+            "airline": "Finnair",
+            "flight_number": "19",
+            "departure_airport": "Helsinki Vantaa Airport",
+            "arrival_airport": "Dallas-Fort Worth International Airport",
+            "departure_datetime": "2026-05-18T12:35:00",
+            "arrival_datetime": "2026-05-18T15:05:00",
+            "duration": 630
+          },
+          {
+            "airline": "American Airlines",
+            "flight_number": "2856",
+            "departure_airport": "Dallas-Fort Worth International Airport",
+            "arrival_airport": "Washington Dulles International Airport",
+            "departure_datetime": "2026-05-18T19:29:00",
+            "arrival_datetime": "2026-05-18T23:26:00",
+            "duration": 177
+          }
+        ],
+        "price": 724.0,
+        "currency": "EUR",
+        "duration": 1071,
+        "stops": 1
+      },
+      {
+        "legs": [
+          {
+            "airline": "British Airways",
+            "flight_number": "292",
+            "departure_airport": "Washington Dulles International Airport",
+            "arrival_airport": "London Heathrow Airport",
+            "departure_datetime": "2026-05-29T22:25:00",
+            "arrival_datetime": "2026-05-30T10:50:00",
+            "duration": 445
+          },
+          {
+            "airline": "Finnair",
+            "flight_number": "1338",
+            "departure_airport": "London Heathrow Airport",
+            "arrival_airport": "Helsinki Vantaa Airport",
+            "departure_datetime": "2026-05-30T18:10:00",
+            "arrival_datetime": "2026-05-30T23:00:00",
+            "duration": 170
+          }
+        ],
+        "price": 835.0,
+        "currency": "EUR",
+        "duration": 1055,
+        "stops": 1
+      }
+    ]
+  },
+  {
+    "kind": "tuple",
+    "items": [
+      {
+        "legs": [
+          {
+            "airline": "Finnair",
+            "flight_number": "19",
+            "departure_airport": "Helsinki Vantaa Airport",
+            "arrival_airport": "Dallas-Fort Worth International Airport",
+            "departure_datetime": "2026-05-18T12:35:00",
+            "arrival_datetime": "2026-05-18T15:05:00",
+            "duration": 630
+          },
+          {
+            "airline": "American Airlines",
+            "flight_number": "2856",
+            "departure_airport": "Dallas-Fort Worth International Airport",
+            "arrival_airport": "Washington Dulles International Airport",
+            "departure_datetime": "2026-05-18T19:29:00",
+            "arrival_datetime": "2026-05-18T23:26:00",
+            "duration": 177
+          }
+        ],
+        "price": 724.0,
+        "currency": "EUR",
+        "duration": 1071,
+        "stops": 1
+      },
+      {
+        "legs": [
+          {
+            "airline": "Iberia",
+            "flight_number": "362",
+            "departure_airport": "Washington Dulles International Airport",
+            "arrival_airport": "Madrid Barajas International Airport",
+            "departure_datetime": "2026-05-29T17:00:00",
+            "arrival_datetime": "2026-05-30T06:50:00",
+            "duration": 470
+          },
+          {
+            "airline": "Finnair",
+            "flight_number": "1662",
+            "departure_airport": "Madrid Barajas International Airport",
+            "arrival_airport": "Helsinki Vantaa Airport",
+            "departure_datetime": "2026-05-30T10:15:00",
+            "arrival_datetime": "2026-05-30T15:25:00",
+            "duration": 250
+          }
+        ],
+        "price": 883.0,
+        "currency": "EUR",
+        "duration": 925,
+        "stops": 1
+      }
+    ]
+  },
+  {
+    "kind": "tuple",
+    "items": [
+      {
+        "legs": [
+          {
+            "airline": "Finnair",
+            "flight_number": "19",
+            "departure_airport": "Helsinki Vantaa Airport",
+            "arrival_airport": "Dallas-Fort Worth International Airport",
+            "departure_datetime": "2026-05-18T12:35:00",
+            "arrival_datetime": "2026-05-18T15:05:00",
+            "duration": 630
+          },
+          {
+            "airline": "American Airlines",
+            "flight_number": "2856",
+            "departure_airport": "Dallas-Fort Worth International Airport",
+            "arrival_airport": "Washington Dulles International Airport",
+            "departure_datetime": "2026-05-18T19:29:00",
+            "arrival_datetime": "2026-05-18T23:26:00",
+            "duration": 177
+          }
+        ],
+        "price": 724.0,
+        "currency": "EUR",
+        "duration": 1071,
+        "stops": 1
+      },
+      {
+        "legs": [
+          {
+            "airline": "British Airways",
+            "flight_number": "216",
+            "departure_airport": "Washington Dulles International Airport",
+            "arrival_airport": "London Heathrow Airport",
+            "departure_datetime": "2026-05-29T17:35:00",
+            "arrival_datetime": "2026-05-30T06:20:00",
+            "duration": 465
+          },
+          {
+            "airline": "Finnair",
+            "flight_number": "1332",
+            "departure_airport": "London Heathrow Airport",
+            "arrival_airport": "Helsinki Vantaa Airport",
+            "departure_datetime": "2026-05-30T10:20:00",
+            "arrival_datetime": "2026-05-30T15:15:00",
+            "duration": 175
+          }
+        ],
+        "price": 890.0,
+        "currency": "EUR",
+        "duration": 880,
+        "stops": 1
+      }
+    ]
+  },
+  {
+    "kind": "tuple",
+    "items": [
+      {
+        "legs": [
+          {
+            "airline": "Finnair",
+            "flight_number": "19",
+            "departure_airport": "Helsinki Vantaa Airport",
+            "arrival_airport": "Dallas-Fort Worth International Airport",
+            "departure_datetime": "2026-05-18T12:35:00",
+            "arrival_datetime": "2026-05-18T15:05:00",
+            "duration": 630
+          },
+          {
+            "airline": "American Airlines",
+            "flight_number": "2856",
+            "departure_airport": "Dallas-Fort Worth International Airport",
+            "arrival_airport": "Washington Dulles International Airport",
+            "departure_datetime": "2026-05-18T19:29:00",
+            "arrival_datetime": "2026-05-18T23:26:00",
+            "duration": 177
+          }
+        ],
+        "price": 724.0,
+        "currency": "EUR",
+        "duration": 1071,
+        "stops": 1
+      },
+      {
+        "legs": [
+          {
+            "airline": "British Airways",
+            "flight_number": "290",
+            "departure_airport": "Washington Dulles International Airport",
+            "arrival_airport": "London Heathrow Airport",
+            "departure_datetime": "2026-05-29T19:15:00",
+            "arrival_datetime": "2026-05-30T07:45:00",
+            "duration": 450
+          },
+          {
+            "airline": "Finnair",
+            "flight_number": "1332",
+            "departure_airport": "London Heathrow Airport",
+            "arrival_airport": "Helsinki Vantaa Airport",
+            "departure_datetime": "2026-05-30T10:20:00",
+            "arrival_datetime": "2026-05-30T15:15:00",
+            "duration": 175
+          }
+        ],
+        "price": 890.0,
+        "currency": "EUR",
+        "duration": 780,
+        "stops": 1
+      }
+    ]
+  },
+  {
+    "kind": "tuple",
+    "items": [
+      {
+        "legs": [
+          {
+            "airline": "Scandinavian Airlines",
+            "flight_number": "1707",
+            "departure_airport": "Helsinki Vantaa Airport",
+            "arrival_airport": "Copenhagen Kastrup Airport",
+            "departure_datetime": "2026-05-18T11:15:00",
+            "arrival_datetime": "2026-05-18T11:55:00",
+            "duration": 100
+          },
+          {
+            "airline": "Scandinavian Airlines",
+            "flight_number": "925",
+            "departure_airport": "Copenhagen Kastrup Airport",
+            "arrival_airport": "Washington Dulles International Airport",
+            "departure_datetime": "2026-05-18T14:25:00",
+            "arrival_datetime": "2026-05-18T17:00:00",
+            "duration": 515
+          }
+        ],
+        "price": 888.0,
+        "currency": "EUR",
+        "duration": 765,
+        "stops": 1
+      },
+      {
+        "legs": [
+          {
+            "airline": "Scandinavian Airlines",
+            "flight_number": "926",
+            "departure_airport": "Washington Dulles International Airport",
+            "arrival_airport": "Copenhagen Kastrup Airport",
+            "departure_datetime": "2026-05-29T20:20:00",
+            "arrival_datetime": "2026-05-30T10:10:00",
+            "duration": 470
+          },
+          {
+            "airline": "Scandinavian Airlines",
+            "flight_number": "1716",
+            "departure_airport": "Copenhagen Kastrup Airport",
+            "arrival_airport": "Helsinki Vantaa Airport",
+            "departure_datetime": "2026-05-30T17:50:00",
+            "arrival_datetime": "2026-05-30T20:25:00",
+            "duration": 95
+          }
+        ],
+        "price": 888.0,
+        "currency": "EUR",
+        "duration": 1025,
+        "stops": 1
+      }
+    ]
+  },
+  {
+    "kind": "tuple",
+    "items": [
+      {
+        "legs": [
+          {
+            "airline": "Scandinavian Airlines",
+            "flight_number": "1707",
+            "departure_airport": "Helsinki Vantaa Airport",
+            "arrival_airport": "Copenhagen Kastrup Airport",
+            "departure_datetime": "2026-05-18T11:15:00",
+            "arrival_datetime": "2026-05-18T11:55:00",
+            "duration": 100
+          },
+          {
+            "airline": "Scandinavian Airlines",
+            "flight_number": "925",
+            "departure_airport": "Copenhagen Kastrup Airport",
+            "arrival_airport": "Washington Dulles International Airport",
+            "departure_datetime": "2026-05-18T14:25:00",
+            "arrival_datetime": "2026-05-18T17:00:00",
+            "duration": 515
+          }
+        ],
+        "price": 888.0,
+        "currency": "EUR",
+        "duration": 765,
+        "stops": 1
+      },
+      {
+        "legs": [
+          {
+            "airline": "Scandinavian Airlines",
+            "flight_number": "926",
+            "departure_airport": "Washington Dulles International Airport",
+            "arrival_airport": "Copenhagen Kastrup Airport",
+            "departure_datetime": "2026-05-29T20:20:00",
+            "arrival_datetime": "2026-05-30T10:10:00",
+            "duration": 470
+          },
+          {
+            "airline": "Scandinavian Airlines",
+            "flight_number": "1712",
+            "departure_airport": "Copenhagen Kastrup Airport",
+            "arrival_airport": "Helsinki Vantaa Airport",
+            "departure_datetime": "2026-05-30T12:45:00",
+            "arrival_datetime": "2026-05-30T15:20:00",
+            "duration": 95
+          }
+        ],
+        "price": 1030.0,
+        "currency": "EUR",
+        "duration": 720,
+        "stops": 1
+      }
+    ]
+  },
+  {
+    "kind": "tuple",
+    "items": [
+      {
+        "legs": [
+          {
+            "airline": "Scandinavian Airlines",
+            "flight_number": "1707",
+            "departure_airport": "Helsinki Vantaa Airport",
+            "arrival_airport": "Copenhagen Kastrup Airport",
+            "departure_datetime": "2026-05-18T11:15:00",
+            "arrival_datetime": "2026-05-18T11:55:00",
+            "duration": 100
+          },
+          {
+            "airline": "Scandinavian Airlines",
+            "flight_number": "925",
+            "departure_airport": "Copenhagen Kastrup Airport",
+            "arrival_airport": "Washington Dulles International Airport",
+            "departure_datetime": "2026-05-18T14:25:00",
+            "arrival_datetime": "2026-05-18T17:00:00",
+            "duration": 515
+          }
+        ],
+        "price": 888.0,
+        "currency": "EUR",
+        "duration": 765,
+        "stops": 1
+      },
+      {
+        "legs": [
+          {
+            "airline": "KLM",
+            "flight_number": "652",
+            "departure_airport": "Washington Dulles International Airport",
+            "arrival_airport": "Amsterdam Airport Schiphol",
+            "departure_datetime": "2026-05-29T17:40:00",
+            "arrival_datetime": "2026-05-30T07:10:00",
+            "duration": 450
+          },
+          {
+            "airline": "KLM",
+            "flight_number": "1251",
+            "departure_airport": "Amsterdam Airport Schiphol",
+            "arrival_airport": "Helsinki Vantaa Airport",
+            "departure_datetime": "2026-05-30T09:45:00",
+            "arrival_datetime": "2026-05-30T13:05:00",
+            "duration": 140
+          }
+        ],
+        "price": 1080.0,
+        "currency": "EUR",
+        "duration": 745,
+        "stops": 1
+      }
+    ]
+  },
+  {
+    "kind": "tuple",
+    "items": [
+      {
+        "legs": [
+          {
+            "airline": "Scandinavian Airlines",
+            "flight_number": "1707",
+            "departure_airport": "Helsinki Vantaa Airport",
+            "arrival_airport": "Copenhagen Kastrup Airport",
+            "departure_datetime": "2026-05-18T11:15:00",
+            "arrival_datetime": "2026-05-18T11:55:00",
+            "duration": 100
+          },
+          {
+            "airline": "Scandinavian Airlines",
+            "flight_number": "925",
+            "departure_airport": "Copenhagen Kastrup Airport",
+            "arrival_airport": "Washington Dulles International Airport",
+            "departure_datetime": "2026-05-18T14:25:00",
+            "arrival_datetime": "2026-05-18T17:00:00",
+            "duration": 515
+          }
+        ],
+        "price": 888.0,
+        "currency": "EUR",
+        "duration": 765,
+        "stops": 1
+      },
+      {
+        "legs": [
+          {
+            "airline": "Air France",
+            "flight_number": "51",
+            "departure_airport": "Washington Dulles International Airport",
+            "arrival_airport": "Charles de Gaulle International Airport",
+            "departure_datetime": "2026-05-29T18:15:00",
+            "arrival_datetime": "2026-05-30T08:00:00",
+            "duration": 465
+          },
+          {
+            "airline": "Air France",
+            "flight_number": "1070",
+            "departure_airport": "Charles de Gaulle International Airport",
+            "arrival_airport": "Helsinki Vantaa Airport",
+            "departure_datetime": "2026-05-30T12:40:00",
+            "arrival_datetime": "2026-05-30T16:40:00",
+            "duration": 180
+          }
+        ],
+        "price": 1076.0,
+        "currency": "EUR",
+        "duration": 925,
+        "stops": 1
+      }
+    ]
+  },
+  {
+    "kind": "tuple",
+    "items": [
+      {
+        "legs": [
+          {
+            "airline": "Scandinavian Airlines",
+            "flight_number": "1707",
+            "departure_airport": "Helsinki Vantaa Airport",
+            "arrival_airport": "Copenhagen Kastrup Airport",
+            "departure_datetime": "2026-05-18T11:15:00",
+            "arrival_datetime": "2026-05-18T11:55:00",
+            "duration": 100
+          },
+          {
+            "airline": "Scandinavian Airlines",
+            "flight_number": "925",
+            "departure_airport": "Copenhagen Kastrup Airport",
+            "arrival_airport": "Washington Dulles International Airport",
+            "departure_datetime": "2026-05-18T14:25:00",
+            "arrival_datetime": "2026-05-18T17:00:00",
+            "duration": 515
+          }
+        ],
+        "price": 888.0,
+        "currency": "EUR",
+        "duration": 765,
+        "stops": 1
+      },
+      {
+        "legs": [
+          {
+            "airline": "KLM",
+            "flight_number": "652",
+            "departure_airport": "Washington Dulles International Airport",
+            "arrival_airport": "Amsterdam Airport Schiphol",
+            "departure_datetime": "2026-05-29T17:40:00",
+            "arrival_datetime": "2026-05-30T07:10:00",
+            "duration": 450
+          },
+          {
+            "airline": "KLM",
+            "flight_number": "1253",
+            "departure_airport": "Amsterdam Airport Schiphol",
+            "arrival_airport": "Helsinki Vantaa Airport",
+            "departure_datetime": "2026-05-30T14:20:00",
+            "arrival_datetime": "2026-05-30T17:40:00",
+            "duration": 140
+          }
+        ],
+        "price": 1080.0,
+        "currency": "EUR",
+        "duration": 1020,
+        "stops": 1
+      }
+    ]
+  },
+  {
+    "kind": "tuple",
+    "items": [
+      {
+        "legs": [
+          {
+            "airline": "Scandinavian Airlines",
+            "flight_number": "1707",
+            "departure_airport": "Helsinki Vantaa Airport",
+            "arrival_airport": "Copenhagen Kastrup Airport",
+            "departure_datetime": "2026-05-18T11:15:00",
+            "arrival_datetime": "2026-05-18T11:55:00",
+            "duration": 100
+          },
+          {
+            "airline": "Scandinavian Airlines",
+            "flight_number": "925",
+            "departure_airport": "Copenhagen Kastrup Airport",
+            "arrival_airport": "Washington Dulles International Airport",
+            "departure_datetime": "2026-05-18T14:25:00",
+            "arrival_datetime": "2026-05-18T17:00:00",
+            "duration": 515
+          }
+        ],
+        "price": 888.0,
+        "currency": "EUR",
+        "duration": 765,
+        "stops": 1
+      },
+      {
+        "legs": [
+          {
+            "airline": "Scandinavian Airlines",
+            "flight_number": "926",
+            "departure_airport": "Washington Dulles International Airport",
+            "arrival_airport": "Copenhagen Kastrup Airport",
+            "departure_datetime": "2026-05-29T20:20:00",
+            "arrival_datetime": "2026-05-30T10:10:00",
+            "duration": 470
+          },
+          {
+            "airline": "Scandinavian Airlines",
+            "flight_number": "1420",
+            "departure_airport": "Copenhagen Kastrup Airport",
+            "arrival_airport": "Stockholm-Arlanda Airport",
+            "departure_datetime": "2026-05-30T11:50:00",
+            "arrival_datetime": "2026-05-30T13:05:00",
+            "duration": 75
+          },
+          {
+            "airline": "Scandinavian Airlines",
+            "flight_number": "710",
+            "departure_airport": "Stockholm-Arlanda Airport",
+            "arrival_airport": "Helsinki Vantaa Airport",
+            "departure_datetime": "2026-05-30T16:35:00",
+            "arrival_datetime": "2026-05-30T18:30:00",
+            "duration": 55
+          }
+        ],
+        "price": 1112.0,
+        "currency": "EUR",
+        "duration": 910,
+        "stops": 2
+      }
+    ]
+  },
+  {
+    "kind": "tuple",
+    "items": [
+      {
+        "legs": [
+          {
+            "airline": "Scandinavian Airlines",
+            "flight_number": "1707",
+            "departure_airport": "Helsinki Vantaa Airport",
+            "arrival_airport": "Copenhagen Kastrup Airport",
+            "departure_datetime": "2026-05-18T11:15:00",
+            "arrival_datetime": "2026-05-18T11:55:00",
+            "duration": 100
+          },
+          {
+            "airline": "Scandinavian Airlines",
+            "flight_number": "925",
+            "departure_airport": "Copenhagen Kastrup Airport",
+            "arrival_airport": "Washington Dulles International Airport",
+            "departure_datetime": "2026-05-18T14:25:00",
+            "arrival_datetime": "2026-05-18T17:00:00",
+            "duration": 515
+          }
+        ],
+        "price": 888.0,
+        "currency": "EUR",
+        "duration": 765,
+        "stops": 1
+      },
+      {
+        "legs": [
+          {
+            "airline": "Air France",
+            "flight_number": "53",
+            "departure_airport": "Washington Dulles International Airport",
+            "arrival_airport": "Charles de Gaulle International Airport",
+            "departure_datetime": "2026-05-29T21:45:00",
+            "arrival_datetime": "2026-05-30T11:15:00",
+            "duration": 450
+          },
+          {
+            "airline": "Air France",
+            "flight_number": "1070",
+            "departure_airport": "Charles de Gaulle International Airport",
+            "arrival_airport": "Helsinki Vantaa Airport",
+            "departure_datetime": "2026-05-30T12:40:00",
+            "arrival_datetime": "2026-05-30T16:40:00",
+            "duration": 180
+          }
+        ],
+        "price": 1175.0,
+        "currency": "EUR",
+        "duration": 715,
+        "stops": 1
+      }
+    ]
+  },
+  {
+    "kind": "tuple",
+    "items": [
+      {
+        "legs": [
+          {
+            "airline": "Scandinavian Airlines",
+            "flight_number": "1705",
+            "departure_airport": "Helsinki Vantaa Airport",
+            "arrival_airport": "Copenhagen Kastrup Airport",
+            "departure_datetime": "2026-05-18T06:10:00",
+            "arrival_datetime": "2026-05-18T06:50:00",
+            "duration": 100
+          },
+          {
+            "airline": "Scandinavian Airlines",
+            "flight_number": "925",
+            "departure_airport": "Copenhagen Kastrup Airport",
+            "arrival_airport": "Washington Dulles International Airport",
+            "departure_datetime": "2026-05-18T14:25:00",
+            "arrival_datetime": "2026-05-18T17:00:00",
+            "duration": 515
+          }
+        ],
+        "price": 835.0,
+        "currency": "EUR",
+        "duration": 1070,
+        "stops": 1
+      },
+      {
+        "legs": [
+          {
+            "airline": "Scandinavian Airlines",
+            "flight_number": "926",
+            "departure_airport": "Washington Dulles International Airport",
+            "arrival_airport": "Copenhagen Kastrup Airport",
+            "departure_datetime": "2026-05-29T20:20:00",
+            "arrival_datetime": "2026-05-30T10:10:00",
+            "duration": 470
+          },
+          {
+            "airline": "Scandinavian Airlines",
+            "flight_number": "1716",
+            "departure_airport": "Copenhagen Kastrup Airport",
+            "arrival_airport": "Helsinki Vantaa Airport",
+            "departure_datetime": "2026-05-30T17:50:00",
+            "arrival_datetime": "2026-05-30T20:25:00",
+            "duration": 95
+          }
+        ],
+        "price": 835.0,
+        "currency": "EUR",
+        "duration": 1025,
+        "stops": 1
+      }
+    ]
+  },
+  {
+    "kind": "tuple",
+    "items": [
+      {
+        "legs": [
+          {
+            "airline": "Scandinavian Airlines",
+            "flight_number": "1705",
+            "departure_airport": "Helsinki Vantaa Airport",
+            "arrival_airport": "Copenhagen Kastrup Airport",
+            "departure_datetime": "2026-05-18T06:10:00",
+            "arrival_datetime": "2026-05-18T06:50:00",
+            "duration": 100
+          },
+          {
+            "airline": "Scandinavian Airlines",
+            "flight_number": "925",
+            "departure_airport": "Copenhagen Kastrup Airport",
+            "arrival_airport": "Washington Dulles International Airport",
+            "departure_datetime": "2026-05-18T14:25:00",
+            "arrival_datetime": "2026-05-18T17:00:00",
+            "duration": 515
+          }
+        ],
+        "price": 835.0,
+        "currency": "EUR",
+        "duration": 1070,
+        "stops": 1
+      },
+      {
+        "legs": [
+          {
+            "airline": "Scandinavian Airlines",
+            "flight_number": "926",
+            "departure_airport": "Washington Dulles International Airport",
+            "arrival_airport": "Copenhagen Kastrup Airport",
+            "departure_datetime": "2026-05-29T20:20:00",
+            "arrival_datetime": "2026-05-30T10:10:00",
+            "duration": 470
+          },
+          {
+            "airline": "Scandinavian Airlines",
+            "flight_number": "1712",
+            "departure_airport": "Copenhagen Kastrup Airport",
+            "arrival_airport": "Helsinki Vantaa Airport",
+            "departure_datetime": "2026-05-30T12:45:00",
+            "arrival_datetime": "2026-05-30T15:20:00",
+            "duration": 95
+          }
+        ],
+        "price": 925.0,
+        "currency": "EUR",
+        "duration": 720,
+        "stops": 1
+      }
+    ]
+  },
+  {
+    "kind": "tuple",
+    "items": [
+      {
+        "legs": [
+          {
+            "airline": "Scandinavian Airlines",
+            "flight_number": "1705",
+            "departure_airport": "Helsinki Vantaa Airport",
+            "arrival_airport": "Copenhagen Kastrup Airport",
+            "departure_datetime": "2026-05-18T06:10:00",
+            "arrival_datetime": "2026-05-18T06:50:00",
+            "duration": 100
+          },
+          {
+            "airline": "Scandinavian Airlines",
+            "flight_number": "925",
+            "departure_airport": "Copenhagen Kastrup Airport",
+            "arrival_airport": "Washington Dulles International Airport",
+            "departure_datetime": "2026-05-18T14:25:00",
+            "arrival_datetime": "2026-05-18T17:00:00",
+            "duration": 515
+          }
+        ],
+        "price": 835.0,
+        "currency": "EUR",
+        "duration": 1070,
+        "stops": 1
+      },
+      {
+        "legs": [
+          {
+            "airline": "Air France",
+            "flight_number": "51",
+            "departure_airport": "Washington Dulles International Airport",
+            "arrival_airport": "Charles de Gaulle International Airport",
+            "departure_datetime": "2026-05-29T18:15:00",
+            "arrival_datetime": "2026-05-30T08:00:00",
+            "duration": 465
+          },
+          {
+            "airline": "Air France",
+            "flight_number": "1070",
+            "departure_airport": "Charles de Gaulle International Airport",
+            "arrival_airport": "Helsinki Vantaa Airport",
+            "departure_datetime": "2026-05-30T12:40:00",
+            "arrival_datetime": "2026-05-30T16:40:00",
+            "duration": 180
+          }
+        ],
+        "price": 1000.0,
+        "currency": "EUR",
+        "duration": 925,
+        "stops": 1
+      }
+    ]
+  },
+  {
+    "kind": "tuple",
+    "items": [
+      {
+        "legs": [
+          {
+            "airline": "Scandinavian Airlines",
+            "flight_number": "1705",
+            "departure_airport": "Helsinki Vantaa Airport",
+            "arrival_airport": "Copenhagen Kastrup Airport",
+            "departure_datetime": "2026-05-18T06:10:00",
+            "arrival_datetime": "2026-05-18T06:50:00",
+            "duration": 100
+          },
+          {
+            "airline": "Scandinavian Airlines",
+            "flight_number": "925",
+            "departure_airport": "Copenhagen Kastrup Airport",
+            "arrival_airport": "Washington Dulles International Airport",
+            "departure_datetime": "2026-05-18T14:25:00",
+            "arrival_datetime": "2026-05-18T17:00:00",
+            "duration": 515
+          }
+        ],
+        "price": 835.0,
+        "currency": "EUR",
+        "duration": 1070,
+        "stops": 1
+      },
+      {
+        "legs": [
+          {
+            "airline": "Scandinavian Airlines",
+            "flight_number": "926",
+            "departure_airport": "Washington Dulles International Airport",
+            "arrival_airport": "Copenhagen Kastrup Airport",
+            "departure_datetime": "2026-05-29T20:20:00",
+            "arrival_datetime": "2026-05-30T10:10:00",
+            "duration": 470
+          },
+          {
+            "airline": "Scandinavian Airlines",
+            "flight_number": "1420",
+            "departure_airport": "Copenhagen Kastrup Airport",
+            "arrival_airport": "Stockholm-Arlanda Airport",
+            "departure_datetime": "2026-05-30T11:50:00",
+            "arrival_datetime": "2026-05-30T13:05:00",
+            "duration": 75
+          },
+          {
+            "airline": "Scandinavian Airlines",
+            "flight_number": "710",
+            "departure_airport": "Stockholm-Arlanda Airport",
+            "arrival_airport": "Helsinki Vantaa Airport",
+            "departure_datetime": "2026-05-30T16:35:00",
+            "arrival_datetime": "2026-05-30T18:30:00",
+            "duration": 55
+          }
+        ],
+        "price": 1059.0,
+        "currency": "EUR",
+        "duration": 910,
+        "stops": 2
+      }
+    ]
+  }
+]
