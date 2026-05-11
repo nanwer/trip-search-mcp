@@ -3,7 +3,14 @@ from datetime import datetime, timedelta, timezone
 import pytest
 from pydantic import ValidationError
 
-from flights_mcp.models import CabinClass, SearchFlightsInput
+from flights_mcp.models import (
+    CabinClass,
+    FlightOffer,
+    Itinerary,
+    SearchFlightsInput,
+    SearchFlightsResult,
+    Segment,
+)
 
 # Match the validator's UTC frame so tests can't flake at midnight UTC on UTC-offset hosts.
 TODAY = datetime.now(tz=timezone.utc).date()
@@ -100,7 +107,6 @@ def test_cabin_class_enum():
 # ---------------------------------------------------------------------------
 # Task 5: output models
 # ---------------------------------------------------------------------------
-from flights_mcp.models import FlightOffer, Itinerary, Segment, SearchFlightsResult
 
 
 def _make_segment(**overrides):
@@ -180,3 +186,18 @@ def test_search_flights_result_wraps_offers():
     )
     result = SearchFlightsResult(results=[offer])
     assert len(result.results) == 1
+
+
+def test_segment_rejects_overlong_airline_code():
+    with pytest.raises(ValidationError):
+        _make_segment(airline="AYZZZ")
+
+
+def test_itinerary_rejects_negative_stops():
+    with pytest.raises(ValidationError):
+        Itinerary(duration="PT10H30M", stops=-1, segments=[_make_segment()])
+
+
+def test_itinerary_rejects_empty_segments():
+    with pytest.raises(ValidationError):
+        Itinerary(duration="PT10H30M", stops=0, segments=[])

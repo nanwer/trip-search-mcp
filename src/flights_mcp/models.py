@@ -90,11 +90,14 @@ class Segment(BaseModel):
 class Itinerary(BaseModel):
     duration: str  # ISO 8601 duration
     stops: int = Field(ge=0)
-    segments: list[Segment]
+    segments: list[Segment] = Field(min_length=1)
 
 
 class FlightOffer(BaseModel):
     offer_id: str
+    # TODO: switch monetary fields to Decimal once Task 8's normalizer is in place.
+    # Amadeus returns prices as strings ("742.18"); float is fine for pass-through
+    # but loses precision under arithmetic. Decimal(str(raw)) is the correct path.
     total_price: float
     currency: IsoCurrency
     price_per_adult: float
