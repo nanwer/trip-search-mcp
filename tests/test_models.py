@@ -1,11 +1,12 @@
-from datetime import date, timedelta
+from datetime import datetime, timedelta, timezone
 
 import pytest
 from pydantic import ValidationError
 
 from flights_mcp.models import CabinClass, SearchFlightsInput
 
-TODAY = date.today()
+# Match the validator's UTC frame so tests can't flake at midnight UTC on UTC-offset hosts.
+TODAY = datetime.now(tz=timezone.utc).date()
 TOMORROW = TODAY + timedelta(days=1)
 NEXT_WEEK = TODAY + timedelta(days=7)
 
@@ -63,6 +64,19 @@ def test_rejects_infants_exceeding_adults():
             departure_date=TOMORROW.isoformat(),
             adults=1,
             infants=2,
+        )
+
+
+def test_rejects_total_travelers_above_amadeus_limit():
+    # adults+children+infants must fit within Amadeus's 9-passenger search cap.
+    with pytest.raises(ValidationError):
+        SearchFlightsInput(
+            origin="HEL",
+            destination="IAD",
+            departure_date=TOMORROW.isoformat(),
+            adults=5,
+            children=4,
+            infants=1,
         )
 
 

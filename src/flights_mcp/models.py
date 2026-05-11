@@ -64,3 +64,12 @@ class SearchFlightsInput(BaseModel):
                 f"infants ({self.infants}) must be <= adults ({self.adults}) — lap-infant rule"
             )
         return self
+
+    @model_validator(mode="after")
+    def _total_travelers_within_amadeus_limit(self) -> "SearchFlightsInput":
+        total = self.adults + self.children + self.infants
+        if total > 9:
+            raise ValueError(
+                f"total travelers ({total}) exceeds the Amadeus limit of 9 per search"
+            )
+        return self
