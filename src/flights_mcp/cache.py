@@ -14,12 +14,15 @@ from typing import Any
 def canonical_key(params: dict[str, Any]) -> str:
     """Stable hash of input parameters.
 
-    IATA fields (origin, destination) are lowercased so case variations collapse.
-    All other keys are stringified as-is and sorted.
+    String fields whose case should collapse (origin, destination, currency,
+    cabin_class) are lowercased; everything else is passed through. `default=str`
+    keeps the hash from crashing on values like Decimal or datetime, but callers
+    should pass validated input — non-JSON-native types may produce surprising
+    collisions (e.g., Decimal('1.0') vs Decimal('1.00') keyed differently).
     """
     normalized: dict[str, Any] = {}
     for k, v in params.items():
-        if isinstance(v, str) and k in {"origin", "destination", "currency"}:
+        if isinstance(v, str) and k in {"origin", "destination", "currency", "cabin_class"}:
             normalized[k] = v.lower()
         else:
             normalized[k] = v
@@ -28,6 +31,10 @@ def canonical_key(params: dict[str, Any]) -> str:
 
 
 class TTLCache:
+    # Not thread-safe or async-safe. Phase 1 stdio transport serializes tool
+    # calls so concurrent access on the same key cannot happen. Wrap _store
+    # access in asyncio.Lock before Phase 2's HTTP transport — the read-then-
+    # delete sequence in `get` would raise KeyError under contention.
     def __init__(self, ttl_seconds: int):
         self._ttl = ttl_seconds
         self._store: dict[str, tuple[float, Any]] = {}

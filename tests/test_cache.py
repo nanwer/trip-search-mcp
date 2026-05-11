@@ -37,3 +37,16 @@ def test_cache_returns_none_after_ttl(monkeypatch):
 def test_cache_returns_none_for_unknown_key():
     cache = TTLCache(ttl_seconds=60)
     assert cache.get("missing") is None
+
+
+def test_canonical_key_collapses_cabin_class_case():
+    k_upper = canonical_key({"origin": "HEL", "destination": "IAD", "cabin_class": "BUSINESS"})
+    k_lower = canonical_key({"origin": "HEL", "destination": "IAD", "cabin_class": "business"})
+    assert k_upper == k_lower
+
+
+def test_cache_set_overwrites_previous_value():
+    cache = TTLCache(ttl_seconds=60)
+    cache.set("k", {"v": 1})
+    cache.set("k", {"v": 2})
+    assert cache.get("k") == {"v": 2}
