@@ -16,10 +16,22 @@ from flights_mcp.tools.search_flights import TOOL_DESCRIPTION, search_flights
 _logger = configure_logging()
 
 
+def _require_env(name: str) -> str:
+    value = os.environ.get(name)
+    if not value:
+        raise RuntimeError(
+            f"Required environment variable {name!r} is not set. "
+            "Copy .env.example to .env and fill in Amadeus credentials, "
+            "or export the variables in your shell before running the server."
+        )
+    return value
+
+
 def _build_amadeus() -> AmadeusClient:
-    client_id = os.environ["AMADEUS_CLIENT_ID"]
-    client_secret = os.environ["AMADEUS_CLIENT_SECRET"]
+    client_id = _require_env("AMADEUS_CLIENT_ID")
+    client_secret = _require_env("AMADEUS_CLIENT_SECRET")
     env = os.environ.get("AMADEUS_ENV", "test")
+    # AsyncClient is intentionally not closed — process lifetime matches mcp.run().
     http = httpx.AsyncClient(timeout=httpx.Timeout(20.0))
     return AmadeusClient(
         http=http,
