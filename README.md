@@ -22,6 +22,87 @@ Claude:[calls search_flights with max_stops="ONE_STOP_OR_FEWER" and
 
 ---
 
+## What you can ask Claude
+
+Two tools (`search_flights` and `search_cheapest_dates`) cover a wide range
+of real trip-planning questions. Ask in plain English; Claude picks the
+right tool and fills in the filters.
+
+### Specific-dates searches (uses `search_flights`)
+
+**Simple round-trip**
+> *"Find me round-trip flights from JFK to LHR, leaving July 12 and returning July 22."*
+
+**One-way**
+> *"What's the cheapest one-way from Seattle to Tokyo on October 4?"*
+
+**Non-stop only**
+> *"Show me only direct flights from Helsinki to JFK on May 18."* → `max_stops=NON_STOP`
+
+**Time-of-day window — outbound**
+> *"I need to leave San Francisco between 6am and noon on Friday."* → `departure_window="6-12"`
+
+**Time-of-day window — separate outbound and return**
+> *"HEL to IAD May 18 returning May 29. I want morning outbounds (8am–noon) but I'm fine with red-eyes back (after 8pm)."* → `departure_window="8-12"`, `inbound_window="20-23"`
+
+**Airline preference (loyalty programs)**
+> *"Find flights to Bangkok in November, but only Star Alliance carriers — United, Lufthansa, Singapore, or Thai."* → `airlines=["UA", "LH", "SQ", "TG"]`
+
+**Avoid specific carriers**
+> *"Anything from LAX to SYD in August, but not Qantas."*
+> (Claude will list the other major carriers as `airlines=[...]` — exclusion isn't a native filter)
+
+**Premium cabins**
+> *"Business-class round-trip from Boston to Singapore, January 15 to January 30."* → `cabin_class="BUSINESS"`
+
+**Family travel**
+> *"4 of us flying SFO to MCO in December — 2 adults and 2 kids under 12."* → `adults=2`, `children=2`
+
+**Capped results for a focused list**
+> *"Just give me the top 5 cheapest options from HEL to LHR for next weekend."* → `max_results=5`
+
+### Flexible-dates searches (uses `search_cheapest_dates`)
+
+**Cheapest week within a month**
+> *"I want to fly from London to Tokyo for about 10 days sometime in March. Which dates are cheapest?"* → `start_date="2026-03-01"`, `end_date="2026-03-31"`, `trip_duration=10`
+
+**One-way departures across a date range**
+> *"What's the cheapest day to fly one-way from HEL to BCN between May 15 and June 5?"* → `is_round_trip=false`
+
+**Tight window, see what shifting a day does**
+> *"Compare HEL→IAD round-trip prices for May 18 ± 3 days, all 11-night trips."* → `start_date="2026-05-15"`, `end_date="2026-05-21"`, `trip_duration=11`
+
+**Sabbatical / extended trip**
+> *"I want a 3-month trip to Australia leaving sometime between June and September. When's it cheapest?"* → `trip_duration=90`
+
+**Filtered date search**
+> *"Cheapest dates from SFO to NRT in October, business class only, non-stop."* → combines `cabin_class="BUSINESS"` + `max_stops="NON_STOP"` with the date range
+
+### Multi-step planning (combining both tools)
+
+This is where the MCP earns its keep — Claude will naturally chain the two
+tools when you give it a trip-planning problem.
+
+> **You:** *"I want to spend two weeks in Lisbon. When's the cheapest time to go in the next 3 months, and what does the cheapest itinerary look like?"*
+>
+> **Claude:**
+> 1. Calls `search_cheapest_dates` over the next 90 days, 14-night trip → identifies cheapest week.
+> 2. Calls `search_flights` for those specific dates → returns the actual airlines, times, and a Google Flights booking link.
+> 3. Summarizes both in one answer with a "shift dates by 2 days and save $X" callout.
+
+> **You:** *"Help me plan a trip that connects two friends — Helsinki for the first week of May, then Tokyo for the second week."*
+>
+> **Claude:** Calls `search_flights` twice (origin → HEL, HEL → NRT or similar), summarizes the multi-leg plan.
+
+### Things this MCP does NOT do (yet)
+
+- **Booking.** Every offer returns a `booking_url` pointing at Google Flights' search page; click through and complete the booking with the airline or an OTA.
+- **Hotels, cars, activities.** Search only. Different APIs.
+- **Multi-airport "Washington DC" expansion.** Use the specific IATA airport code (`IAD`, `DCA`, or `BWI`). Claude usually picks the most-likely airport from context.
+- **Open-jaw / multi-city itineraries** in a single call. Workaround: ask Claude to call `search_flights` once per leg.
+
+---
+
 For a verbose, step-by-step walkthrough including troubleshooting see
 [docs/SETUP.md](./docs/SETUP.md).
 
