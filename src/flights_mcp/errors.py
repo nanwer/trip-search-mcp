@@ -8,10 +8,8 @@ from typing import Any
 class ErrorCode(str, Enum):
     NO_RESULTS = "no_results"
     INVALID_INPUT = "invalid_input"
-    QUOTA_EXCEEDED = "quota_exceeded"
     RATE_LIMITED = "rate_limited"
     UPSTREAM_ERROR = "upstream_error"
-    AUTH_FAILED = "auth_failed"
 
 
 class ToolError(Exception):

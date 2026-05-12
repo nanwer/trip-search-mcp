@@ -1,9 +1,10 @@
 # Flight Search MCP
 
 A Model Context Protocol server that lets Claude search live Google Flights
-data. Bring your own SerpAPI key (free tier covers 100 searches/month). Plug
-the server into Claude Desktop, Claude Code, or any MCP-aware client, then ask
-Claude to find you flights in plain English.
+data. **No API key required** — talks to Google Flights directly via the
+[fli](https://github.com/punitarani/fli) library. Plug the server into Claude
+Desktop, Claude Code, or any MCP-aware client, then ask Claude to find you
+flights in plain English.
 
 ```
 You:   Find me cheap round-trips from Helsinki to Washington DC for May 18 – 29.
@@ -15,15 +16,7 @@ Claude:[calls search_flights, summarizes the cheapest options, asks if you want 
 For a verbose, step-by-step walkthrough including troubleshooting see
 [docs/SETUP.md](./docs/SETUP.md).
 
-## Install (one-time, ~5 minutes)
-
-### 1. Get a SerpAPI key
-
-1. Sign up at <https://serpapi.com>. The free tier gives 100 searches/month —
-   enough for a few trips' worth of planning.
-2. Copy your API key from <https://serpapi.com/manage-api-key>.
-
-### 2. Install the server
+## Install (one-time, ~3 minutes)
 
 You need Python 3.12 or newer. The cleanest path is `uv`
 (<https://docs.astral.sh/uv>), but plain `pip` works too.
@@ -42,35 +35,27 @@ git clone https://github.com/nanwer/flights-mcp.git
 cd flights-mcp
 python3.12 -m venv .venv
 source .venv/bin/activate
+pip install --upgrade pip
 pip install -e .
 ```
 
-### 3. Configure environment
+No API key, no `.env` setup, no signup. The server talks directly to Google
+Flights through fli's reverse-engineered endpoints.
 
-Copy the example file and paste your SerpAPI key into it:
-
-```bash
-cp .env.example .env
-# Edit .env, replace `your-serpapi-key-here` with the key from step 1
-```
-
-### 4. Connect Claude
+### Connect Claude
 
 #### Claude Desktop (macOS / Windows)
 
 Edit `~/Library/Application Support/Claude/claude_desktop_config.json`
 (macOS) or `%APPDATA%\Claude\claude_desktop_config.json` (Windows). Add a
-`mcpServers` entry, replacing the two ABSOLUTE paths with your own:
+`mcpServers` entry, replacing the ABSOLUTE path with your own:
 
 ```json
 {
   "mcpServers": {
     "flights": {
       "command": "/ABSOLUTE/PATH/TO/flights-mcp/.venv/bin/python",
-      "args": ["-m", "flights_mcp.server"],
-      "env": {
-        "SERPAPI_KEY": "paste-your-key-here"
-      }
+      "args": ["-m", "flights_mcp.server"]
     }
   }
 }
@@ -84,17 +69,10 @@ returning May 29."*
 
 ```bash
 claude mcp add flights \
-  --env SERPAPI_KEY=paste-your-key-here \
   -- /ABSOLUTE/PATH/TO/flights-mcp/.venv/bin/python -m flights_mcp.server
 ```
 
 Then start a Claude Code session and the tool is available.
-
-#### Other MCP clients
-
-Any client that supports stdio transport. Point it at
-`/ABSOLUTE/PATH/TO/flights-mcp/.venv/bin/python -m flights_mcp.server`
-with `SERPAPI_KEY` set in the environment.
 
 ---
 
@@ -105,7 +83,7 @@ short version:
 
 | Parameter | Default | Notes |
 |---|---|---|
-| `origin` | required | 3-letter IATA airport code (`HEL`, `JFK`) or city code (`NYC`, `LON`, `WAS`). |
+| `origin` | required | 3-letter IATA airport code (`HEL`, `JFK`). |
 | `destination` | required | Same format as origin. |
 | `departure_date` | required | `YYYY-MM-DD`. Must be today (UTC) or later. |
 | `return_date` | optional | Omit for one-way. |
@@ -113,36 +91,23 @@ short version:
 | `children` | 0 | 0–9, age 2–11. |
 | `infants` | 0 | 0–9, lap infants (must be ≤ adults). |
 | `cabin_class` | `ECONOMY` | `ECONOMY` / `PREMIUM_ECONOMY` / `BUSINESS` / `FIRST`. |
-| `currency` | `USD` | ISO 4217 currency code. |
-| `non_stop_only` | `false` | Filter to direct flights only. |
-| `max_results` | 3 (round-trip) / 20 (one-way) | Round-trip is capped at 5 (each result costs 1 extra API call); one-way is capped at 50. |
+| `max_stops` | `ANY` | `ANY` / `NON_STOP` / `ONE_STOP_OR_FEWER` / `TWO_OR_FEWER_STOPS`. "Or fewer" semantics. |
+| `departure_window` | none | `"HH-HH"` 24-hour local time, e.g. `"6-20"`. Applies to both legs. |
+| `airlines` | none | List of IATA airline codes to restrict to, e.g. `["AY", "FI"]`. |
+| `max_results` | 20 | 1–50. |
 
 Responses come back as a `results` array of offers. Each offer has
 `offer_id`, `total_price`, `currency`, `airlines`, `validating_airline`,
-`outbound`, `inbound` (null for one-way), plus nullable fields like
-`baggage_allowance`, `last_ticketing_date`, `seats_available`.
+`outbound`, `inbound` (null for one-way), `booking_url` (Google Flights
+link), plus nullable fields (`baggage_allowance`, `last_ticketing_date`,
+`seats_available` — these come up `null` because fli doesn't surface them).
+
+The `currency` in the response is whatever Google Flights returns for your
+region (typically EUR for European IPs, USD for US IPs). You can't pick it.
 
 Errors are structured: `{"error": {"code": ..., "message": ..., "retryable": ...}}`.
-The codes are documented in `src/flights_mcp/errors.py` —
-`invalid_input`, `no_results`, `auth_failed`, `quota_exceeded`,
-`rate_limited`, `upstream_error`.
-
----
-
-## Quota math
-
-SerpAPI free tier = 100 searches/month. Cost per `search_flights` call:
-
-| Query shape | Upstream calls |
-|---|---|
-| One-way | 1 |
-| Round-trip, `max_results=1` | 2 |
-| Round-trip, `max_results=3` (default) | 4 |
-| Round-trip, `max_results=5` (cap) | 6 |
-
-A 5-minute response cache means identical follow-up queries within a session
-are free. Most flight-planning sessions iterate on dates and stay within the
-free tier comfortably.
+The four codes are `invalid_input`, `no_results`, `rate_limited`,
+`upstream_error`.
 
 ---
 
@@ -151,31 +116,28 @@ free tier comfortably.
 ```
 search_flights() (MCP tool)
     │
-    ├── SearchFlightsInput (Pydantic validation, round-trip cap enforcement)
+    ├── SearchFlightsInput (Pydantic validation)
     ├── TTLCache (canonical-key, 5-min TTL)
-    └── SerpAPIClient
-            ├── 1 GET /search?engine=google_flights        (one-way OR outbound)
-            ├── N GET /search?...&departure_token=...      (round-trip return legs, parallel)
+    └── FliClient
+            ├── fli.search.SearchFlights (one upstream call, round-trip pairs in tuples)
             └── normalize → list[FlightOffer]
 ```
 
-For a round-trip search, SerpAPI's Google Flights endpoint returns a list of
-outbound options each carrying a `departure_token`. To assemble each
-round-trip offer we make a follow-up call per outbound to fetch its matching
-return leg. Return-leg calls run in parallel, so a round-trip search is
-~1× single-call latency, not N×.
+`fli` handles HTTP, retries, and rate-limit backoff internally. The MCP
+server's only job is shaping requests and translating responses into our
+provider-neutral output models.
 
 ---
 
 ## Development
 
 ```bash
-pytest                       # 73 tests, all fixture-driven, no live API calls
-.venv/bin/python scripts/verify_serpapi.py   # capture a fresh real-data fixture (1 SerpAPI call)
+pytest                                       # 79 tests, all fixture-driven, no live API calls
+.venv/bin/python scripts/verify_fli.py       # capture fresh real-data fixtures (1 SearchFlights + 1 SearchDates call)
 ```
 
-See [SPEC.md](./SPEC.md) for the original Phase 1 functional spec and
-[docs/superpowers/plans/](./docs/superpowers/plans/) for the implementation plan.
+See [SPEC.md](./SPEC.md) for the original Phase 1 spec and
+[MIGRATION-FLI-SPEC.md](./MIGRATION-FLI-SPEC.md) for the fli migration plan.
 
 ---
 
@@ -189,21 +151,26 @@ src/flights_mcp/
 ├── models.py              Pydantic I/O models
 ├── cache.py               TTL response cache
 ├── tools/search_flights.py
-└── serpapi/
-    ├── client.py          HTTP layer + error mapping
-    ├── normalize.py       SerpAPI raw → clean output models
-    └── raw.py             Pydantic types for parsing SerpAPI's response
+└── fli_backend/
+    ├── client.py          fli wrapper + filter construction + error mapping
+    └── normalize.py       FlightResult → FlightOffer
 ```
 
 ---
 
 ## Limitations & roadmap
 
-- **Search only, no booking.** This MCP returns search results with an
-  `offer_id` (SerpAPI booking_token). To actually book, follow the airline
-  link in Google Flights or a travel agency.
+- **Search only, no booking.** This MCP returns search results with a
+  `booking_url` pointing at Google Flights' search page. To actually book,
+  click through and follow the airline link.
 - **stdio transport only.** Works with Claude Desktop, Claude Code, and any
   local stdio MCP client. HTTP transport (for claude.ai web) is a future
   phase.
-- **Single tool.** `airport_search`, `flight_price_confirm`, `fare_calendar`
-  are planned for later phases.
+- **Currency not user-controllable.** Google Flights picks based on your IP
+  region. The `currency` field on each offer tells you what you got.
+- **fli depends on Google's internal API.** If Google changes their
+  endpoints, fli ships a fix (typically within days based on their release
+  cadence). For the typical week of personal trip planning this is
+  reasonable. To roll back to the previous SerpAPI-based version,
+  `git checkout pre-fli-migration`.
+- **`search_cheapest_dates` tool** (date-flex grid) is planned next.

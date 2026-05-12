@@ -2,8 +2,8 @@
 
 Input validation enforces IATA format, date sanity, passenger constraints, and
 enum membership at the boundary — Claude's malformed input never reaches the
-provider client. Output models are provider-neutral; the SerpAPI parsing types
-live in `flights_mcp.serpapi.raw`.
+provider client. Output models are provider-neutral; the fli parsing types
+live inside `flights_mcp.fli_backend`.
 """
 from __future__ import annotations
 
@@ -21,16 +21,22 @@ class CabinClass(str, Enum):
     FIRST = "FIRST"
 
 
+class MaxStops(str, Enum):
+    # Names mirror fli.models.MaxStops exactly — "or fewer" semantics, not
+    # "exactly N stops". Pass through to fli without translation.
+    ANY = "ANY"
+    NON_STOP = "NON_STOP"
+    ONE_STOP_OR_FEWER = "ONE_STOP_OR_FEWER"
+    TWO_OR_FEWER_STOPS = "TWO_OR_FEWER_STOPS"
+
+
 IataCode = Annotated[str, StringConstraints(pattern=r"^[A-Z]{3}$", strip_whitespace=False)]
 IataAirlineCode = Annotated[str, StringConstraints(pattern=r"^[A-Z0-9]{2,3}$", strip_whitespace=False)]
 IsoDate = Annotated[str, StringConstraints(pattern=r"^\d{4}-\d{2}-\d{2}$")]
 IsoCurrency = Annotated[str, StringConstraints(pattern=r"^[A-Z]{3}$")]
-
-# Provider-imposed caps. SerpAPI's Google Flights endpoint returns ~9 outbound
-# options per call; round-trips need a follow-up call per outbound to fetch the
-# matching return leg, so we cap round-trip max_results to keep the upstream
-# quota math predictable. One-way uses a single call and inherits the looser cap.
-ROUND_TRIP_MAX_RESULTS = 5
+# "HH-HH" — two integer hours in 0-23, end strictly after start. Validation
+# is structural here (regex catches typos); semantic checks live in the model.
+DepartureWindow = Annotated[str, StringConstraints(pattern=r"^([01]?\d|2[0-3])-([01]?\d|2[0-3])$")]
 
 
 class SearchFlightsInput(BaseModel):
@@ -42,8 +48,10 @@ class SearchFlightsInput(BaseModel):
     children: int = Field(default=0, ge=0, le=9)
     infants: int = Field(default=0, ge=0, le=9)
     cabin_class: CabinClass = CabinClass.ECONOMY
-    currency: IsoCurrency = "USD"
-    non_stop_only: bool = False
+    # New filter knobs exposed by fli:
+    max_stops: MaxStops = MaxStops.ANY
+    departure_window: DepartureWindow | None = None
+    airlines: list[IataAirlineCode] | None = None
     max_results: int = Field(default=20, ge=1, le=50)
 
     @field_validator("departure_date")
@@ -75,8 +83,6 @@ class SearchFlightsInput(BaseModel):
 
     @model_validator(mode="after")
     def _total_travelers_within_provider_limit(self) -> "SearchFlightsInput":
-        # Google Flights (via SerpAPI) accepts up to 9 travelers per search;
-        # the same limit holds across most GDS feeds.
         total = self.adults + self.children + self.infants
         if total > 9:
             raise ValueError(
@@ -85,15 +91,14 @@ class SearchFlightsInput(BaseModel):
         return self
 
     @model_validator(mode="after")
-    def _round_trip_max_results_cap(self) -> "SearchFlightsInput":
-        # Round-trip needs 1 + N upstream calls (one outbound, N return-leg
-        # follow-ups). Cap N at 5 so a single search never burns more than ~6
-        # SerpAPI calls. One-way is single-call and stays at the looser 50 cap.
-        if self.return_date is not None and self.max_results > ROUND_TRIP_MAX_RESULTS:
+    def _departure_window_end_after_start(self) -> "SearchFlightsInput":
+        if self.departure_window is None:
+            return self
+        start_str, end_str = self.departure_window.split("-")
+        start, end = int(start_str), int(end_str)
+        if end <= start:
             raise ValueError(
-                f"max_results {self.max_results} exceeds the round-trip cap of "
-                f"{ROUND_TRIP_MAX_RESULTS} (set max_results <= {ROUND_TRIP_MAX_RESULTS} "
-                "for round-trip searches, or omit return_date for a one-way search)"
+                f"departure_window end hour ({end}) must be after start hour ({start})"
             )
         return self
 

@@ -7,6 +7,7 @@ from flights_mcp.models import (
     CabinClass,
     FlightOffer,
     Itinerary,
+    MaxStops,
     SearchFlightsInput,
     SearchFlightsResult,
     Segment,
@@ -18,30 +19,34 @@ TOMORROW = TODAY + timedelta(days=1)
 NEXT_WEEK = TODAY + timedelta(days=7)
 
 
+# ----- SearchFlightsInput happy path -----------------------------------------
+
+
 def test_accepts_valid_round_trip():
-    # Round-trip max_results is capped at 5 because each result requires a
-    # follow-up call to fetch the return leg — see ROUND_TRIP_MAX_RESULTS.
     m = SearchFlightsInput(
         origin="HEL",
         destination="IAD",
         departure_date=TOMORROW.isoformat(),
         return_date=NEXT_WEEK.isoformat(),
         adults=2,
-        max_results=3,
     )
     assert m.origin == "HEL"
     assert m.cabin_class is CabinClass.ECONOMY
-    assert m.currency == "USD"
-    assert m.max_results == 3
+    assert m.max_stops is MaxStops.ANY
+    assert m.departure_window is None
+    assert m.airlines is None
+    assert m.max_results == 20
 
 
 def test_accepts_valid_one_way_with_defaults():
     m = SearchFlightsInput(
-        origin="HEL",
-        destination="IAD",
-        departure_date=TOMORROW.isoformat(),
+        origin="HEL", destination="IAD", departure_date=TOMORROW.isoformat(),
     )
-    assert m.max_results == 20  # one-way keeps the looser default
+    assert m.return_date is None
+    assert m.max_results == 20
+
+
+# ----- IATA, date, passenger validation (carried over from previous phases) --
 
 
 def test_rejects_lowercase_iata():
@@ -81,44 +86,127 @@ def test_rejects_infants_exceeding_adults():
             origin="HEL",
             destination="IAD",
             departure_date=TOMORROW.isoformat(),
-            adults=1,
-            infants=2,
+            adults=1, infants=2,
         )
 
 
-def test_rejects_total_travelers_above_amadeus_limit():
-    # adults+children+infants must fit within the provider's 9-passenger search cap.
+def test_rejects_total_travelers_above_limit():
     with pytest.raises(ValidationError):
         SearchFlightsInput(
-            origin="HEL",
-            destination="IAD",
+            origin="HEL", destination="IAD",
             departure_date=TOMORROW.isoformat(),
-            adults=5,
-            children=4,
-            infants=1,
+            adults=5, children=4, infants=1,  # total = 10, cap is 9
         )
 
 
 def test_rejects_max_results_above_50():
     with pytest.raises(ValidationError):
         SearchFlightsInput(
-            origin="HEL", destination="IAD", departure_date=TOMORROW.isoformat(), max_results=51
+            origin="HEL", destination="IAD",
+            departure_date=TOMORROW.isoformat(),
+            max_results=51,
         )
+
+
+def test_round_trip_max_results_50_now_allowed():
+    """fli round-trip is a single upstream call, so the old 5-cap is gone."""
+    m = SearchFlightsInput(
+        origin="HEL", destination="IAD",
+        departure_date=TOMORROW.isoformat(),
+        return_date=NEXT_WEEK.isoformat(),
+        max_results=50,
+    )
+    assert m.max_results == 50
 
 
 def test_cabin_class_enum():
     m = SearchFlightsInput(
-        origin="HEL",
-        destination="IAD",
+        origin="HEL", destination="IAD",
         departure_date=TOMORROW.isoformat(),
         cabin_class="BUSINESS",
     )
     assert m.cabin_class is CabinClass.BUSINESS
 
 
-# ---------------------------------------------------------------------------
-# Task 5: output models
-# ---------------------------------------------------------------------------
+# ----- New fli-era input fields ----------------------------------------------
+
+
+def test_max_stops_accepts_all_fli_values():
+    for v in ("ANY", "NON_STOP", "ONE_STOP_OR_FEWER", "TWO_OR_FEWER_STOPS"):
+        m = SearchFlightsInput(
+            origin="HEL", destination="IAD",
+            departure_date=TOMORROW.isoformat(),
+            max_stops=v,
+        )
+        assert m.max_stops.value == v
+
+
+def test_max_stops_rejects_unknown_value():
+    with pytest.raises(ValidationError):
+        SearchFlightsInput(
+            origin="HEL", destination="IAD",
+            departure_date=TOMORROW.isoformat(),
+            max_stops="THREE_STOPS",
+        )
+
+
+def test_departure_window_accepts_valid_range():
+    m = SearchFlightsInput(
+        origin="HEL", destination="IAD",
+        departure_date=TOMORROW.isoformat(),
+        departure_window="6-20",
+    )
+    assert m.departure_window == "6-20"
+
+
+def test_departure_window_rejects_malformed():
+    for bad in ("morning", "6", "6-20-22", "6:00-20:00"):
+        with pytest.raises(ValidationError):
+            SearchFlightsInput(
+                origin="HEL", destination="IAD",
+                departure_date=TOMORROW.isoformat(),
+                departure_window=bad,
+            )
+
+
+def test_departure_window_rejects_inverted_range():
+    """End hour must be after start hour."""
+    with pytest.raises(ValidationError):
+        SearchFlightsInput(
+            origin="HEL", destination="IAD",
+            departure_date=TOMORROW.isoformat(),
+            departure_window="20-6",
+        )
+
+
+def test_departure_window_rejects_hour_over_23():
+    with pytest.raises(ValidationError):
+        SearchFlightsInput(
+            origin="HEL", destination="IAD",
+            departure_date=TOMORROW.isoformat(),
+            departure_window="0-24",
+        )
+
+
+def test_airlines_filter_accepts_iata_list():
+    m = SearchFlightsInput(
+        origin="HEL", destination="IAD",
+        departure_date=TOMORROW.isoformat(),
+        airlines=["AY", "FI"],
+    )
+    assert m.airlines == ["AY", "FI"]
+
+
+def test_airlines_filter_rejects_bad_codes():
+    with pytest.raises(ValidationError):
+        SearchFlightsInput(
+            origin="HEL", destination="IAD",
+            departure_date=TOMORROW.isoformat(),
+            airlines=["Finnair"],
+        )
+
+
+# ----- output model shape (unchanged from previous phase) --------------------
 
 
 def _make_segment(**overrides):
@@ -136,6 +224,9 @@ def _make_segment(**overrides):
     return Segment(**base)
 
 
+_SAMPLE_BOOKING_URL = "https://www.google.com/travel/flights?q=Flights+from+HEL+to+IAD+on+2026-05-18"
+
+
 def test_segment_round_trips():
     s = _make_segment()
     assert s.airline == "AY"
@@ -148,67 +239,9 @@ def test_itinerary_holds_segments():
     assert len(it.segments) == 2
 
 
-_SAMPLE_BOOKING_URL = "https://www.google.com/travel/flights?q=Flights+from+HEL+to+IAD+on+2026-05-18"
-
-
-def test_flight_offer_round_trip_shape():
-    it = Itinerary(duration="PT10H30M", stops=0, segments=[_make_segment()])
-    offer = FlightOffer(
-        offer_id="1",
-        total_price=850.50,
-        currency="USD",
-        price_per_adult=850.50,
-        airlines=["AY"],
-        validating_airline="AY",
-        outbound=it,
-        inbound=None,
-        seats_available=7,
-        last_ticketing_date="2026-05-15",
-        fare_basis="VLOWFI",
-        baggage_allowance="1 checked bag",
-        booking_url=_SAMPLE_BOOKING_URL,
-    )
-    assert offer.inbound is None
-    assert offer.baggage_allowance == "1 checked bag"
-
-
-def test_flight_offer_allows_null_optional_fields():
-    it = Itinerary(duration="PT10H30M", stops=0, segments=[_make_segment()])
-    offer = FlightOffer(
-        offer_id="1",
-        total_price=850.50,
-        currency="USD",
-        price_per_adult=850.50,
-        airlines=["AY"],
-        validating_airline="AY",
-        outbound=it,
-        inbound=None,
-        seats_available=None,
-        last_ticketing_date=None,
-        fare_basis="VLOWFI",
-        baggage_allowance=None,
-        booking_url=_SAMPLE_BOOKING_URL,
-    )
-    assert offer.seats_available is None
-    assert offer.last_ticketing_date is None
-    assert offer.baggage_allowance is None
-
-
-def test_search_flights_result_wraps_offers():
-    it = Itinerary(duration="PT10H30M", stops=0, segments=[_make_segment()])
-    offer = FlightOffer(
-        offer_id="1", total_price=850.5, currency="USD", price_per_adult=850.5,
-        airlines=["AY"], validating_airline="AY", outbound=it, inbound=None,
-        seats_available=None, last_ticketing_date=None, fare_basis="V", baggage_allowance=None,
-        booking_url=_SAMPLE_BOOKING_URL,
-    )
-    result = SearchFlightsResult(results=[offer])
-    assert len(result.results) == 1
-
-
-def test_segment_rejects_overlong_airline_code():
+def test_itinerary_rejects_empty_segments():
     with pytest.raises(ValidationError):
-        _make_segment(airline="AYZZZ")
+        Itinerary(duration="PT10H30M", stops=0, segments=[])
 
 
 def test_itinerary_rejects_negative_stops():
@@ -216,53 +249,51 @@ def test_itinerary_rejects_negative_stops():
         Itinerary(duration="PT10H30M", stops=-1, segments=[_make_segment()])
 
 
-def test_itinerary_rejects_empty_segments():
+def test_segment_rejects_overlong_airline_code():
     with pytest.raises(ValidationError):
-        Itinerary(duration="PT10H30M", stops=0, segments=[])
+        _make_segment(airline="AYZZZ")
 
 
-# ---------------------------------------------------------------------------
-# Round-trip max_results cap (migration constraint)
-# ---------------------------------------------------------------------------
-
-
-def test_round_trip_rejects_max_results_above_cap():
-    # Round-trip burns one upstream call per result; capped at 5.
-    with pytest.raises(ValidationError):
-        SearchFlightsInput(
-            origin="HEL",
-            destination="IAD",
-            departure_date=TOMORROW.isoformat(),
-            return_date=NEXT_WEEK.isoformat(),
-            max_results=6,
-        )
-
-
-def test_round_trip_accepts_max_results_at_cap():
-    m = SearchFlightsInput(
-        origin="HEL",
-        destination="IAD",
-        departure_date=TOMORROW.isoformat(),
-        return_date=NEXT_WEEK.isoformat(),
-        max_results=5,
+def _make_offer(**overrides):
+    it = Itinerary(duration="PT10H30M", stops=0, segments=[_make_segment()])
+    base = dict(
+        offer_id="abc",
+        total_price=850.5,
+        currency="USD",
+        price_per_adult=850.5,
+        airlines=["AY"],
+        validating_airline="AY",
+        outbound=it,
+        inbound=None,
+        seats_available=None,
+        last_ticketing_date=None,
+        fare_basis="",
+        baggage_allowance=None,
+        booking_url=_SAMPLE_BOOKING_URL,
     )
-    assert m.max_results == 5
+    base.update(overrides)
+    return FlightOffer(**base)
 
 
-def test_one_way_keeps_50_results_cap():
-    # One-way is a single upstream call; the 50 ceiling from Field(le=50) applies.
-    m = SearchFlightsInput(
-        origin="HEL",
-        destination="IAD",
-        departure_date=TOMORROW.isoformat(),
-        max_results=50,
+def test_flight_offer_round_trip_shape():
+    offer = _make_offer(
+        seats_available=7,
+        last_ticketing_date="2026-05-15",
+        fare_basis="VLOWFI",
+        baggage_allowance="1 checked bag",
     )
-    assert m.max_results == 50
+    assert offer.inbound is None
+    assert offer.baggage_allowance == "1 checked bag"
 
-    with pytest.raises(ValidationError):
-        SearchFlightsInput(
-            origin="HEL",
-            destination="IAD",
-            departure_date=TOMORROW.isoformat(),
-            max_results=51,
-        )
+
+def test_flight_offer_allows_null_optional_fields():
+    offer = _make_offer()
+    assert offer.seats_available is None
+    assert offer.last_ticketing_date is None
+    assert offer.baggage_allowance is None
+
+
+def test_search_flights_result_wraps_offers():
+    offer = _make_offer()
+    result = SearchFlightsResult(results=[offer])
+    assert len(result.results) == 1

@@ -1,0 +1,45 @@
+[
+  {
+    "legs": [
+      {
+        "airline": "AY",
+        "flight_number": "17",
+        "departure_airport": "HEL",
+        "arrival_airport": "IAD",
+        "departure_datetime": "2026-05-18T13:00:00",
+        "arrival_datetime": "2026-05-18T17:30:00",
+        "duration": 630
+      }
+    ],
+    "price": 460.0,
+    "currency": "EUR",
+    "duration": 630,
+    "stops": 0
+  },
+  {
+    "legs": [
+      {
+        "airline": "KL",
+        "flight_number": "1170",
+        "departure_airport": "HEL",
+        "arrival_airport": "AMS",
+        "departure_datetime": "2026-05-18T09:00:00",
+        "arrival_datetime": "2026-05-18T10:30:00",
+        "duration": 150
+      },
+      {
+        "airline": "KL",
+        "flight_number": "651",
+        "departure_airport": "AMS",
+        "arrival_airport": "IAD",
+        "departure_datetime": "2026-05-18T12:00:00",
+        "arrival_datetime": "2026-05-18T14:30:00",
+        "duration": 510
+      }
+    ],
+    "price": 410.0,
+    "currency": "EUR",
+    "duration": 720,
+    "stops": 1
+  }
+]

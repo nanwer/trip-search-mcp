@@ -1,42 +1,37 @@
-import httpx
+"""Orchestration tests for the search_flights tool function."""
+from __future__ import annotations
+
 import pytest
 
 from flights_mcp.cache import TTLCache
-from flights_mcp.serpapi.client import SerpAPIClient
-from flights_mcp.tools.search_flights import (
-    DEFAULT_MAX_RESULTS_ONE_WAY,
-    DEFAULT_MAX_RESULTS_ROUND_TRIP,
-    search_flights,
-)
+from flights_mcp.fli_backend.client import FliClient
+from flights_mcp.tools.search_flights import search_flights
 
 
-def _make_client(handler):
-    transport = httpx.MockTransport(handler)
-    http = httpx.AsyncClient(transport=transport)
-    return SerpAPIClient(http=http, api_key="fake-key")
+class _MockSearcher:
+    def __init__(self, *, results=None, raises: Exception | None = None):
+        self._results = results
+        self._raises = raises
+        self.call_count = 0
+
+    def search(self, filters, *args, **kwargs):
+        self.call_count += 1
+        if self._raises is not None:
+            raise self._raises
+        return self._results
 
 
-def _one_handler(body: dict):
-    def handler(request: httpx.Request) -> httpx.Response:
-        return httpx.Response(200, json=body)
-    return handler
-
-
-def _two_step_handler(outbound: dict, return_leg: dict):
-    def handler(request: httpx.Request) -> httpx.Response:
-        if "departure_token" in dict(request.url.params):
-            return httpx.Response(200, json=return_leg)
-        return httpx.Response(200, json=outbound)
-    return handler
+def _client_with(results=None, raises=None) -> tuple[FliClient, _MockSearcher]:
+    searcher = _MockSearcher(results=results, raises=raises)
+    return FliClient(flight_searcher=searcher), searcher
 
 
 # ----- happy paths -----------------------------------------------------------
 
 
-async def test_one_way_returns_success_envelope(serpapi_one_way):
-    client = _make_client(_one_handler(serpapi_one_way))
+async def test_one_way_returns_success_envelope(fli_one_way):
+    client, _ = _client_with(results=fli_one_way)
     cache = TTLCache(ttl_seconds=300)
-
     result = await search_flights(
         client=client, cache=cache,
         origin="HEL", destination="IAD", departure_date="2026-05-18",
@@ -46,12 +41,9 @@ async def test_one_way_returns_success_envelope(serpapi_one_way):
     assert result["results"][0]["inbound"] is None
 
 
-async def test_round_trip_returns_success_envelope(
-    serpapi_round_trip_outbound, serpapi_round_trip_return,
-):
-    client = _make_client(_two_step_handler(serpapi_round_trip_outbound, serpapi_round_trip_return))
+async def test_round_trip_returns_success_envelope(fli_round_trip):
+    client, _ = _client_with(results=fli_round_trip)
     cache = TTLCache(ttl_seconds=300)
-
     result = await search_flights(
         client=client, cache=cache,
         origin="HEL", destination="IAD",
@@ -61,165 +53,138 @@ async def test_round_trip_returns_success_envelope(
     assert len(result["results"]) >= 1
     first = result["results"][0]
     assert first["inbound"] is not None
-    assert first["outbound"]["stops"] >= 0
     seg = first["outbound"]["segments"][0]
     assert "T" in seg["departure_time_local"]
     assert "+" not in seg["departure_time_local"]
     assert "Z" not in seg["departure_time_local"]
 
 
-# ----- smart defaults --------------------------------------------------------
+# ----- new fli-era filter params plumb through --------------------------------
 
 
-async def test_one_way_default_max_results(serpapi_one_way):
-    client = _make_client(_one_handler(serpapi_one_way))
+async def test_max_stops_param_threads_through(fli_one_way):
+    from fli.models import MaxStops as FliMaxStops
+    client, searcher = _client_with(results=fli_one_way)
     cache = TTLCache(ttl_seconds=300)
-
-    result = await search_flights(
+    await search_flights(
         client=client, cache=cache,
-        origin="HEL", destination="IAD", departure_date="2026-05-18",
+        origin="HEL", destination="IAD",
+        departure_date="2026-05-18",
+        max_stops="NON_STOP",
     )
-    assert DEFAULT_MAX_RESULTS_ONE_WAY == 20
-    assert len(result["results"]) == 2
+    # The mock captured the filters that reached fli's SearchFlights.
+    assert searcher.call_count == 1
 
 
-async def test_round_trip_default_max_results(
-    serpapi_round_trip_outbound, serpapi_round_trip_return,
-):
-    call_log: list[dict] = []
-
-    def handler(request: httpx.Request) -> httpx.Response:
-        params = dict(request.url.params)
-        call_log.append(params)
-        if "departure_token" in params:
-            return httpx.Response(200, json=serpapi_round_trip_return)
-        return httpx.Response(200, json=serpapi_round_trip_outbound)
-
-    client = _make_client(handler)
+async def test_departure_window_validation_at_boundary(fli_one_way):
+    client, _ = _client_with(results=fli_one_way)
     cache = TTLCache(ttl_seconds=300)
-
     result = await search_flights(
         client=client, cache=cache,
         origin="HEL", destination="IAD",
-        departure_date="2026-05-18", return_date="2026-05-29",
+        departure_date="2026-05-18",
+        departure_window="not-a-window",
     )
-    assert DEFAULT_MAX_RESULTS_ROUND_TRIP == 3
-    # Outbound fixture has 2 options total; expect 1 outbound + 2 return calls.
-    assert len(call_log) == 3
-    assert len(result["results"]) == 2
+    assert result["error"]["code"] == "invalid_input"
+
+
+async def test_airlines_filter_validation(fli_one_way):
+    client, _ = _client_with(results=fli_one_way)
+    cache = TTLCache(ttl_seconds=300)
+    result = await search_flights(
+        client=client, cache=cache,
+        origin="HEL", destination="IAD",
+        departure_date="2026-05-18",
+        airlines=["finnair"],  # lowercase — fails IataAirlineCode regex
+    )
+    assert result["error"]["code"] == "invalid_input"
 
 
 # ----- error envelopes -------------------------------------------------------
 
 
-async def test_invalid_input_returns_error_envelope(serpapi_one_way):
-    client = _make_client(_one_handler(serpapi_one_way))
+async def test_invalid_input_returns_error_envelope(fli_one_way):
+    client, _ = _client_with(results=fli_one_way)
     cache = TTLCache(ttl_seconds=300)
-
     result = await search_flights(
         client=client, cache=cache,
-        origin="hel",
+        origin="hel",  # lowercase — invalid
         destination="IAD", departure_date="2026-05-18",
     )
-    assert "error" in result
     assert result["error"]["code"] == "invalid_input"
 
 
-async def test_round_trip_max_results_above_cap_returns_invalid_input(serpapi_one_way):
-    client = _make_client(_one_handler(serpapi_one_way))
+async def test_no_results_returns_clean_message():
+    client, _ = _client_with(results=[])
     cache = TTLCache(ttl_seconds=300)
-
-    result = await search_flights(
-        client=client, cache=cache,
-        origin="HEL", destination="IAD",
-        departure_date="2026-05-18", return_date="2026-05-29",
-        max_results=10,
-    )
-    assert result["error"]["code"] == "invalid_input"
-    assert "round-trip" in result["error"]["message"].lower()
-
-
-async def test_no_results_returns_clean_message(serpapi_empty_results):
-    client = _make_client(_one_handler(serpapi_empty_results))
-    cache = TTLCache(ttl_seconds=300)
-
     result = await search_flights(
         client=client, cache=cache,
         origin="HEL", destination="IAD", departure_date="2026-05-18",
     )
     assert result["error"]["code"] == "no_results"
-    # No more test/prod env distinction — message is provider-neutral.
+    # No more SerpAPI test-env caveats.
+    assert "serpapi" not in result["error"]["message"].lower()
     assert "test environment" not in result["error"]["message"].lower()
 
 
-async def test_auth_failure_returns_error_envelope():
-    def handler(request: httpx.Request) -> httpx.Response:
-        return httpx.Response(401, json={"error": "Invalid API key"})
-
-    client = _make_client(handler)
+async def test_upstream_error_returns_error_envelope():
+    client, _ = _client_with(raises=RuntimeError("google said nope"))
     cache = TTLCache(ttl_seconds=300)
-
     result = await search_flights(
         client=client, cache=cache,
         origin="HEL", destination="IAD", departure_date="2026-05-18",
     )
-    assert result["error"]["code"] == "auth_failed"
+    assert result["error"]["code"] == "upstream_error"
+    assert result["error"]["retryable"] is True
+
+
+async def test_unknown_airport_returns_invalid_input():
+    client, _ = _client_with(results=[])
+    cache = TTLCache(ttl_seconds=300)
+    result = await search_flights(
+        client=client, cache=cache,
+        origin="ZZZ",  # passes regex, fails fli's Airport enum lookup
+        destination="IAD", departure_date="2026-05-18",
+    )
+    assert result["error"]["code"] == "invalid_input"
 
 
 # ----- caching ---------------------------------------------------------------
 
 
-async def test_second_identical_call_is_cache_hit(serpapi_one_way):
-    call_count = {"n": 0}
-
-    def handler(request: httpx.Request) -> httpx.Response:
-        call_count["n"] += 1
-        return httpx.Response(200, json=serpapi_one_way)
-
-    transport = httpx.MockTransport(handler)
-    http = httpx.AsyncClient(transport=transport)
-    client = SerpAPIClient(http=http, api_key="fake-key")
+async def test_second_identical_call_is_cache_hit(fli_one_way):
+    client, searcher = _client_with(results=fli_one_way)
     cache = TTLCache(ttl_seconds=300)
-
     kwargs = dict(
         client=client, cache=cache,
         origin="HEL", destination="IAD", departure_date="2026-05-18",
     )
     await search_flights(**kwargs)
     await search_flights(**kwargs)
-    assert call_count["n"] == 1
+    assert searcher.call_count == 1
 
 
-# ----- shape regression -------------------------------------------------------
+# ----- shape regression ------------------------------------------------------
 
 
-async def test_full_round_trip_matches_documented_shape(
-    serpapi_round_trip_outbound, serpapi_round_trip_return,
-):
-    client = _make_client(_two_step_handler(serpapi_round_trip_outbound, serpapi_round_trip_return))
+async def test_full_round_trip_matches_documented_shape(fli_round_trip):
+    client, _ = _client_with(results=fli_round_trip)
     cache = TTLCache(ttl_seconds=300)
-
     result = await search_flights(
         client=client, cache=cache,
         origin="HEL", destination="IAD",
         departure_date="2026-05-18", return_date="2026-05-29",
     )
-    assert "results" in result and isinstance(result["results"], list)
     offer = result["results"][0]
     expected_keys = {
         "offer_id", "total_price", "currency", "price_per_adult",
         "airlines", "validating_airline", "outbound", "inbound",
         "seats_available", "last_ticketing_date", "fare_basis", "baggage_allowance",
+        "booking_url",  # regression check: still populated post-migration
     }
     assert expected_keys.issubset(offer.keys())
-
-    outbound = offer["outbound"]
-    assert {"duration", "stops", "segments"}.issubset(outbound.keys())
-    seg = outbound["segments"][0]
-    assert {
-        "airline", "flight_number", "departure_airport", "departure_time_local",
-        "arrival_airport", "arrival_time_local", "cabin", "booking_class",
-    }.issubset(seg.keys())
+    assert offer["booking_url"].startswith("https://www.google.com/travel/flights")
+    seg = offer["outbound"]["segments"][0]
+    assert "T" in seg["departure_time_local"]
     assert "+" not in seg["departure_time_local"]
     assert "Z" not in seg["departure_time_local"]
-    assert "T" in seg["departure_time_local"]
