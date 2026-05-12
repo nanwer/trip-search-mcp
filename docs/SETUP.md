@@ -180,6 +180,28 @@ with a clickable "Book on Google Flights" link per offer.
 3. Open the Claude Desktop log: `~/Library/Logs/Claude/mcp*.log`. Look for a
    line like `flights: stdio process exited with code X` and a traceback.
 
+### Searches time out for 4+ minutes (or hang silently) after pulling new code
+
+Claude Desktop launches the MCP server as a subprocess **once** when it
+starts up. Pulling new code and editing `claude_desktop_config.json` does
+not reload the running subprocess — it keeps executing whatever code was on
+disk when Claude Desktop first launched it.
+
+Diagnose:
+```bash
+ps -o lstart=,command= -p $(pgrep -f flights_mcp.server | head -1)
+```
+
+If the start time is older than your last `git pull`, the subprocess is
+stale. Fix:
+
+1. **⌘Q Claude Desktop** (full quit; closing the window is not enough).
+2. Reopen Claude Desktop.
+3. Re-run the `ps` command above; the start time should now be recent.
+
+The same applies after any `pip install -e .` rebuild or git pull that
+changes server code.
+
 ### "ModuleNotFoundError: No module named 'flights_mcp'"
 
 The Python in `command` doesn't have the package installed. Either:

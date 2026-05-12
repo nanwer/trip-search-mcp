@@ -7,9 +7,18 @@ Desktop, Claude Code, or any MCP-aware client, then ask Claude to find you
 flights in plain English.
 
 ```
-You:   Find me cheap round-trips from Helsinki to Washington DC for May 18 – 29.
-Claude:[calls search_flights, summarizes the cheapest options, asks if you want details]
+You:   Find me round-trips from Helsinki to Washington DC for May 18 returning May 29,
+       one stop or fewer, leaving between 8am and 8pm.
+Claude:[calls search_flights with max_stops="ONE_STOP_OR_FEWER" and
+        departure_window="8-20", summarizes the cheapest options, offers
+        Book on Google Flights links]
 ```
+
+> **Heads up after every git pull / pip install:** Claude Desktop holds onto
+> the MCP subprocess it spawned at launch. To pick up new code, **fully
+> ⌘Q and reopen Claude Desktop** — closing the window isn't enough. See
+> [docs/SETUP.md § Searches time out](./docs/SETUP.md#searches-time-out-for-4-minutes-or-hang-silently-after-pulling-new-code)
+> for the diagnostic command.
 
 ---
 
