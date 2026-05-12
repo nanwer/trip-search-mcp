@@ -188,3 +188,33 @@ async def test_full_round_trip_matches_documented_shape(fli_round_trip):
     assert "T" in seg["departure_time_local"]
     assert "+" not in seg["departure_time_local"]
     assert "Z" not in seg["departure_time_local"]
+
+
+# ----- inbound_window end-to-end --------------------------------------------
+
+
+async def test_inbound_window_filters_through_tool(fli_round_trip):
+    """inbound_window threads from tool kwargs through to normalize."""
+    client, _ = _client_with(results=fli_round_trip)
+    cache = TTLCache(ttl_seconds=300)
+    result = await search_flights(
+        client=client, cache=cache,
+        origin="HEL", destination="IAD",
+        departure_date="2026-05-18", return_date="2026-05-29",
+        inbound_window="6-19",  # drops the 20:30 inbound, keeps the 19:00 one
+    )
+    assert "error" not in result
+    assert len(result["results"]) == 1
+
+
+async def test_inbound_window_validation_at_boundary(fli_round_trip):
+    """Malformed window returns invalid_input, no upstream call."""
+    client, _ = _client_with(results=fli_round_trip)
+    cache = TTLCache(ttl_seconds=300)
+    result = await search_flights(
+        client=client, cache=cache,
+        origin="HEL", destination="IAD",
+        departure_date="2026-05-18", return_date="2026-05-29",
+        inbound_window="evening",
+    )
+    assert result["error"]["code"] == "invalid_input"

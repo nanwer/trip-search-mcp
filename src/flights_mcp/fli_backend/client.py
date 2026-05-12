@@ -17,6 +17,7 @@ from typing import Any, Protocol
 from fli.models import (
     Airline as FliAirline,
     Airport as FliAirport,
+    DateSearchFilters,
     FlightSearchFilters,
     FlightSegment,
     MaxStops as FliMaxStops,
@@ -29,8 +30,18 @@ from fli.models import (
 from fli.search import SearchDates, SearchFlights
 
 from flights_mcp.errors import ErrorCode, ToolError
-from flights_mcp.fli_backend.normalize import booking_url_for, build_offers
-from flights_mcp.models import FlightOffer, MaxStops, SearchFlightsInput
+from flights_mcp.fli_backend.normalize import (
+    booking_url_for,
+    build_date_offers,
+    build_offers,
+)
+from flights_mcp.models import (
+    DatePriceOffer,
+    FlightOffer,
+    MaxStops,
+    SearchCheapestDatesInput,
+    SearchFlightsInput,
+)
 
 
 class _SearchProtocol(Protocol):
@@ -91,6 +102,7 @@ class FliClient:
                 departure_date=params.departure_date,
                 return_date=params.return_date,
                 limit=params.max_results,
+                inbound_window=params.inbound_window,
             )
         except (KeyError, ValueError, TypeError, AttributeError) as e:
             # Defensive: a malformed fli result (e.g. an unknown airline enum
@@ -164,5 +176,107 @@ class FliClient:
             stops=FliMaxStops[p.max_stops.value],
             airlines=airlines,
             sort_by=SortBy.BEST,
+            flight_segments=segments,
+        )
+
+    # ----- date-flex (search_cheapest_dates) ---------------------------------
+
+    async def search_dates(self, params: SearchCheapestDatesInput) -> list[DatePriceOffer]:
+        filters = self._build_dates_filters(params)
+        try:
+            raw = await asyncio.to_thread(self._date.search, filters)
+        except ToolError:
+            raise
+        except KeyError as e:
+            raise ToolError(
+                ErrorCode.UPSTREAM_ERROR,
+                f"fli date lookup miss: {e}",
+                retryable=False,
+            ) from e
+        except Exception as e:
+            raise ToolError(
+                ErrorCode.UPSTREAM_ERROR,
+                f"fli SearchDates failed: {type(e).__name__}: {e}",
+                retryable=True,
+            ) from e
+
+        entries: list = list(raw) if raw else []
+        if not entries:
+            raise ToolError(
+                ErrorCode.NO_RESULTS,
+                "Google Flights returned no price data for this date range.",
+            )
+
+        try:
+            offers = build_date_offers(entries)
+        except (KeyError, ValueError, TypeError, AttributeError) as e:
+            raise ToolError(
+                ErrorCode.UPSTREAM_ERROR,
+                f"fli returned a date-price entry we couldn't parse: {e}",
+                retryable=True,
+            ) from e
+
+        if not offers:
+            raise ToolError(ErrorCode.NO_RESULTS, "No usable date-price entries.")
+        return offers
+
+    def _build_dates_filters(self, p: SearchCheapestDatesInput) -> DateSearchFilters:
+        try:
+            origin = FliAirport[p.origin]
+            destination = FliAirport[p.destination]
+        except KeyError as e:
+            raise ToolError(
+                ErrorCode.INVALID_INPUT,
+                f"Airport code {e.args[0]!r} is not recognized by Google Flights.",
+            ) from e
+
+        try:
+            airlines = (
+                [FliAirline[code] for code in p.airlines] if p.airlines else None
+            )
+        except KeyError as e:
+            raise ToolError(
+                ErrorCode.INVALID_INPUT,
+                f"Airline IATA code {e.args[0]!r} is not recognized.",
+            ) from e
+
+        time_restrictions = None
+        if p.departure_window:
+            start_s, end_s = p.departure_window.split("-")
+            time_restrictions = TimeRestrictions(
+                earliest_departure=int(start_s),
+                latest_departure=int(end_s),
+            )
+
+        # SearchDates derives the date matrix from from_date/to_date/duration;
+        # the flight_segments still need a placeholder travel_date inside the
+        # range so fli accepts the filter object.
+        segments = [
+            FlightSegment(
+                departure_airport=[[origin, 0]],
+                arrival_airport=[[destination, 0]],
+                travel_date=p.start_date,
+                time_restrictions=time_restrictions,
+            )
+        ]
+        if p.is_round_trip:
+            # trip_duration is guaranteed set at this point by the model
+            # validator; mypy can't see that across the Pydantic boundary.
+            segments.append(FlightSegment(
+                departure_airport=[[destination, 0]],
+                arrival_airport=[[origin, 0]],
+                travel_date=p.start_date,  # placeholder; SearchDates ignores this
+                time_restrictions=time_restrictions,
+            ))
+
+        return DateSearchFilters(
+            trip_type=TripType.ROUND_TRIP if p.is_round_trip else TripType.ONE_WAY,
+            passenger_info=PassengerInfo(adults=p.passengers),
+            seat_type=SeatType[p.cabin_class.value],
+            stops=FliMaxStops[p.max_stops.value],
+            airlines=airlines,
+            from_date=p.start_date,
+            to_date=p.end_date,
+            duration=p.trip_duration,
             flight_segments=segments,
         )

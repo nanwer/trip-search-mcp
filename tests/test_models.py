@@ -5,9 +5,12 @@ from pydantic import ValidationError
 
 from flights_mcp.models import (
     CabinClass,
+    DatePriceOffer,
     FlightOffer,
     Itinerary,
     MaxStops,
+    SearchCheapestDatesInput,
+    SearchCheapestDatesResult,
     SearchFlightsInput,
     SearchFlightsResult,
     Segment,
@@ -297,3 +300,164 @@ def test_search_flights_result_wraps_offers():
     offer = _make_offer()
     result = SearchFlightsResult(results=[offer])
     assert len(result.results) == 1
+
+
+# ----- inbound_window (added in Phase 2) -------------------------------------
+
+
+def test_inbound_window_accepts_valid_range():
+    m = SearchFlightsInput(
+        origin="HEL", destination="IAD",
+        departure_date=TOMORROW.isoformat(),
+        return_date=NEXT_WEEK.isoformat(),
+        inbound_window="6-20",
+    )
+    assert m.inbound_window == "6-20"
+
+
+def test_inbound_window_rejects_inverted_range():
+    with pytest.raises(ValidationError):
+        SearchFlightsInput(
+            origin="HEL", destination="IAD",
+            departure_date=TOMORROW.isoformat(),
+            return_date=NEXT_WEEK.isoformat(),
+            inbound_window="20-6",
+        )
+
+
+def test_inbound_window_rejects_malformed():
+    with pytest.raises(ValidationError):
+        SearchFlightsInput(
+            origin="HEL", destination="IAD",
+            departure_date=TOMORROW.isoformat(),
+            return_date=NEXT_WEEK.isoformat(),
+            inbound_window="evening",
+        )
+
+
+def test_inbound_window_default_none():
+    m = SearchFlightsInput(
+        origin="HEL", destination="IAD", departure_date=TOMORROW.isoformat(),
+    )
+    assert m.inbound_window is None
+
+
+# ----- SearchCheapestDatesInput (Phase 2) ------------------------------------
+
+
+def test_cheapest_dates_one_way_accepts_minimal():
+    m = SearchCheapestDatesInput(
+        origin="HEL", destination="IAD",
+        start_date=TOMORROW.isoformat(),
+        end_date=NEXT_WEEK.isoformat(),
+    )
+    assert m.is_round_trip is False
+    assert m.passengers == 1
+    assert m.cabin_class is CabinClass.ECONOMY
+    assert m.max_stops is MaxStops.ANY
+    assert m.trip_duration is None
+
+
+def test_cheapest_dates_round_trip_requires_trip_duration():
+    with pytest.raises(ValidationError):
+        SearchCheapestDatesInput(
+            origin="HEL", destination="IAD",
+            start_date=TOMORROW.isoformat(),
+            end_date=NEXT_WEEK.isoformat(),
+            is_round_trip=True,
+        )
+
+
+def test_cheapest_dates_round_trip_with_duration_ok():
+    m = SearchCheapestDatesInput(
+        origin="HEL", destination="IAD",
+        start_date=TOMORROW.isoformat(),
+        end_date=NEXT_WEEK.isoformat(),
+        is_round_trip=True,
+        trip_duration=11,
+    )
+    assert m.trip_duration == 11
+
+
+def test_cheapest_dates_rejects_end_before_start():
+    with pytest.raises(ValidationError):
+        SearchCheapestDatesInput(
+            origin="HEL", destination="IAD",
+            start_date=NEXT_WEEK.isoformat(),
+            end_date=TOMORROW.isoformat(),
+        )
+
+
+def test_cheapest_dates_rejects_start_in_past():
+    yesterday = (TODAY - timedelta(days=1)).isoformat()
+    with pytest.raises(ValidationError):
+        SearchCheapestDatesInput(
+            origin="HEL", destination="IAD",
+            start_date=yesterday,
+            end_date=NEXT_WEEK.isoformat(),
+        )
+
+
+def test_cheapest_dates_trip_duration_cap_at_365():
+    with pytest.raises(ValidationError):
+        SearchCheapestDatesInput(
+            origin="HEL", destination="IAD",
+            start_date=TOMORROW.isoformat(),
+            end_date=NEXT_WEEK.isoformat(),
+            is_round_trip=True,
+            trip_duration=366,
+        )
+
+
+def test_cheapest_dates_trip_duration_accepts_365():
+    m = SearchCheapestDatesInput(
+        origin="HEL", destination="IAD",
+        start_date=TOMORROW.isoformat(),
+        end_date=NEXT_WEEK.isoformat(),
+        is_round_trip=True,
+        trip_duration=365,
+    )
+    assert m.trip_duration == 365
+
+
+def test_cheapest_dates_departure_window_validates():
+    # Same window-validator pattern as search_flights.
+    with pytest.raises(ValidationError):
+        SearchCheapestDatesInput(
+            origin="HEL", destination="IAD",
+            start_date=TOMORROW.isoformat(),
+            end_date=NEXT_WEEK.isoformat(),
+            departure_window="20-6",
+        )
+
+
+# ----- DatePriceOffer shape --------------------------------------------------
+
+
+def test_date_price_offer_round_trip():
+    o = DatePriceOffer(
+        departure_date="2026-05-18",
+        return_date="2026-05-29",
+        price=540.0,
+        currency="EUR",
+    )
+    assert o.return_date == "2026-05-29"
+
+
+def test_date_price_offer_one_way_has_null_return():
+    o = DatePriceOffer(
+        departure_date="2026-05-18",
+        return_date=None,
+        price=300.0,
+        currency="EUR",
+    )
+    assert o.return_date is None
+
+
+def test_search_cheapest_dates_result_wraps():
+    o = DatePriceOffer(
+        departure_date="2026-05-18", return_date="2026-05-29",
+        price=540.0, currency="EUR",
+    )
+    r = SearchCheapestDatesResult(results=[o])
+    assert len(r.results) == 1

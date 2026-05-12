@@ -42,7 +42,8 @@ Origin and destination are 3-letter IATA airport codes (HEL, JFK, LHR). The curr
 
 Filter parameters:
 - `max_stops`: one of `ANY` (default), `NON_STOP`, `ONE_STOP_OR_FEWER`, `TWO_OR_FEWER_STOPS`. The names mean "this many stops or fewer".
-- `departure_window`: a "HH-HH" string in 24-hour local time, e.g. `"6-20"` to restrict to flights departing between 6am and 8pm. Applies to both outbound and return legs.
+- `departure_window`: a "HH-HH" string in 24-hour local time, e.g. `"6-20"` to restrict to outbound flights departing between 6am and 8pm local. **Applies to the outbound leg only.** Google Flights' native filter does not control the return leg.
+- `inbound_window`: a separate "HH-HH" window for the return leg. Same format as `departure_window`. Has no effect on one-way searches. When set, offers whose return-leg first segment departs outside this window are filtered out post-hoc.
 - `airlines`: an optional list of IATA airline codes (e.g. `["AY", "FI"]`) to restrict results to those carriers. Omit or pass null for no filter.
 
 Results from identical searches are cached for up to 5 minutes. If the user is about to act on a specific offer, re-run the search before committing to a number.
@@ -55,7 +56,7 @@ PRE-CALL ELICITATION: Before calling this tool, ensure the user has expressed pr
 
 - Baggage: carry-on only, or checked bag needed (affects fare class and final price)
 - Connections: non-stop preferred, or okay with stops (sets `max_stops`)
-- Time of day: red-eye okay, hard arrival deadlines, preferred departure window (sets `departure_window`)
+- Time of day: red-eye okay, hard arrival deadlines, preferred outbound departure window (sets `departure_window`), preferred return departure window (sets `inbound_window`)
 - Airline preferences: any airlines to prefer (loyalty programs) or avoid (sets `airlines`)
 
 RESULT PRESENTATION: When returning 2 or more results to the user, render them as an interactive artifact rather than a text list. Each offer is a card showing:
@@ -92,6 +93,7 @@ async def search_flights(
     cabin_class: str = "ECONOMY",
     max_stops: str = "ANY",
     departure_window: str | None = None,
+    inbound_window: str | None = None,
     airlines: list[str] | None = None,
     max_results: int = 20,
 ) -> dict[str, Any]:
@@ -99,7 +101,7 @@ async def search_flights(
         origin=origin, destination=destination, departure_date=departure_date,
         return_date=return_date, adults=adults, children=children, infants=infants,
         cabin_class=cabin_class, max_stops=max_stops, departure_window=departure_window,
-        airlines=airlines, max_results=max_results,
+        inbound_window=inbound_window, airlines=airlines, max_results=max_results,
     )
     # 1. Input validation.
     try:
@@ -112,8 +114,9 @@ async def search_flights(
                   error=first_error.get("msg"))
         return error_response(ErrorCode.INVALID_INPUT, msg, retryable=False)
 
-    # 2. Cache.
-    key = canonical_key(params.model_dump())
+    # 2. Cache. Namespace the key by tool so we never collide with another
+    # tool's identical-shape input.
+    key = canonical_key({"tool": TOOL_NAME, **params.model_dump()})
     cached = cache.get(key)
     if cached is not None:
         log_event(_logger, "tool.cache_hit", tool=TOOL_NAME, input=params.model_dump())

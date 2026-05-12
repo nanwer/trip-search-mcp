@@ -19,9 +19,11 @@ import hashlib
 from urllib.parse import quote_plus
 
 from fli.models import FlightLeg, FlightResult
+from fli.search import DatePrice
 
 from flights_mcp.models import (
     CabinClass,
+    DatePriceOffer,
     FlightOffer,
     Itinerary,
     Segment,
@@ -180,6 +182,30 @@ def _to_offer(
     )
 
 
+def _parse_window(window: str | None) -> tuple[int, int] | None:
+    """'6-20' → (6, 20). None → None. Validation already happened at the model."""
+    if not window:
+        return None
+    s, e = window.split("-", 1)
+    return int(s), int(e)
+
+
+def _inbound_hour_within(offer: FlightOffer, window: tuple[int, int]) -> bool:
+    """True if the offer's inbound first-segment departure hour is in the window.
+
+    One-way offers (inbound=None) trivially pass — no inbound leg to filter.
+    The hour comparison is inclusive on both bounds: window=(6, 20) admits
+    hour 20, drops hour 21.
+    """
+    if offer.inbound is None:
+        return True
+    first_inbound = offer.inbound.segments[0]
+    # Time format is ISO 8601 with no offset: "2026-05-29T20:30:00"
+    # Hour is characters 11-13.
+    hour = int(first_inbound.departure_time_local[11:13])
+    return window[0] <= hour <= window[1]
+
+
 def build_offers(
     raw_entries: list,
     *,
@@ -189,22 +215,59 @@ def build_offers(
     departure_date: str,
     return_date: str | None,
     limit: int,
+    inbound_window: str | None = None,
 ) -> list[FlightOffer]:
-    """Translate up to `limit` fli results into the clean FlightOffer shape.
+    """Translate fli results into the clean FlightOffer shape.
 
-    Post-filtering happens here: fli's `top_n` is a suggestion the upstream
-    sometimes ignores (29 results were observed when 5 were requested), so
-    we slice to `limit` after the fact. Order is preserved from upstream
-    (fli's SortBy.BEST ranking).
+    fli's `top_n` argument is a soft suggestion the upstream sometimes ignores
+    (29 results were observed when 5 were requested), so we cap at `limit`
+    here. When `inbound_window` is set, we filter before counting toward the
+    limit — so a tight window doesn't silently shrink the result list because
+    of unrelated truncation.
+
+    Order is preserved from upstream (fli's SortBy.BEST ranking).
     """
+    window = _parse_window(inbound_window)
     offers: list[FlightOffer] = []
-    for entry in raw_entries[:limit]:
-        offers.append(_to_offer(
+    for entry in raw_entries:
+        if len(offers) >= limit:
+            break
+        offer = _to_offer(
             entry,
             cabin=cabin,
             adults=adults,
             booking_url=booking_url,
             departure_date=departure_date,
             return_date=return_date,
-        ))
+        )
+        if window is not None and not _inbound_hour_within(offer, window):
+            continue
+        offers.append(offer)
     return offers
+
+
+def build_date_offers(
+    entries: list[DatePrice],
+    *,
+    currency_fallback: str = "USD",
+) -> list[DatePriceOffer]:
+    """Translate fli's DatePrice entries into DatePriceOffer.
+
+    fli's `DatePrice.date` is a tuple — 1-element for one-way (just the
+    departure datetime) or 2-element for round-trip (departure, return).
+    Both datetimes are naive (midnight, no tz). We surface them as ISO
+    YYYY-MM-DD strings consistent with the rest of the date contract.
+    """
+    out: list[DatePriceOffer] = []
+    for entry in entries:
+        if not entry.date:
+            continue
+        departure = entry.date[0].date().isoformat()
+        return_ = entry.date[1].date().isoformat() if len(entry.date) > 1 else None
+        out.append(DatePriceOffer(
+            departure_date=departure,
+            return_date=return_,
+            price=float(entry.price),
+            currency=(entry.currency or currency_fallback).upper(),
+        ))
+    return out

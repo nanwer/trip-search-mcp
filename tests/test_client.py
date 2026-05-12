@@ -8,7 +8,11 @@ import pytest
 
 from flights_mcp.errors import ErrorCode, ToolError
 from flights_mcp.fli_backend.client import FliClient
-from flights_mcp.models import MaxStops, SearchFlightsInput
+from flights_mcp.models import (
+    MaxStops,
+    SearchCheapestDatesInput,
+    SearchFlightsInput,
+)
 
 
 class _MockSearcher:
@@ -172,3 +176,105 @@ async def test_searcher_exception_maps_to_upstream_error():
         await client.search(_input())
     assert exc.value.code is ErrorCode.UPSTREAM_ERROR
     assert exc.value.retryable is True
+
+
+async def test_inbound_window_threaded_into_normalize(fli_round_trip):
+    """End-to-end: inbound_window on input filters the result list."""
+    searcher = _MockSearcher(results=fli_round_trip)
+    client = FliClient(flight_searcher=searcher)
+    inp = SearchFlightsInput(
+        origin="HEL", destination="IAD",
+        departure_date="2026-05-18", return_date="2026-05-29",
+        inbound_window="6-19",
+    )
+    offers = await client.search(inp)
+    assert len(offers) == 1  # fixture has one entry inside 6-19, one outside
+
+
+# ============================================================================
+# search_dates (Phase 2)
+# ============================================================================
+
+
+def _dates_input(**overrides) -> SearchCheapestDatesInput:
+    base = dict(
+        origin="HEL", destination="IAD",
+        start_date="2026-05-15", end_date="2026-05-25",
+    )
+    base.update(overrides)
+    return SearchCheapestDatesInput(**base)
+
+
+async def test_search_dates_returns_offers(fli_dates_flex):
+    searcher = _MockSearcher(results=fli_dates_flex)
+    client = FliClient(date_searcher=searcher)
+    offers = await client.search_dates(_dates_input(is_round_trip=True, trip_duration=11))
+    assert len(offers) == 5
+    assert all(o.currency == "EUR" for o in offers)
+
+
+async def test_search_dates_round_trip_builds_two_segments(fli_dates_flex):
+    searcher = _MockSearcher(results=fli_dates_flex)
+    client = FliClient(date_searcher=searcher)
+    await client.search_dates(_dates_input(is_round_trip=True, trip_duration=11))
+    filters = searcher.last_filters
+    assert len(filters.flight_segments) == 2
+    assert filters.from_date == "2026-05-15"
+    assert filters.to_date == "2026-05-25"
+    assert filters.duration == 11
+
+
+async def test_search_dates_one_way_builds_one_segment(fli_dates_flex):
+    searcher = _MockSearcher(results=fli_dates_flex)
+    client = FliClient(date_searcher=searcher)
+    await client.search_dates(_dates_input())  # is_round_trip=False
+    filters = searcher.last_filters
+    assert len(filters.flight_segments) == 1
+    assert filters.duration is None
+
+
+async def test_search_dates_empty_raises_no_results():
+    searcher = _MockSearcher(results=[])
+    client = FliClient(date_searcher=searcher)
+    with pytest.raises(ToolError) as exc:
+        await client.search_dates(_dates_input(is_round_trip=True, trip_duration=11))
+    assert exc.value.code is ErrorCode.NO_RESULTS
+
+
+async def test_search_dates_none_raises_no_results():
+    searcher = _MockSearcher(results=None)
+    client = FliClient(date_searcher=searcher)
+    with pytest.raises(ToolError) as exc:
+        await client.search_dates(_dates_input())
+    assert exc.value.code is ErrorCode.NO_RESULTS
+
+
+async def test_search_dates_unknown_origin_invalid_input():
+    searcher = _MockSearcher(results=[])
+    client = FliClient(date_searcher=searcher)
+    with pytest.raises(ToolError) as exc:
+        await client.search_dates(_dates_input(origin="ZZZ"))
+    assert exc.value.code is ErrorCode.INVALID_INPUT
+
+
+async def test_search_dates_passes_max_stops_and_airlines(fli_dates_flex):
+    from fli.models import MaxStops as FliMaxStops
+    searcher = _MockSearcher(results=fli_dates_flex)
+    client = FliClient(date_searcher=searcher)
+    await client.search_dates(_dates_input(
+        max_stops="NON_STOP",
+        airlines=["AY", "FI"],
+    ))
+    filters = searcher.last_filters
+    assert filters.stops is FliMaxStops.NON_STOP
+    assert [a.name for a in filters.airlines] == ["AY", "FI"]
+
+
+async def test_search_dates_passes_departure_window(fli_dates_flex):
+    searcher = _MockSearcher(results=fli_dates_flex)
+    client = FliClient(date_searcher=searcher)
+    await client.search_dates(_dates_input(departure_window="8-20"))
+    tr = searcher.last_filters.flight_segments[0].time_restrictions
+    assert tr is not None
+    assert tr.earliest_departure == 8
+    assert tr.latest_departure == 20

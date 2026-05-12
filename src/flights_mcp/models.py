@@ -51,6 +51,10 @@ class SearchFlightsInput(BaseModel):
     # New filter knobs exposed by fli:
     max_stops: MaxStops = MaxStops.ANY
     departure_window: DepartureWindow | None = None
+    # Inbound (return-leg) departure window. fli's filter only controls the
+    # outbound leg, so this is applied as a post-filter in normalize.py over
+    # the inbound's first segment. No effect on one-way searches.
+    inbound_window: DepartureWindow | None = None
     airlines: list[IataAirlineCode] | None = None
     max_results: int = Field(default=20, ge=1, le=50)
 
@@ -102,6 +106,18 @@ class SearchFlightsInput(BaseModel):
             )
         return self
 
+    @model_validator(mode="after")
+    def _inbound_window_end_after_start(self) -> "SearchFlightsInput":
+        if self.inbound_window is None:
+            return self
+        start_str, end_str = self.inbound_window.split("-")
+        start, end = int(start_str), int(end_str)
+        if end <= start:
+            raise ValueError(
+                f"inbound_window end hour ({end}) must be after start hour ({start})"
+            )
+        return self
+
 
 class Segment(BaseModel):
     airline: IataAirlineCode
@@ -138,3 +154,78 @@ class FlightOffer(BaseModel):
 
 class SearchFlightsResult(BaseModel):
     results: list[FlightOffer]
+
+
+# ----- search_cheapest_dates: date-flex grid input/output --------------------
+
+
+class SearchCheapestDatesInput(BaseModel):
+    """Input contract for the date-flex tool.
+
+    `start_date` and `end_date` bracket the range of acceptable DEPARTURE
+    dates. For round-trip, `trip_duration` (days) determines each candidate
+    return date — fli's SearchDates returns (departure, departure+duration)
+    pairs across the window. For one-way, return_date in the output is null.
+    """
+    origin: IataCode
+    destination: IataCode
+    start_date: IsoDate
+    end_date: IsoDate
+    # 365-day cap is a typo guardrail (someone types 3000 instead of 30),
+    # not a product opinion on how long a trip should be.
+    trip_duration: int | None = Field(default=None, ge=1, le=365)
+    is_round_trip: bool = False
+    passengers: int = Field(default=1, ge=1, le=9)
+    cabin_class: CabinClass = CabinClass.ECONOMY
+    max_stops: MaxStops = MaxStops.ANY
+    departure_window: DepartureWindow | None = None
+    airlines: list[IataAirlineCode] | None = None
+
+    @field_validator("start_date")
+    @classmethod
+    def _start_not_in_past(cls, v: str) -> str:
+        d = date.fromisoformat(v)
+        today_utc = datetime.now(tz=timezone.utc).date()
+        if d < today_utc:
+            raise ValueError(f"start_date {v} is before today (UTC) {today_utc.isoformat()}")
+        return v
+
+    @model_validator(mode="after")
+    def _end_after_start(self) -> "SearchCheapestDatesInput":
+        s = date.fromisoformat(self.start_date)
+        e = date.fromisoformat(self.end_date)
+        if e < s:
+            raise ValueError(f"end_date {self.end_date} is before start_date {self.start_date}")
+        return self
+
+    @model_validator(mode="after")
+    def _round_trip_requires_duration(self) -> "SearchCheapestDatesInput":
+        if self.is_round_trip and self.trip_duration is None:
+            raise ValueError(
+                "trip_duration is required when is_round_trip is true "
+                "(e.g. trip_duration=11 for a 1.5-week trip)"
+            )
+        return self
+
+    @model_validator(mode="after")
+    def _departure_window_end_after_start(self) -> "SearchCheapestDatesInput":
+        if self.departure_window is None:
+            return self
+        start_str, end_str = self.departure_window.split("-")
+        if int(end_str) <= int(start_str):
+            raise ValueError(
+                f"departure_window end hour must be after start hour, got {self.departure_window!r}"
+            )
+        return self
+
+
+class DatePriceOffer(BaseModel):
+    """One (departure_date, return_date_or_null, price) entry in the date grid."""
+    departure_date: IsoDate
+    return_date: IsoDate | None
+    price: float
+    currency: IsoCurrency
+
+
+class SearchCheapestDatesResult(BaseModel):
+    results: list[DatePriceOffer]

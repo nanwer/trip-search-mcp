@@ -9,6 +9,7 @@ from flights_mcp.fli_backend.normalize import (
     _compute_offer_id,
     _iso_duration,
     booking_url_for,
+    build_date_offers,
     build_offers,
 )
 from flights_mcp.models import CabinClass
@@ -196,3 +197,114 @@ def test_fli_only_nulls_carry_through(fli_one_way):
     assert offer.last_ticketing_date is None
     assert offer.seats_available is None
     assert offer.fare_basis == ""
+
+
+# ----- inbound_window post-filter -------------------------------------------
+
+
+def test_inbound_window_keeps_in_range_offers(fli_round_trip):
+    """Fixture inbound first-segment departures: entry[0]=20:30 (hour 20),
+    entry[1]=19:00 (hour 19). Window 6-19 keeps hour 19, drops hour 20."""
+    offers = build_offers(
+        fli_round_trip,
+        cabin=CabinClass.ECONOMY, adults=1,
+        booking_url="x",
+        departure_date="2026-05-18", return_date="2026-05-29",
+        limit=20,
+        inbound_window="6-19",
+    )
+    assert len(offers) == 1
+    seg = offers[0].inbound.segments[0]
+    assert seg.departure_time_local.startswith("2026-05-29T19:00")
+
+
+def test_inbound_window_inclusive_upper_bound(fli_round_trip):
+    """Window 6-20 INCLUDES hour 20 (inclusive bounds), so both entries match."""
+    offers = build_offers(
+        fli_round_trip,
+        cabin=CabinClass.ECONOMY, adults=1,
+        booking_url="x",
+        departure_date="2026-05-18", return_date="2026-05-29",
+        limit=20,
+        inbound_window="6-20",
+    )
+    assert len(offers) == 2
+
+
+def test_inbound_window_can_filter_everything(fli_round_trip):
+    """Tight window that excludes all inbound times → empty list."""
+    offers = build_offers(
+        fli_round_trip,
+        cabin=CabinClass.ECONOMY, adults=1,
+        booking_url="x",
+        departure_date="2026-05-18", return_date="2026-05-29",
+        limit=20,
+        inbound_window="6-15",
+    )
+    assert offers == []
+
+
+def test_inbound_window_no_effect_on_one_way(fli_one_way):
+    """One-way offers have inbound=None and pass the filter trivially."""
+    offers = build_offers(
+        fli_one_way,
+        cabin=CabinClass.ECONOMY, adults=1,
+        booking_url="x",
+        departure_date="2026-05-18", return_date=None,
+        limit=20,
+        inbound_window="6-7",  # tight window that would block round-trip
+    )
+    assert len(offers) == 2
+
+
+def test_inbound_window_none_disables_filter(fli_round_trip):
+    """Passing None for inbound_window leaves all offers untouched."""
+    offers = build_offers(
+        fli_round_trip,
+        cabin=CabinClass.ECONOMY, adults=1,
+        booking_url="x",
+        departure_date="2026-05-18", return_date="2026-05-29",
+        limit=20,
+        inbound_window=None,
+    )
+    assert len(offers) == 2
+
+
+# ----- build_date_offers (Phase 2) ------------------------------------------
+
+
+def test_build_date_offers_from_fixture(fli_dates_flex):
+    """Fixture has 5 round-trip entries, unsorted by price."""
+    offers = build_date_offers(fli_dates_flex)
+    assert len(offers) == 5
+    # All round-trip → return_date populated.
+    for o in offers:
+        assert o.return_date is not None
+        assert o.currency == "EUR"
+    # Values should preserve fixture order, not sort.
+    departures = [o.departure_date for o in offers]
+    assert departures == ["2026-05-20", "2026-05-21", "2026-05-24", "2026-05-15", "2026-05-18"]
+
+
+def test_build_date_offers_one_way_has_null_return():
+    """One-way DatePrice entries have a 1-tuple date; return_date should be null."""
+    from datetime import datetime
+    from fli.search import DatePrice
+    entries = [
+        DatePrice(date=(datetime(2026, 5, 18),), price=300.0, currency="EUR"),
+    ]
+    offers = build_date_offers(entries)
+    assert len(offers) == 1
+    assert offers[0].departure_date == "2026-05-18"
+    assert offers[0].return_date is None
+
+
+def test_build_date_offers_currency_fallback():
+    """Some entries may have currency=None; fallback should kick in."""
+    from datetime import datetime
+    from fli.search import DatePrice
+    entries = [
+        DatePrice(date=(datetime(2026, 5, 18), datetime(2026, 5, 29)), price=540.0, currency=None),
+    ]
+    offers = build_date_offers(entries, currency_fallback="USD")
+    assert offers[0].currency == "USD"
