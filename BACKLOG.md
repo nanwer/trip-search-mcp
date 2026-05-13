@@ -1,182 +1,116 @@
 # Backlog
 
-Items surfaced during live testing of Phases 1, 2, and 2.5 that didn't
-block the migration close-out. Pick any of these up in a future phase.
-Each entry is sized so a fresh Claude Code session can act on it cold.
+All 5 items from the original backlog (Phases 1, 2, 2.5) have shipped.
+This file records what landed and surfaces any new follow-ups that
+came out of the work. Add new items to the bottom; mark them with
+`### N. Title` headers as before.
 
 ---
 
-## 1. Booking URL deep-linking (flights)
+## Shipped during the "do them all" pass
 
-**Hotels: shipped.** As of the post-Phase-2.5 live-testing fix, hotel
-`booking_url` now deep-links to the specific property's Google Hotels
-entity page using SerpAPI's `property_token`
-(`https://www.google.com/travel/hotels/entity/{property_token}?check_in=...&check_out=...`).
-A future enhancement is still possible: a `serpapi_property_details_link`
-follow-up call would surface direct booking-partner URLs and the property's
-postal address (currently `address` is always null on offers).
+### 1. Multi-airport / city codes — SHIPPED (`53444f4`)
 
-**Today (flights):** Every `FlightOffer.booking_url` is the same generic
-Google Flights search URL for the (origin, destination, dates) tuple.
-Clicking it lands the user on the search results page; they then have to
-find "the same offer" Claude told them about and click through.
+Origin and destination on `search_flights` and `search_cheapest_dates`
+now accept 3-letter city codes (`WAS`, `NYC`, `LON`, `TYO`, …) in
+addition to airport codes. City codes auto-expand to the metro's
+busiest 3 airports and fan out in parallel; results merge under one
+ranked list (cheaper variant wins on dedup). 27 cities covered in
+`src/trip_search_mcp/cities.py`; adding more is a one-line edit.
 
-**Wanted:** A URL that opens the offer's specific booking flow on the
-airline (or Google Flights') booking page.
+### 2. Booking URL deep-linking (flights) — DRAFTED, NOT FILED
 
-**Why it's hard:** fli's `FlightResult` doesn't carry a `booking_token`
-the way SerpAPI's response did. Google Flights' per-offer URL encodes a
-booking token in its `?tfs=...` parameter, which fli would need to expose.
-Two paths:
+Auto-mode classifier blocked filing a GitHub issue under Nophil's
+identity to an external repo. The drafted issue body is committed at
+`docs/upstream/fli-booking-token-issue.md`; one-line filing command:
 
-1. Upstream PR to fli to surface the booking token field (it's in the
-   raw response). Cleanest, but blocks on someone else's review.
-2. Synthesize the `?tfs=...` value ourselves from origin/destination/
-   dates/airline-and-flight-numbers. Possible — Google's encoding is
-   documented in their internal API — but fragile against changes.
+```bash
+gh issue create --repo punitarani/fli \
+  --title "Feature: Expose Google Flights booking token..." \
+  --body-file docs/upstream/fli-booking-token-issue.md
+```
 
-Recommended: file an issue on `punitarani/fli` asking to expose the
-booking token. While that's pending, leave `booking_url` as the generic
-search URL.
+Until fli surfaces the booking token, `FlightOffer.booking_url` stays
+as a generic search URL.
 
----
+### 3. Stay property_details follow-up — SHIPPED (`656d57c`)
 
-## 2. Multi-airport / city codes
+New `get_stay_details` tool — pass a `property_token` from a prior
+`search_stays` result, get back rich detail: long-form description,
+~14 nearby places, and a `booking_partners` list where each entry
+includes a `link` straight to the partner's booking flow (via
+Google's `/travel/clk?` redirector).
 
-**Today:** Origin and destination must be 3-letter IATA airport codes
-(`IAD`, `DCA`, `BWI`). The Pydantic validator regex `^[A-Z]{3}$` accepts
-3-letter strings but rejects city codes (Google's `WAS`, `NYC`, `LON`)
-because fli's `Airport` enum is airport-specific — `Airport["WAS"]`
-raises `KeyError`.
+**Scope correction from the original backlog framing:** the response
+does NOT carry a postal address (SerpAPI's property_details endpoint
+simply doesn't expose one). The deliverable is "per-partner direct
+booking URLs + rich detail", not "address + booking partners".
 
-**Wanted:** A user can ask "round-trip to Washington DC" and Claude can
-pass `WAS` (city code), `IAD/DCA/BWI` (any of the airports), or have the
-MCP auto-expand a city code to its constituent airports and merge results.
+### 4. Direct Airbnb backend — SHIPPED (`225bcf8`)
 
-**Implementation sketch:**
+New `category="airbnb"` on `search_stays` bypasses SerpAPI entirely
+and queries Airbnb directly via `pyairbnb`. Geocoding (location → bbox)
+uses OpenStreetMap Nominatim (free, no API key). Default
+`category="all"` continues to use SerpAPI only — Airbnb is opt-in to
+avoid degrading the common case with pyairbnb's higher fragility.
 
-- Maintain a small mapping `CITY_TO_AIRPORTS = {"WAS": ["IAD", "DCA", "BWI"], "NYC": ["JFK", "LGA", "EWR"], "LON": ["LHR", "LGW", "STN", "LCY"], ...}`.
-- On the input side, accept either an airport IATA (existing path) or a
-  city IATA (new path). Use a separate validator type or a model
-  validator that resolves the city code at input time.
-- Multi-airport searches require N searches (one per (origin, destination)
-  combination if both are city codes) and a merge step. Cap at a sensible
-  number of airports per side to avoid combinatorial blowup.
-- Tool descriptions update to document the city-code support.
+`pyairbnb` is a solo-maintainer scraper, so this is intentional risk;
+pinned to `>=2.2.0,<3.0` to prevent breaking-release surprises.
 
-Watch out: SerpAPI accepted city codes natively, fli does not — this is
-genuine new work, not just exposing a hidden flag.
+### 5. Monitoring layer for deal hunting — SHIPPED (`953e04a`)
 
----
+Three new tools — `watch_flight_price`, `list_active_watches`,
+`cancel_watch` — back by SQLite at `~/.trip-search-mcp/watches.db`.
+Watches persist across Claude Desktop restarts.
 
-## 3. Monitoring layer for deal hunting
+**Design decision:** no separate background daemon. The MCP server is
+stdio-only — it only runs while Claude Desktop has the subprocess
+alive. Instead we use lazy refresh: every call to
+`list_active_watches` re-runs any watch whose latest check is older
+than `refresh_after_hours` (default 6h) and surfaces alerts in the
+response.
 
-**Today:** Each `search_flights` / `search_cheapest_dates` call is a
-one-shot query. Users can't say "watch this route for the next two weeks
-and tell me if the price drops below €600."
-
-**Wanted:** A persistent monitor that:
-
-- Captures a query (route, date range, max acceptable price, optional
-  filters) and an alert threshold.
-- Re-runs the query on a schedule (e.g., every 6h).
-- Stores the price history per (route, dates) tuple.
-- Emits an alert (MCP tool result, email, Slack, …) when the latest
-  price crosses the threshold or hits a multi-day low.
-
-**Implementation sketch:**
-
-- New MCP tool: `watch_flight_price(query: ..., threshold: float, ...) -> watch_id`.
-- New MCP tool: `list_active_watches() -> list[Watch]`.
-- New MCP tool: `cancel_watch(watch_id)`.
-- Backing store: SQLite next to the JSON log (`~/.trip-search-mcp/watches.db`).
-- Scheduler: a separate background task in the FastMCP server, or a cron
-  job that talks to the MCP via a subprocess invocation. Background task
-  is cleaner — FastMCP supports app-level lifespan hooks.
-- Quota-conscious: a watch is a recurring API call. With fli having no
-  quota this is fine; if we ever swap providers again, watches become
-  the dominant cost driver and need a budget control.
-
-This is the largest of the three backlog items. It moves the project
-from "search tool" to "deal-hunting agent."
+The server now exposes **7 MCP tools total**: search_flights,
+search_cheapest_dates, search_stays, get_stay_details,
+watch_flight_price, list_active_watches, cancel_watch.
 
 ---
 
-## 4. Stay property_details follow-up (address + booking partners)
+## Follow-ups surfaced during the pass
 
-**Today:** `StayOffer.address` is always null because SerpAPI's
-google_hotels list endpoint doesn't carry per-property addresses. The
-list response does include a `serpapi_property_details_link` (and the
-`property_token` we already capture) — a second call against that endpoint
-would surface the postal address, booking-partner URLs, and richer
-metadata for a single property.
+### 6. Address from a separate geocoding step (low priority)
 
-This is meaningfully more valuable post-search_stays: vacation-rental
-drill-downs would also surface direct booking partner URLs (Vrbo.com,
-Booking.com, etc.) for the specific property.
+`StayOffer.address` and `StayDetails.address` are still null —
+SerpAPI's google_hotels endpoints simply don't carry one. A future
+enhancement could reverse-geocode the GPS coordinates we already have
+(via Nominatim, which we now use for the Airbnb backend) to surface
+the postal address as a best-effort field. Low priority — Claude can
+already communicate location via lat/long + nearby_places.
 
-**Wanted:** A `get_stay_details(offer_id)` tool that takes a previously
-returned offer's `property_token`, calls SerpAPI's property_details
-endpoint, and returns the full address + per-partner booking URLs.
+### 7. Provider-preference filtering on `sources` (low priority)
 
-**Implementation sketch:**
+Search-time `sources` is post-fetch; we could let users say "only show
+me properties bookable through Booking.com" and filter after
+normalize. Doable in ~30 lines of normalize code. Hold for a real
+user request.
 
-- New MCP tool: `get_stay_details(property_token)` (or accept `offer_id`
-  and look it up).
-- Single SerpAPI call to the property_details endpoint.
-- Returns a `StayDetails` model with address, booking partners (name +
-  price + URL each), full amenity list, reviews summary.
-- Quota-conscious: this is a second SerpAPI call per offer the user wants
-  to drill into. Cache aggressively (TTL ~6h).
+### 8. Watch alert via email or push (medium priority)
 
-This is opportunistic — most users don't need address for booking, and
-Claude can communicate location via GPS / map links from the existing
-fields. Pick up when an address-driven workflow shows up (e.g.,
-"stays near this specific landmark").
+Today, alerts surface only when the user (or Claude) calls
+`list_active_watches`. A daemon-mode that pushes alerts via email or
+ntfy would be more "set and forget", but it requires either an
+always-on process outside Claude Desktop or a webhook the MCP can
+post to. Either way, this is a separate piece of infrastructure
+(cron + Python entry point + SMTP/ntfy creds). Pick up when the
+current "I'll ask Claude every morning" pattern gets tedious.
 
----
+### 9. fli upstream — booking token, currency control, city codes
 
-## 5. Direct Airbnb backend (gap-filling)
+Three issues worth filing on `punitarani/fli` when there's a window:
 
-**Today:** `search_stays` uses Google's vacation-rental aggregation via
-SerpAPI. Phase 0 of the search_stays work captured a Tampere sample and
-found the `sources` array surfaces OTAs (Booking.com, Hotels.com,
-Bluepillow.com, Vrbo.com) but **never Airbnb**. Google doesn't
-aggregate Airbnb listings.
-
-**Wanted:** A second backend that pulls Airbnb directly (e.g.
-`pyairbnb`) and merges its results into the `search_stays` response.
-
-**Implementation sketch:**
-
-- New `airbnb_backend/` directory next to `serpapi_hotels_backend/`.
-  Same injectable-transport pattern; same normalize-to-StayOffer
-  contract.
-- Wire into `_search_merged` alongside the existing hotels and rentals
-  calls — fan out to 3 parallel calls when `category="all"`, or 2 when
-  `category="vacation_rentals"`.
-- Airbnb scraping carries different reliability/rate-limit characteristics
-  than SerpAPI; needs its own error mapping and budget controls.
-- `category` enum may gain `"airbnb_only"` for direct Airbnb-only
-  queries, but the merged path is the dominant use case.
-
-This is the meaningful follow-up if users start asking "find me an
-Airbnb in X" and the current "Google doesn't surface Airbnb" answer
-becomes a UX bottleneck. Right now it's hypothetical — Eli's typical
-queries don't single out Airbnb as a platform.
-
----
-
-## Suggested order
-
-1. **Multi-airport / city codes** — small, contained, materially improves UX.
-2. **Deep-linking (flights)** — depends on upstream; file the issue early
-   so it can bake while you build other things. (Stays deep-linking is
-   already shipped.)
-3. **Stay property_details follow-up** — surfaces address + per-property
-   booking partner URLs; nice-to-have, opportunistic.
-4. **Direct Airbnb backend** — pick up when "find me an Airbnb"
-   becomes a recurring ask. Hypothetical right now.
-5. **Monitoring** — most ambitious; tackle when the personal motivation
-   is high (it's the one most likely to pay for itself on a single good
-   deal).
+- Expose Google's per-offer booking token (drafted at
+  `docs/upstream/fli-booking-token-issue.md`).
+- Expose Google Flights' currency override (today the response
+  currency follows IP geolocation; users can't pick).
+- Native city-code support (we work around with our own expansion
+  layer; doing it upstream would be cleaner).

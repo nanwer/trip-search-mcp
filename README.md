@@ -1,22 +1,30 @@
 # trip-search-mcp
 
-**Let Claude search Google Flights and Google Hotels for you, in plain English.**
+**Let Claude plan trips for you, in plain English.** Flights, hotels,
+vacation rentals (including Airbnb), and persistent price watches —
+all from one chat.
 
 This is a small program that runs on your computer alongside Claude Desktop.
 Once it's set up, you can ask Claude things like:
 
 > *"Find me round-trip flights from Helsinki to Washington DC for May 18,
 > returning May 29. One stop or fewer. Cheapest first."*
+> *(Tip: just say "Washington DC" — Claude expands it to IAD/DCA/BWI in parallel.)*
 
 > *"What's the cheapest week to fly from London to Tokyo in March for a
 > 10-day trip?"*
 
-> *"Find hotels in Tampere from June 15 to 18, 2 adults, at least 4 stars,
-> with pool and wifi. Cheapest first."*
+> *"Find me a place to stay in Tampere from June 15 to 18, 2 adults, at
+> least 4 stars or strong reviews, with pool and wifi. Cheapest first."*
+
+> *"Find me an Airbnb in Lisbon for 4 nights from October 12, 2 bedrooms minimum."*
+
+> *"Watch flights HEL → IAD on May 18 and tell me if it drops below €600."*
+> *(Later: "any deals?" — Claude re-runs all your watches and reports alerts.)*
 
 Claude does the search live (no stale data), summarizes the results, and
-gives you a clickable link to Google Flights / Google Hotels so you can
-actually book.
+gives you clickable booking links. Seven tools total — see "What can I
+ask?" below for the full set.
 
 ---
 
@@ -164,10 +172,16 @@ window isn't enough — the program keeps running in the background.
 
 Open a new chat in Claude Desktop. Click the **hammer / tools icon** at
 the bottom of the message box. You should see `trip-search` listed with
-two tools (three if you set up hotels later):
+**six tools without a SerpAPI key, seven with one**:
 
-- `search_flights`
-- `search_cheapest_dates`
+- `search_flights` — specific-date flight search
+- `search_cheapest_dates` — flexible-date price grid
+- `search_stays` — hotels + vacation rentals (needs SERPAPI_KEY)
+- `search_stays` with `category="airbnb"` — direct Airbnb (no key needed!)
+- `get_stay_details` — drill into one property (needs SERPAPI_KEY)
+- `watch_flight_price` — register a price watch
+- `list_active_watches` — see active watches + alerts
+- `cancel_watch` — stop watching
 
 Now ask:
 
@@ -290,6 +304,32 @@ and adapt to your trip.
 
 > *"Family hotel in Orlando from July 5–12: 2 adults, 2 kids, one room."*
 
+### Airbnb specifically (uses `search_stays` with `category="airbnb"`)
+
+> *"Find me an Airbnb in Lisbon for 4 nights from October 12, 2 bedrooms minimum."*
+
+> *"What's on Airbnb near Tampere June 15–18, sleeps 6 or more, under €200/night?"*
+
+### Deal hunting (uses `watch_flight_price` + `list_active_watches`)
+
+> *"Watch flights from HEL to IAD on May 18 and tell me if it drops below €600."* → registers a watch
+
+> *"Any deals on my watches yet?"* → re-runs all active watches and reports alerts
+
+> *"Show me everything I've cooked up, including the ones I cancelled."* → `list_active_watches(include_cancelled=true)`
+
+> *"Cancel the Lisbon watch."* → finds it via `list_active_watches`, then `cancel_watch(watch_id=...)`
+
+### Drilling into one stay (uses `get_stay_details`)
+
+> *"Tell me more about [hotel name] — what's nearby, and which sites are offering it?"* → Claude pulls the `property_token` from the prior `search_stays` result and calls `get_stay_details`
+
+### City codes (uses `search_flights` with city → airport expansion)
+
+> *"Round-trip to Washington DC for May 18, return May 29."* → `origin="HEL"`, `destination="WAS"` (auto-expands to IAD, DCA, BWI in parallel)
+
+> *"Cheapest week to fly from NYC to LON in March, 10-night trip."* → date-flex grid across 3×3 = 9 airport pairs
+
 ### Trip planning (combining flights + stays)
 
 > *"I want to spend two weeks in Lisbon. When's the cheapest time to go
@@ -343,7 +383,7 @@ If you want to read the code, extend the tools, or run the test suite:
 Run the test suite:
 
 ```bash
-.venv/bin/pytest -q          # 219 tests, all fixture-driven, no live API calls
+.venv/bin/pytest -q          # 258 tests, all fixture-driven, no live API calls
 ```
 
 Capture fresh real-data fixtures (uses live APIs):
@@ -364,7 +404,7 @@ version for humans.
 
 | Parameter | Default | Notes |
 |---|---|---|
-| `origin` | required | 3-letter IATA airport code (`HEL`, `JFK`). |
+| `origin` | required | 3-letter IATA **airport** code (`HEL`, `JFK`) OR **city** code (`WAS`, `NYC`, `LON`, …). City codes expand to the metro's busiest 3 airports and fan out in parallel. |
 | `destination` | required | Same format as origin. |
 | `departure_date` | required | `YYYY-MM-DD`. Today (UTC) or later. |
 | `return_date` | optional | Omit for one-way. |
@@ -376,13 +416,20 @@ version for humans.
 | `departure_window` | none | `"HH-HH"` 24-hour local time, e.g. `"8-20"`. Outbound leg only. Inclusive of start hour, exclusive of end (`"8-20"` matches 08:00–19:59). |
 | `inbound_window` | none | Same format, applied to the return leg. |
 | `airlines` | none | List of IATA airline codes, e.g. `["AY", "FI"]`. Inclusion-only — matches offers where at least one segment is operated by one of these carriers. |
-| `max_results` | 20 | 1–50. |
+| `max_results` | 20 | 1–50. Applies to the merged result across all expanded airport pairs. |
+
+**City codes supported:** `NYC`, `WAS`, `CHI`, `DFW`, `HOU`, `MIA`,
+`QLA` (LA), `SFO`, `YTO`, `YMQ`, `BOS`, `LON`, `PAR`, `BER`, `MIL`,
+`ROM`, `STO`, `MOW`, `IST`, `TYO`, `OSA`, `SEL`, `BJS`, `SHA`, `TPE`,
+`JNB`, `BUE`, `RIO`, `SAO`, `DUB`, `MEL`, `SYD`, `HEL`. Each expands
+to its constituent airport list (max 3). See `cities.py` for the
+full map.
 
 ### `search_cheapest_dates`
 
 | Parameter | Default | Notes |
 |---|---|---|
-| `origin` | required | 3-letter IATA airport code. |
+| `origin` | required | 3-letter IATA airport code OR city code (same expansion as `search_flights`). |
 | `destination` | required | Same format as origin. |
 | `start_date` | required | Earliest acceptable departure date. |
 | `end_date` | required | Latest acceptable departure date. |
@@ -408,7 +455,7 @@ Covers both hotels AND vacation rentals. Default `category="all"` makes
 | `adults` | 2 | 1–10. |
 | `children` | 0 | 0–10. |
 | `rooms` | 1 | 1–10. |
-| `category` | `"all"` | `"all"` / `"hotels"` / `"vacation_rentals"`. `"all"` costs 2 SerpAPI calls per query. |
+| `category` | `"all"` | `"all"` / `"hotels"` / `"vacation_rentals"` / `"airbnb"`. `"all"` costs 2 SerpAPI calls per query. `"airbnb"` bypasses SerpAPI and hits Airbnb directly (no API key, but slower + more fragile). |
 | `min_rating` | none | Star rating 1–5. **Hotels-only filter.** Vacation rentals pass through unfiltered (they have no hotel class). |
 | `min_bedrooms` | none | **Vacation-rental-only filter.** Hotels pass through. |
 | `min_bathrooms` | none | Same scoping as `min_bedrooms`. |
@@ -442,6 +489,46 @@ The success envelope is `{"results": [...], "warnings": [...]}`.
 `category="all"` and one of the two SerpAPI calls fails but the other
 succeeds).
 
+### `get_stay_details` *(requires `SERPAPI_KEY`)*
+
+Drill into one stay (hotel or vacation rental) using a `property_token`
+from a prior `search_stays` result. Returns long-form description, full
+booking-partner list with direct booking-flow URLs, and ~14
+`nearby_places`.
+
+| Parameter | Default | Notes |
+|---|---|---|
+| `property_token` | required | Copy from any offer in a `search_stays` response. |
+| `check_in_date` / `check_out_date` | required | Same constraints as `search_stays`. |
+| `adults` | 2 | 1–10. |
+| `currency` | `EUR` | ISO 4217. |
+
+**`address` is NOT in the response.** Use the lat/long plus the
+`nearby_places` list for location signal.
+
+### `watch_flight_price`, `list_active_watches`, `cancel_watch`
+
+Deal-hunting layer. Register a price threshold for a route; ask later
+("any deals?") to refresh the watch and surface alerts when the price
+drops to or below the threshold.
+
+Watches live in SQLite at `~/.trip-search-mcp/watches.db` and persist
+across Claude Desktop restarts. Refresh is **lazy**: a call to
+`list_active_watches` re-runs any watch whose latest check is older
+than `refresh_after_hours` (default 6h). No background daemon.
+
+| Tool | Inputs | Returns |
+|---|---|---|
+| `watch_flight_price` | route + departure_date (+ optional return_date) + `threshold_price` + `currency` (+ optional `note`) | `watch_id` (12 hex chars) + confirmation message |
+| `list_active_watches` | `refresh_after_hours` (default `6.0`), `include_cancelled` (default `false`) | list of watches with `last_price`, `gap` (last_price - threshold), `status` (`active` / `alerted`), `last_checked_at` |
+| `cancel_watch` | `watch_id` | `{watch_id, status: "cancelled"}` |
+
+A watch's `status` flips from `active` → `alerted` the first time its
+refresh observes a price ≤ threshold. `alerted_at` records when it
+fired. Cancelled watches stay in the DB (so the user can recall what
+they cancelled) but are filtered out of the default
+`list_active_watches` response.
+
 ### Errors
 
 Every tool returns either a success envelope on success, or an error
@@ -452,8 +539,8 @@ envelope on failure:
 ```
 
 Codes: `invalid_input`, `no_results`, `rate_limited`, `upstream_error`,
-`auth_failed` (the last only fires from `search_stays` when
-`SERPAPI_KEY` is missing or rejected).
+`auth_failed` (the last only fires from `search_stays` /
+`get_stay_details` when `SERPAPI_KEY` is missing or rejected).
 
 ---
 

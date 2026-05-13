@@ -90,8 +90,29 @@ doesn't exist wastes the user's time and breeds wrong fixes.
   `test_stays_merge.py::test_min_bedrooms_routed_only_to_rentals_request`.
 - Google's vacation-rental aggregation does NOT include Airbnb. The
   `sources` field surfaces OTAs (Booking.com, Hotels.com, Vrbo.com,
-  Bluepillow.com). If a user asks for "Airbnb" specifically, explain
-  the limitation rather than promising it.
+  Bluepillow.com). **For Airbnb specifically, use `category="airbnb"`
+  on `search_stays`** — it bypasses SerpAPI and hits Airbnb directly
+  via the pyairbnb library. Default `category="all"` continues to use
+  SerpAPI only (Airbnb is opt-in to avoid degrading the common case
+  with pyairbnb's higher fragility).
+- City codes (`WAS`, `NYC`, `LON`, …) work on `search_flights` and
+  `search_cheapest_dates` — the tools auto-expand them to constituent
+  airports (capped at 3 per side) and fan out in parallel. The map
+  lives in `src/trip_search_mcp/cities.py`; adding cities is a
+  one-line edit.
+- The deal-hunting tools (`watch_flight_price`, `list_active_watches`,
+  `cancel_watch`) persist to SQLite at
+  `~/.trip-search-mcp/watches.db`. **No background daemon** —
+  `list_active_watches` lazy-refreshes any watch whose latest check is
+  older than `refresh_after_hours` (default 6h). If you find yourself
+  wanting an always-on scheduler, see BACKLOG.md #8 — it's a
+  deliberate non-feature for now because the MCP server isn't
+  always-on either.
+- `get_stay_details` is the property-details follow-up tool. It costs
+  1 SerpAPI quota per call (NOT cached across `(token, dates)` tuples
+  for very long — TTLCache default 5 min). Use it sparingly; surface
+  the `booking_partners` array prominently in card rendering since
+  those are the direct booking-flow links.
 
 ## Useful repo entry points
 
