@@ -75,7 +75,23 @@ complete — re-run the previous command and read the output.
 
 ---
 
-## Step 3 — Connect to Claude
+## Step 3 — (optional) Get a SerpAPI key for hotels
+
+The flight tools (`search_flights`, `search_cheapest_dates`) need no API
+keys. **The hotel tool (`search_hotels`) needs a free SerpAPI key.** If
+you only care about flights, skip this step entirely; the server starts
+fine without one and `search_hotels` will surface a clear "set
+SERPAPI_KEY" message if anyone calls it.
+
+To enable hotels:
+
+1. Sign up at <https://serpapi.com>. Free tier gives 100 searches/month.
+2. Copy your key from <https://serpapi.com/manage-api-key>.
+3. You'll paste it into the MCP client config in the next step.
+
+---
+
+## Step 4 — Connect to Claude
 
 ### Claude Desktop (macOS)
 
@@ -94,7 +110,9 @@ echo '{}' > "$HOME/Library/Application Support/Claude/claude_desktop_config.json
 
 Add a `mcpServers` entry. If you already have other MCP servers, just add
 `flights` alongside them (don't forget to put a comma after the previous
-entry). Replace the path marked `# CHANGE THIS`:
+entry).
+
+**Flights-only (no hotels):**
 
 ```json
 {
@@ -102,6 +120,22 @@ entry). Replace the path marked `# CHANGE THIS`:
     "flights": {
       "command": "/ABSOLUTE/PATH/TO/flights-mcp/.venv/bin/python",
       "args": ["-m", "flights_mcp.server"]
+    }
+  }
+}
+```
+
+**With hotels enabled:** add the `env` block with your SerpAPI key.
+
+```json
+{
+  "mcpServers": {
+    "flights": {
+      "command": "/ABSOLUTE/PATH/TO/flights-mcp/.venv/bin/python",
+      "args": ["-m", "flights_mcp.server"],
+      "env": {
+        "SERPAPI_KEY": "paste-your-serpapi-key-here"
+      }
     }
   }
 }
@@ -124,14 +158,18 @@ the window isn't enough.
 Same shape, different path. Open
 `%APPDATA%\Claude\claude_desktop_config.json` in a text editor and add the
 same `mcpServers.flights` block. Replace the path with your actual install
-location, using Windows backslashes:
+location, using Windows backslashes. Use the same `env` block to enable
+hotels.
 
 ```json
 {
   "mcpServers": {
     "flights": {
       "command": "C:\\path\\to\\flights-mcp\\.venv\\Scripts\\python.exe",
-      "args": ["-m", "flights_mcp.server"]
+      "args": ["-m", "flights_mcp.server"],
+      "env": {
+        "SERPAPI_KEY": "paste-your-serpapi-key-here"
+      }
     }
   }
 }
@@ -139,46 +177,76 @@ location, using Windows backslashes:
 
 ### Claude Code (CLI)
 
+Flights-only:
+
 ```bash
 claude mcp add flights \
   -- /ABSOLUTE/PATH/TO/flights-mcp/.venv/bin/python -m flights_mcp.server
 ```
 
-Then `claude` to start a session; the tool is available.
+With hotels enabled:
+
+```bash
+claude mcp add flights \
+  --env SERPAPI_KEY=paste-your-serpapi-key-here \
+  -- /ABSOLUTE/PATH/TO/flights-mcp/.venv/bin/python -m flights_mcp.server
+```
+
+Then `claude` to start a session; the tools are available.
 
 ### Other clients
 
 Any MCP client that supports the stdio transport. Use:
 - **Command:** `/ABSOLUTE/PATH/TO/flights-mcp/.venv/bin/python`
 - **Arguments:** `-m flights_mcp.server`
+- **Environment (optional):** `SERPAPI_KEY=<your-key>` to enable `search_hotels`.
 
 ---
 
-## Step 4 — Use it
+## Step 5 — Use it
 
 Start a new chat. Click the hammer/tools icon at the bottom of the message
-input. You should see `flights` listed with one tool: `search_flights`.
+input. You should see `flights` with up to **three tools**:
+
+- `search_flights` — specific-date flight search (always available)
+- `search_cheapest_dates` — date-flex price grid (always available)
+- `search_hotels` — Google Hotels search (only useful if you set SERPAPI_KEY)
 
 Ask Claude in plain English:
 
-> Find me round-trip flights from Helsinki to Washington DC for May 18
-> returning May 29, 1 adult, in economy. Summarize the cheapest options.
+> **Flights:**
+> "Find me round-trip flights from Helsinki to Washington DC for May 18
+> returning May 29, 1 adult, in economy. Summarize the cheapest options."
+>
+> **Date-flex:**
+> "What's the cheapest week to go from London to Tokyo in March for a
+> 10-day trip?"
+>
+> **Hotels (requires SERPAPI_KEY):**
+> "Find me hotels in Tampere from June 15 to June 18, 2 adults, at least
+> 4 stars, with pool and wifi, cheapest first."
 
-Claude calls the tool (you'll see a "Running search_flights..." indicator),
-waits ~10 seconds for Google Flights to respond, and writes you a summary
-with a clickable "Book on Google Flights" link per offer.
+Claude picks the right tool, waits a few seconds for the response, and
+writes you a summary with a clickable "Book on Google Flights" /
+"Book on Google Hotels" link per offer.
 
 ---
 
 ## Troubleshooting
 
-### The `flights` tool doesn't appear in Claude Desktop's tools menu
+### The `flights` server doesn't appear in Claude Desktop's tools menu
 
 1. Did you fully quit Claude Desktop with ⌘Q? Closing the window keeps the
    process running with the old config.
 2. Is the `command` field an absolute path? Relative paths fail silently.
 3. Open the Claude Desktop log: `~/Library/Logs/Claude/mcp*.log`. Look for a
    line like `flights: stdio process exited with code X` and a traceback.
+
+### `search_hotels` returns `auth_failed` ("SERPAPI_KEY is not set")
+
+The server started without a SerpAPI key. Add the `env` block to your
+Claude Desktop config (see Step 4) with `SERPAPI_KEY` set, then ⌘Q +
+reopen Claude Desktop. The flight tools keep working regardless.
 
 ### Searches time out for 4+ minutes (or hang silently) after pulling new code
 

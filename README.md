@@ -117,6 +117,14 @@ tools when you give it a trip-planning problem.
 >
 > **Claude:** Calls `search_flights` twice (origin → HEL, HEL → NRT or similar), summarizes the multi-leg plan.
 
+> **You:** *"I want to spend 3 nights in Tampere in June. Find me a flight and a hotel — keep the hotel cheap but at least 4 stars."*
+>
+> **Claude:**
+> 1. Calls `search_flights` for your origin → TMP / HEL with the dates you mention.
+> 2. Calls `search_hotels(location="Tampere", check_in_date=..., check_out_date=..., min_rating=4, sort_by="PRICE_LOW")`.
+> 3. Returns a combined plan: cheapest flight option + cheapest 4-star hotel + total trip cost.
+> 4. (Requires `SERPAPI_KEY` configured. Without it, Claude still finds the flight and clearly says "hotel search isn't enabled — set SERPAPI_KEY to add hotels.")
+
 ### Things this MCP does NOT do (yet)
 
 - **Booking.** Every offer returns a `booking_url` pointing at Google Flights' search page; click through and complete the booking with the airline or an OTA.
