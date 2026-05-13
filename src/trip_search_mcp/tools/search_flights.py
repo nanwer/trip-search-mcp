@@ -164,8 +164,6 @@ async def _search_with_city_expansion(
     For the common case (both sides are airport codes), this collapses
     to a single client.search() — same as the pre-expansion path.
     """
-    import asyncio
-
     origins = expand_to_airports(params.origin)
     dests = expand_to_airports(params.destination)
     pairs = [(o, d) for o in origins for d in dests if o != d]
@@ -180,14 +178,20 @@ async def _search_with_city_expansion(
         sub = params.model_copy(update={"origin": pairs[0][0], "destination": pairs[0][1]})
         return await client.search(sub)
 
-    # Multi-airport fanout. Build a copy of params for each pair, fire
-    # them in parallel with return_exceptions=True so one bad pair doesn't
-    # tank the others.
-    tasks = []
+    # Multi-airport fanout. We tried full parallel (asyncio.gather over
+    # all pairs) but a 3×1 fanout against Google triggered fli's retry-
+    # with-backoff loop on every pair, blowing a single search out to
+    # 150+ seconds. Sequential calls keep each one in the normal 5-10s
+    # range. The serial fanout is bounded by MAX_AIRPORTS_PER_SIDE × 2
+    # (= 9 worst case) so it stays under a comfortable 90s ceiling.
+    results: list = []
     for o, d in pairs:
         sub = params.model_copy(update={"origin": o, "destination": d})
-        tasks.append(client.search(sub))
-    results = await asyncio.gather(*tasks, return_exceptions=True)
+        try:
+            res = await client.search(sub)
+        except BaseException as exc:  # noqa: BLE001 — preserve to filter below
+            res = exc
+        results.append(res)
 
     all_offers: list = []
     last_error: ToolError | None = None

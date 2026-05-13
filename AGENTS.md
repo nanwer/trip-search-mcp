@@ -113,6 +113,25 @@ doesn't exist wastes the user's time and breeds wrong fixes.
   for very long — TTLCache default 5 min). Use it sparingly; surface
   the `booking_partners` array prominently in card rendering since
   those are the direct booking-flow links.
+- **City-expansion fanout is SERIAL, not parallel.** Earlier code used
+  `asyncio.gather` to fan out `WAS → IAD/DCA/BWI` searches in parallel.
+  That triggered Google's rate limiter, fli retried with backoff on
+  every pair, and search latency blew up to 150+ seconds per query.
+  The current code calls each pair sequentially — bounded by
+  `MAX_AIRPORTS_PER_SIDE × MAX_AIRPORTS_PER_SIDE = 9` worst case at
+  ~5-10s each = ~50-90s ceiling. If you ever want parallel fanout
+  back, gate it with `asyncio.Semaphore(1)` first and measure.
+- **All sqlite3 calls in the monitoring layer go through
+  `asyncio.to_thread`.** Calling sync sqlite from an async function
+  technically works but blocks the event loop. After a heavy fli
+  fanout (which uses the default thread executor), sync sqlite calls
+  can deadlock-look in production for 4+ minutes. Don't unwrap them.
+- **Stale subprocess gotcha:** Claude Desktop occasionally fails to
+  kill the old MCP subprocess on ⌘Q + reopen, leaving two subprocesses
+  running. Symptom: tools return correctly via one path but time out
+  via another. Diagnostic: `pgrep -f trip_search_mcp.server` — should
+  be exactly 2 PIDs (the disclaimer wrapper + the actual Python).
+  Fix: `pkill -f trip_search_mcp.server` then ⌘Q + reopen.
 
 ## Useful repo entry points
 

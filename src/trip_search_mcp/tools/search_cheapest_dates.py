@@ -147,8 +147,6 @@ async def _search_dates_with_city_expansion(client: FliClient, params):
     For the common case (both sides are airport codes), this collapses
     to a single client.search_dates() — same as the pre-expansion path.
     """
-    import asyncio
-
     origins = expand_to_airports(params.origin)
     dests = expand_to_airports(params.destination)
     pairs = [(o, d) for o in origins for d in dests if o != d]
@@ -158,11 +156,18 @@ async def _search_dates_with_city_expansion(client: FliClient, params):
         sub = params.model_copy(update={"origin": pairs[0][0], "destination": pairs[0][1]})
         return await client.search_dates(sub)
 
-    tasks = []
+    # Serial (not parallel) — see comment in search_flights's analogue.
+    # Parallel fanout triggers Google rate-limit retries that blow per-pair
+    # latency from 5-10s up to 50s+. Sequential keeps each pair's call
+    # in the normal range; worst case 3×3=9 calls bounded under ~90s.
+    results: list = []
     for o, d in pairs:
         sub = params.model_copy(update={"origin": o, "destination": d})
-        tasks.append(client.search_dates(sub))
-    results = await asyncio.gather(*tasks, return_exceptions=True)
+        try:
+            res = await client.search_dates(sub)
+        except BaseException as exc:  # noqa: BLE001 — preserve to filter below
+            res = exc
+        results.append(res)
 
     all_offers: list = []
     last_error: ToolError | None = None

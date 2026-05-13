@@ -7,6 +7,7 @@ gets re-run against fli. Watches whose new price ≤ threshold flip to
 """
 from __future__ import annotations
 
+import asyncio
 import logging
 from typing import Any
 
@@ -72,7 +73,7 @@ async def list_active_watches(
     refresh_after_hours: float = 6.0,
     include_cancelled: bool = False,
 ) -> dict[str, Any]:
-    db.init_db()
+    await asyncio.to_thread(db.init_db)
     # Refresh stale active watches first so the snapshot we return is fresh.
     try:
         refreshed = await refresh.maybe_refresh_all(
@@ -85,11 +86,12 @@ async def list_active_watches(
         # return whatever we have on disk.
         refreshed = 0
 
-    rows = db.list_watches(status=None) if include_cancelled else db.list_watches(status="active")
-    # The status='active' filter excludes 'alerted'; for the user-facing
-    # list we WANT alerted watches surfaced. Re-fetch with alerted union.
-    if not include_cancelled:
-        alerted = db.list_watches(status="alerted")
+    if include_cancelled:
+        rows = await asyncio.to_thread(db.list_watches, status=None)
+    else:
+        rows = await asyncio.to_thread(db.list_watches, status="active")
+        # status='active' excludes 'alerted'; surface alerted watches too.
+        alerted = await asyncio.to_thread(db.list_watches, status="alerted")
         rows = list(rows) + list(alerted)
 
     formatted = [_format_watch(r) for r in rows]

@@ -6,6 +6,7 @@ when the user (or Claude) calls `list_active_watches`.
 """
 from __future__ import annotations
 
+import asyncio
 import logging
 from typing import Any
 
@@ -82,9 +83,13 @@ async def watch_flight_price(
             retryable=False,
         )
 
-    # Ensure schema exists before insert.
-    db.init_db()
-    watch_id = db.create_watch(
+    # Ensure schema exists before insert. sqlite3 calls are synchronous,
+    # so we run them via asyncio.to_thread to avoid blocking the FastMCP
+    # event loop — particularly important right after a heavy fli search
+    # that already used the default thread executor.
+    await asyncio.to_thread(db.init_db)
+    watch_id = await asyncio.to_thread(
+        db.create_watch,
         origin=params.origin,
         destination=params.destination,
         departure_date=params.departure_date,

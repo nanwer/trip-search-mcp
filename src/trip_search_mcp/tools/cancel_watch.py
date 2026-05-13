@@ -1,6 +1,7 @@
 """`cancel_watch` — stop monitoring a specific watch."""
 from __future__ import annotations
 
+import asyncio
 import logging
 from typing import Any
 
@@ -23,12 +24,12 @@ _logger = logging.getLogger("trip_search_mcp")
 
 
 async def cancel_watch(*, watch_id: str) -> dict[str, Any]:
-    db.init_db()
     if not isinstance(watch_id, str) or not watch_id.strip():
         return error_response(
             ErrorCode.INVALID_INPUT, "watch_id is required.", retryable=False,
         )
-    existing = db.get_watch(watch_id)
+    await asyncio.to_thread(db.init_db)
+    existing = await asyncio.to_thread(db.get_watch, watch_id)
     if existing is None:
         return error_response(
             ErrorCode.NO_RESULTS,
@@ -37,7 +38,7 @@ async def cancel_watch(*, watch_id: str) -> dict[str, Any]:
         )
     if existing["status"] == "cancelled":
         return {"watch_id": watch_id, "status": "already_cancelled"}
-    updated = db.cancel_watch(watch_id)
+    updated = await asyncio.to_thread(db.cancel_watch, watch_id)
     if not updated:
         # Race condition with a parallel cancel; treat as already-cancelled.
         return {"watch_id": watch_id, "status": "already_cancelled"}

@@ -192,7 +192,7 @@ Hotels and vacation-rental search use [SerpAPI](https://serpapi.com) — free ti
 |---|---|
 | The `trip-search` server doesn't appear in Claude's tools menu | You forgot to fully quit. ⌘Q (or quit from the system tray on Windows), then reopen. |
 | `search_stays` says "SERPAPI_KEY is not set" | The `env` block is missing or you reopened Claude before saving the config. Re-check step 8, then ⌘Q + reopen. |
-| Claude says "the tool call timed out" | The MCP subprocess is stuck on stale code. Run `pkill -f trip_search_mcp` (macOS/Linux) or End Task on every `Claude` process in Task Manager (Windows), then ⌘Q + reopen. |
+| Claude says "the tool call timed out" | A previous Claude Desktop quit may have left a stale MCP subprocess running. Run `pgrep -f trip_search_mcp` — if more than 2 PIDs show up, run `pkill -f trip_search_mcp.server` (macOS/Linux) or End Task on every `Claude` process in Task Manager (Windows), then ⌘Q + reopen. |
 | `ModuleNotFoundError: No module named 'trip_search_mcp'` | The `command` path in your config points to the wrong Python. Re-run step 4 and paste that exact path. |
 | Airbnb search returns an `upstream_error` | Airbnb sometimes pushes back on scraping during high traffic. Wait a few minutes and retry. If it keeps failing, [pyairbnb](https://github.com/johnbalvin/pyairbnb) may need a release. |
 

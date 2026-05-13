@@ -13,6 +13,7 @@ and the normalize layer.
 """
 from __future__ import annotations
 
+import asyncio
 import logging
 from datetime import datetime, timedelta, timezone
 
@@ -83,7 +84,7 @@ async def maybe_refresh_all(
 
     Errors on individual watches are logged and skipped — one watch's
     bad route doesn't poison the rest."""
-    watches = db.list_watches(status="active")
+    watches = await asyncio.to_thread(db.list_watches, status="active")
     refreshed = 0
     for watch in watches:
         if not _is_stale(watch["last_checked_at"], refresh_after_hours):
@@ -93,7 +94,8 @@ async def maybe_refresh_all(
             # Don't update last_checked_at on hard failure — we want to
             # retry next time. Soft-skip.
             continue
-        db.record_check(
+        await asyncio.to_thread(
+            db.record_check,
             watch["watch_id"],
             price=price,
             currency=currency,
