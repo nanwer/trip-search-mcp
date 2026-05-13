@@ -200,16 +200,62 @@ Hotels and vacation-rental search use [SerpAPI](https://serpapi.com) — free ti
 
 ---
 
-## After a `git pull` for updates
+## Updating to the latest version
 
-Claude Desktop spawns the MCP subprocess **once** at launch and keeps running it. Pulling new code doesn't reload the running process.
+Claude Desktop spawns the MCP subprocess **once** at launch and keeps running it. Pulling new code doesn't reload the running process — you have to ⌘Q and reopen Claude Desktop after every update.
+
+### Recent install (within the last few weeks)
 
 ```bash
+cd /path/to/trip-search-mcp
 git pull
-uv pip install -e .    # only needed if dependencies changed
+uv pip install -e .          # reinstalls in case dependencies changed
 ```
 
 Then **⌘Q Claude Desktop and reopen.**
+
+Verify:
+
+```bash
+.venv/bin/python -c "from trip_search_mcp.server import mcp; print(mcp.name)"
+# → trip-search-mcp
+```
+
+### Updating from an older version (before the `flights-mcp` → `trip-search-mcp` rename)
+
+Older installs used the module name `flights_mcp` (now `trip_search_mcp`). If your Claude Desktop config still says `-m flights_mcp.server`, the server will fail to start with `ModuleNotFoundError` after the update. Three things to fix:
+
+1. **Pull and reinstall:**
+   ```bash
+   cd /path/to/trip-search-mcp     # path is unchanged; GitHub redirects the old repo URL
+   git pull
+   uv pip install -e .              # picks up new deps including pyairbnb
+   ```
+
+2. **Edit your Claude Desktop config.** Open
+   `~/Library/Application Support/Claude/claude_desktop_config.json`
+   (macOS) or `%APPDATA%\Claude\claude_desktop_config.json` (Windows)
+   and update the `args` array:
+
+   ```diff
+   - "args": ["-m", "flights_mcp.server"]
+   + "args": ["-m", "trip_search_mcp.server"]
+   ```
+
+   Optionally rename the JSON key from `"flights"` to `"trip-search"`
+   so the entry in Claude Desktop's tools menu matches the new docs.
+
+3. **⌘Q Claude Desktop and reopen.**
+
+### Common gotchas during an update
+
+| Symptom | Cause / Fix |
+|---|---|
+| `ModuleNotFoundError: No module named 'trip_search_mcp'` | Your config still points at the old module name. See "Updating from an older version" above. |
+| `ModuleNotFoundError: No module named 'pyairbnb'` | New dependency added since your install. Run `uv pip install -e .` to pick it up. |
+| `trip-search` server shows "running" but new tools (`search_stays`, `get_stay_details`, `watch_flight_price`, …) don't appear | You didn't fully quit. Closing the window doesn't kill the subprocess on macOS or Windows. Use ⌘Q (macOS) or the system-tray Quit (Windows). |
+| Updates seem to apply but a specific tool times out | Two MCP subprocesses may be running (Claude Desktop occasionally fails to kill the old one). Check with `pgrep -f trip_search_mcp.server` — if you see more than 2 PIDs, run `pkill -f trip_search_mcp.server` and reopen Claude Desktop. |
+| The Claude Code CLI (not Desktop) doesn't see the updates | `claude mcp` commands cache server metadata. Restart your Claude Code session, or remove and re-add the server: `claude mcp remove trip-search && claude mcp add trip-search -- /ABSOLUTE/PATH/TO/.venv/bin/python -m trip_search_mcp.server` |
 
 ---
 
