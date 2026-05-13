@@ -554,3 +554,44 @@ def test_hotels_sort_by_enum_coercion():
         sort_by="PRICE_LOW",
     )
     assert m.sort_by is HotelSortBy.PRICE_LOW
+
+
+def test_hotels_currency_defaults_to_eur():
+    from flights_mcp.models import SearchHotelsInput
+    m = SearchHotelsInput(
+        location="Tampere",
+        check_in_date=TOMORROW.isoformat(),
+        check_out_date=NEXT_WEEK.isoformat(),
+    )
+    assert m.currency == "EUR"
+
+
+def test_hotels_currency_accepts_valid_iso():
+    from flights_mcp.models import SearchHotelsInput
+    m = SearchHotelsInput(
+        location="Tokyo",
+        check_in_date=TOMORROW.isoformat(),
+        check_out_date=NEXT_WEEK.isoformat(),
+        currency="JPY",
+    )
+    assert m.currency == "JPY"
+
+
+def test_hotels_currency_rejects_non_iso_strings():
+    from flights_mcp.models import SearchHotelsInput
+    # Two letters → fail
+    with pytest.raises(ValidationError):
+        SearchHotelsInput(
+            location="Tampere",
+            check_in_date=TOMORROW.isoformat(),
+            check_out_date=NEXT_WEEK.isoformat(),
+            currency="EU",
+        )
+    # Lowercase → fail (regex requires uppercase)
+    with pytest.raises(ValidationError):
+        SearchHotelsInput(
+            location="Tampere",
+            check_in_date=TOMORROW.isoformat(),
+            check_out_date=NEXT_WEEK.isoformat(),
+            currency="usd",
+        )

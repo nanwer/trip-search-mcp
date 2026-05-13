@@ -144,6 +144,7 @@ async def search_hotels_tool(
     required_amenities: list[str] | None = None,
     sort_by: str = "BEST",
     max_results: int = 10,
+    currency: str = "EUR",
 ) -> dict[str, Any]:
     return await search_hotels(
         client=_HOTELS_CLIENT,
@@ -160,6 +161,7 @@ async def search_hotels_tool(
         required_amenities=required_amenities,
         sort_by=sort_by,
         max_results=max_results,
+        currency=currency,
     )
 
 

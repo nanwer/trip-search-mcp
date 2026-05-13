@@ -55,6 +55,36 @@ async def test_search_returns_normalized_offers(serpapi_hotels_success):
     assert captured["params"]["api_key"] == "fake-key"
 
 
+async def test_currency_threads_through_to_request_and_response(serpapi_hotels_success):
+    """`currency` is now a per-call input. The same value must end up in the
+    outbound SerpAPI request AND in every returned offer's `currency` field."""
+    captured = {}
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        captured["params"] = dict(request.url.params)
+        return _ok(serpapi_hotels_success)
+
+    client = _make_client(handler)
+    offers = await client.search(_input(currency="JPY"))
+    assert captured["params"]["currency"] == "JPY"
+    assert all(o.currency == "JPY" for o in offers)
+
+
+async def test_currency_defaults_to_eur(serpapi_hotels_success):
+    """Omitting `currency` falls back to EUR — matches the flights default
+    for European-IP users so trip-cost comparisons remain direct."""
+    captured = {}
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        captured["params"] = dict(request.url.params)
+        return _ok(serpapi_hotels_success)
+
+    client = _make_client(handler)
+    offers = await client.search(_input())
+    assert captured["params"]["currency"] == "EUR"
+    assert all(o.currency == "EUR" for o in offers)
+
+
 async def test_max_results_caps_response(serpapi_hotels_success):
     def handler(request: httpx.Request) -> httpx.Response:
         return _ok(serpapi_hotels_success)

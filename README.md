@@ -255,6 +255,7 @@ entries sorted cheapest first. `return_date` is `null` for one-way.
 | `required_amenities` | none | List of free-text amenity names. Best-effort substring match, case- and punctuation-insensitive ("wifi" matches "Free Wi-Fi"). |
 | `sort_by` | `BEST` | `BEST` / `PRICE_LOW` / `PRICE_HIGH` / `RATING` / `REVIEW_SCORE`. |
 | `max_results` | 10 | 1–25. |
+| `currency` | `EUR` | ISO 4217 three-letter code (`"USD"`, `"JPY"`, `"GBP"`, …). Pass it to match the user's stated location/budget — `max_price_per_night` is interpreted in this currency, so mixing them silently corrupts the budget filter. |
 
 Returns a `results` array of `HotelOffer` entries with `offer_id`, `name`,
 nights, `price_total`, `price_per_night`, `currency`, `star_rating`,

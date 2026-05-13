@@ -26,13 +26,12 @@ from flights_mcp.serpapi_hotels_backend.raw import SerpHotelsResponse
 BASE_URL = "https://serpapi.com"
 _SEARCH_PATH = "/search"
 _REQUEST_TIMEOUT = httpx.Timeout(connect=5.0, read=30.0, write=5.0, pool=5.0)
-# We pin a single response currency rather than expose it as a tool input.
-# Matches the flights contract: "no currency input; documented in tool
-# description". EUR mirrors what fli returns by default for European-IP
-# users (Nophil's primary use case), so a hotel-vs-flight total comparison
-# doesn't require mental FX. Users who care about a different currency
-# can submit a future enhancement adding the input.
-_RESPONSE_CURRENCY = "EUR"
+# Currency is now a per-call input on SearchHotelsInput (default "EUR"),
+# so we no longer pin it here. EUR was chosen as the default because it
+# mirrors what fli returns by default for European-IP users, making
+# flight+hotel total comparisons directly meaningful when the user is in
+# the project's primary geography. Callers in other regions pass
+# currency="USD"/"JPY"/etc. explicitly.
 
 # Mirror the body-error keyword maps used by the flights SerpAPI client
 # (which was retired during the fli migration, but the wisdom carries over).
@@ -77,7 +76,7 @@ class SerpAPIHotelsClient:
                 location=params.location,
                 check_in=params.check_in_date,
                 check_out=params.check_out_date,
-                currency=_RESPONSE_CURRENCY,
+                currency=params.currency,
                 sort_by=params.sort_by,
                 min_rating=params.min_rating,
                 min_review_score=params.min_review_score,
@@ -139,7 +138,7 @@ class SerpAPIHotelsClient:
             "check_in_date": p.check_in_date,
             "check_out_date": p.check_out_date,
             "adults": str(p.adults),
-            "currency": _RESPONSE_CURRENCY,
+            "currency": p.currency,
             "hl": "en",
         }
         if p.children:

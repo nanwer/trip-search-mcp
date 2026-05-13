@@ -44,7 +44,7 @@ Search Google Hotels for a city, date range, and party size, returning a ranked 
 
 Returns ranked hotel offers with name, photos, star rating, review score, price (per-night and total), top amenities, GPS coordinates, and a per-property Google Hotels deep link. Does NOT book — the booking_url opens the specific property's Google Hotels entity page with the user's check-in/check-out pre-filled, where they can click through to a booking partner.
 
-Prices come back in **EUR** by default (matches the flights tool's typical response currency for European-IP users, so hotel-vs-flight totals are directly comparable). The server pins the request currency for predictability; the `currency` field on each offer reflects what was actually requested.
+Prices come back in **EUR** by default (matches the flights tool's typical response currency for European-IP users, so hotel-vs-flight totals are directly comparable). Pass `currency` (ISO 4217, e.g. `"USD"`, `"JPY"`, `"GBP"`) to override per call when the user works in a different currency. The `currency` field on each offer reflects what was actually requested.
 
 **`address` is always null on offers** — SerpAPI's google_hotels list endpoint doesn't carry per-property addresses. Use `latitude`/`longitude` for location, or follow up with a property_details call (not yet implemented) for the postal address.
 
@@ -67,6 +67,7 @@ PRE-CALL ELICITATION: Before calling this tool, confirm with the user:
 - **Must-have amenities**: wifi, breakfast, parking, gym, pool, pet-friendly? Don't assume; ask.
 - **Star rating or review score floor**: "at least 4 stars", "well-reviewed (8+)"? Map to min_rating or min_review_score (remember review_score is 0-5, so "8+" should become min_review_score=4.0 or you should ask for clarification).
 - **Sort priority**: cheapest first, highest-rated, best location? Map to sort_by.
+- **Currency**: infer from the user's stated location or budget. "I'm in Tokyo, budget ¥30000/night" → `currency="JPY"`, `max_price_per_night=30000`. "$200/night in NYC" → `currency="USD"`. Default `"EUR"` if the user gives no signal (matches the flights tool's typical response currency for European-IP users). Always pass the currency that matches the units the user spoke in for `max_price_per_night` — mixing currencies silently corrupts the budget filter.
 
 RESULT PRESENTATION: When returning 2+ hotels, render them as an interactive artifact with one card per offer. Each card shows:
 
@@ -100,6 +101,7 @@ async def search_hotels(
     required_amenities: list[str] | None = None,
     sort_by: str = "BEST",
     max_results: int = 10,
+    currency: str = "EUR",
 ) -> dict[str, Any]:
     raw_input = dict(
         location=location, check_in_date=check_in_date, check_out_date=check_out_date,
@@ -108,6 +110,7 @@ async def search_hotels(
         max_price_per_night=max_price_per_night,
         required_amenities=required_amenities,
         sort_by=sort_by, max_results=max_results,
+        currency=currency,
     )
 
     # 1. Input validation.

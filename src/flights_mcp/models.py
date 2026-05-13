@@ -255,6 +255,12 @@ class SearchHotelsInput(BaseModel):
     required_amenities: list[str] | None = None
     sort_by: HotelSortBy = HotelSortBy.BEST
     max_results: int = Field(default=10, ge=1, le=25)
+    # ISO 4217 three-letter code. Defaults to EUR (matches what fli returns
+    # for European-IP users so flight+hotel totals can be compared directly).
+    # Override per call when the user works in a different currency
+    # ("budget ¥30000/night" → currency="JPY"). Validated as 3 uppercase
+    # letters; SerpAPI will surface unsupported codes via its error body.
+    currency: IsoCurrency = "EUR"
 
     @field_validator("check_in_date")
     @classmethod
