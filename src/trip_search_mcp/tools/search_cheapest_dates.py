@@ -14,6 +14,7 @@ from typing import Any
 from pydantic import ValidationError
 
 from trip_search_mcp.cache import TTLCache, canonical_key
+from trip_search_mcp.cities import expand_to_airports
 from trip_search_mcp.errors import ErrorCode, ToolError, error_response
 from trip_search_mcp.fli_backend.client import FliClient
 from trip_search_mcp.logging_config import log_event
@@ -101,10 +102,10 @@ async def search_cheapest_dates(
         log_event(_logger, "tool.cache_hit", tool=TOOL_NAME, input=params.model_dump())
         return copy.deepcopy(cached)
 
-    # 3. Provider call.
+    # 3. Provider call(s). City codes expand to multiple airport pairs.
     started = time.monotonic()
     try:
-        offers = await client.search_dates(params)
+        offers = await _search_dates_with_city_expansion(client, params)
     except ToolError as e:
         elapsed_ms = int((time.monotonic() - started) * 1000)
         if e.code is ErrorCode.NO_RESULTS:
@@ -133,3 +134,70 @@ async def search_cheapest_dates(
     log_event(_logger, "tool.success", tool=TOOL_NAME, input=params.model_dump(),
               count=len(offers_sorted), elapsed_ms=elapsed_ms, cache_hit=False)
     return copy.deepcopy(result)
+
+
+# ----- city-code expansion / multi-airport fanout ----------------------------
+
+
+async def _search_dates_with_city_expansion(client: FliClient, params):
+    """Expand origin / destination city codes and fan out to N parallel
+    fli.search_dates() calls. For each (departure_date, return_date)
+    tuple across all pairs, keep the LOWEST price.
+
+    For the common case (both sides are airport codes), this collapses
+    to a single client.search_dates() — same as the pre-expansion path.
+    """
+    import asyncio
+
+    origins = expand_to_airports(params.origin)
+    dests = expand_to_airports(params.destination)
+    pairs = [(o, d) for o in origins for d in dests if o != d]
+    if not pairs:
+        return await client.search_dates(params)
+    if len(pairs) == 1:
+        sub = params.model_copy(update={"origin": pairs[0][0], "destination": pairs[0][1]})
+        return await client.search_dates(sub)
+
+    tasks = []
+    for o, d in pairs:
+        sub = params.model_copy(update={"origin": o, "destination": d})
+        tasks.append(client.search_dates(sub))
+    results = await asyncio.gather(*tasks, return_exceptions=True)
+
+    all_offers: list = []
+    last_error: ToolError | None = None
+    no_results_count = 0
+    for res in results:
+        if isinstance(res, ToolError):
+            if res.code is ErrorCode.NO_RESULTS:
+                no_results_count += 1
+                continue
+            last_error = res
+            continue
+        if isinstance(res, BaseException):
+            raise res
+        all_offers.extend(res)
+
+    if not all_offers:
+        if no_results_count == len(pairs):
+            raise ToolError(
+                ErrorCode.NO_RESULTS,
+                f"No price data on any of {len(pairs)} airport pairs expanded from "
+                f"{params.origin}→{params.destination}.",
+            )
+        if last_error is not None:
+            raise last_error
+        raise ToolError(
+            ErrorCode.UPSTREAM_ERROR,
+            f"All {len(pairs)} airport-pair searches failed.",
+            retryable=True,
+        )
+
+    # Dedup by (departure_date, return_date) keeping the lowest price.
+    by_dates: dict[tuple, Any] = {}
+    for offer in all_offers:
+        key = (offer.departure_date, offer.return_date)
+        existing = by_dates.get(key)
+        if existing is None or offer.price < existing.price:
+            by_dates[key] = offer
+    return list(by_dates.values())

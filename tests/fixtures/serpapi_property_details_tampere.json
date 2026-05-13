@@ -1,0 +1,530 @@
+{
+  "search_metadata": {
+    "id": "6a04c26aeb2bd145f5e8eb42",
+    "status": "Success",
+    "json_endpoint": "https://serpapi.com/searches/v7D1TV3s7ktsX6_4hjVB0A/6a04c26aeb2bd145f5e8eb42.json",
+    "created_at": "2026-05-13T18:26:50.144Z",
+    "processed_at": "2026-05-13T18:26:50.146Z",
+    "google_hotels_url": "https://www.google.com/travel/search?q=Tampere&hl=en&gl=us",
+    "raw_html_file": "https://serpapi.com/searches/v7D1TV3s7ktsX6_4hjVB0A/6a04c26aeb2bd145f5e8eb42.html",
+    "prettify_html_file": "https://serpapi.com/searches/v7D1TV3s7ktsX6_4hjVB0A/6a04c26aeb2bd145f5e8eb42.prettify",
+    "total_time_taken": {
+      "float": 2.9054040908813477
+    }
+  },
+  "search_parameters": {
+    "engine": "google_hotels",
+    "q": "Tampere",
+    "gl": "us",
+    "hl": "en",
+    "currency": "EUR",
+    "check_in_date": "2026-06-15",
+    "check_out_date": "2026-06-18",
+    "adults": 2,
+    "children": 0,
+    "vacation_rentals": true,
+    "property_token": "ChoQ7cre3vCRr9naARoNL2cvMTF6MjFqODVqcBAC"
+  },
+  "type": "vacation rental",
+  "name": "Luxurious 7th Floor Penthouse | Private Jacuzzi & Sauna",
+  "description": "Experience luxury by the lake in this modern apartment designed to comfortably host up to 8 guests. Ideal for families or groups, the space features elegant interiors, high-end furnishings, and all modern appliances to ensure a seamless stay. The highlight is the private glazed rooftop terrace with your own hot tub, offering stunning scenic views over Lake Nasijarvi. Whether youre relaxing after a day in the city or enjoying a peaceful evening soak, this apartment is the perfect choice for your stay. <br><br>The apartment features two comfortable bedrooms. The master bedroom includes a 180 cm wide bed, while the second bedroom offers a bunk bed suitable for two guests. Fresh linens and towels are provided, and both rooms offer ample storage space for your belongings. <br><br>The spacious living room is combined with a modern open-concept kitchen that is fully equipped with all essential appliances. A stylish dining table comfortably seats a larger group for shared meals. The living room includes a large sofa that converts into a sofa bed, plus two futon mattresses to accommodate extra guests. There are also two signle futon mattresses for additional guests.<br><br>Step directly from the living room onto your private rooftop terrace, where you can relax in your own hot tub while enjoying scenic views over Lake Nasijarvi  the perfect spot to unwind any time of day.<br><br>The apartment includes one guest bathroom and a full bathroom with two showers. Youll also have access to a modern private sauna for a truly authentic and relaxing stay. Everything is prepared for your comfort  just bring your personal belongings and enjoy.<br><br>This apartment is hosted by a private company and co-hosted by Shillinki Hosting.",
+  "link": "https://book.shillinki.com/listings/484105?googleVR=1&utm_source=google&utm_medium=vacation_rentals",
+  "property_token": "ChoQ7cre3vCRr9naARoNL2cvMTF6MjFqODVqcBAC",
+  "gps_coordinates": {
+    "latitude": 61.50650405883789,
+    "longitude": 23.710979461669922
+  },
+  "check_in_time": "4:00\u202fPM",
+  "check_out_time": "12:00\u202fPM",
+  "rate_per_night": {
+    "lowest": "\u20ac272",
+    "extracted_lowest": 272,
+    "before_taxes_fees": "\u20ac243",
+    "extracted_before_taxes_fees": 243
+  },
+  "total_rate": {
+    "lowest": "\u20ac817",
+    "extracted_lowest": 817,
+    "before_taxes_fees": "\u20ac730",
+    "extracted_before_taxes_fees": 730
+  },
+  "prices": [
+    {
+      "source": "2ndhomes Hosting",
+      "link": "https://www.google.com/travel/clk?pc=AA80OswrHW_WC_ZMC2sIEiDve14pDznEvHhEkX54sedomJI3CU93hvZaOdL6xbVW53TTmbH1dEZJtk4h0oz5D1Nzi0_ao71sjWMM0o7vtIW9icgzjB6fP2FL_RT-MD-0tQ8hipEYiAsTs7UjRc3vPdUid7lHi15nmG0ijCYjOzCoBxl0IsepkaoeVYQ&pcurl=https://book.shillinki.com/listings/484105?start%3D2026-06-15%26end%3D2026-06-18%26numberOfGuests%3D2%26currency%3DEUR%26total%3D732.08%26taxes%3D261.05%26googleVR%3D1%26utm_source%3Dgoogle%26utm_medium%3Dvacation_rentals&s=AD1XQnkFIIHuG9BXqx3Zb_Bj8FEU&ap=1",
+      "logo": "https://www.gstatic.com/travel-hotels/branding/icon_default.png",
+      "official": true,
+      "num_guests": 2,
+      "rate_per_night": {
+        "lowest": "\u20ac244",
+        "extracted_lowest": 244
+      },
+      "total_rate": {
+        "lowest": "\u20ac732",
+        "extracted_lowest": 732
+      },
+      "free_cancellation": true,
+      "free_cancellation_until_date": "Jun 1"
+    },
+    {
+      "source": "Expedia.com",
+      "link": "https://www.google.com/travel/clk?pc=AA80OsxmjUi9tSWnLMsN1FhgoqBj-rAP7EEEpQwvzefQjDac-6bsQDqtlSe3kqVjqqwTvh6ttFkesoa_y7M9WISC8hEKIc7sViMmwoQ7-pk0SdZwlyOH1oyHGIRixUCNJipRlDjWnwMjAfF50TzHRyXXJMpTm3UEzSSsjilFx6PTsYbJBwvvgrTPspDeI_pAAaXsXdr4B5wDvxhpb9sRoeIqy6Y&pcurl=https://www.expedia.com/Hotel-Search?selected%3D125854865%26startDate%3D2026-06-15%26endDate%3D2026-06-18%26MDPCID%3DUS.META.HPA.ORGANIC-desktop.VR%26langid%3D1033%26adults%3D2%26children%3D%26MDPDTL%3DHTL.125854865.20260615.20260618.DDF.33.CID..AUDID.%26mctc%3D10%26ct%3Dhotel%26exp_curr%3DEUR%26exp_dp%3D816.53%26exp_tx%3D405.32%26mpr%3D318.66%26exp_pg%3Dgoogle%26langid%3Den%26ad%3D2%26tp%3D%26utm_source%3Dgoogle%26utm_medium%3Dcpc%26utm_term%3D125854865%26utm_content%3Dlocaluniversal%26utm_campaign%3DHotelAds%26rateplanid%3D000452366b13824f44128a8e52e762147b73%26mpm%3D103%26mpn%3D125854865%26mpo%3DEC%26mpp%3D1&s=AD1XQnmiUzbe1DJNzhewkEMf-Kuz&ap=1",
+      "logo": "https://www.gstatic.com/travel-hotels/branding/384478467102568077.png",
+      "num_guests": 2,
+      "rate_per_night": {
+        "lowest": "\u20ac272",
+        "extracted_lowest": 272,
+        "before_taxes_fees": "\u20ac243",
+        "extracted_before_taxes_fees": 243
+      },
+      "total_rate": {
+        "lowest": "\u20ac817",
+        "extracted_lowest": 817,
+        "before_taxes_fees": "\u20ac730",
+        "extracted_before_taxes_fees": 730
+      },
+      "free_cancellation": true,
+      "free_cancellation_until_date": "Jun 15",
+      "free_cancellation_until_time": "3:00\u202fAM"
+    },
+    {
+      "source": "Hotels.com",
+      "link": "https://www.google.com/travel/clk?pc=AA80OsyoXgI-Y_XqVqO_vhjl2ivOyXHaHFP3DVmcug7THvDtOKLT4SGvnupu2K5YyUKtBzWAjHLSLQeTYWWfNdxSNqknb2F3dWY5y9RSktZCJJfLNQIat9trcAYRzO8UiNmmHTPJr0xSmztJYSsyWwxS2sn7qS9yvEfFPv_wwQHcu9OGUyAsHYi_5ImiODtE&pcurl=https://www.hotels.com/Hotel-Search?selected%3D127725117%26startDate%3D2026-06-15%26endDate%3D2026-06-18%26mdpcid%3DHCOM-US.META.HPA.ORGANIC-desktop.VR%26MDPDTL%3DHTL.127725117.20260615.20260618.DDF.33.CID..AUDID.%26adults%3D2%26children%3D%26mctc%3D10%26mpf%3D674.27%26mpg%3DEUR%26mpl%3DUSD%26mpj%3D310.86%26mpr%3D230.66%26rateplanid%3D408758230%26mpm%3D24%26mpn%3D328381559%26mpo%3DEC%26mpp%3D1&s=AD1XQnk8GgU1-O-KkuOrteuF_ZJj&ap=1",
+      "logo": "https://www.gstatic.com/travel-hotels/branding/16815192664768424423.png",
+      "num_guests": 2,
+      "rate_per_night": {
+        "lowest": "\u20ac225",
+        "extracted_lowest": 225,
+        "before_taxes_fees": "\u20ac198",
+        "extracted_before_taxes_fees": 198
+      },
+      "total_rate": {
+        "lowest": "\u20ac674",
+        "extracted_lowest": 674,
+        "before_taxes_fees": "\u20ac594",
+        "extracted_before_taxes_fees": 594
+      },
+      "free_cancellation": true,
+      "free_cancellation_until_date": "Jun 15",
+      "free_cancellation_until_time": "3:00\u202fAM"
+    },
+    {
+      "source": "Vrbo.com",
+      "link": "https://www.google.com/travel/clk?pc=AA80Osyav-uLjZHzPo39I8fCxI6MW8HplEvvca-CTYJT73Fif3YuVbaHHYWabOL-5Gqt8huJshkw2jb3gVrhtRO4B-M0cyGeHzXS9_L1u2CVm6UqPl3V7SiTQqDD7tfB5OIBl3QJjjhRU0hWrlkG8WI6qZLQkvGH59wDjDabXV8lROb5JGmWaxAErw&pcurl=https://www.vrbo.com/search?selected%3D125854865%26startDate%3D2026-06-15%26endDate%3D2026-06-18%26MDPCID%3DVRBO-US.META.HPA.ORGANIC-desktop.VR%26adults%3D2%26children%3D%26MDPDTL%3DHTL.125854865.20260615.20260618.DDF.33.CID..AUDID..RRID.vrbo_us_desktop%26mctc%3D10%26ct%3Dhotel%26mpg%3DEUR%26mpf%3D816.53%26mpj%3D405.32%26mpr%3D318.66%26mpl%3DUSD%26langid%3Den%26rateplanid%3D000452366b13824f44128a8e52e762147b73%26mpm%3D103%26mpn%3D125854865%26mpo%3DEC%26mpp%3D1&s=AD1XQnlWdN5bllOidTllRGy967p6&ap=1",
+      "logo": "https://www.gstatic.com/travel-hotels/branding/icon_1850600648__vrbo.com.png",
+      "num_guests": 2,
+      "rate_per_night": {
+        "lowest": "\u20ac272",
+        "extracted_lowest": 272,
+        "before_taxes_fees": "\u20ac243",
+        "extracted_before_taxes_fees": 243
+      },
+      "total_rate": {
+        "lowest": "\u20ac817",
+        "extracted_lowest": 817,
+        "before_taxes_fees": "\u20ac730",
+        "extracted_before_taxes_fees": 730
+      },
+      "free_cancellation": true,
+      "free_cancellation_until_date": "Jun 15",
+      "free_cancellation_until_time": "3:00\u202fAM"
+    }
+  ],
+  "nearby_places": [
+    {
+      "category": "Train station",
+      "name": "Tampereen Rautatieasema",
+      "transportations": [
+        {
+          "type": "Taxi",
+          "duration": "15 min"
+        },
+        {
+          "type": "Walking",
+          "duration": "1 hr"
+        }
+      ],
+      "gps_coordinates": {
+        "latitude": 61.4984336,
+        "longitude": 23.773009
+      }
+    },
+    {
+      "category": "Tram stop",
+      "name": "Santalahti B",
+      "transportations": [
+        {
+          "type": "Walking",
+          "duration": "10 min"
+        }
+      ],
+      "gps_coordinates": {
+        "latitude": 61.5056209,
+        "longitude": 23.7155415
+      }
+    },
+    {
+      "category": "Bus station",
+      "name": "Ahjola",
+      "transportations": [
+        {
+          "type": "Walking",
+          "duration": "15 min"
+        }
+      ],
+      "gps_coordinates": {
+        "latitude": 61.50516,
+        "longitude": 23.70968
+      }
+    },
+    {
+      "category": "Bus station",
+      "name": "Santalahti",
+      "transportations": [
+        {
+          "type": "Walking",
+          "duration": "15 min"
+        }
+      ],
+      "gps_coordinates": {
+        "latitude": 61.5058753,
+        "longitude": 23.716277599999998
+      }
+    },
+    {
+      "category": "Bus station",
+      "name": "Pispalanharju",
+      "transportations": [
+        {
+          "type": "Walking",
+          "duration": "15 min"
+        }
+      ],
+      "gps_coordinates": {
+        "latitude": 61.50358,
+        "longitude": 23.71184
+      }
+    },
+    {
+      "category": "Airport",
+      "name": "Tampere-Pirkkala Airport",
+      "transportations": [
+        {
+          "type": "Taxi",
+          "duration": "25 min"
+        },
+        {
+          "type": "Public transport",
+          "duration": "50 min"
+        }
+      ],
+      "gps_coordinates": {
+        "latitude": 61.4147222,
+        "longitude": 23.6044444
+      }
+    },
+    {
+      "category": "Greek restaurant",
+      "name": "Ola - Ravintola",
+      "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/AHVAweo5rDaryO-hE08CPVzcrobqZ0RvPo3FX0brTz0GGc201F2n0aKHZTBFuC-_PltW7-Xsbd57E33OtDVeuzVEKNlqMhG2Hr4WiUotMfS3nyYBTxijtrOGj93pLzBd-GL9--DwI-94=k-no-",
+      "transportations": [
+        {
+          "type": "Taxi",
+          "duration": "15 min"
+        },
+        {
+          "type": "Public transport",
+          "duration": "25 min"
+        },
+        {
+          "type": "Walking",
+          "duration": "1 hr 5 min"
+        }
+      ],
+      "rating": 4.6,
+      "reviews": 605,
+      "gps_coordinates": {
+        "latitude": 61.499103299999994,
+        "longitude": 23.7778332
+      }
+    },
+    {
+      "category": "Restaurant",
+      "name": "Roka Street Bistro Tampere",
+      "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/AHVAwepSsjWi9nIN8U7tuXxR9dzNFvunGcjjoV95LCHwTmpIUIRPc1xznFI4jHC2qKRXcvBl70mgkYP2zZpxAGeIIl7tW9Lvi3_6WecN8iDkf2XkQ3RU8GsbEVNDcYRM5kJoc6wxRssSn_igZ0Tq=k-no-",
+      "transportations": [
+        {
+          "type": "Taxi",
+          "duration": "15 min"
+        },
+        {
+          "type": "Public transport",
+          "duration": "20 min"
+        },
+        {
+          "type": "Walking",
+          "duration": "55 min"
+        }
+      ],
+      "rating": 4.8,
+      "reviews": 97,
+      "gps_coordinates": {
+        "latitude": 61.4970073,
+        "longitude": 23.7693413
+      }
+    },
+    {
+      "category": "Restaurant",
+      "name": "Ravintola KATTO",
+      "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/AHVAweoZqAaF0vX5_ClRKibr79yTOyGJGPrxC8Mu55FURRCgijn14BMB9qYbzm1gsaHKTUCXDvaFtc-G8J5z8DTWHWUlscj8Csn0G8aW_arKSvmlQ_QrUUuZ-_Dfg_7XjUFNsAuWFglmZiMDxjI=k-no-",
+      "transportations": [
+        {
+          "type": "Taxi",
+          "duration": "15 min"
+        },
+        {
+          "type": "Public transport",
+          "duration": "20 min"
+        },
+        {
+          "type": "Walking",
+          "duration": "45 min"
+        }
+      ],
+      "rating": 5,
+      "reviews": 1,
+      "gps_coordinates": {
+        "latitude": 61.4932209,
+        "longitude": 23.7261737
+      }
+    },
+    {
+      "category": "Steak house",
+      "name": "Ravintola KOPO",
+      "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/AHVAwere3enz2SxFdVQzpqfY4wWjH1PbgHA5w8KDtRyf0wCGpXoZhsoTAtpK5KafFR8Vm54NY-i6FZtpdmOY-sxdf9dPrlDZm6dQIXCUeNKXORJ8kSZsKa9AD3RPeK460p6u_aY-DFZ5jZph9ag7=k-no-",
+      "transportations": [
+        {
+          "type": "Taxi",
+          "duration": "15 min"
+        },
+        {
+          "type": "Public transport",
+          "duration": "15 min"
+        },
+        {
+          "type": "Walking",
+          "duration": "45 min"
+        }
+      ],
+      "rating": 4.6,
+      "reviews": 77,
+      "gps_coordinates": {
+        "latitude": 61.4962958,
+        "longitude": 23.7537108
+      }
+    },
+    {
+      "category": "Restaurant",
+      "name": "Ravintola Mummola",
+      "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/AHVAweolacgeja8OCfV150lJgs8AsZ1AFPpsJ3diZCRTz6pT5-g2RfycYdE5ySALKwS7y120BUJZ4c2mNfvF6aHb-u-AfwFVoQBunMOehXGJf17TPXqIPcMWPAD3lVnWFnhA-Mk6fyvzWgx_xdW-=k-no-",
+      "transportations": [
+        {
+          "type": "Taxi",
+          "duration": "15 min"
+        },
+        {
+          "type": "Public transport",
+          "duration": "20 min"
+        },
+        {
+          "type": "Walking",
+          "duration": "50 min"
+        }
+      ],
+      "rating": 5,
+      "reviews": 13,
+      "gps_coordinates": {
+        "latitude": 61.4970539,
+        "longitude": 23.7588434
+      }
+    },
+    {
+      "category": "Georgian restaurant",
+      "name": "Restaurant Tbilisi",
+      "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/AHVAweofd4Slvmw-5I_uZiUdpmaE8nettCMpiSiPBY031vgPmZ6F-RjRE0eAmfZ660H493erKVsGdr_PmMrqkWhQtYGXze2h1oDthigZOMQPH3zEjdTVybOjgdnO9SEh6XGSzfIKHbXc=k-no-",
+      "transportations": [
+        {
+          "type": "Taxi",
+          "duration": "15 min"
+        },
+        {
+          "type": "Public transport",
+          "duration": "20 min"
+        },
+        {
+          "type": "Walking",
+          "duration": "45 min"
+        }
+      ],
+      "rating": 4.8,
+      "reviews": 1048,
+      "gps_coordinates": {
+        "latitude": 61.4996948,
+        "longitude": 23.7567573
+      }
+    },
+    {
+      "category": "Restaurant",
+      "name": "Restaurant Tampella",
+      "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/AHVAwerzjJ8oUZQBF-AonQ-4HBjs6vjrKbXJC5XeLmcMIk5juxjfPvwHwG1JQwPgzlnS0dDYgL-EwU5wFuMtNRwodBQLUcrSWDvlGIfHWW-hL4Kde3YYfkWym7G1ij1ZEiVwrqn6Dwe7=k-no-",
+      "transportations": [
+        {
+          "type": "Taxi",
+          "duration": "15 min"
+        },
+        {
+          "type": "Public transport",
+          "duration": "25 min"
+        },
+        {
+          "type": "Walking",
+          "duration": "50 min"
+        }
+      ],
+      "rating": 4.4,
+      "reviews": 1832,
+      "gps_coordinates": {
+        "latitude": 61.5017929,
+        "longitude": 23.7627867
+      }
+    },
+    {
+      "category": "Restaurant",
+      "name": "Ravintola V\u00c4ST",
+      "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/AHVAweqpl5C52es1Mpsin0IM4Og9LlNg5uUKCL6lNsQKVuXPsXuTBA4HRMy6vSJpx2CEaNcVUy0IOUYClrB4aObDDYSP_xxgKstxs14KZfU7AVXBp7MrsCpHbioNd_TLFmBjGkHwvH34kbDGMDA=k-no-",
+      "transportations": [
+        {
+          "type": "Taxi",
+          "duration": "15 min"
+        },
+        {
+          "type": "Public transport",
+          "duration": "20 min"
+        },
+        {
+          "type": "Walking",
+          "duration": "1 hr 25 min"
+        }
+      ],
+      "rating": 4.2,
+      "reviews": 43,
+      "gps_coordinates": {
+        "latitude": 61.5167423,
+        "longitude": 23.686304999999997
+      }
+    }
+  ],
+  "images": [
+    {
+      "thumbnail": "https://lh4.googleusercontent.com/proxy/S3pGjl6cMn-sDlKeE_ETlhq3YFWVYUFTGBAgax0TtRpR1rDu0TobPfaHZ2RQOl152uuqMskib4EiY5y2acHLM9tFo135vXK4UKXcEL-iQr_v6mC2hvoFE4D2WSsL7QqZAguo_t3OS-LGnJ9CyI_ATGO9KtmL7yA=s287-w287-h192-n-k-no-v1",
+      "original_image": "https://hostaway-platform.s3.us-west-2.amazonaws.com/listing/139163-484105-iwwRvN6P1GadUnUTfTF4--1OyplMhwA5U2-bqbAhZo3k-698ec3087231d-medium"
+    },
+    {
+      "thumbnail": "https://lh4.googleusercontent.com/proxy/IfJwBL2VenVVEJMFFIE2IdiFxlRhU92hnb_zyxfmzdQsDMM5uqBxnotvldlx8Nkr3Ha-P0MBXl1j8XAX0SpPPu9wadgGS3KKom-OZRuvUs_TeweaajSggD8KbDtWiK0IKdHUc5cqOTg8LQtvFO_20Bzl9Dx9Zw=s287-w287-h192-n-k-no-v1",
+      "original_image": "https://media.vrbo.com/lodging/126000000/125860000/125854900/125854865/e377204b.jpg"
+    },
+    {
+      "thumbnail": "https://lh6.googleusercontent.com/proxy/KlyGP5ELfNvcpq7p2SU6nd8mbjcCE914tqnFlbX5c1IT0nTmwApdssLxJjJ7bGI7r0qkjfXcnYbTVkc9WYTBQDSDW2G1STYalxQsAaK-aAP8cL6etwlzC0gdVJFOYpUe6l7knIfWv28vauh5gPiAm0BjP_Bk8A=s287-w287-h192-n-k-no-v1",
+      "original_image": "https://images.trvl-media.com/lodging/128000000/127730000/127725200/127725117/w2032h1365x0y0-fa125c33_z.jpg"
+    },
+    {
+      "thumbnail": "https://lh5.googleusercontent.com/proxy/b09PUFbZcn6ouRailIGBGMkZrz4F89hdYcJO2ieLpZ3Sa5soM6jWqBWwKPOlRs5SakuAdxiZuKKnW1futrvYbS59KmbsNfwybXLcWR8T40OlhN2wjALwLmNkFvvc4wSFgCmMi3M5IeKwpejmWk__iICtxFTbcA=s287-w287-h192-n-k-no-v1",
+      "original_image": "https://hostaway-platform.s3.us-west-2.amazonaws.com/listing/139163-484105-usUeSKzNR4xx6iZcnANSqTpRMUX5zoSo0cTIn5bjGQE-698ec31c6ecea-medium"
+    },
+    {
+      "thumbnail": "https://lh6.googleusercontent.com/proxy/TOcb9pJvaHP0GA4s2q-4PYGYdOGw00sbF0i9guP0DpzNY5Edo3fSAxTfHgxXCLil9FqAlRm2lUfmAz7nTnxP5nl7CfukfwYaqot5y4MV68RXshQ3pUpew6q-ZgR_aToY8LfBbUYe6jhUEzy7v8VQY-AEkq1b00s=s287-w287-h192-n-k-no-v1",
+      "original_image": "https://hostaway-platform.s3.us-west-2.amazonaws.com/listing/139163-484105-E6mI5VuNyHPh0uDL7TjBnDu8Q0g87-ZAc4yivgyQwmc-698ec381d20d0-medium"
+    },
+    {
+      "thumbnail": "https://lh4.googleusercontent.com/proxy/LB3nI0N_xSHkh62BTa7FY8TktSpkN6dWsEoh2x2Xp0Jh6JGWYUXqJjjVohAy5qV8_bCTLE6vO4ZEWM4b7XyN3EC8cnBoKgo5BKinNLlER2osiYKYCUrqy9LR6_ml56pYDUZpic6p_JBghpnMwkaq-oY1MtN-x9Y=s287-w287-h192-n-k-no-v1",
+      "original_image": "https://p.fih.io/v2/nSr0o-3gbZN8o1xMecXCcG-BkDeQVo3k-wOeVogkTe7ajuFOX7O-WA8aRWhXz1jsToZif_TsA_xCWfhWRa0Z38W1sQAqtUAIPxWue8BatynPs0D8ILSEmSjgP5HJju-jFFRHzrXsUU7tHzF4en3ketkYyx1j1dLbUfhlOgkNcIcn9PwNtk_AU2csbUk6dd9sGo49Qn31qiMVOoIxofR_2o8VcZA3AAhCPReYBoJ8vY2Gq2593GaA4u4OT_bb2nQda_hO30Az3Jmsq7VLLkiv-8O4z7ScYnZA-_xXuuyYfAdwFxNRWDeIbPQ9a8t4UCJM_RJyYFlIURe6blhdvk_2497wQhMp30ZtnmdI_mKyWNKfa6OdQw"
+    },
+    {
+      "thumbnail": "https://lh5.googleusercontent.com/proxy/STeg_cPvmnPcLyejO4sk2i3eLv7vJqiyYnYnmsB00ZTFPt5G2QazdA4aydIehXlOwz36hbLKlXAU98av6sGvUWW6-U0kLtnmqxZMjz7o0nKlCipReFnNoZFdYTi0vgu8ci67Zp86qQ0XPPN-Jz3eo2C1cCXJhCs=s287-w287-h192-n-k-no-v1",
+      "original_image": "https://hostaway-platform.s3.us-west-2.amazonaws.com/listing/139163-484105-jPatdGGg4M81dXSIAiCbrxIf--csO28uN5MdQdTPrKGY-698ec3151dbeb-medium"
+    },
+    {
+      "thumbnail": "https://lh3.googleusercontent.com/proxy/2e6tR8kIp0rxt68nSf1BUhpWRgGoIbSpXwT6a4_uZMmBa-tnPcO88DzmQD3gGkdDEy54jj_CwHz4KD8lG6tKDVDrHcq76utPmiS8oCTOgTdnv32LBXZllgFTUoLGv6Vv6VBZJcamdhLKVXgeAIbNqYHVNUIXERc=s287-w287-h192-n-k-no-v1",
+      "original_image": "https://p.fih.io/v2/nSr0o-3gbZN8o1xMecXCcG-BkDeQVo3k-wOeVogkTe7ajuFOX7O-WA8aRWhXz1jsToZif_TsA_xCWfhWRa0Znsu7rywGsyMzbEaGdJNlsWfMpHTJNbGqhQzENYD3jaidFRxh8IrfE0qxAzF4en3ketkYyx1j1dLbUfhlOgkNcIcn9PwNtk_AU2csbUk6dd9sGo49Qn31qiMVOoIxofR_2o8VcZA3AAhCPReYBoJ8vY2Gq2593GaA4u4OT_bb2nQda_hO30Az3Jmsq7VLLkiv-8O4z7ScYnZA-_xXuuyYfAdwFxNRWDeIbPQ9a8t4U1dE_xNPQQRLQQu6blhdvk_2497wQhMpxVu3GHVcLmuFnNtuuZ7XPw"
+    },
+    {
+      "thumbnail": "https://lh5.googleusercontent.com/proxy/iY_8FirzTbb3tCFk6xT45A0d1oph5v6XlQ80zwurOGMGJN1178b-vbbqGeJ8z_dMLnEgL4S-KRnceCazYPPBwIhbxLIoUBcZMhmOwkTZPhYKf2TIh5IZaKm_XMqF4GcBc4SYO6dtemx_qBzaaxAlLV4jj7WDEQ=s287-w287-h192-n-k-no-v1",
+      "original_image": "https://hostaway-platform.s3.us-west-2.amazonaws.com/listing/139163-484105-khweEGvkwipVmJPC30tvT-HC9HFnqIHbT95BbABETwc-698ec2f23a6a6-medium"
+    }
+  ],
+  "overall_rating": 4.5,
+  "reviews": 6,
+  "location_rating": 3.6,
+  "amenities": [
+    "Air conditioning",
+    "Balcony",
+    "Kid-friendly",
+    "Elevator",
+    "Heating",
+    "Hot tub",
+    "Kitchen",
+    "Microwave",
+    "Oven stove",
+    "Patio",
+    "Pet-friendly",
+    "Smoke-free",
+    "Cable TV",
+    "Wheelchair accessible",
+    "Free parking",
+    "Free Wi-Fi"
+  ],
+  "excluded_amenities": [
+    "No airport shuttle",
+    "No beach access",
+    "No fireplace",
+    "No fitness center",
+    "No indoor pool",
+    "No outdoor pool"
+  ],
+  "health_and_safety": {
+    "groups": [
+      {
+        "title": "Enhanced cleaning",
+        "list": [
+          {
+            "title": "Enhanced cleaning of the property",
+            "available": true
+          },
+          {
+            "title": "Disinfectant used to clean the property",
+            "available": true
+          }
+        ]
+      },
+      {
+        "title": "Minimized contact",
+        "list": [
+          {
+            "title": "No-contact check-in and check-out",
+            "available": true
+          }
+        ]
+      }
+    ]
+  },
+  "essential_info": [
+    "Entire apartment",
+    "Sleeps 8",
+    "2 bedrooms",
+    "2 bathrooms",
+    "5 beds",
+    "786 sq ft"
+  ],
+  "serpapi_google_hotels_reviews_link": "https://serpapi.com/search.json?engine=google_hotels_reviews&hl=en&property_token=ChoQ7cre3vCRr9naARoNL2cvMTF6MjFqODVqcBAC",
+  "serpapi_google_hotels_photos_link": "https://serpapi.com/search.json?engine=google_hotels_photos&property_token=ChoQ7cre3vCRr9naARoNL2cvMTF6MjFqODVqcBAC"
+}

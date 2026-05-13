@@ -14,6 +14,7 @@ from pydantic import ValidationError
 
 from trip_search_mcp.cache import TTLCache, canonical_key
 from trip_search_mcp.errors import ErrorCode, ToolError, error_response
+from trip_search_mcp.cities import expand_to_airports, is_known_city
 from trip_search_mcp.fli_backend.client import FliClient
 from trip_search_mcp.logging_config import log_event
 from trip_search_mcp.models import (
@@ -38,7 +39,7 @@ Returns a ranked list of flight options with prices, airlines, segment details, 
 
 Times in the response are local to the departure or arrival airport, with the airport's IATA code attached so the timezone can be derived. Do not perform timezone math on these times without first converting them.
 
-Origin and destination are 3-letter IATA airport codes (HEL, JFK, LHR). The currency Google Flights returns is determined by the request region and is surfaced in each offer's `currency` field; do not assume USD.
+Origin and destination accept 3-letter IATA **airport codes** (HEL, JFK, LHR) AND **city codes** (WAS, NYC, LON, PAR, TYO, LAX/QLA, BOS, …). City codes auto-expand to the metro's busiest 3 airports and search them in parallel; results merge under one ranked list (cheaper variant wins on dedup). Use the airport code when the traveler insists on a specific airport. The currency Google Flights returns is determined by the request region and is surfaced in each offer's `currency` field; do not assume USD.
 
 Filter parameters:
 - `max_stops`: one of `ANY` (default), `NON_STOP`, `ONE_STOP_OR_FEWER`, `TWO_OR_FEWER_STOPS`. The names mean "this many stops or fewer".
@@ -122,10 +123,10 @@ async def search_flights(
         log_event(_logger, "tool.cache_hit", tool=TOOL_NAME, input=params.model_dump())
         return copy.deepcopy(cached)
 
-    # 3. Provider call.
+    # 3. Provider call(s). City codes expand to multiple airport pairs.
     started = time.monotonic()
     try:
-        offers = await client.search(params)
+        offers = await _search_with_city_expansion(client, params)
     except ToolError as e:
         elapsed_ms = int((time.monotonic() - started) * 1000)
         if e.code is ErrorCode.NO_RESULTS:
@@ -148,3 +149,86 @@ async def search_flights(
     log_event(_logger, "tool.success", tool=TOOL_NAME, input=params.model_dump(),
               count=len(offers), elapsed_ms=elapsed_ms, cache_hit=False)
     return copy.deepcopy(result)
+
+
+# ----- city-code expansion / multi-airport fanout ----------------------------
+
+
+async def _search_with_city_expansion(
+    client: FliClient, params: SearchFlightsInput,
+):
+    """Expand origin / destination city codes to airport lists and fan
+    out to N parallel fli calls. Merge by offer_id (lower-price wins),
+    sort by total_price, truncate to max_results.
+
+    For the common case (both sides are airport codes), this collapses
+    to a single client.search() — same as the pre-expansion path.
+    """
+    import asyncio
+
+    origins = expand_to_airports(params.origin)
+    dests = expand_to_airports(params.destination)
+    pairs = [(o, d) for o in origins for d in dests if o != d]
+    # If both sides are 1 airport (the typical case), pairs has 1 element.
+    if not pairs:
+        # Same city on both sides — unlikely but possible if origin=destination.
+        # Fall back to the original single-call path.
+        return await client.search(params)
+    if len(pairs) == 1:
+        # Hot path: no fanout needed. Avoid the overhead of asyncio.gather +
+        # merge logic when there's nothing to merge.
+        sub = params.model_copy(update={"origin": pairs[0][0], "destination": pairs[0][1]})
+        return await client.search(sub)
+
+    # Multi-airport fanout. Build a copy of params for each pair, fire
+    # them in parallel with return_exceptions=True so one bad pair doesn't
+    # tank the others.
+    tasks = []
+    for o, d in pairs:
+        sub = params.model_copy(update={"origin": o, "destination": d})
+        tasks.append(client.search(sub))
+    results = await asyncio.gather(*tasks, return_exceptions=True)
+
+    all_offers: list = []
+    last_error: ToolError | None = None
+    no_results_count = 0
+    for res in results:
+        if isinstance(res, ToolError):
+            if res.code is ErrorCode.NO_RESULTS:
+                no_results_count += 1
+                continue
+            last_error = res
+            continue
+        if isinstance(res, BaseException):
+            raise res  # unexpected, propagate
+        all_offers.extend(res)
+
+    # If EVERY pair errored, surface the most informative error.
+    if not all_offers:
+        if no_results_count == len(pairs):
+            raise ToolError(
+                ErrorCode.NO_RESULTS,
+                f"No flights on any of {len(pairs)} airport pairs expanded from "
+                f"{params.origin}→{params.destination}.",
+            )
+        if last_error is not None:
+            raise last_error
+        raise ToolError(
+            ErrorCode.UPSTREAM_ERROR,
+            f"All {len(pairs)} airport-pair searches failed.",
+            retryable=True,
+        )
+
+    return _dedup_and_truncate_offers(all_offers, params.max_results)
+
+
+def _dedup_and_truncate_offers(offers: list, limit: int) -> list:
+    """Dedup offers by offer_id (keep the cheaper variant), sort by
+    total_price ascending, truncate to limit."""
+    by_id: dict[str, Any] = {}
+    for offer in offers:
+        existing = by_id.get(offer.offer_id)
+        if existing is None or offer.total_price < existing.total_price:
+            by_id[offer.offer_id] = offer
+    deduped = sorted(by_id.values(), key=lambda o: o.total_price)
+    return deduped[:limit]
