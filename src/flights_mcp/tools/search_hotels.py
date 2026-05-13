@@ -70,13 +70,14 @@ PRE-CALL ELICITATION: Before calling this tool, confirm with the user:
 
 RESULT PRESENTATION: When returning 2+ hotels, render them as an interactive artifact with one card per offer. Each card shows:
 
-- A lead photo (first image from `images`).
-- The hotel name, prominent.
+- The hotel name, prominent and large at the top of the card (it carries the card's visual hierarchy in the absence of a photo).
 - Star rating (as filled stars if you can) and review_score with review_count: "4.6 / 5  (686 reviews)".
 - Price per night with the total alongside in smaller text, in the response currency.
 - Top 3-4 amenities pulled from the `amenities` list.
 - Hotel type and short description if present.
 - A "Book on Google Hotels" button linking to `booking_url`, opening in a new tab.
+
+Do NOT render the `images` field as photo elements. Hotel image CDNs (Google's signed `gps-cs-s` URLs, hotelbeds, trvl-media, bstatic, giata) use hotlink protection that breaks these URLs outside their intended hosts; broken images degrade the card more than missing photos. The `images` field stays on the response model for future use (e.g., a server-side image proxy layer), but card rendering should be text-only. Compensate for the missing visual hierarchy by making the hotel name larger and prominent at the top of each card.
 
 Sort cards by the same `sort_by` the user requested. For a single result, prose is fine."""
 
