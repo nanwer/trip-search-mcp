@@ -3,9 +3,9 @@ from __future__ import annotations
 
 import pytest
 
-from flights_mcp.cache import TTLCache
-from flights_mcp.fli_backend.client import FliClient
-from flights_mcp.tools.search_flights import search_flights
+from trip_search_mcp.cache import TTLCache
+from trip_search_mcp.fli_backend.client import FliClient
+from trip_search_mcp.tools.search_flights import search_flights
 
 
 class _MockSearcher:

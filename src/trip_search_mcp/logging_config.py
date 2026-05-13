@@ -12,7 +12,7 @@ from pathlib import Path
 
 
 def _default_log_path() -> Path:
-    return Path.home() / ".flights-mcp" / "logs" / "flight-search.log"
+    return Path.home() / ".trip-search-mcp" / "logs" / "trip-search.log"
 
 
 class JsonLineFormatter(logging.Formatter):
@@ -42,7 +42,7 @@ def configure_logging() -> logging.Logger:
     level_name = os.environ.get("LOG_LEVEL", "INFO").upper()
     level = getattr(logging, level_name, logging.INFO)
 
-    logger = logging.getLogger("flights_mcp")
+    logger = logging.getLogger("trip_search_mcp")
     logger.setLevel(level)
     logger.propagate = False
     # Once a handler is attached, LOG_FILE_PATH changes are ignored for the lifetime of the process.

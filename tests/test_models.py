@@ -3,7 +3,7 @@ from datetime import datetime, timedelta, timezone
 import pytest
 from pydantic import ValidationError
 
-from flights_mcp.models import (
+from trip_search_mcp.models import (
     CabinClass,
     DatePriceOffer,
     FlightOffer,
@@ -467,7 +467,7 @@ def test_search_cheapest_dates_result_wraps():
 
 
 def test_hotels_accepts_minimal_input():
-    from flights_mcp.models import HotelSortBy, SearchHotelsInput
+    from trip_search_mcp.models import HotelSortBy, SearchHotelsInput
     m = SearchHotelsInput(
         location="Tampere",
         check_in_date=TOMORROW.isoformat(),
@@ -480,7 +480,7 @@ def test_hotels_accepts_minimal_input():
 
 
 def test_hotels_rejects_check_out_before_check_in():
-    from flights_mcp.models import SearchHotelsInput
+    from trip_search_mcp.models import SearchHotelsInput
     with pytest.raises(ValidationError):
         SearchHotelsInput(
             location="Tampere",
@@ -491,7 +491,7 @@ def test_hotels_rejects_check_out_before_check_in():
 
 def test_hotels_rejects_same_day_check_in_check_out():
     """check_out_date must be STRICTLY after check_in_date."""
-    from flights_mcp.models import SearchHotelsInput
+    from trip_search_mcp.models import SearchHotelsInput
     with pytest.raises(ValidationError):
         SearchHotelsInput(
             location="Tampere",
@@ -501,7 +501,7 @@ def test_hotels_rejects_same_day_check_in_check_out():
 
 
 def test_hotels_rejects_check_in_in_past():
-    from flights_mcp.models import SearchHotelsInput
+    from trip_search_mcp.models import SearchHotelsInput
     yesterday = (TODAY - timedelta(days=1)).isoformat()
     with pytest.raises(ValidationError):
         SearchHotelsInput(
@@ -512,7 +512,7 @@ def test_hotels_rejects_check_in_in_past():
 
 
 def test_hotels_rejects_empty_location():
-    from flights_mcp.models import SearchHotelsInput
+    from trip_search_mcp.models import SearchHotelsInput
     with pytest.raises(ValidationError):
         SearchHotelsInput(
             location="",
@@ -522,7 +522,7 @@ def test_hotels_rejects_empty_location():
 
 
 def test_hotels_min_rating_bounded():
-    from flights_mcp.models import SearchHotelsInput
+    from trip_search_mcp.models import SearchHotelsInput
     # 0 and 6 are out of [1, 5]
     for bad in (0, 6):
         with pytest.raises(ValidationError):
@@ -535,7 +535,7 @@ def test_hotels_min_rating_bounded():
 
 
 def test_hotels_max_results_capped_at_25():
-    from flights_mcp.models import SearchHotelsInput
+    from trip_search_mcp.models import SearchHotelsInput
     with pytest.raises(ValidationError):
         SearchHotelsInput(
             location="Tampere",
@@ -546,7 +546,7 @@ def test_hotels_max_results_capped_at_25():
 
 
 def test_hotels_sort_by_enum_coercion():
-    from flights_mcp.models import HotelSortBy, SearchHotelsInput
+    from trip_search_mcp.models import HotelSortBy, SearchHotelsInput
     m = SearchHotelsInput(
         location="Tampere",
         check_in_date=TOMORROW.isoformat(),
@@ -557,7 +557,7 @@ def test_hotels_sort_by_enum_coercion():
 
 
 def test_hotels_currency_defaults_to_eur():
-    from flights_mcp.models import SearchHotelsInput
+    from trip_search_mcp.models import SearchHotelsInput
     m = SearchHotelsInput(
         location="Tampere",
         check_in_date=TOMORROW.isoformat(),
@@ -567,7 +567,7 @@ def test_hotels_currency_defaults_to_eur():
 
 
 def test_hotels_currency_accepts_valid_iso():
-    from flights_mcp.models import SearchHotelsInput
+    from trip_search_mcp.models import SearchHotelsInput
     m = SearchHotelsInput(
         location="Tokyo",
         check_in_date=TOMORROW.isoformat(),
@@ -578,7 +578,7 @@ def test_hotels_currency_accepts_valid_iso():
 
 
 def test_hotels_currency_rejects_non_iso_strings():
-    from flights_mcp.models import SearchHotelsInput
+    from trip_search_mcp.models import SearchHotelsInput
     # Two letters → fail
     with pytest.raises(ValidationError):
         SearchHotelsInput(

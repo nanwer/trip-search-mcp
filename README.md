@@ -144,16 +144,16 @@ You need Python 3.12 or newer. The cleanest path is `uv`
 
 **Option A — `uv` (recommended):**
 ```bash
-git clone https://github.com/nanwer/flights-mcp.git
-cd flights-mcp
+git clone https://github.com/nanwer/trip-search-mcp.git
+cd trip-search-mcp
 uv venv
 uv pip install -e .
 ```
 
 **Option B — `pip`:**
 ```bash
-git clone https://github.com/nanwer/flights-mcp.git
-cd flights-mcp
+git clone https://github.com/nanwer/trip-search-mcp.git
+cd trip-search-mcp
 python3.12 -m venv .venv
 source .venv/bin/activate
 pip install --upgrade pip
@@ -174,9 +174,9 @@ Edit `~/Library/Application Support/Claude/claude_desktop_config.json`
 ```json
 {
   "mcpServers": {
-    "flights": {
-      "command": "/ABSOLUTE/PATH/TO/flights-mcp/.venv/bin/python",
-      "args": ["-m", "flights_mcp.server"]
+    "trip-search": {
+      "command": "/ABSOLUTE/PATH/TO/trip-search-mcp/.venv/bin/python",
+      "args": ["-m", "trip_search_mcp.server"]
     }
   }
 }
@@ -189,8 +189,8 @@ returning May 29."*
 #### Claude Code (CLI)
 
 ```bash
-claude mcp add flights \
-  -- /ABSOLUTE/PATH/TO/flights-mcp/.venv/bin/python -m flights_mcp.server
+claude mcp add trip-search \
+  -- /ABSOLUTE/PATH/TO/trip-search-mcp/.venv/bin/python -m trip_search_mcp.server
 ```
 
 Then start a Claude Code session and the tool is available.
@@ -351,7 +351,7 @@ See [SPEC.md](./SPEC.md) for the original Phase 1 spec and
 ## Project layout
 
 ```
-src/flights_mcp/
+src/trip_search_mcp/
 ├── server.py              FastMCP entry point
 ├── logging_config.py      JSON-line file logger
 ├── errors.py              Error codes and envelope

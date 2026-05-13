@@ -13,11 +13,11 @@ from typing import Any
 
 from pydantic import ValidationError
 
-from flights_mcp.cache import TTLCache, canonical_key
-from flights_mcp.errors import ErrorCode, ToolError, error_response
-from flights_mcp.fli_backend.client import FliClient
-from flights_mcp.logging_config import log_event
-from flights_mcp.models import (
+from trip_search_mcp.cache import TTLCache, canonical_key
+from trip_search_mcp.errors import ErrorCode, ToolError, error_response
+from trip_search_mcp.fli_backend.client import FliClient
+from trip_search_mcp.logging_config import log_event
+from trip_search_mcp.models import (
     SearchCheapestDatesInput,
     SearchCheapestDatesResult,
 )
@@ -55,7 +55,7 @@ PRE-CALL ELICITATION: Before calling this tool, ensure the user has expressed:
 
 RESULT PRESENTATION: Render the results as a sorted list with the cheapest entries highlighted, or a small date grid if the range is short. Each entry shows the departure date, the return date (if round-trip), and the total price with currency. Lead with the cheapest. Offer to deep-dive into a specific date with `search_flights` once the user picks one."""
 
-_logger = logging.getLogger("flights_mcp")
+_logger = logging.getLogger("trip_search_mcp")
 
 
 async def search_cheapest_dates(

@@ -12,7 +12,7 @@ Eli asked for hotel search alongside the existing flight search. He uses Google 
 
 Architectural pattern we're following: same approach as the fli migration. A new provider backend (`fast_hotels_backend/`) mirrors the existing `fli_backend/`, exposes a clean shape via the existing models pattern, and lights up a new MCP tool registered alongside the existing two.
 
-**Architectural decision: keep the repo named `flights-mcp` for now. Add hotels as a sibling backend inside it.**
+**Architectural decision: keep the repo named `trip-search-mcp` for now. Add hotels as a sibling backend inside it.**
 
 The "right" long-term name might be `travel-mcp` (or similar) once the scope clearly exceeds flights, but a rename right now is one-time disruption: repo URL, Claude Desktop config path, AGENTS.md, memory entries, all need updating. Not blocking value. If a third domain ever gets added (cars, activities, something else), revisit the rename then. For one new tool, pragmatism wins.
 
@@ -73,11 +73,11 @@ Goal: a working `search_hotels` MCP tool that returns hotel offers in a clean st
 ### In scope
 
 **New code:**
-- `src/flights_mcp/fast_hotels_backend/` package:
+- `src/trip_search_mcp/fast_hotels_backend/` package:
   - `client.py`: thin wrapper over `fast_hotels.SearchHotels` (or whatever the library names its main class), with the injectable pattern for fixture-driven tests
   - `normalize.py`: adapts the library's response to a new `HotelOffer` model
-- `src/flights_mcp/tools/search_hotels.py`: the MCP tool function with description and orchestration
-- `src/flights_mcp/models.py` additions: `HotelOffer` and `SearchHotelsInput`
+- `src/trip_search_mcp/tools/search_hotels.py`: the MCP tool function with description and orchestration
+- `src/trip_search_mcp/models.py` additions: `HotelOffer` and `SearchHotelsInput`
 
 **New tool surface (`search_hotels` input):**
 

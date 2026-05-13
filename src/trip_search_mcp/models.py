@@ -3,7 +3,7 @@
 Input validation enforces IATA format, date sanity, passenger constraints, and
 enum membership at the boundary — Claude's malformed input never reaches the
 provider client. Output models are provider-neutral; the fli parsing types
-live inside `flights_mcp.fli_backend`.
+live inside `trip_search_mcp.fli_backend`.
 """
 from __future__ import annotations
 

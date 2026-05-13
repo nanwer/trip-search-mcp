@@ -1,5 +1,5 @@
-"""FastMCP server entry point. Run via `fastmcp run src/flights_mcp/server.py`
-or `python -m flights_mcp.server`."""
+"""FastMCP server entry point. Run via `fastmcp run src/trip_search_mcp/server.py`
+or `python -m trip_search_mcp.server`."""
 from __future__ import annotations
 
 import os
@@ -24,16 +24,16 @@ warnings.showwarning = _drop_authlib_deprecation
 
 from fastmcp import FastMCP  # noqa: E402 — must follow the warning hook above
 
-from flights_mcp.cache import TTLCache
-from flights_mcp.fli_backend.client import FliClient
-from flights_mcp.logging_config import configure_logging, log_event
-from flights_mcp.serpapi_hotels_backend.client import SerpAPIHotelsClient
-from flights_mcp.tools.search_cheapest_dates import (
+from trip_search_mcp.cache import TTLCache
+from trip_search_mcp.fli_backend.client import FliClient
+from trip_search_mcp.logging_config import configure_logging, log_event
+from trip_search_mcp.serpapi_hotels_backend.client import SerpAPIHotelsClient
+from trip_search_mcp.tools.search_cheapest_dates import (
     TOOL_DESCRIPTION as CHEAPEST_DATES_DESCRIPTION,
     search_cheapest_dates,
 )
-from flights_mcp.tools.search_flights import TOOL_DESCRIPTION, search_flights
-from flights_mcp.tools.search_hotels import (
+from trip_search_mcp.tools.search_flights import TOOL_DESCRIPTION, search_flights
+from trip_search_mcp.tools.search_hotels import (
     TOOL_DESCRIPTION as HOTELS_DESCRIPTION,
     search_hotels,
 )
@@ -61,7 +61,7 @@ def _build_hotels_client() -> SerpAPIHotelsClient | None:
 
 _HOTELS_CLIENT = _build_hotels_client()
 
-mcp = FastMCP("flights-mcp")
+mcp = FastMCP("trip-search-mcp")
 
 
 @mcp.tool(name="search_flights", description=TOOL_DESCRIPTION)

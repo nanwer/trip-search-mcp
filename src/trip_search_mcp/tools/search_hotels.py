@@ -15,15 +15,15 @@ from typing import Any
 
 from pydantic import ValidationError
 
-from flights_mcp.cache import TTLCache, canonical_key
-from flights_mcp.errors import ErrorCode, ToolError, error_response
-from flights_mcp.logging_config import log_event
-from flights_mcp.models import (
+from trip_search_mcp.cache import TTLCache, canonical_key
+from trip_search_mcp.errors import ErrorCode, ToolError, error_response
+from trip_search_mcp.logging_config import log_event
+from trip_search_mcp.models import (
     HotelSortBy,
     SearchHotelsInput,
     SearchHotelsResult,
 )
-from flights_mcp.serpapi_hotels_backend.client import SerpAPIHotelsClient
+from trip_search_mcp.serpapi_hotels_backend.client import SerpAPIHotelsClient
 
 TOOL_NAME = "search_hotels"
 
@@ -82,7 +82,7 @@ Do NOT render the `images` field as photo elements. Hotel image CDNs (Google's s
 
 Sort cards by the same `sort_by` the user requested. For a single result, prose is fine."""
 
-_logger = logging.getLogger("flights_mcp")
+_logger = logging.getLogger("trip_search_mcp")
 
 
 async def search_hotels(

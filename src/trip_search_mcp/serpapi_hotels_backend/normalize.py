@@ -10,8 +10,8 @@ import hashlib
 from datetime import date
 from urllib.parse import quote_plus
 
-from flights_mcp.models import HotelOffer, HotelSortBy
-from flights_mcp.serpapi_hotels_backend.raw import (
+from trip_search_mcp.models import HotelOffer, HotelSortBy
+from trip_search_mcp.serpapi_hotels_backend.raw import (
     SerpHotelProperty,
     SerpHotelsResponse,
 )

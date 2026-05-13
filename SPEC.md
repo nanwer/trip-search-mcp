@@ -222,7 +222,7 @@ Environment variables only, no config files in Phase 1.
 | AMADEUS_CLIENT_ID | yes | From Amadeus Self-Service workspace. |
 | AMADEUS_CLIENT_SECRET | yes | From Amadeus Self-Service workspace. |
 | AMADEUS_ENV | yes | `test` or `production`. Determines the base URL. Also influences user-facing error messages. |
-| LOG_FILE_PATH | no | Default `~/.flights-mcp/logs/flight-search.log`. Must be an absolute path. Do not use CWD-relative paths; stdio transport inherits CWD from the MCP client and the resulting path is unpredictable. |
+| LOG_FILE_PATH | no | Default `~/.trip-search-mcp/logs/flight-search.log`. Must be an absolute path. Do not use CWD-relative paths; stdio transport inherits CWD from the MCP client and the resulting path is unpredictable. |
 | LOG_LEVEL | no | Default INFO. |
 | CACHE_TTL_SECONDS | no | Default 300. |
 
@@ -256,12 +256,12 @@ Phase 1 is done when all of the following are true:
 ## File layout
 
 ```
-flights-mcp/
+trip-search-mcp/
 ├── README.md
 ├── pyproject.toml
 ├── .env.example
 ├── .gitignore
-├── src/flights_mcp/
+├── src/trip_search_mcp/
 │   ├── __init__.py
 │   ├── server.py              # FastMCP app, tool registration
 │   ├── tools/

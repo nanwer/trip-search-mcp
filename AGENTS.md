@@ -33,7 +33,7 @@ Claude Desktop, Claude Code, or claude.ai web:
 After the restart, sanity-check the subprocess is running on current code:
 
 ```bash
-ps -o lstart=,command= -p $(pgrep -f flights_mcp.server | head -1)
+ps -o lstart=,command= -p $(pgrep -f trip_search_mcp.server | head -1)
 ```
 
 The start time should be recent. If it's older than the latest commit

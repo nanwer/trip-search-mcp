@@ -8,9 +8,9 @@ from __future__ import annotations
 import httpx
 import pytest
 
-from flights_mcp.cache import TTLCache
-from flights_mcp.serpapi_hotels_backend.client import SerpAPIHotelsClient
-from flights_mcp.tools.search_hotels import search_hotels
+from trip_search_mcp.cache import TTLCache
+from trip_search_mcp.serpapi_hotels_backend.client import SerpAPIHotelsClient
+from trip_search_mcp.tools.search_hotels import search_hotels
 
 
 def _client_with(handler) -> SerpAPIHotelsClient:
@@ -176,7 +176,7 @@ async def test_second_identical_call_is_cache_hit(serpapi_hotels_success):
 async def test_cache_key_namespaced_per_tool(serpapi_hotels_success):
     """The hotels cache must not collide with flights' cache for
     identical-shape inputs that happen to overlap."""
-    from flights_mcp.tools.search_flights import search_flights as flights_search
+    from trip_search_mcp.tools.search_flights import search_flights as flights_search
     # Construct a flight client that we won't actually call — the test
     # only proves both tools can coexist in one cache without crosstalk.
     cache = TTLCache(ttl_seconds=300)

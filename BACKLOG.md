@@ -89,7 +89,7 @@ and tell me if the price drops below €600."
 - New MCP tool: `watch_flight_price(query: ..., threshold: float, ...) -> watch_id`.
 - New MCP tool: `list_active_watches() -> list[Watch]`.
 - New MCP tool: `cancel_watch(watch_id)`.
-- Backing store: SQLite next to the JSON log (`~/.flights-mcp/watches.db`).
+- Backing store: SQLite next to the JSON log (`~/.trip-search-mcp/watches.db`).
 - Scheduler: a separate background task in the FastMCP server, or a cron
   job that talks to the MCP via a subprocess invocation. Background task
   is cleaner — FastMCP supports app-level lifespan hooks.

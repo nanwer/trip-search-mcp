@@ -8,13 +8,13 @@ from urllib.parse import parse_qs, urlparse
 
 import pytest
 
-from flights_mcp.models import HotelSortBy
-from flights_mcp.serpapi_hotels_backend.normalize import (
+from trip_search_mcp.models import HotelSortBy
+from trip_search_mcp.serpapi_hotels_backend.normalize import (
     _compute_offer_id,
     booking_url_for,
     build_offers,
 )
-from flights_mcp.serpapi_hotels_backend.raw import SerpHotelsResponse
+from trip_search_mcp.serpapi_hotels_backend.raw import SerpHotelsResponse
 
 
 def _build(resp_dict, **overrides):

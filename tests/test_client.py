@@ -6,9 +6,9 @@ from __future__ import annotations
 
 import pytest
 
-from flights_mcp.errors import ErrorCode, ToolError
-from flights_mcp.fli_backend.client import FliClient
-from flights_mcp.models import (
+from trip_search_mcp.errors import ErrorCode, ToolError
+from trip_search_mcp.fli_backend.client import FliClient
+from trip_search_mcp.models import (
     MaxStops,
     SearchCheapestDatesInput,
     SearchFlightsInput,

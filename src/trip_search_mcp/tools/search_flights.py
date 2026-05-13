@@ -12,11 +12,11 @@ from typing import Any
 
 from pydantic import ValidationError
 
-from flights_mcp.cache import TTLCache, canonical_key
-from flights_mcp.errors import ErrorCode, ToolError, error_response
-from flights_mcp.fli_backend.client import FliClient
-from flights_mcp.logging_config import log_event
-from flights_mcp.models import (
+from trip_search_mcp.cache import TTLCache, canonical_key
+from trip_search_mcp.errors import ErrorCode, ToolError, error_response
+from trip_search_mcp.fli_backend.client import FliClient
+from trip_search_mcp.logging_config import log_event
+from trip_search_mcp.models import (
     MaxStops,
     SearchFlightsInput,
     SearchFlightsResult,
@@ -69,7 +69,7 @@ RESULT PRESENTATION: When returning 2 or more results to the user, render them a
 
 Sort cards by price ascending. For a single result, prose is fine."""
 
-_logger = logging.getLogger("flights_mcp")
+_logger = logging.getLogger("trip_search_mcp")
 
 
 def _no_results_message(origin: str, destination: str, departure_date: str) -> str:

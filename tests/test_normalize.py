@@ -7,14 +7,14 @@ from urllib.parse import parse_qs, urlparse
 
 import pytest
 
-from flights_mcp.fli_backend.normalize import (
+from trip_search_mcp.fli_backend.normalize import (
     _compute_offer_id,
     _iso_duration,
     booking_url_for,
     build_date_offers,
     build_offers,
 )
-from flights_mcp.models import CabinClass
+from trip_search_mcp.models import CabinClass
 
 
 # ----- formatting helpers ----------------------------------------------------

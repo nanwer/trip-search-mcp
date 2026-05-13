@@ -29,13 +29,13 @@ from fli.models import (
 )
 from fli.search import SearchDates, SearchFlights
 
-from flights_mcp.errors import ErrorCode, ToolError
-from flights_mcp.fli_backend.normalize import (
+from trip_search_mcp.errors import ErrorCode, ToolError
+from trip_search_mcp.fli_backend.normalize import (
     booking_url_for,
     build_date_offers,
     build_offers,
 )
-from flights_mcp.models import (
+from trip_search_mcp.models import (
     DatePriceOffer,
     FlightOffer,
     MaxStops,

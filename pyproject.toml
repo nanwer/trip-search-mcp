@@ -3,13 +3,16 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "flights-mcp"
-version = "0.1.0"
-description = "MCP server exposing Google Flights search (via the fli library) as a tool for Claude and other MCP clients"
+name = "trip-search-mcp"
+version = "0.2.0"
+description = "MCP server giving Claude live access to Google Flights and Google Hotels — search trips and compare dates in plain English"
 readme = "README.md"
 requires-python = ">=3.12"
 license = "MIT"
-keywords = ["mcp", "model-context-protocol", "claude", "flights", "google-flights"]
+keywords = [
+    "mcp", "model-context-protocol", "claude",
+    "flights", "google-flights", "hotels", "google-hotels", "travel",
+]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
@@ -37,10 +40,10 @@ dev = [
 ]
 
 [project.scripts]
-flights-mcp = "flights_mcp.server:main"
+trip-search-mcp = "trip_search_mcp.server:main"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/flights_mcp"]
+packages = ["src/trip_search_mcp"]
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"

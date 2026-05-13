@@ -61,13 +61,13 @@ If anything in 0.1, 0.2, or 0.3 is unexpected, pause and re-evaluate.
 
 ## Phase 1: Swap the data layer
 
-Goal: replace `src/flights_mcp/serpapi/` with `src/flights_mcp/fli_backend/`. The `search_flights` tool gains three filter params it didn't have, otherwise its surface stays.
+Goal: replace `src/trip_search_mcp/serpapi/` with `src/trip_search_mcp/fli_backend/`. The `search_flights` tool gains three filter params it didn't have, otherwise its surface stays.
 
 ### In scope
 
 **New code:**
 
-- `src/flights_mcp/fli_backend/` package containing:
+- `src/trip_search_mcp/fli_backend/` package containing:
   - `client.py`: thin wrapper around `fli.search.SearchFlights` and (Phase 2) `SearchDates`, with the injectable pattern so tests can substitute fixtures
   - `normalize.py`: adapts `FlightResult` → existing `FlightOffer` model
 
@@ -131,7 +131,7 @@ Goal: replace `src/flights_mcp/serpapi/` with `src/flights_mcp/fli_backend/`. Th
 
 ### Cleanup
 
-- Delete `src/flights_mcp/serpapi/` after `fli_backend/` is verified working end-to-end
+- Delete `src/trip_search_mcp/serpapi/` after `fli_backend/` is verified working end-to-end
 - Tag the last SerpAPI commit (`git tag pre-fli-migration`) before deletion in case you need to revert
 
 ---
@@ -214,7 +214,7 @@ Migration is done when:
 5. `search_cheapest_dates(origin="HEL", destination="IAD", start_date="2026-05-15", end_date="2026-05-25", trip_duration=11, is_round_trip=true)` returns a sorted list of `DatePriceOffer`
 6. Error states match the revised contract; no exceptions leak to Claude
 7. All tests pass against fixtures; no live API calls in the test suite
-8. `src/flights_mcp/serpapi/` no longer exists in the codebase
+8. `src/trip_search_mcp/serpapi/` no longer exists in the codebase
 9. PRE-CALL ELICITATION and RESULT PRESENTATION blocks still in both tools' descriptions
 10. `FlightOffer.booking_url` still populated on every offer (regression check from previous phase)
 

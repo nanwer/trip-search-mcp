@@ -1,4 +1,4 @@
-from flights_mcp.errors import ErrorCode, ToolError, error_response
+from trip_search_mcp.errors import ErrorCode, ToolError, error_response
 
 
 def test_error_code_values_match_spec():

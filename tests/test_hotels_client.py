@@ -7,9 +7,9 @@ from __future__ import annotations
 import httpx
 import pytest
 
-from flights_mcp.errors import ErrorCode, ToolError
-from flights_mcp.models import HotelSortBy, SearchHotelsInput
-from flights_mcp.serpapi_hotels_backend.client import SerpAPIHotelsClient
+from trip_search_mcp.errors import ErrorCode, ToolError
+from trip_search_mcp.models import HotelSortBy, SearchHotelsInput
+from trip_search_mcp.serpapi_hotels_backend.client import SerpAPIHotelsClient
 
 
 def _make_client(handler) -> SerpAPIHotelsClient:

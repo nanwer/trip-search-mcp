@@ -18,10 +18,10 @@ from typing import Any
 import httpx
 from pydantic import ValidationError
 
-from flights_mcp.errors import ErrorCode, ToolError
-from flights_mcp.models import HotelOffer, SearchHotelsInput
-from flights_mcp.serpapi_hotels_backend.normalize import build_offers
-from flights_mcp.serpapi_hotels_backend.raw import SerpHotelsResponse
+from trip_search_mcp.errors import ErrorCode, ToolError
+from trip_search_mcp.models import HotelOffer, SearchHotelsInput
+from trip_search_mcp.serpapi_hotels_backend.normalize import build_offers
+from trip_search_mcp.serpapi_hotels_backend.raw import SerpHotelsResponse
 
 BASE_URL = "https://serpapi.com"
 _SEARCH_PATH = "/search"

@@ -3,9 +3,9 @@ from __future__ import annotations
 
 import pytest
 
-from flights_mcp.cache import TTLCache
-from flights_mcp.fli_backend.client import FliClient
-from flights_mcp.tools.search_cheapest_dates import search_cheapest_dates
+from trip_search_mcp.cache import TTLCache
+from trip_search_mcp.fli_backend.client import FliClient
+from trip_search_mcp.tools.search_cheapest_dates import search_cheapest_dates
 
 
 class _MockSearcher:
@@ -140,7 +140,7 @@ async def test_second_identical_call_is_cache_hit(fli_dates_flex):
 
 async def test_cache_key_namespaced_apart_from_search_flights(fli_dates_flex, fli_round_trip):
     """search_flights and search_cheapest_dates must not share cache entries."""
-    from flights_mcp.tools.search_flights import search_flights
+    from trip_search_mcp.tools.search_flights import search_flights
 
     flight_searcher = _MockSearcher(results=fli_round_trip)
     date_searcher = _MockSearcher(results=fli_dates_flex)

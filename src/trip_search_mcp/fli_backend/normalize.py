@@ -22,7 +22,7 @@ from urllib.parse import quote_plus
 from fli.models import FlightLeg, FlightResult
 from fli.search import DatePrice
 
-from flights_mcp.models import (
+from trip_search_mcp.models import (
     CabinClass,
     DatePriceOffer,
     FlightOffer,

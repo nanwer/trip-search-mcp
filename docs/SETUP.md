@@ -24,8 +24,8 @@ does" version.
 ## Step 1 — Clone the repository
 
 ```bash
-git clone https://github.com/nanwer/flights-mcp.git
-cd flights-mcp
+git clone https://github.com/nanwer/trip-search-mcp.git
+cd trip-search-mcp
 ```
 
 If you don't have `git`, install it first. On macOS the easiest way is
@@ -67,10 +67,10 @@ pip install -e .
 ### Verify
 
 ```bash
-.venv/bin/python -c "from flights_mcp.server import mcp; print(mcp.name)"
+.venv/bin/python -c "from trip_search_mcp.server import mcp; print(mcp.name)"
 ```
 
-Should print `flights-mcp`. If you see an `ImportError`, the install didn't
+Should print `trip-search-mcp`. If you see an `ImportError`, the install didn't
 complete — re-run the previous command and read the output.
 
 ---
@@ -117,9 +117,9 @@ entry).
 ```json
 {
   "mcpServers": {
-    "flights": {
-      "command": "/ABSOLUTE/PATH/TO/flights-mcp/.venv/bin/python",
-      "args": ["-m", "flights_mcp.server"]
+    "trip-search": {
+      "command": "/ABSOLUTE/PATH/TO/trip-search-mcp/.venv/bin/python",
+      "args": ["-m", "trip_search_mcp.server"]
     }
   }
 }
@@ -130,9 +130,9 @@ entry).
 ```json
 {
   "mcpServers": {
-    "flights": {
-      "command": "/ABSOLUTE/PATH/TO/flights-mcp/.venv/bin/python",
-      "args": ["-m", "flights_mcp.server"],
+    "trip-search": {
+      "command": "/ABSOLUTE/PATH/TO/trip-search-mcp/.venv/bin/python",
+      "args": ["-m", "trip_search_mcp.server"],
       "env": {
         "SERPAPI_KEY": "paste-your-serpapi-key-here"
       }
@@ -147,7 +147,7 @@ repo and append `/.venv/bin/python`. Example:
 
 ```bash
 echo "$(pwd)/.venv/bin/python"
-# → /Users/yourname/code/flights-mcp/.venv/bin/python
+# → /Users/yourname/code/trip-search-mcp/.venv/bin/python
 ```
 
 Save the file, then **fully quit Claude Desktop with ⌘Q** and reopen. Closing
@@ -164,9 +164,9 @@ hotels.
 ```json
 {
   "mcpServers": {
-    "flights": {
-      "command": "C:\\path\\to\\flights-mcp\\.venv\\Scripts\\python.exe",
-      "args": ["-m", "flights_mcp.server"],
+    "trip-search": {
+      "command": "C:\\path\\to\\trip-search-mcp\\.venv\\Scripts\\python.exe",
+      "args": ["-m", "trip_search_mcp.server"],
       "env": {
         "SERPAPI_KEY": "paste-your-serpapi-key-here"
       }
@@ -180,16 +180,16 @@ hotels.
 Flights-only:
 
 ```bash
-claude mcp add flights \
-  -- /ABSOLUTE/PATH/TO/flights-mcp/.venv/bin/python -m flights_mcp.server
+claude mcp add trip-search \
+  -- /ABSOLUTE/PATH/TO/trip-search-mcp/.venv/bin/python -m trip_search_mcp.server
 ```
 
 With hotels enabled:
 
 ```bash
-claude mcp add flights \
+claude mcp add trip-search \
   --env SERPAPI_KEY=paste-your-serpapi-key-here \
-  -- /ABSOLUTE/PATH/TO/flights-mcp/.venv/bin/python -m flights_mcp.server
+  -- /ABSOLUTE/PATH/TO/trip-search-mcp/.venv/bin/python -m trip_search_mcp.server
 ```
 
 Then `claude` to start a session; the tools are available.
@@ -197,8 +197,8 @@ Then `claude` to start a session; the tools are available.
 ### Other clients
 
 Any MCP client that supports the stdio transport. Use:
-- **Command:** `/ABSOLUTE/PATH/TO/flights-mcp/.venv/bin/python`
-- **Arguments:** `-m flights_mcp.server`
+- **Command:** `/ABSOLUTE/PATH/TO/trip-search-mcp/.venv/bin/python`
+- **Arguments:** `-m trip_search_mcp.server`
 - **Environment (optional):** `SERPAPI_KEY=<your-key>` to enable `search_hotels`.
 
 ---
@@ -257,7 +257,7 @@ disk when Claude Desktop first launched it.
 
 Diagnose:
 ```bash
-ps -o lstart=,command= -p $(pgrep -f flights_mcp.server | head -1)
+ps -o lstart=,command= -p $(pgrep -f trip_search_mcp.server | head -1)
 ```
 
 If the start time is older than your last `git pull`, the subprocess is
@@ -270,7 +270,7 @@ stale. Fix:
 The same applies after any `pip install -e .` rebuild or git pull that
 changes server code.
 
-### "ModuleNotFoundError: No module named 'flights_mcp'"
+### "ModuleNotFoundError: No module named 'trip_search_mcp'"
 
 The Python in `command` doesn't have the package installed. Either:
 - You pointed to the system Python, not the project venv. Fix the path.
@@ -310,7 +310,7 @@ To test the integration without going through Claude Desktop:
 ```bash
 .venv/bin/python -c "
 import asyncio, json
-from flights_mcp.server import search_flights_tool
+from trip_search_mcp.server import search_flights_tool
 r = asyncio.run(search_flights_tool.fn(
     origin='HEL', destination='IAD',
     departure_date='2026-05-18', return_date='2026-05-29', adults=1,
