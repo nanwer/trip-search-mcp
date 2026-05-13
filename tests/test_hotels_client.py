@@ -51,7 +51,7 @@ async def test_search_returns_normalized_offers(serpapi_hotels_success):
     assert captured["params"]["check_in_date"] == "2026-06-15"
     assert captured["params"]["check_out_date"] == "2026-06-18"
     assert captured["params"]["adults"] == "2"
-    assert captured["params"]["currency"] == "USD"
+    assert captured["params"]["currency"] == "EUR"
     assert captured["params"]["api_key"] == "fake-key"
 
 

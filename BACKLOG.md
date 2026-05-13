@@ -6,18 +6,20 @@ Each entry is sized so a fresh Claude Code session can act on it cold.
 
 ---
 
-## 1. Booking URL deep-linking (flights AND hotels)
+## 1. Booking URL deep-linking (flights)
+
+**Hotels: shipped.** As of the post-Phase-2.5 live-testing fix, hotel
+`booking_url` now deep-links to the specific property's Google Hotels
+entity page using SerpAPI's `property_token`
+(`https://www.google.com/travel/hotels/entity/{property_token}?check_in=...&check_out=...`).
+A future enhancement is still possible: a `serpapi_property_details_link`
+follow-up call would surface direct booking-partner URLs and the property's
+postal address (currently `address` is always null on offers).
 
 **Today (flights):** Every `FlightOffer.booking_url` is the same generic
 Google Flights search URL for the (origin, destination, dates) tuple.
 Clicking it lands the user on the search results page; they then have to
 find "the same offer" Claude told them about and click through.
-
-**Today (hotels):** Every `HotelOffer.booking_url` is the same generic
-Google Hotels search URL for the (location, check-in, check-out) tuple,
-even though SerpAPI returns a `property_token` per result. A
-`serpapi_property_details_link` follow-up call would surface direct
-booking partner URLs for the specific property.
 
 **Wanted:** A URL that opens the offer's specific booking flow on the
 airline (or Google Flights') booking page.
@@ -100,11 +102,44 @@ from "search tool" to "deal-hunting agent."
 
 ---
 
+## 4. Hotel property_details follow-up (address + booking partners)
+
+**Today:** `HotelOffer.address` is always null because SerpAPI's
+google_hotels list endpoint doesn't carry per-property addresses. The
+list response does include a `serpapi_property_details_link` (and the
+`property_token` we already capture) — a second call against that endpoint
+would surface the postal address, booking-partner URLs, and richer
+metadata for a single property.
+
+**Wanted:** A `get_hotel_details(offer_id)` tool that takes a previously
+returned offer's `property_token`, calls SerpAPI's property_details
+endpoint, and returns the full address + per-partner booking URLs.
+
+**Implementation sketch:**
+
+- New MCP tool: `get_hotel_details(property_token)` (or accept `offer_id`
+  and look it up).
+- Single SerpAPI call to the property_details endpoint.
+- Returns a `HotelDetails` model with address, booking partners (name +
+  price + URL each), full amenity list, reviews summary.
+- Quota-conscious: this is a second SerpAPI call per offer the user wants
+  to drill into. Cache aggressively (TTL ~6h).
+
+This is opportunistic — most users don't need address for booking, and
+Claude can communicate location via GPS / map links from the existing
+fields. Pick up when an address-driven workflow shows up (e.g.,
+"hotels near this specific landmark").
+
+---
+
 ## Suggested order
 
 1. **Multi-airport / city codes** — small, contained, materially improves UX.
-2. **Deep-linking** — depends on upstream; file the issue early so it can
-   bake while you build other things.
-3. **Monitoring** — most ambitious; tackle after the previous two land or
+2. **Deep-linking (flights)** — depends on upstream; file the issue early
+   so it can bake while you build other things. (Hotels deep-linking is
+   already shipped.)
+3. **Hotel property_details follow-up** — surfaces address + booking
+   partners; nice-to-have, opportunistic.
+4. **Monitoring** — most ambitious; tackle after the previous two land or
    when the personal motivation is high (it's the one most likely to pay
    for itself on a single good deal).

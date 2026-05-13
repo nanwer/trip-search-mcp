@@ -251,7 +251,7 @@ entries sorted cheapest first. `return_date` is `null` for one-way.
 | `rooms` | 1 | 1–10. |
 | `min_rating` | none | Star rating 1–5. Properties without a star rating are excluded when set. |
 | `min_review_score` | none | Google's native 0–5 review score (NOT 0–10). Properties without a review score are excluded when set. |
-| `max_price_per_night` | none | Per-night ceiling in the response currency (USD by default). |
+| `max_price_per_night` | none | Per-night ceiling in the response currency (EUR by default — matches flights' typical response currency for European-IP users). |
 | `required_amenities` | none | List of free-text amenity names. Best-effort substring match, case- and punctuation-insensitive ("wifi" matches "Free Wi-Fi"). |
 | `sort_by` | `BEST` | `BEST` / `PRICE_LOW` / `PRICE_HIGH` / `RATING` / `REVIEW_SCORE`. |
 | `max_results` | 10 | 1–25. |
@@ -260,7 +260,13 @@ Returns a `results` array of `HotelOffer` entries with `offer_id`, `name`,
 nights, `price_total`, `price_per_night`, `currency`, `star_rating`,
 `review_score` (0–5 scale), `review_count`, GPS coordinates, `amenities`,
 `images` (up to 5 URLs), `description`, `hotel_type`, and `booking_url`
-(Google Hotels search page with the query pre-filled).
+(deep link to the specific property's Google Hotels entity page, with
+check-in/check-out pre-filled).
+
+**`address` is always null** on hotel offers — SerpAPI's google_hotels
+list endpoint doesn't carry per-property addresses. Use `latitude` /
+`longitude` for location; a future property_details follow-up call would
+surface postal addresses (tracked in BACKLOG).
 
 ### Window semantics
 

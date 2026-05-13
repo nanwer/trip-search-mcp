@@ -22,12 +22,30 @@ from flights_mcp.serpapi_hotels_backend.raw import (
 _IMAGE_CAP = 5
 
 
-def booking_url_for(location: str, check_in: str, check_out: str) -> str:
-    """Synthesize a Google Hotels search URL pre-filled with the user's
-    query. We do NOT link to a specific property — same trade-off as the
-    flights `booking_url`. A future "open the property page" tool can
-    follow up using SerpAPI's `property_token` + `serpapi_property_details_link`.
+def booking_url_for(
+    location: str,
+    check_in: str,
+    check_out: str,
+    *,
+    property_token: str | None = None,
+) -> str:
+    """Synthesize a Google Hotels URL for this offer.
+
+    When `property_token` is present (true for ~all SerpAPI list results),
+    we deep-link to the specific property's Google Hotels entity page
+    with check-in/check-out pre-filled. This is the same property_token
+    SerpAPI exposes for follow-up `property_details` calls; Google accepts
+    it directly in the URL path (returns 302 to the property page).
+
+    When `property_token` is missing — a rare fallback path — we fall back
+    to a search URL pre-filled with the user's query so the user still
+    lands somewhere useful.
     """
+    if property_token:
+        return (
+            f"https://www.google.com/travel/hotels/entity/{property_token}"
+            f"?check_in={check_in}&check_out={check_out}"
+        )
     q = f"Hotels in {location} from {check_in} to {check_out}"
     return f"https://www.google.com/travel/hotels?q={quote_plus(q)}"
 
@@ -116,7 +134,12 @@ def _to_offer(
         images=images,
         description=raw.description,
         hotel_type=raw.type,
-        booking_url=booking_url_for(location, check_in, check_out),
+        booking_url=booking_url_for(
+            location,
+            check_in,
+            check_out,
+            property_token=raw.property_token,
+        ),
     )
 
 

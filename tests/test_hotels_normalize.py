@@ -24,7 +24,7 @@ def _build(resp_dict, **overrides):
         location="Tampere",
         check_in="2026-06-15",
         check_out="2026-06-18",
-        currency="USD",
+        currency="EUR",
         sort_by=HotelSortBy.BEST,
         min_rating=None,
         min_review_score=None,
@@ -39,7 +39,8 @@ def _build(resp_dict, **overrides):
 # ----- booking_url -----------------------------------------------------------
 
 
-def test_booking_url_url_encoded_and_well_formed():
+def test_booking_url_search_fallback_when_no_property_token():
+    """No token → fall back to the pre-filled search URL."""
     url = booking_url_for("Notting Hill, London", "2026-06-15", "2026-06-18")
     parsed = urlparse(url)
     assert parsed.scheme == "https"
@@ -50,6 +51,30 @@ def test_booking_url_url_encoded_and_well_formed():
     assert "2026-06-15" in q
     assert "2026-06-18" in q
     assert " " not in url  # spaces URL-encoded
+
+
+def test_booking_url_deep_links_to_property_entity_when_token_present():
+    """Token → deep-link to the property's entity page with dates pre-filled."""
+    token = "ChoI4oTlisut8aeaARoNL2cvMTFkZjgyOXc2ORAB"
+    url = booking_url_for(
+        "Tampere", "2026-06-15", "2026-06-18",
+        property_token=token,
+    )
+    parsed = urlparse(url)
+    assert parsed.scheme == "https"
+    assert parsed.netloc == "www.google.com"
+    assert parsed.path == f"/travel/hotels/entity/{token}"
+    q = parse_qs(parsed.query)
+    assert q["check_in"] == ["2026-06-15"]
+    assert q["check_out"] == ["2026-06-18"]
+
+
+def test_booking_urls_differ_per_property(serpapi_hotels_success):
+    """Regression: every offer should have a DISTINCT booking_url (was the
+    same generic search URL before the property_token fix)."""
+    offers = _build(serpapi_hotels_success)
+    urls = [o.booking_url for o in offers]
+    assert len(set(urls)) == len(urls), f"booking_urls not distinct: {urls}"
 
 
 # ----- offer_id --------------------------------------------------------------
@@ -111,11 +136,14 @@ def test_build_offers_from_fixture(serpapi_hotels_success):
     assert offers[0].nights == 3
     assert offers[0].price_total == 333.0
     assert offers[0].price_per_night == 111.0
-    assert offers[0].currency == "USD"
+    assert offers[0].currency == "EUR"
     assert offers[0].hotel_type == "hotel"
     assert "Free breakfast" in offers[0].amenities
     assert offers[0].latitude == 61.5
-    assert offers[0].booking_url.startswith("https://www.google.com/travel/hotels")
+    # Now deep-links to the specific property's entity page.
+    assert offers[0].booking_url.startswith(
+        "https://www.google.com/travel/hotels/entity/"
+    )
 
 
 def test_build_offers_caps_images_at_5(serpapi_hotels_success):

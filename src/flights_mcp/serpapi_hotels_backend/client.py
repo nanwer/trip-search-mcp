@@ -28,9 +28,11 @@ _SEARCH_PATH = "/search"
 _REQUEST_TIMEOUT = httpx.Timeout(connect=5.0, read=30.0, write=5.0, pool=5.0)
 # We pin a single response currency rather than expose it as a tool input.
 # Matches the flights contract: "no currency input; documented in tool
-# description". Users who care about a different currency can submit a
-# future enhancement adding the input.
-_RESPONSE_CURRENCY = "USD"
+# description". EUR mirrors what fli returns by default for European-IP
+# users (Nophil's primary use case), so a hotel-vs-flight total comparison
+# doesn't require mental FX. Users who care about a different currency
+# can submit a future enhancement adding the input.
+_RESPONSE_CURRENCY = "EUR"
 
 # Mirror the body-error keyword maps used by the flights SerpAPI client
 # (which was retired during the fli migration, but the wisdom carries over).

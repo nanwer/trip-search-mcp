@@ -42,9 +42,11 @@ _NO_KEY_MESSAGE = (
 TOOL_DESCRIPTION = """\
 Search Google Hotels for a city, date range, and party size, returning a ranked list of available properties.
 
-Returns ranked hotel offers with name, photos, star rating, review score, price (per-night and total), top amenities, GPS coordinates, and a Google Hotels search URL. Does NOT book — the booking_url drops the user onto the Google Hotels results page where they can click through to a property and a booking partner.
+Returns ranked hotel offers with name, photos, star rating, review score, price (per-night and total), top amenities, GPS coordinates, and a per-property Google Hotels deep link. Does NOT book — the booking_url opens the specific property's Google Hotels entity page with the user's check-in/check-out pre-filled, where they can click through to a booking partner.
 
-Prices come back in **USD** by default (the server pins the request currency for predictability). The `currency` field on each offer reflects what was actually requested.
+Prices come back in **EUR** by default (matches the flights tool's typical response currency for European-IP users, so hotel-vs-flight totals are directly comparable). The server pins the request currency for predictability; the `currency` field on each offer reflects what was actually requested.
+
+**`address` is always null on offers** — SerpAPI's google_hotels list endpoint doesn't carry per-property addresses. Use `latitude`/`longitude` for location, or follow up with a property_details call (not yet implemented) for the postal address.
 
 The review score is **Google's native 0-5 scale** (e.g., 4.6 / 5), NOT a 0-10 scale. The star rating is the property's hotel class (1-5 stars, integer).
 
