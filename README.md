@@ -23,8 +23,12 @@ Once it's set up, you can ask Claude things like:
 > *(Later: "any deals?" — Claude re-runs all your watches and reports alerts.)*
 
 Claude does the search live (no stale data), summarizes the results, and
-gives you clickable booking links. Seven tools total — see "What can I
-ask?" below for the full set.
+gives you clickable booking links.
+
+**📋 Full feature list with example prompts: [FEATURES.md](./FEATURES.md)**
+
+Seven tools total — keep scrolling for the install guide, or jump to
+"What can I ask?" below for short examples.
 
 ---
 
