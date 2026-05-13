@@ -39,18 +39,19 @@ right tool and fills in the filters.
 **Non-stop only**
 > *"Show me only direct flights from Helsinki to JFK on May 18."* → `max_stops=NON_STOP`
 
-**Time-of-day window — outbound**
-> *"I need to leave San Francisco between 6am and noon on Friday."* → `departure_window="6-12"`
+**Time-of-day window — outbound only**
+> *"I need to leave San Francisco between 6am and noon on Friday."* → `departure_window="6-12"` (matches 06:00–11:59; a noon flight is the cutoff, not included)
 
 **Time-of-day window — separate outbound and return**
-> *"HEL to IAD May 18 returning May 29. I want morning outbounds (8am–noon) but I'm fine with red-eyes back (after 8pm)."* → `departure_window="8-12"`, `inbound_window="20-23"`
+> *"HEL to IAD May 18 returning May 29. Morning outbound (8am–noon), evening return (8pm–11pm)."* → `departure_window="8-12"`, `inbound_window="20-23"` (outbound 08:00–11:59, inbound 20:00–22:59 — both are exclusive on the right edge)
+
+**Return-leg-only constraint**
+> *"Any outbound to Tokyo on March 5, but I need to land back in NYC before 6pm on the 19th — so the return must leave Tokyo in the morning."* → `inbound_window="6-12"`
 
 **Airline preference (loyalty programs)**
-> *"Find flights to Bangkok in November, but only Star Alliance carriers — United, Lufthansa, Singapore, or Thai."* → `airlines=["UA", "LH", "SQ", "TG"]`
+> *"Find flights to Bangkok in November, prefer Star Alliance — United, Lufthansa, Singapore, or Thai."* → `airlines=["UA", "LH", "SQ", "TG"]` (returns offers where ANY leg is operated by one of these; mixed-carrier itineraries with non-Star-Alliance codeshares can still appear, so Claude will summarize each result's airlines)
 
-**Avoid specific carriers**
-> *"Anything from LAX to SYD in August, but not Qantas."*
-> (Claude will list the other major carriers as `airlines=[...]` — exclusion isn't a native filter)
+**Avoiding a carrier isn't a native filter.** The `airlines` parameter is inclusion-only and matches "any segment operated by any of these," so even listing the carriers you DO want can't fully exclude a specific airline (it could still appear on a codeshare leg of a returned offer). Workaround: Claude reviews the response and skips offers whose `airlines` list contains the one you want to avoid.
 
 **Premium cabins**
 > *"Business-class round-trip from Boston to Singapore, January 15 to January 30."* → `cabin_class="BUSINESS"`
@@ -168,8 +169,10 @@ Then start a Claude Code session and the tool is available.
 
 ## Tool reference
 
-One tool, `search_flights`. Claude reads a richer description than this; the
-short version:
+Two tools. Claude reads richer descriptions than these tables; this is the
+short version.
+
+### `search_flights` — flight options for specific dates
 
 | Parameter | Default | Notes |
 |---|---|---|
@@ -182,20 +185,66 @@ short version:
 | `infants` | 0 | 0–9, lap infants (must be ≤ adults). |
 | `cabin_class` | `ECONOMY` | `ECONOMY` / `PREMIUM_ECONOMY` / `BUSINESS` / `FIRST`. |
 | `max_stops` | `ANY` | `ANY` / `NON_STOP` / `ONE_STOP_OR_FEWER` / `TWO_OR_FEWER_STOPS`. "Or fewer" semantics. |
-| `departure_window` | none | `"HH-HH"` 24-hour local time, e.g. `"6-20"`. Applies to both legs. |
-| `airlines` | none | List of IATA airline codes to restrict to, e.g. `["AY", "FI"]`. |
+| `departure_window` | none | `"HH-HH"` 24-hour local time, e.g. `"8-20"`. **Outbound leg only.** See *Window semantics* below. |
+| `inbound_window` | none | Same format as `departure_window`, applied to the **return leg**. Has no effect on one-way searches. |
+| `airlines` | none | List of IATA airline codes, e.g. `["AY", "FI"]`. See *Airline filter semantics* below. |
 | `max_results` | 20 | 1–50. |
 
-Responses come back as a `results` array of offers. Each offer has
-`offer_id`, `total_price`, `currency`, `airlines`, `validating_airline`,
-`outbound`, `inbound` (null for one-way), `booking_url` (Google Flights
-link), plus nullable fields (`baggage_allowance`, `last_ticketing_date`,
-`seats_available` — these come up `null` because fli doesn't surface them).
+### `search_cheapest_dates` — date-flex price grid
 
-The `currency` in the response is whatever Google Flights returns for your
-region (typically EUR for European IPs, USD for US IPs). You can't pick it.
+| Parameter | Default | Notes |
+|---|---|---|
+| `origin` | required | 3-letter IATA airport code. |
+| `destination` | required | Same format as origin. |
+| `start_date` | required | Earliest acceptable departure date. |
+| `end_date` | required | Latest acceptable departure date. |
+| `trip_duration` | conditional | Days. **Required when `is_round_trip=true`**, 1–365. |
+| `is_round_trip` | `false` | When true, output includes a paired `return_date` per entry. |
+| `passengers` | 1 | 1–9. (Single field; no per-traveler-type breakdown.) |
+| `cabin_class` | `ECONOMY` | Same enum as `search_flights`. |
+| `max_stops` | `ANY` | Same enum as `search_flights`. |
+| `departure_window` | none | Same format and semantics as on `search_flights`. |
+| `airlines` | none | Same list semantics as on `search_flights`. |
 
-Errors are structured: `{"error": {"code": ..., "message": ..., "retryable": ...}}`.
+Returns a `results` array of `{departure_date, return_date, price, currency}`
+entries sorted cheapest first. `return_date` is `null` for one-way.
+
+### Window semantics
+
+`departure_window` and `inbound_window` are **inclusive of the start hour
+and exclusive of the end hour**:
+
+- `"8-20"` matches departures from `08:00` through `19:59` local time.
+- A `20:00` or `20:30` departure does NOT match `"8-20"`. Use `"8-21"` if
+  you want to include the 20:00 hour.
+
+This matches how most people read "between 8 and 8" — "8pm" is the cutoff,
+not the last hour included.
+
+### Airline filter semantics
+
+`airlines=["FI"]` returns offers where **at least one segment** is operated
+by Icelandair. It does NOT restrict to Icelandair-only itineraries:
+
+- Pure Finnair: appears if and only if `"AY"` is in the list (won't appear if you only listed `"FI"`).
+- Mixed Icelandair + American codeshare: appears if `"FI"` OR `"AA"` is in the list.
+
+There is no native "exclude this airline" filter. To bias against a carrier,
+list the carriers you DO want.
+
+### Response shape
+
+Each `search_flights` offer has: `offer_id`, `total_price`, `currency`,
+`price_per_adult`, `airlines`, `validating_airline`, `outbound`, `inbound`
+(null for one-way), `booking_url` (Google Flights link with the search
+pre-filled), plus nullable fields `baggage_allowance`, `last_ticketing_date`,
+`seats_available` (these come back `null` because fli doesn't surface them).
+
+The `currency` field reflects whatever Google Flights returns for your
+request region (typically EUR for European IPs, USD for US IPs). You can't
+pick it.
+
+Errors on either tool: `{"error": {"code": ..., "message": ..., "retryable": ...}}`.
 The four codes are `invalid_input`, `no_results`, `rate_limited`,
 `upstream_error`.
 
@@ -204,25 +253,29 @@ The four codes are `invalid_input`, `no_results`, `rate_limited`,
 ## Architecture
 
 ```
-search_flights() (MCP tool)
+search_flights()           search_cheapest_dates()
+    │                              │
+    ├── Pydantic input validation, tool-namespaced cache key
     │
-    ├── SearchFlightsInput (Pydantic validation)
-    ├── TTLCache (canonical-key, 5-min TTL)
     └── FliClient
-            ├── fli.search.SearchFlights (one upstream call, round-trip pairs in tuples)
-            └── normalize → list[FlightOffer]
+            ├── fli.search.SearchFlights → list[FlightOffer]
+            │     (round-trip pairs arrive as tuples; one upstream call)
+            └── fli.search.SearchDates   → list[DatePriceOffer]
+                  (sorted by price after normalization)
 ```
 
 `fli` handles HTTP, retries, and rate-limit backoff internally. The MCP
 server's only job is shaping requests and translating responses into our
-provider-neutral output models.
+provider-neutral output models. `inbound_window` is enforced as a
+post-filter in `normalize.py` since fli's native time filter doesn't bind
+the return leg.
 
 ---
 
 ## Development
 
 ```bash
-pytest                                       # 79 tests, all fixture-driven, no live API calls
+pytest                                       # 135 tests, all fixture-driven, no live API calls
 .venv/bin/python scripts/verify_fli.py       # capture fresh real-data fixtures (1 SearchFlights + 1 SearchDates call)
 ```
 
