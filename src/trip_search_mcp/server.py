@@ -34,9 +34,21 @@ from trip_search_mcp.tools.search_cheapest_dates import (
     search_cheapest_dates,
 )
 from trip_search_mcp.tools.search_flights import TOOL_DESCRIPTION, search_flights
+from trip_search_mcp.tools.cancel_watch import (
+    TOOL_DESCRIPTION as CANCEL_WATCH_DESCRIPTION,
+    cancel_watch,
+)
 from trip_search_mcp.tools.get_stay_details import (
     TOOL_DESCRIPTION as STAY_DETAILS_DESCRIPTION,
     get_stay_details,
+)
+from trip_search_mcp.tools.list_active_watches import (
+    TOOL_DESCRIPTION as LIST_WATCHES_DESCRIPTION,
+    list_active_watches,
+)
+from trip_search_mcp.tools.watch_flight_price import (
+    TOOL_DESCRIPTION as WATCH_FLIGHT_DESCRIPTION,
+    watch_flight_price,
 )
 from trip_search_mcp.tools.search_stays import (
     TOOL_DESCRIPTION as STAYS_DESCRIPTION,
@@ -197,6 +209,48 @@ async def get_stay_details_tool(
         adults=adults,
         currency=currency,
     )
+
+
+# ----- monitoring tools (deal hunting) ---------------------------------------
+
+
+@mcp.tool(name="watch_flight_price", description=WATCH_FLIGHT_DESCRIPTION)
+async def watch_flight_price_tool(
+    origin: str,
+    destination: str,
+    departure_date: str,
+    threshold_price: float,
+    currency: str = "EUR",
+    return_date: str | None = None,
+    adults: int = 1,
+    cabin_class: str = "ECONOMY",
+    max_stops: str = "ANY",
+    note: str | None = None,
+) -> dict[str, Any]:
+    return await watch_flight_price(
+        origin=origin, destination=destination,
+        departure_date=departure_date, threshold_price=threshold_price,
+        currency=currency, return_date=return_date,
+        adults=adults, cabin_class=cabin_class, max_stops=max_stops,
+        note=note,
+    )
+
+
+@mcp.tool(name="list_active_watches", description=LIST_WATCHES_DESCRIPTION)
+async def list_active_watches_tool(
+    refresh_after_hours: float = 6.0,
+    include_cancelled: bool = False,
+) -> dict[str, Any]:
+    return await list_active_watches(
+        client=_CLIENT,
+        refresh_after_hours=refresh_after_hours,
+        include_cancelled=include_cancelled,
+    )
+
+
+@mcp.tool(name="cancel_watch", description=CANCEL_WATCH_DESCRIPTION)
+async def cancel_watch_tool(watch_id: str) -> dict[str, Any]:
+    return await cancel_watch(watch_id=watch_id)
 
 
 def main() -> None:
