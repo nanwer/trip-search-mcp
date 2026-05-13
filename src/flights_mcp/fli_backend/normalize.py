@@ -16,6 +16,7 @@ That means most fields drop straight in, with formatting touch-ups for ISO
 from __future__ import annotations
 
 import hashlib
+import json
 from urllib.parse import quote_plus
 
 from fli.models import FlightLeg, FlightResult
@@ -105,7 +106,7 @@ def _dedupe_airlines(*itineraries: Itinerary | None) -> list[str]:
 def _compute_offer_id(
     *,
     airlines: list[str],
-    flight_numbers: list[str],
+    segments: list[tuple[str, str]],
     departure_date: str,
     return_date: str | None,
 ) -> str:
@@ -115,14 +116,29 @@ def _compute_offer_id(
     deterministic per query input, so cache invalidation works correctly,
     but the value isn't globally meaningful — only useful inside a single
     search response for cross-referencing.
+
+    Inputs:
+      - sorted airline IATA codes (set-like; ordering doesn't matter)
+      - ordered list of (flight_number, departure_time_local) tuples across
+        outbound segments then inbound segments. ORDER MATTERS — two
+        itineraries with identical flight numbers but different segment
+        timing (e.g. same-day connection vs overnight layover) must hash
+        differently, which the previous flight-number-only hash failed to
+        guarantee.
+      - departure_date
+      - return_date (empty string for one-way so it still gets canonicalized)
     """
-    payload = "|".join([
-        ",".join(sorted(airlines)),
-        ",".join(sorted(flight_numbers)),
-        departure_date,
-        return_date or "",
-    ])
-    return hashlib.sha256(payload.encode()).hexdigest()
+    canonical = json.dumps(
+        {
+            "airlines": sorted(airlines),
+            "segments": [list(t) for t in segments],  # JSON has no native tuples
+            "departure_date": departure_date,
+            "return_date": return_date or "",
+        },
+        sort_keys=True,
+        separators=(",", ":"),
+    )
+    return hashlib.sha256(canonical.encode()).hexdigest()
 
 
 def _to_offer(
@@ -154,16 +170,23 @@ def _to_offer(
     total = float(outbound_raw.price)
     per_adult = total / max(1, adults)
 
-    all_legs: list[FlightLeg] = list(outbound_raw.legs)
-    if inbound_raw:
-        all_legs += list(inbound_raw.legs)
     airlines = _dedupe_airlines(outbound, inbound)
-    flight_numbers = [_flight_number(leg) for leg in all_legs]
+    # Build (flight_number, departure_time_local) tuples in itinerary order:
+    # outbound legs first, then inbound legs. Order is meaningful for the
+    # offer_id hash — two itineraries with identical flight numbers but
+    # different segment timing (e.g. same-day connection vs overnight stay)
+    # must hash to distinct offer_ids.
+    segment_id_inputs: list[tuple[str, str]] = []
+    for seg in outbound.segments:
+        segment_id_inputs.append((seg.flight_number, seg.departure_time_local))
+    if inbound is not None:
+        for seg in inbound.segments:
+            segment_id_inputs.append((seg.flight_number, seg.departure_time_local))
 
     return FlightOffer(
         offer_id=_compute_offer_id(
             airlines=airlines,
-            flight_numbers=flight_numbers,
+            segments=segment_id_inputs,
             departure_date=departure_date,
             return_date=return_date,
         ),
@@ -193,9 +216,12 @@ def _parse_window(window: str | None) -> tuple[int, int] | None:
 def _inbound_hour_within(offer: FlightOffer, window: tuple[int, int]) -> bool:
     """True if the offer's inbound first-segment departure hour is in the window.
 
+    Semantics: inclusive of start, EXCLUSIVE of end. window=(8, 20) admits
+    hours 8 through 19 (08:00 through 19:59 local). A 20:00 or 20:30
+    departure does NOT match. This matches how humans typically read
+    "between 8am and 8pm" — "8pm" is the cutoff, not part of the range.
+
     One-way offers (inbound=None) trivially pass — no inbound leg to filter.
-    The hour comparison is inclusive on both bounds: window=(6, 20) admits
-    hour 20, drops hour 21.
     """
     if offer.inbound is None:
         return True
@@ -203,7 +229,7 @@ def _inbound_hour_within(offer: FlightOffer, window: tuple[int, int]) -> bool:
     # Time format is ISO 8601 with no offset: "2026-05-29T20:30:00"
     # Hour is characters 11-13.
     hour = int(first_inbound.departure_time_local[11:13])
-    return window[0] <= hour <= window[1]
+    return window[0] <= hour < window[1]
 
 
 def build_offers(

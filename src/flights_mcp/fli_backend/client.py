@@ -119,6 +119,29 @@ class FliClient:
 
     # ----- filter construction ----------------------------------------------
 
+    @staticmethod
+    def _time_restrictions_from_window(window: str | None) -> TimeRestrictions | None:
+        """Translate a user `departure_window` ('HH-HH', inclusive start /
+        exclusive end) into fli's `TimeRestrictions` (inclusive on both
+        bounds when forwarded to Google Flights).
+
+        Subtract 1 from the user's end so the upstream filter caps at the
+        last hour the user actually wants included. Example:
+          user "8-20"   → fli (earliest=8, latest=19)   admits 08:00-19:59
+          user "8-9"    → fli (earliest=8, latest=8)    admits 08:00-08:59
+          user "0-1"    → fli (earliest=0, latest=1)    admits 00:00-01:59
+                          (slightly looser than requested — fli's
+                          `latest_departure` is PositiveInt so we can't
+                          pass 0; this is the closest representable bound)
+        """
+        if not window:
+            return None
+        start_s, end_s = window.split("-")
+        start = int(start_s)
+        end = int(end_s)
+        latest = max(1, end - 1)
+        return TimeRestrictions(earliest_departure=start, latest_departure=latest)
+
     def _build_filters(self, p: SearchFlightsInput) -> FlightSearchFilters:
         try:
             origin = FliAirport[p.origin]
@@ -139,13 +162,7 @@ class FliClient:
                 f"Airline IATA code {e.args[0]!r} is not recognized.",
             ) from e
 
-        time_restrictions = None
-        if p.departure_window:
-            start_s, end_s = p.departure_window.split("-")
-            time_restrictions = TimeRestrictions(
-                earliest_departure=int(start_s),
-                latest_departure=int(end_s),
-            )
+        time_restrictions = self._time_restrictions_from_window(p.departure_window)
 
         segments = [
             FlightSegment(
@@ -156,13 +173,15 @@ class FliClient:
             )
         ]
         if p.return_date:
+            # fli's outbound-only filter doesn't constrain the return leg;
+            # we apply the user's `inbound_window` (if set) as a post-filter
+            # in normalize.build_offers. The outbound `time_restrictions`
+            # are intentionally NOT reused on the return segment.
             segments.append(FlightSegment(
                 departure_airport=[[destination, 0]],
                 arrival_airport=[[origin, 0]],
                 travel_date=p.return_date,
-                # Apply the same window to the return leg — users almost
-                # always want symmetric departure preferences.
-                time_restrictions=time_restrictions,
+                time_restrictions=None,
             ))
 
         return FlightSearchFilters(
@@ -240,13 +259,7 @@ class FliClient:
                 f"Airline IATA code {e.args[0]!r} is not recognized.",
             ) from e
 
-        time_restrictions = None
-        if p.departure_window:
-            start_s, end_s = p.departure_window.split("-")
-            time_restrictions = TimeRestrictions(
-                earliest_departure=int(start_s),
-                latest_departure=int(end_s),
-            )
+        time_restrictions = self._time_restrictions_from_window(p.departure_window)
 
         # SearchDates derives the date matrix from from_date/to_date/duration;
         # the flight_segments still need a placeholder travel_date inside the
@@ -262,11 +275,13 @@ class FliClient:
         if p.is_round_trip:
             # trip_duration is guaranteed set at this point by the model
             # validator; mypy can't see that across the Pydantic boundary.
+            # departure_window applies to the OUTBOUND segment only — same
+            # reasoning as in _build_filters.
             segments.append(FlightSegment(
                 departure_airport=[[destination, 0]],
                 arrival_airport=[[origin, 0]],
                 travel_date=p.start_date,  # placeholder; SearchDates ignores this
-                time_restrictions=time_restrictions,
+                time_restrictions=None,
             ))
 
         return DateSearchFilters(

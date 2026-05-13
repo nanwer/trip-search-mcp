@@ -42,9 +42,9 @@ Origin and destination are 3-letter IATA airport codes (HEL, JFK, LHR). The curr
 
 Filter parameters:
 - `max_stops`: one of `ANY` (default), `NON_STOP`, `ONE_STOP_OR_FEWER`, `TWO_OR_FEWER_STOPS`. The names mean "this many stops or fewer".
-- `departure_window`: a "HH-HH" string in 24-hour local time, e.g. `"6-20"` to restrict to outbound flights departing between 6am and 8pm local. **Applies to the outbound leg only.** Google Flights' native filter does not control the return leg.
-- `inbound_window`: a separate "HH-HH" window for the return leg. Same format as `departure_window`. Has no effect on one-way searches. When set, offers whose return-leg first segment departs outside this window are filtered out post-hoc.
-- `airlines`: an optional list of IATA airline codes (e.g. `["AY", "FI"]`) to restrict results to those carriers. Omit or pass null for no filter.
+- `departure_window`: a "HH-HH" string in 24-hour local time, e.g. `"8-20"` to restrict to outbound departures between 8am and 8pm local. **Hours are inclusive of the start and EXCLUSIVE of the end** — `"8-20"` matches 08:00 through 19:59 local time; a 20:00 or 20:30 departure does NOT match. **Applies to the outbound leg only.** Google Flights' native filter does not control the return leg.
+- `inbound_window`: a separate "HH-HH" window for the return leg. Same format and same inclusive-start/exclusive-end semantics as `departure_window`. Has no effect on one-way searches. When set, offers whose return-leg first segment departs outside this window are filtered out post-hoc.
+- `airlines`: an optional list of IATA airline codes. Shows offers where AT LEAST ONE of the listed airlines operates ANY segment of the itinerary. For example, `["FI"]` returns options operated entirely or partly by Icelandair; it does NOT restrict to Icelandair-only itineraries. Omit or pass null for no airline filter.
 
 Results from identical searches are cached for up to 5 minutes. If the user is about to act on a specific offer, re-run the search before committing to a number.
 

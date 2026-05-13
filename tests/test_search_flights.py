@@ -194,14 +194,16 @@ async def test_full_round_trip_matches_documented_shape(fli_round_trip):
 
 
 async def test_inbound_window_filters_through_tool(fli_round_trip):
-    """inbound_window threads from tool kwargs through to normalize."""
+    """inbound_window threads from tool kwargs through to normalize.
+    Fixture inbounds are 20:30 and 19:00. Window 6-20 (exclusive end)
+    keeps hour 19 only."""
     client, _ = _client_with(results=fli_round_trip)
     cache = TTLCache(ttl_seconds=300)
     result = await search_flights(
         client=client, cache=cache,
         origin="HEL", destination="IAD",
         departure_date="2026-05-18", return_date="2026-05-29",
-        inbound_window="6-19",  # drops the 20:30 inbound, keeps the 19:00 one
+        inbound_window="6-20",
     )
     assert "error" not in result
     assert len(result["results"]) == 1

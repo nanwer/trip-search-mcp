@@ -100,13 +100,52 @@ async def test_max_stops_passes_through(fli_one_way):
 
 
 async def test_departure_window_becomes_time_restrictions(fli_one_way):
+    """User-facing window is inclusive-start/exclusive-end; fli's
+    TimeRestrictions is inclusive on both bounds. We translate by passing
+    `latest = end - 1` so the upstream filter still cuts off where the user
+    wanted it to."""
     searcher = _MockSearcher(results=fli_one_way)
     client = FliClient(flight_searcher=searcher)
     await client.search(_input(departure_window="6-20"))
     tr = searcher.last_filters.flight_segments[0].time_restrictions
     assert tr is not None
     assert tr.earliest_departure == 6
-    assert tr.latest_departure == 20
+    assert tr.latest_departure == 19  # 20 - 1, exclusive-end translation
+
+
+async def test_departure_window_one_hour_width(fli_one_way):
+    """User "8-9" → fli (8, 8). fli's validator accepts earliest == latest."""
+    searcher = _MockSearcher(results=fli_one_way)
+    client = FliClient(flight_searcher=searcher)
+    await client.search(_input(departure_window="8-9"))
+    tr = searcher.last_filters.flight_segments[0].time_restrictions
+    assert tr.earliest_departure == 8
+    assert tr.latest_departure == 8
+
+
+async def test_departure_window_at_midnight_clamps_to_fli_minimum(fli_one_way):
+    """User "0-1" can't shrink to fli (0, 0) — latest_departure is PositiveInt.
+    We clamp at 1, accepting a slightly looser window (00:00-01:59 instead of
+    00:00-00:59). Documented quirk for the marginal midnight-only case."""
+    searcher = _MockSearcher(results=fli_one_way)
+    client = FliClient(flight_searcher=searcher)
+    await client.search(_input(departure_window="0-1"))
+    tr = searcher.last_filters.flight_segments[0].time_restrictions
+    assert tr.earliest_departure == 0
+    assert tr.latest_departure == 1  # clamped up from 0
+
+
+async def test_departure_window_not_applied_to_return_leg(fli_round_trip):
+    """departure_window applies to outbound only. Live testing confirmed
+    Google ignores time_restrictions on the inbound segment anyway, so we
+    leave it None to make intent match observed behavior. Return-leg
+    filtering happens via inbound_window in normalize.py."""
+    searcher = _MockSearcher(results=fli_round_trip)
+    client = FliClient(flight_searcher=searcher)
+    await client.search(_input(return_date="2026-05-29", departure_window="8-20"))
+    segs = searcher.last_filters.flight_segments
+    assert segs[0].time_restrictions is not None
+    assert segs[1].time_restrictions is None
 
 
 async def test_airlines_filter_passes_iata_codes(fli_one_way):
@@ -179,16 +218,18 @@ async def test_searcher_exception_maps_to_upstream_error():
 
 
 async def test_inbound_window_threaded_into_normalize(fli_round_trip):
-    """End-to-end: inbound_window on input filters the result list."""
+    """End-to-end: inbound_window on input filters the result list.
+    Fixture inbounds depart at 20:30 and 19:00. Window 6-20 admits hours
+    6 through 19 inclusive (exclusive end), so only the 19:00 inbound passes."""
     searcher = _MockSearcher(results=fli_round_trip)
     client = FliClient(flight_searcher=searcher)
     inp = SearchFlightsInput(
         origin="HEL", destination="IAD",
         departure_date="2026-05-18", return_date="2026-05-29",
-        inbound_window="6-19",
+        inbound_window="6-20",
     )
     offers = await client.search(inp)
-    assert len(offers) == 1  # fixture has one entry inside 6-19, one outside
+    assert len(offers) == 1
 
 
 # ============================================================================
@@ -271,10 +312,23 @@ async def test_search_dates_passes_max_stops_and_airlines(fli_dates_flex):
 
 
 async def test_search_dates_passes_departure_window(fli_dates_flex):
+    """Same exclusive-end translation as search_flights."""
     searcher = _MockSearcher(results=fli_dates_flex)
     client = FliClient(date_searcher=searcher)
     await client.search_dates(_dates_input(departure_window="8-20"))
     tr = searcher.last_filters.flight_segments[0].time_restrictions
     assert tr is not None
     assert tr.earliest_departure == 8
-    assert tr.latest_departure == 20
+    assert tr.latest_departure == 19  # 20 - 1
+
+
+async def test_search_dates_return_leg_has_no_time_restrictions(fli_dates_flex):
+    """departure_window applies to outbound only on round-trip date searches too."""
+    searcher = _MockSearcher(results=fli_dates_flex)
+    client = FliClient(date_searcher=searcher)
+    await client.search_dates(_dates_input(
+        is_round_trip=True, trip_duration=11, departure_window="8-20",
+    ))
+    segs = searcher.last_filters.flight_segments
+    assert segs[0].time_restrictions is not None
+    assert segs[1].time_restrictions is None

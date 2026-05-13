@@ -44,8 +44,8 @@ For round-trip date searches, `trip_duration` (in days) is required — it deter
 
 Filter parameters mirror search_flights:
 - `max_stops`: one of `ANY` (default), `NON_STOP`, `ONE_STOP_OR_FEWER`, `TWO_OR_FEWER_STOPS`. "Or fewer" semantics.
-- `departure_window`: a "HH-HH" string in 24-hour local time, applied to the outbound departure.
-- `airlines`: an optional list of IATA airline codes to restrict to.
+- `departure_window`: a "HH-HH" string in 24-hour local time, applied to the outbound departure. **Hours are inclusive of the start and EXCLUSIVE of the end** — `"8-20"` matches 08:00 through 19:59 local time.
+- `airlines`: an optional list of IATA airline codes. Shows date entries where AT LEAST ONE of the listed airlines operates ANY segment. For example, `["FI"]` returns dates with options operated entirely or partly by Icelandair; it does NOT restrict to Icelandair-only itineraries. Omit or pass null for no airline filter.
 
 PRE-CALL ELICITATION: Before calling this tool, ensure the user has expressed:
 

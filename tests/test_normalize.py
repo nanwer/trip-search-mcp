@@ -5,6 +5,8 @@ The normalizer is pure — no I/O — so these are straightforward.
 """
 from urllib.parse import parse_qs, urlparse
 
+import pytest
+
 from flights_mcp.fli_backend.normalize import (
     _compute_offer_id,
     _iso_duration,
@@ -68,26 +70,62 @@ def test_booking_url_is_url_encoded():
 # ----- offer_id --------------------------------------------------------------
 
 
-def test_offer_id_is_deterministic():
+def test_offer_id_airlines_order_invariant():
+    """Airlines are sorted set-like — caller order doesn't change the hash."""
     a = _compute_offer_id(
-        airlines=["FI", "AY"], flight_numbers=["FI343", "AY15"],
+        airlines=["FI", "AY"],
+        segments=[("FI343", "2026-05-18T15:00:00"), ("AY15", "2026-05-18T20:00:00")],
         departure_date="2026-05-18", return_date="2026-05-29",
     )
     b = _compute_offer_id(
-        airlines=["AY", "FI"], flight_numbers=["AY15", "FI343"],
+        airlines=["AY", "FI"],
+        segments=[("FI343", "2026-05-18T15:00:00"), ("AY15", "2026-05-18T20:00:00")],
         departure_date="2026-05-18", return_date="2026-05-29",
     )
-    # Sorted inputs → same hash regardless of caller ordering.
     assert a == b
+
+
+def test_offer_id_segments_order_matters():
+    """Segment order IS meaningful — outbound-then-inbound ordering distinguishes
+    itineraries that fly the same legs in different directions."""
+    a = _compute_offer_id(
+        airlines=["FI"],
+        segments=[("FI343", "2026-05-18T15:00:00"), ("FI645", "2026-05-18T16:50:00")],
+        departure_date="2026-05-18", return_date=None,
+    )
+    b = _compute_offer_id(
+        airlines=["FI"],
+        segments=[("FI645", "2026-05-18T16:50:00"), ("FI343", "2026-05-18T15:00:00")],
+        departure_date="2026-05-18", return_date=None,
+    )
+    assert a != b
+
+
+def test_offer_id_segment_timing_matters():
+    """Same flight number on different days produces different hashes — the bug
+    Phase 2.5 fixed was that timing wasn't in the hash."""
+    a = _compute_offer_id(
+        airlines=["FI"],
+        segments=[("FI343", "2026-05-18T15:00:00")],
+        departure_date="2026-05-18", return_date=None,
+    )
+    b = _compute_offer_id(
+        airlines=["FI"],
+        segments=[("FI343", "2026-05-19T15:00:00")],  # next-day variant
+        departure_date="2026-05-18", return_date=None,
+    )
+    assert a != b
 
 
 def test_offer_id_distinguishes_one_way_from_round_trip_on_same_outbound():
     one_way = _compute_offer_id(
-        airlines=["FI"], flight_numbers=["FI343"],
+        airlines=["FI"],
+        segments=[("FI343", "2026-05-18T15:00:00")],
         departure_date="2026-05-18", return_date=None,
     )
     round_trip = _compute_offer_id(
-        airlines=["FI"], flight_numbers=["FI343"],
+        airlines=["FI"],
+        segments=[("FI343", "2026-05-18T15:00:00")],
         departure_date="2026-05-18", return_date="2026-05-29",
     )
     assert one_way != round_trip
@@ -202,24 +240,10 @@ def test_fli_only_nulls_carry_through(fli_one_way):
 # ----- inbound_window post-filter -------------------------------------------
 
 
-def test_inbound_window_keeps_in_range_offers(fli_round_trip):
+def test_inbound_window_exclusive_upper_bound_drops_hour_at_end(fli_round_trip):
     """Fixture inbound first-segment departures: entry[0]=20:30 (hour 20),
-    entry[1]=19:00 (hour 19). Window 6-19 keeps hour 19, drops hour 20."""
-    offers = build_offers(
-        fli_round_trip,
-        cabin=CabinClass.ECONOMY, adults=1,
-        booking_url="x",
-        departure_date="2026-05-18", return_date="2026-05-29",
-        limit=20,
-        inbound_window="6-19",
-    )
-    assert len(offers) == 1
-    seg = offers[0].inbound.segments[0]
-    assert seg.departure_time_local.startswith("2026-05-29T19:00")
-
-
-def test_inbound_window_inclusive_upper_bound(fli_round_trip):
-    """Window 6-20 INCLUDES hour 20 (inclusive bounds), so both entries match."""
+    entry[1]=19:00 (hour 19). Window 6-20 admits hours 6 through 19 ONLY
+    (exclusive end), so hour 20 is dropped and hour 19 is kept."""
     offers = build_offers(
         fli_round_trip,
         cabin=CabinClass.ECONOMY, adults=1,
@@ -227,6 +251,21 @@ def test_inbound_window_inclusive_upper_bound(fli_round_trip):
         departure_date="2026-05-18", return_date="2026-05-29",
         limit=20,
         inbound_window="6-20",
+    )
+    assert len(offers) == 1
+    seg = offers[0].inbound.segments[0]
+    assert seg.departure_time_local.startswith("2026-05-29T19:00")
+
+
+def test_inbound_window_widening_includes_both(fli_round_trip):
+    """Window 6-21 admits hours 6 through 20 → both fixture entries pass."""
+    offers = build_offers(
+        fli_round_trip,
+        cabin=CabinClass.ECONOMY, adults=1,
+        booking_url="x",
+        departure_date="2026-05-18", return_date="2026-05-29",
+        limit=20,
+        inbound_window="6-21",
     )
     assert len(offers) == 2
 
@@ -268,6 +307,121 @@ def test_inbound_window_none_disables_filter(fli_round_trip):
         inbound_window=None,
     )
     assert len(offers) == 2
+
+
+# ----- inbound_window boundary semantics (Phase 2.5 acceptance criteria) ----
+
+
+@pytest.mark.parametrize("hour,window,expected", [
+    (20, "8-20", False),  # exclusive end: hour 20 is NOT inside "8-20"
+    (19, "8-20", True),   # one below the end is inside
+    (8,  "8-20", True),   # inclusive start: hour 8 IS inside
+    (7,  "8-20", False),  # one below the start is outside
+    (0,  "0-24", True),   # widest practical window: hour 0 inside
+    (23, "0-24", True),   # hour 23 inside (under exclusive 24)
+])
+def test_inbound_window_boundary_table(hour, window, expected):
+    """Spec'd boundary cases. Built end-to-end through build_offers using a
+    minimal synthetic FlightResult so we exercise the _inbound_hour_within
+    call site, not just the helper in isolation."""
+    from datetime import datetime
+    from fli.models import Airline, Airport, FlightLeg, FlightResult
+
+    def _leg(dep_dt):
+        return FlightLeg(
+            airline=Airline.FI,
+            flight_number="100",
+            departure_airport=Airport.IAD,
+            arrival_airport=Airport.HEL,
+            departure_datetime=dep_dt,
+            arrival_datetime=dep_dt.replace(year=dep_dt.year, day=dep_dt.day + 1),
+            duration=600,
+        )
+
+    outbound = FlightResult(
+        legs=[FlightLeg(
+            airline=Airline.FI, flight_number="200",
+            departure_airport=Airport.HEL, arrival_airport=Airport.IAD,
+            departure_datetime=datetime(2026, 5, 18, 12, 0),
+            arrival_datetime=datetime(2026, 5, 18, 22, 0),
+            duration=600,
+        )],
+        price=500.0, currency="EUR", duration=600, stops=0,
+    )
+    inbound = FlightResult(
+        legs=[_leg(datetime(2026, 5, 29, hour, 0))],
+        price=500.0, currency="EUR", duration=600, stops=0,
+    )
+    offers = build_offers(
+        [(outbound, inbound)],
+        cabin=CabinClass.ECONOMY, adults=1,
+        booking_url="x",
+        departure_date="2026-05-18", return_date="2026-05-29",
+        limit=10,
+        inbound_window=window,
+    )
+    assert (len(offers) == 1) is expected
+
+
+# ----- offer_id collision (Phase 2.5 regression test) ------------------------
+
+
+def test_offer_id_distinguishes_same_flights_different_layover_timing():
+    """End-to-end regression: two FlightResults with identical airlines,
+    identical flight numbers, identical departure_date and return_date — but
+    different connection timing (same-day vs overnight layover at KEF). The
+    pre-Phase-2.5 hash collided on these. The fix is that segment timing
+    enters the hash via (flight_number, departure_time_local) tuples.
+
+    Exercises the wiring inside _to_offer (building the tuple list in
+    outbound-then-inbound order, ISO 8601 formatting of departure_time_local),
+    not just _compute_offer_id in isolation.
+    """
+    from datetime import datetime
+    from fli.models import Airline, Airport, FlightLeg, FlightResult
+
+    def _leg(flight_number, dep_airport, arr_airport, dep_dt, arr_dt, duration):
+        return FlightLeg(
+            airline=Airline.FI,
+            flight_number=flight_number,
+            departure_airport=Airport[dep_airport],
+            arrival_airport=Airport[arr_airport],
+            departure_datetime=dep_dt,
+            arrival_datetime=arr_dt,
+            duration=duration,
+        )
+
+    # Same-day connection: HEL 15:00 → KEF 15:40, KEF 16:50 → IAD 19:20
+    same_day = FlightResult(
+        legs=[
+            _leg("343", "HEL", "KEF", datetime(2026, 5, 18, 15, 0), datetime(2026, 5, 18, 15, 40), 220),
+            _leg("645", "KEF", "IAD", datetime(2026, 5, 18, 16, 50), datetime(2026, 5, 18, 19, 20), 450),
+        ],
+        price=666.0, currency="EUR", duration=680, stops=1,
+    )
+
+    # Overnight at KEF: identical first leg, FI645 the FOLLOWING day at the same clock time.
+    overnight = FlightResult(
+        legs=[
+            _leg("343", "HEL", "KEF", datetime(2026, 5, 18, 15, 0), datetime(2026, 5, 18, 15, 40), 220),
+            _leg("645", "KEF", "IAD", datetime(2026, 5, 19, 16, 50), datetime(2026, 5, 19, 19, 20), 450),
+        ],
+        price=750.0, currency="EUR", duration=2120, stops=1,
+    )
+
+    offers = build_offers(
+        [same_day, overnight],
+        cabin=CabinClass.ECONOMY, adults=1,
+        booking_url="x",
+        departure_date="2026-05-18", return_date=None,
+        limit=10,
+    )
+    assert len(offers) == 2
+    # Same airlines, same flight numbers, same dates — but the (flight_number,
+    # departure_time_local) tuple for FI645 differs between the two offers,
+    # so the hashes diverge.
+    assert offers[0].offer_id != offers[1].offer_id
+    assert set(offers[0].airlines) == set(offers[1].airlines) == {"FI"}
 
 
 # ----- build_date_offers (Phase 2) ------------------------------------------
