@@ -1,0 +1,20 @@
+{
+  "_phase_0_verdict": "fast-hotels is BROKEN as of 2026-05-13",
+  "_diagnosis": {
+    "fetch_mode_common": "RuntimeError: No hotels found — scraper hits Google's cookie/locale consent page instead of hotel listings. Google changed HTML structure since fast-hotels' last GH push in June 2025.",
+    "fetch_mode_fallback": "AssertionError: 401 Result: {\"error\":\"no token provided\"} — playwright fallback is gated behind an external token-based service that's not documented or shipped with the library.",
+    "packaging_issues": "fast-hotels 0.2.1 on PyPI does NOT declare its runtime deps (selectolax, primp). `import fast_hotels` raises ModuleNotFoundError on a clean install; had to `uv pip install selectolax primp` manually.",
+    "recommendation": "Pivot to SerpAPI google_hotels for Phase 1. fast-hotels is unmaintained and non-functional."
+  },
+  "_data_model_inspected_before_live_call_failed": {
+    "Hotel": {
+      "fields": ["name: str", "price: float", "rating: Optional[float]", "url: Optional[str]", "amenities: List[str]"],
+      "note": "Much thinner than the spec's HotelOffer (5 fields vs 18). Would not have surfaced review_score, review_count, address, lat/lng, photo_url, star_rating, currency, or a per-night vs total split."
+    },
+    "Result": {
+      "fields": ["hotels: List[Hotel]", "lowest_price: Optional[float]", "current_price: Optional[float]"]
+    },
+    "get_hotels_signature": "(*, hotel_data: List[HotelData], guests: Guests, room_type: Literal['standard','deluxe','suite'] = 'standard', fetch_mode: Literal['common','fallback','force-fallback','local'] = 'common', amenities: List[str] | None = None, limit: int | None = None, sort_by: str | None = None) -> Result",
+    "sort_by_accepted_values": "'price' and 'rating' only (from source inspection). Spec wanted BEST/PRICE_LOW/PRICE_HIGH/RATING/REVIEW_SCORE — would have needed our own translation layer."
+  }
+}
