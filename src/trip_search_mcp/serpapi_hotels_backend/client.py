@@ -27,17 +27,23 @@ from pydantic import ValidationError
 
 from trip_search_mcp.errors import ErrorCode, ToolError
 from trip_search_mcp.models import (
+    GetStayDetailsInput,
     SearchStaysInput,
     SearchStaysResult,
     StayCategory,
+    StayDetails,
     StayOffer,
 )
 from trip_search_mcp.serpapi_hotels_backend.normalize import (
+    build_stay_details,
     merge_and_dedup,
     normalize_and_filter,
     sort_and_truncate,
 )
-from trip_search_mcp.serpapi_hotels_backend.raw import SerpHotelsResponse
+from trip_search_mcp.serpapi_hotels_backend.raw import (
+    SerpHotelsResponse,
+    SerpPropertyDetailsResponse,
+)
 
 BASE_URL = "https://serpapi.com"
 _SEARCH_PATH = "/search"
@@ -82,6 +88,49 @@ class SerpAPIHotelsClient:
 
         # category=ALL: fan out in parallel.
         return await self._search_merged(params)
+
+    # ----- property details (get_stay_details tool) -------------------------
+
+    async def get_property_details(self, params: GetStayDetailsInput) -> StayDetails:
+        """One SerpAPI call against the property_details endpoint.
+
+        Unlike `search()`, this takes a specific `property_token` (from a
+        prior search result) and returns rich per-property data:
+        long-form description, ~14 nearby places, and a `prices` array
+        where each entry includes a `link` to the booking partner.
+        """
+        body = await self._call({
+            "engine": "google_hotels",
+            "q": params.property_token,    # required by SerpAPI but ignored when property_token is set
+            "check_in_date": params.check_in_date,
+            "check_out_date": params.check_out_date,
+            "adults": str(params.adults),
+            "currency": params.currency,
+            "hl": "en",
+            "property_token": params.property_token,
+        })
+        try:
+            parsed = SerpPropertyDetailsResponse.model_validate(body)
+        except ValidationError as e:
+            raise ToolError(
+                ErrorCode.UPSTREAM_ERROR,
+                f"SerpAPI returned an unparseable property_details response: {e}",
+                retryable=True,
+            ) from e
+        if not parsed.name:
+            raise ToolError(
+                ErrorCode.NO_RESULTS,
+                f"No property found for token {params.property_token!r}. "
+                "The token may have expired or the property is no longer listed.",
+            )
+        try:
+            return build_stay_details(parsed, currency=params.currency)
+        except (KeyError, ValueError, TypeError, AttributeError) as e:
+            raise ToolError(
+                ErrorCode.UPSTREAM_ERROR,
+                f"Couldn't normalize property_details response: {e}",
+                retryable=True,
+            ) from e
 
     # ----- single-mode -------------------------------------------------------
 

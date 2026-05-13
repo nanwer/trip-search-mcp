@@ -364,3 +364,91 @@ class SearchStaysResult(BaseModel):
     # tool description tells Claude to surface these verbatim above the
     # card grid.
     warnings: list[str] = Field(default_factory=list)
+
+
+# ----- get_stay_details (Phase 6: SerpAPI property_details follow-up) -------
+
+
+class BookingPartner(BaseModel):
+    """One booking partner with a direct booking-flow link.
+
+    Distinct from the search-time `Source` in that this one carries the
+    per-partner `link` (via Google's `/travel/clk?` redirector) that
+    lands the user on the actual booking page. Only the property_details
+    endpoint populates the link; the list endpoint doesn't.
+    """
+    name: str                              # OTA name, canonicalized
+    price_per_night: float | None = None
+    total_price: float | None = None
+    link: str | None = None                # google.com/travel/clk?... redirector
+    official: bool | None = None           # property's own site vs an OTA
+    free_cancellation: bool | None = None
+
+
+class NearbyPlace(BaseModel):
+    name: str
+    category: str | None = None            # "airport", "train station", "restaurant", ...
+    latitude: float | None = None
+    longitude: float | None = None
+
+
+class StayDetails(BaseModel):
+    """Rich per-property detail returned by `get_stay_details`.
+
+    Complements `StayOffer` (the search-time shape) — drills into a
+    specific property to surface direct booking-partner links, long-form
+    description, and a richer nearby_places list (~14 entries vs ~3 in
+    search results).
+
+    NOTE: `address` is NOT included. SerpAPI's property_details endpoint
+    does not carry a postal address — only `latitude`/`longitude` and
+    nearby landmarks. The previous backlog framing has been corrected.
+    """
+    property_token: str
+    name: str
+    category: Literal["hotel", "vacation_rental"]
+    description: str | None
+    hotel_type: str | None
+    star_rating: int | None
+    review_score: float | None
+    review_count: int | None
+    location_rating: float | None = None
+    check_in_time: str | None
+    check_out_time: str | None
+    latitude: float | None
+    longitude: float | None
+    amenities: list[str]
+    excluded_amenities: list[str]
+    nearby_places: list[NearbyPlace]
+    booking_partners: list[BookingPartner]
+    currency: IsoCurrency
+
+
+class GetStayDetailsInput(BaseModel):
+    """Input to `get_stay_details`. Takes a property_token from a prior
+    `search_stays` result and a check-in/check-out range (required by
+    SerpAPI to price the property for those dates)."""
+    property_token: str = Field(min_length=4)
+    check_in_date: IsoDate
+    check_out_date: IsoDate
+    adults: int = Field(default=2, ge=1, le=10)
+    currency: IsoCurrency = "EUR"
+
+    @field_validator("check_in_date")
+    @classmethod
+    def _check_in_not_in_past(cls, v: str) -> str:
+        d = date.fromisoformat(v)
+        today_utc = datetime.now(tz=timezone.utc).date()
+        if d < today_utc:
+            raise ValueError(f"check_in_date {v} is before today (UTC) {today_utc.isoformat()}")
+        return v
+
+    @model_validator(mode="after")
+    def _check_out_after_check_in(self) -> "GetStayDetailsInput":
+        ci = date.fromisoformat(self.check_in_date)
+        co = date.fromisoformat(self.check_out_date)
+        if co <= ci:
+            raise ValueError(
+                f"check_out_date {self.check_out_date} must be strictly after check_in_date {self.check_in_date}"
+            )
+        return self

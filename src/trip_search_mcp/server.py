@@ -33,6 +33,10 @@ from trip_search_mcp.tools.search_cheapest_dates import (
     search_cheapest_dates,
 )
 from trip_search_mcp.tools.search_flights import TOOL_DESCRIPTION, search_flights
+from trip_search_mcp.tools.get_stay_details import (
+    TOOL_DESCRIPTION as STAY_DETAILS_DESCRIPTION,
+    get_stay_details,
+)
 from trip_search_mcp.tools.search_stays import (
     TOOL_DESCRIPTION as STAYS_DESCRIPTION,
     search_stays,
@@ -167,6 +171,25 @@ async def search_stays_tool(
         required_amenities=required_amenities,
         sort_by=sort_by,
         max_results=max_results,
+        currency=currency,
+    )
+
+
+@mcp.tool(name="get_stay_details", description=STAY_DETAILS_DESCRIPTION)
+async def get_stay_details_tool(
+    property_token: str,
+    check_in_date: str,
+    check_out_date: str,
+    adults: int = 2,
+    currency: str = "EUR",
+) -> dict[str, Any]:
+    return await get_stay_details(
+        client=_HOTELS_CLIENT,
+        cache=_CACHE,
+        property_token=property_token,
+        check_in_date=check_in_date,
+        check_out_date=check_out_date,
+        adults=adults,
         currency=currency,
     )
 

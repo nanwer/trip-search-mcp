@@ -455,3 +455,74 @@ def merge_and_dedup(
     # Order: token-keyed first (in original encounter order), then fallback.
     # We preserve input order via dict insertion order in Python 3.7+.
     return [*by_token.values(), *by_fallback.values()]
+
+
+# ----- get_stay_details normalization ---------------------------------------
+
+
+def _booking_partners_from_prices(prices, currency: str):
+    """Build a list of BookingPartner from SerpAPI's prices array.
+
+    Same canonicalization as the search-time `sources` field, plus the
+    per-partner `link` and `official` flag the property_details endpoint
+    surfaces. Empty list when SerpAPI didn't surface `prices`."""
+    from trip_search_mcp.models import BookingPartner
+    out = []
+    for p in prices or []:
+        rpn = p.rate_per_night
+        total = p.total_rate
+        out.append(
+            BookingPartner(
+                name=_canonicalize_source_name(p.source),
+                price_per_night=(rpn.extracted_lowest if rpn else None),
+                total_price=(total.extracted_lowest if total else None),
+                link=p.link,
+                official=p.official,
+                free_cancellation=p.free_cancellation,
+            )
+        )
+    return out
+
+
+def _nearby_places_from_raw(raw_nearby):
+    from trip_search_mcp.models import NearbyPlace
+    out = []
+    for np in raw_nearby or []:
+        if not np.name:
+            continue
+        gps = np.gps_coordinates
+        out.append(
+            NearbyPlace(
+                name=np.name,
+                category=np.category,
+                latitude=(gps.latitude if gps else None),
+                longitude=(gps.longitude if gps else None),
+            )
+        )
+    return out
+
+
+def build_stay_details(raw, *, currency: str):
+    """Translate SerpPropertyDetailsResponse → StayDetails."""
+    from trip_search_mcp.models import StayDetails
+    gps = raw.gps_coordinates
+    return StayDetails(
+        property_token=raw.property_token or "",
+        name=raw.name or "",
+        category=_category_from_type(raw.type),
+        description=raw.description,
+        hotel_type=raw.type,
+        star_rating=raw.extracted_hotel_class,
+        review_score=raw.overall_rating,
+        review_count=raw.reviews,
+        location_rating=raw.location_rating,
+        check_in_time=raw.check_in_time,
+        check_out_time=raw.check_out_time,
+        latitude=(gps.latitude if gps else None),
+        longitude=(gps.longitude if gps else None),
+        amenities=list(raw.amenities),
+        excluded_amenities=list(raw.excluded_amenities),
+        nearby_places=_nearby_places_from_raw(raw.nearby_places),
+        booking_partners=_booking_partners_from_prices(raw.prices, currency),
+        currency=currency,
+    )

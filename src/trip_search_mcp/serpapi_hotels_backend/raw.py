@@ -44,11 +44,31 @@ class SerpHotelPrice(_SerpModel):
     Bluepillow.com — NOT Airbnb / VRBO directly per Phase 0 fixtures).
     Hotel properties may surface this too, though the Phase 0 hotel
     fixture didn't carry it for the captured Tampere query.
+
+    The property_details endpoint (get_stay_details tool) populates
+    `link` (a google.com/travel/clk?... redirector that lands on the
+    partner's booking flow). The list endpoint omits the link.
     """
     source: str | None = None             # OTA name, e.g. "Booking.com"
     logo: str | None = None
     num_guests: int | None = None
     rate_per_night: SerpHotelRate | None = None
+    total_rate: SerpHotelRate | None = None
+    link: str | None = None               # only populated by property_details endpoint
+    official: bool | None = None
+    free_cancellation: bool | None = None
+    free_cancellation_until_date: str | None = None
+
+
+class SerpNearbyPlace(_SerpModel):
+    """One entry inside a property's `nearby_places` array.
+
+    The property_details endpoint surfaces 10–15 of these (airports,
+    transit stations, landmarks). The list endpoint surfaces ~3.
+    """
+    name: str | None = None
+    category: str | None = None
+    gps_coordinates: SerpHotelGPS | None = None
 
 
 class SerpHotelProperty(_SerpModel):
@@ -79,3 +99,34 @@ class SerpHotelProperty(_SerpModel):
 
 class SerpHotelsResponse(_SerpModel):
     properties: list[SerpHotelProperty] = Field(default_factory=list)
+
+
+class SerpPropertyDetailsResponse(_SerpModel):
+    """Response shape from the SerpAPI `google_hotels` endpoint when
+    invoked with a `property_token` (the get_stay_details path).
+
+    Unlike the list endpoint (which wraps in `properties[]`), the
+    details endpoint returns a flat property object at the top level.
+    We mirror the same field set as `SerpHotelProperty` plus
+    `nearby_places` (which the list endpoint truncates to 3).
+    """
+    name: str | None = None
+    property_token: str | None = None
+    description: str | None = None
+    type: str | None = None
+    hotel_class: str | None = None
+    extracted_hotel_class: int | None = None
+    overall_rating: float | None = None
+    reviews: int | None = None
+    location_rating: float | None = None
+    amenities: list[str] = Field(default_factory=list)
+    excluded_amenities: list[str] = Field(default_factory=list)
+    gps_coordinates: SerpHotelGPS | None = None
+    images: list[SerpHotelImage] = Field(default_factory=list)
+    rate_per_night: SerpHotelRate | None = None
+    total_rate: SerpHotelRate | None = None
+    essential_info: list[str] = Field(default_factory=list)
+    prices: list[SerpHotelPrice] = Field(default_factory=list)
+    nearby_places: list[SerpNearbyPlace] = Field(default_factory=list)
+    check_in_time: str | None = None
+    check_out_time: str | None = None
