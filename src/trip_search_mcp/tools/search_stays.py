@@ -22,7 +22,7 @@ from pydantic import ValidationError
 from trip_search_mcp.cache import TTLCache, canonical_key
 from trip_search_mcp.errors import ErrorCode, ToolError, error_response
 from trip_search_mcp.logging_config import log_event
-from trip_search_mcp.models import SearchStaysInput
+from trip_search_mcp.models import SearchStaysInput, SearchStaysResult, StayCategory
 from trip_search_mcp.serpapi_hotels_backend.client import SerpAPIHotelsClient
 
 TOOL_NAME = "search_stays"
@@ -47,7 +47,8 @@ Returns ranked stay offers — each with name, photos, star rating (hotels only)
 **`category` selector**:
 - `"all"` (default) — fans out to TWO SerpAPI calls in parallel: one for hotels, one for vacation rentals. Merges, dedupes, sorts. Latency is ~3s (parallel, not summed). Costs 2 SerpAPI calls instead of 1 per query — burns SERPAPI quota twice as fast.
 - `"hotels"` — only hotel-class properties. One SerpAPI call.
-- `"vacation_rentals"` — only short-term rentals. One SerpAPI call. NOTE: Google aggregates rentals from OTAs (Booking.com, Hotels.com, Bluepillow.com, Vrbo.com when available). **Airbnb is NOT in Google's aggregation** and will not appear in `sources` or results.
+- `"vacation_rentals"` — only short-term rentals via SerpAPI's aggregation. Surfaces OTAs (Booking.com, Hotels.com, Bluepillow.com, Vrbo.com when available). Airbnb is NOT in Google's aggregation — use `category="airbnb"` for that.
+- `"airbnb"` — bypasses SerpAPI entirely and queries Airbnb directly (via the pyairbnb library). Use this when the user specifically asks for "Airbnb" / "AirBNB" / "stuff on Airbnb". Costs NO SerpAPI quota but is slower and more fragile (Airbnb may block scraping during high traffic). Filter parameters supported: `min_bedrooms`, `min_bathrooms`, `min_review_score`, `max_price_per_night`. `min_rating` is ignored (Airbnb listings have no hotel-class star rating).
 
 **`sources`** is a per-offer list of `(name, price_per_night)` entries showing the same property listed across different booking partners. Empty list for hotels in the current data (SerpAPI doesn't surface partner prices for hotels in our queries). Populated for vacation rentals.
 
@@ -66,7 +67,7 @@ The review score is **Google's native 0-5 scale** (e.g., 4.6 / 5), NOT a 0-10 sc
 
 PRE-CALL ELICITATION: Before calling this tool, confirm with the user:
 
-- **Type of stay** (`category`): default to `"all"` unless the user signals "hotel" / "rental" / "Airbnb" / "vacation rental" / "apartment" / "STR". "Find me a place to stay in Lisbon" stays at `"all"`. "Find me a nice hotel in Lisbon" is `"hotels"`. "Find me a rental in Lisbon" is `"vacation_rentals"`.
+- **Type of stay** (`category`): default to `"all"` unless the user signals otherwise. "Find me a place to stay in Lisbon" stays at `"all"`. "Find me a nice hotel in Lisbon" → `"hotels"`. "Find me a rental in Lisbon" → `"vacation_rentals"`. **"Find me an Airbnb in Lisbon" → `"airbnb"`** (this hits Airbnb directly; SerpAPI doesn't include Airbnb listings).
 - **Location**: specific city or neighborhood — "Tampere" works, "Notting Hill, London" works, "somewhere in Europe" does not. Ask if vague.
 - **Check-in and check-out dates**: both required and check_out must be strictly after check_in. Confirm UTC-today or later.
 - **Party size**: adults, children, and number of rooms. Default is 2 adults / 0 children / 1 room — don't assume; ask if not stated.
@@ -102,6 +103,7 @@ async def search_stays(
     *,
     client: SerpAPIHotelsClient | None,
     cache: TTLCache,
+    airbnb_client=None,
     location: str,
     check_in_date: str,
     check_out_date: str,
@@ -143,13 +145,25 @@ async def search_stays(
                   error=first_error.get("msg"))
         return error_response(ErrorCode.INVALID_INPUT, msg, retryable=False)
 
-    # 2. Lazy auth check. If the server started without SERPAPI_KEY, the
-    #    stays client wasn't built. Surface that as a clean auth_failed
-    #    envelope with an actionable next step.
-    if client is None:
+    # 2. Auth / backend availability check.
+    #    - SerpAPI categories (all/hotels/vacation_rentals) require client.
+    #    - AIRBNB category requires airbnb_client (no API key — just the lib).
+    needs_serpapi = params.category in (
+        StayCategory.ALL, StayCategory.HOTELS, StayCategory.VACATION_RENTALS,
+    )
+    if needs_serpapi and client is None:
         log_event(_logger, "tool.auth_failed", tool=TOOL_NAME,
                   level=logging.ERROR, reason="SERPAPI_KEY not set")
         return error_response(ErrorCode.AUTH_FAILED, _NO_KEY_MESSAGE, retryable=False)
+    if params.category is StayCategory.AIRBNB and airbnb_client is None:
+        log_event(_logger, "tool.upstream_error", tool=TOOL_NAME,
+                  level=logging.ERROR, reason="airbnb_client not configured")
+        return error_response(
+            ErrorCode.UPSTREAM_ERROR,
+            "Airbnb backend is not configured on this server. "
+            "Restart with pyairbnb installed and the AirbnbClient wired in server.py.",
+            retryable=False,
+        )
 
     # 3. Cache.
     key = canonical_key({"tool": TOOL_NAME, **params.model_dump()})
@@ -158,13 +172,16 @@ async def search_stays(
         log_event(_logger, "tool.cache_hit", tool=TOOL_NAME, input=params.model_dump())
         return copy.deepcopy(cached)
 
-    # 4. Provider call. Returns SearchStaysResult (with possible warnings on
-    #    the partial-failure path). The client raises ToolError only when
-    #    the user-facing call should fail entirely (both sides down, or
-    #    single-mode failure).
+    # 4. Provider call. SerpAPI categories go to the hotels client; AIRBNB
+    #    goes to pyairbnb via AirbnbClient. AirbnbClient returns list[StayOffer];
+    #    we wrap into a SearchStaysResult to keep the envelope uniform.
     started = time.monotonic()
     try:
-        result_model = await client.search(params)
+        if params.category is StayCategory.AIRBNB:
+            offers = await airbnb_client.search(params)
+            result_model = SearchStaysResult(results=offers, warnings=[])
+        else:
+            result_model = await client.search(params)
     except ToolError as e:
         elapsed_ms = int((time.monotonic() - started) * 1000)
         if e.code is ErrorCode.NO_RESULTS:

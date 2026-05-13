@@ -77,6 +77,10 @@ class SerpAPIHotelsClient:
         Single-mode paths preserve the historical search_hotels contract;
         merged path runs both SerpAPI calls in parallel via asyncio.gather
         with return_exceptions=True so one failure doesn't cancel the other.
+
+        NOTE: `StayCategory.AIRBNB` is NOT handled here — it bypasses
+        SerpAPI entirely. The tool-function layer routes it to
+        `AirbnbClient.search()` instead.
         """
         if params.category is StayCategory.HOTELS:
             offers = await self._search_single(params, mode="hotels")
@@ -85,6 +89,16 @@ class SerpAPIHotelsClient:
         if params.category is StayCategory.VACATION_RENTALS:
             offers = await self._search_single(params, mode="rentals")
             return SearchStaysResult(results=offers, warnings=[])
+
+        if params.category is StayCategory.AIRBNB:
+            # Defensive: tool layer should have routed this to AirbnbClient.
+            # If we land here, signal a programming error clearly.
+            raise ToolError(
+                ErrorCode.UPSTREAM_ERROR,
+                "category='airbnb' must be handled by AirbnbClient, not SerpAPIHotelsClient. "
+                "This is a router bug.",
+                retryable=False,
+            )
 
         # category=ALL: fan out in parallel.
         return await self._search_merged(params)

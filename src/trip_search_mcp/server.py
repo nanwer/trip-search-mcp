@@ -27,6 +27,7 @@ from fastmcp import FastMCP  # noqa: E402 — must follow the warning hook above
 from trip_search_mcp.cache import TTLCache
 from trip_search_mcp.fli_backend.client import FliClient
 from trip_search_mcp.logging_config import configure_logging, log_event
+from trip_search_mcp.airbnb_backend.client import AirbnbClient
 from trip_search_mcp.serpapi_hotels_backend.client import SerpAPIHotelsClient
 from trip_search_mcp.tools.search_cheapest_dates import (
     TOOL_DESCRIPTION as CHEAPEST_DATES_DESCRIPTION,
@@ -64,6 +65,9 @@ def _build_hotels_client() -> SerpAPIHotelsClient | None:
 
 
 _HOTELS_CLIENT = _build_hotels_client()
+# Airbnb client is always available — pyairbnb is a hard dependency and
+# has no API key requirement. Geocoding uses Nominatim (also key-free).
+_AIRBNB_CLIENT = AirbnbClient()
 
 mcp = FastMCP("trip-search-mcp")
 
@@ -156,6 +160,7 @@ async def search_stays_tool(
     return await search_stays(
         client=_HOTELS_CLIENT,
         cache=_CACHE,
+        airbnb_client=_AIRBNB_CLIENT,
         location=location,
         check_in_date=check_in_date,
         check_out_date=check_out_date,

@@ -610,9 +610,10 @@ def test_stays_category_defaults_to_all():
     assert m.category is StayCategory.ALL
 
 
-def test_stays_category_accepts_three_values():
+def test_stays_category_accepts_four_values():
+    """Phase 7 added `airbnb` as a category (direct Airbnb backend)."""
     from trip_search_mcp.models import SearchStaysInput, StayCategory
-    for v in ("all", "hotels", "vacation_rentals"):
+    for v in ("all", "hotels", "vacation_rentals", "airbnb"):
         m = SearchStaysInput(
             location="Tampere",
             check_in_date=TOMORROW.isoformat(),
@@ -626,7 +627,7 @@ def test_stays_category_accepts_three_values():
             location="Tampere",
             check_in_date=TOMORROW.isoformat(),
             check_out_date=NEXT_WEEK.isoformat(),
-            category="airbnb",
+            category="hostels",  # not a real category
         )
 
 

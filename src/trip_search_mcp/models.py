@@ -235,17 +235,20 @@ class SearchCheapestDatesResult(BaseModel):
 
 
 class StayCategory(str, Enum):
-    """Which SerpAPI mode(s) to query.
+    """Which backend(s) to query.
 
-    ALL fan-outs to both calls in parallel and merges (~3s wall-clock,
-    2x SerpAPI quota burn). HOTELS / VACATION_RENTALS are single-call
-    paths. Per Phase 0 fixtures, SerpAPI rejects mismatched filters
-    with HTTP 400 — the client builds two distinct param sets when
-    category=ALL.
+    ALL fan-outs to SerpAPI hotels + SerpAPI rentals in parallel and
+    merges (~3s wall-clock, 2x SerpAPI quota burn). HOTELS /
+    VACATION_RENTALS are single-call paths against SerpAPI. AIRBNB
+    bypasses SerpAPI entirely and hits Airbnb directly via pyairbnb —
+    use this only when the user specifically asks for Airbnb. Per Phase
+    0 verification, Google's SerpAPI aggregation does NOT include
+    Airbnb listings; AIRBNB exists to fill that gap.
     """
     ALL = "all"
     HOTELS = "hotels"
     VACATION_RENTALS = "vacation_rentals"
+    AIRBNB = "airbnb"
 
 
 class HotelSortBy(str, Enum):
