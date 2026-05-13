@@ -102,25 +102,29 @@ from "search tool" to "deal-hunting agent."
 
 ---
 
-## 4. Hotel property_details follow-up (address + booking partners)
+## 4. Stay property_details follow-up (address + booking partners)
 
-**Today:** `HotelOffer.address` is always null because SerpAPI's
+**Today:** `StayOffer.address` is always null because SerpAPI's
 google_hotels list endpoint doesn't carry per-property addresses. The
 list response does include a `serpapi_property_details_link` (and the
 `property_token` we already capture) — a second call against that endpoint
 would surface the postal address, booking-partner URLs, and richer
 metadata for a single property.
 
-**Wanted:** A `get_hotel_details(offer_id)` tool that takes a previously
+This is meaningfully more valuable post-search_stays: vacation-rental
+drill-downs would also surface direct booking partner URLs (Vrbo.com,
+Booking.com, etc.) for the specific property.
+
+**Wanted:** A `get_stay_details(offer_id)` tool that takes a previously
 returned offer's `property_token`, calls SerpAPI's property_details
 endpoint, and returns the full address + per-partner booking URLs.
 
 **Implementation sketch:**
 
-- New MCP tool: `get_hotel_details(property_token)` (or accept `offer_id`
+- New MCP tool: `get_stay_details(property_token)` (or accept `offer_id`
   and look it up).
 - Single SerpAPI call to the property_details endpoint.
-- Returns a `HotelDetails` model with address, booking partners (name +
+- Returns a `StayDetails` model with address, booking partners (name +
   price + URL each), full amenity list, reviews summary.
 - Quota-conscious: this is a second SerpAPI call per offer the user wants
   to drill into. Cache aggressively (TTL ~6h).
@@ -128,7 +132,38 @@ endpoint, and returns the full address + per-partner booking URLs.
 This is opportunistic — most users don't need address for booking, and
 Claude can communicate location via GPS / map links from the existing
 fields. Pick up when an address-driven workflow shows up (e.g.,
-"hotels near this specific landmark").
+"stays near this specific landmark").
+
+---
+
+## 5. Direct Airbnb backend (gap-filling)
+
+**Today:** `search_stays` uses Google's vacation-rental aggregation via
+SerpAPI. Phase 0 of the search_stays work captured a Tampere sample and
+found the `sources` array surfaces OTAs (Booking.com, Hotels.com,
+Bluepillow.com, Vrbo.com) but **never Airbnb**. Google doesn't
+aggregate Airbnb listings.
+
+**Wanted:** A second backend that pulls Airbnb directly (e.g.
+`pyairbnb`) and merges its results into the `search_stays` response.
+
+**Implementation sketch:**
+
+- New `airbnb_backend/` directory next to `serpapi_hotels_backend/`.
+  Same injectable-transport pattern; same normalize-to-StayOffer
+  contract.
+- Wire into `_search_merged` alongside the existing hotels and rentals
+  calls — fan out to 3 parallel calls when `category="all"`, or 2 when
+  `category="vacation_rentals"`.
+- Airbnb scraping carries different reliability/rate-limit characteristics
+  than SerpAPI; needs its own error mapping and budget controls.
+- `category` enum may gain `"airbnb_only"` for direct Airbnb-only
+  queries, but the merged path is the dominant use case.
+
+This is the meaningful follow-up if users start asking "find me an
+Airbnb in X" and the current "Google doesn't surface Airbnb" answer
+becomes a UX bottleneck. Right now it's hypothetical — Eli's typical
+queries don't single out Airbnb as a platform.
 
 ---
 
@@ -136,10 +171,12 @@ fields. Pick up when an address-driven workflow shows up (e.g.,
 
 1. **Multi-airport / city codes** — small, contained, materially improves UX.
 2. **Deep-linking (flights)** — depends on upstream; file the issue early
-   so it can bake while you build other things. (Hotels deep-linking is
+   so it can bake while you build other things. (Stays deep-linking is
    already shipped.)
-3. **Hotel property_details follow-up** — surfaces address + booking
-   partners; nice-to-have, opportunistic.
-4. **Monitoring** — most ambitious; tackle after the previous two land or
-   when the personal motivation is high (it's the one most likely to pay
-   for itself on a single good deal).
+3. **Stay property_details follow-up** — surfaces address + per-property
+   booking partner URLs; nice-to-have, opportunistic.
+4. **Direct Airbnb backend** — pick up when "find me an Airbnb"
+   becomes a recurring ask. Hypothetical right now.
+5. **Monitoring** — most ambitious; tackle when the personal motivation
+   is high (it's the one most likely to pay for itself on a single good
+   deal).

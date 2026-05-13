@@ -463,12 +463,12 @@ def test_search_cheapest_dates_result_wraps():
     assert len(r.results) == 1
 
 
-# ----- SearchHotelsInput (hotels extension) ---------------------------------
+# ----- SearchStaysInput (hotels extension) ---------------------------------
 
 
 def test_hotels_accepts_minimal_input():
-    from trip_search_mcp.models import HotelSortBy, SearchHotelsInput
-    m = SearchHotelsInput(
+    from trip_search_mcp.models import HotelSortBy, SearchStaysInput
+    m = SearchStaysInput(
         location="Tampere",
         check_in_date=TOMORROW.isoformat(),
         check_out_date=NEXT_WEEK.isoformat(),
@@ -480,9 +480,9 @@ def test_hotels_accepts_minimal_input():
 
 
 def test_hotels_rejects_check_out_before_check_in():
-    from trip_search_mcp.models import SearchHotelsInput
+    from trip_search_mcp.models import SearchStaysInput
     with pytest.raises(ValidationError):
-        SearchHotelsInput(
+        SearchStaysInput(
             location="Tampere",
             check_in_date=NEXT_WEEK.isoformat(),
             check_out_date=TOMORROW.isoformat(),
@@ -491,9 +491,9 @@ def test_hotels_rejects_check_out_before_check_in():
 
 def test_hotels_rejects_same_day_check_in_check_out():
     """check_out_date must be STRICTLY after check_in_date."""
-    from trip_search_mcp.models import SearchHotelsInput
+    from trip_search_mcp.models import SearchStaysInput
     with pytest.raises(ValidationError):
-        SearchHotelsInput(
+        SearchStaysInput(
             location="Tampere",
             check_in_date=TOMORROW.isoformat(),
             check_out_date=TOMORROW.isoformat(),
@@ -501,10 +501,10 @@ def test_hotels_rejects_same_day_check_in_check_out():
 
 
 def test_hotels_rejects_check_in_in_past():
-    from trip_search_mcp.models import SearchHotelsInput
+    from trip_search_mcp.models import SearchStaysInput
     yesterday = (TODAY - timedelta(days=1)).isoformat()
     with pytest.raises(ValidationError):
-        SearchHotelsInput(
+        SearchStaysInput(
             location="Tampere",
             check_in_date=yesterday,
             check_out_date=NEXT_WEEK.isoformat(),
@@ -512,9 +512,9 @@ def test_hotels_rejects_check_in_in_past():
 
 
 def test_hotels_rejects_empty_location():
-    from trip_search_mcp.models import SearchHotelsInput
+    from trip_search_mcp.models import SearchStaysInput
     with pytest.raises(ValidationError):
-        SearchHotelsInput(
+        SearchStaysInput(
             location="",
             check_in_date=TOMORROW.isoformat(),
             check_out_date=NEXT_WEEK.isoformat(),
@@ -522,11 +522,11 @@ def test_hotels_rejects_empty_location():
 
 
 def test_hotels_min_rating_bounded():
-    from trip_search_mcp.models import SearchHotelsInput
+    from trip_search_mcp.models import SearchStaysInput
     # 0 and 6 are out of [1, 5]
     for bad in (0, 6):
         with pytest.raises(ValidationError):
-            SearchHotelsInput(
+            SearchStaysInput(
                 location="Tampere",
                 check_in_date=TOMORROW.isoformat(),
                 check_out_date=NEXT_WEEK.isoformat(),
@@ -535,9 +535,9 @@ def test_hotels_min_rating_bounded():
 
 
 def test_hotels_max_results_capped_at_25():
-    from trip_search_mcp.models import SearchHotelsInput
+    from trip_search_mcp.models import SearchStaysInput
     with pytest.raises(ValidationError):
-        SearchHotelsInput(
+        SearchStaysInput(
             location="Tampere",
             check_in_date=TOMORROW.isoformat(),
             check_out_date=NEXT_WEEK.isoformat(),
@@ -546,8 +546,8 @@ def test_hotels_max_results_capped_at_25():
 
 
 def test_hotels_sort_by_enum_coercion():
-    from trip_search_mcp.models import HotelSortBy, SearchHotelsInput
-    m = SearchHotelsInput(
+    from trip_search_mcp.models import HotelSortBy, SearchStaysInput
+    m = SearchStaysInput(
         location="Tampere",
         check_in_date=TOMORROW.isoformat(),
         check_out_date=NEXT_WEEK.isoformat(),
@@ -557,8 +557,8 @@ def test_hotels_sort_by_enum_coercion():
 
 
 def test_hotels_currency_defaults_to_eur():
-    from trip_search_mcp.models import SearchHotelsInput
-    m = SearchHotelsInput(
+    from trip_search_mcp.models import SearchStaysInput
+    m = SearchStaysInput(
         location="Tampere",
         check_in_date=TOMORROW.isoformat(),
         check_out_date=NEXT_WEEK.isoformat(),
@@ -567,8 +567,8 @@ def test_hotels_currency_defaults_to_eur():
 
 
 def test_hotels_currency_accepts_valid_iso():
-    from trip_search_mcp.models import SearchHotelsInput
-    m = SearchHotelsInput(
+    from trip_search_mcp.models import SearchStaysInput
+    m = SearchStaysInput(
         location="Tokyo",
         check_in_date=TOMORROW.isoformat(),
         check_out_date=NEXT_WEEK.isoformat(),
@@ -578,10 +578,10 @@ def test_hotels_currency_accepts_valid_iso():
 
 
 def test_hotels_currency_rejects_non_iso_strings():
-    from trip_search_mcp.models import SearchHotelsInput
+    from trip_search_mcp.models import SearchStaysInput
     # Two letters → fail
     with pytest.raises(ValidationError):
-        SearchHotelsInput(
+        SearchStaysInput(
             location="Tampere",
             check_in_date=TOMORROW.isoformat(),
             check_out_date=NEXT_WEEK.isoformat(),
@@ -589,9 +589,65 @@ def test_hotels_currency_rejects_non_iso_strings():
         )
     # Lowercase → fail (regex requires uppercase)
     with pytest.raises(ValidationError):
-        SearchHotelsInput(
+        SearchStaysInput(
             location="Tampere",
             check_in_date=TOMORROW.isoformat(),
             check_out_date=NEXT_WEEK.isoformat(),
             currency="usd",
+        )
+
+
+# ----- stays new inputs (Phase 1: category, min_bedrooms, min_bathrooms) -----
+
+
+def test_stays_category_defaults_to_all():
+    from trip_search_mcp.models import SearchStaysInput, StayCategory
+    m = SearchStaysInput(
+        location="Tampere",
+        check_in_date=TOMORROW.isoformat(),
+        check_out_date=NEXT_WEEK.isoformat(),
+    )
+    assert m.category is StayCategory.ALL
+
+
+def test_stays_category_accepts_three_values():
+    from trip_search_mcp.models import SearchStaysInput, StayCategory
+    for v in ("all", "hotels", "vacation_rentals"):
+        m = SearchStaysInput(
+            location="Tampere",
+            check_in_date=TOMORROW.isoformat(),
+            check_out_date=NEXT_WEEK.isoformat(),
+            category=v,
+        )
+        assert m.category.value == v
+    # Reject unknown
+    with pytest.raises(ValidationError):
+        SearchStaysInput(
+            location="Tampere",
+            check_in_date=TOMORROW.isoformat(),
+            check_out_date=NEXT_WEEK.isoformat(),
+            category="airbnb",
+        )
+
+
+def test_stays_min_bedrooms_bathrooms_accept_zero_and_positive():
+    from trip_search_mcp.models import SearchStaysInput
+    m = SearchStaysInput(
+        location="Tampere",
+        check_in_date=TOMORROW.isoformat(),
+        check_out_date=NEXT_WEEK.isoformat(),
+        min_bedrooms=2, min_bathrooms=1,
+    )
+    assert m.min_bedrooms == 2
+    assert m.min_bathrooms == 1
+
+
+def test_stays_min_bedrooms_rejects_negative():
+    from trip_search_mcp.models import SearchStaysInput
+    with pytest.raises(ValidationError):
+        SearchStaysInput(
+            location="Tampere",
+            check_in_date=TOMORROW.isoformat(),
+            check_out_date=NEXT_WEEK.isoformat(),
+            min_bedrooms=-1,
         )

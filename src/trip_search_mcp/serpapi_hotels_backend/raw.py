@@ -36,6 +36,21 @@ class SerpHotelRate(_SerpModel):
     extracted_before_taxes_fees: float | None = None
 
 
+class SerpHotelPrice(_SerpModel):
+    """One booking-partner entry inside a property's `prices` array.
+
+    Captured for the search_stays merge work: vacation rentals always
+    surface this (typically with OTAs like Booking.com, Hotels.com,
+    Bluepillow.com — NOT Airbnb / VRBO directly per Phase 0 fixtures).
+    Hotel properties may surface this too, though the Phase 0 hotel
+    fixture didn't carry it for the captured Tampere query.
+    """
+    source: str | None = None             # OTA name, e.g. "Booking.com"
+    logo: str | None = None
+    num_guests: int | None = None
+    rate_per_night: SerpHotelRate | None = None
+
+
 class SerpHotelProperty(_SerpModel):
     name: str
     property_token: str | None = None
@@ -51,6 +66,15 @@ class SerpHotelProperty(_SerpModel):
     images: list[SerpHotelImage] = Field(default_factory=list)
     rate_per_night: SerpHotelRate | None = None
     total_rate: SerpHotelRate | None = None
+    # Vacation-rental-only structured facts list. Phase 0 fixture shape:
+    # ["Entire apartment", "Sleeps 8", "2 bedrooms", "2 bathrooms",
+    #  "5 beds", "786 sq ft"]. We parse this in the normalize layer
+    # into structured bedrooms/bathrooms/sleeps fields.
+    essential_info: list[str] = Field(default_factory=list)
+    # OTA price comparison. Empty list on hotels in the Phase 0 fixture,
+    # populated on every rental there. Surfaces in the normalize layer
+    # as the StayOffer.sources field.
+    prices: list[SerpHotelPrice] = Field(default_factory=list)
 
 
 class SerpHotelsResponse(_SerpModel):

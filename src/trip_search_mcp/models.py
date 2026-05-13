@@ -9,7 +9,7 @@ from __future__ import annotations
 
 from datetime import date, datetime, timezone
 from enum import Enum
-from typing import Annotated
+from typing import Annotated, Literal
 
 from pydantic import BaseModel, Field, StringConstraints, field_validator, model_validator
 
@@ -231,7 +231,21 @@ class SearchCheapestDatesResult(BaseModel):
     results: list[DatePriceOffer]
 
 
-# ----- search_hotels (Google Hotels via SerpAPI) -----------------------------
+# ----- search_stays (Google Hotels + vacation rentals via SerpAPI) -----------
+
+
+class StayCategory(str, Enum):
+    """Which SerpAPI mode(s) to query.
+
+    ALL fan-outs to both calls in parallel and merges (~3s wall-clock,
+    2x SerpAPI quota burn). HOTELS / VACATION_RENTALS are single-call
+    paths. Per Phase 0 fixtures, SerpAPI rejects mismatched filters
+    with HTTP 400 — the client builds two distinct param sets when
+    category=ALL.
+    """
+    ALL = "all"
+    HOTELS = "hotels"
+    VACATION_RENTALS = "vacation_rentals"
 
 
 class HotelSortBy(str, Enum):
@@ -242,21 +256,33 @@ class HotelSortBy(str, Enum):
     REVIEW_SCORE = "REVIEW_SCORE"  # review_score descending (then review_count)
 
 
-class SearchHotelsInput(BaseModel):
+class SearchStaysInput(BaseModel):
     location: str = Field(min_length=1)
     check_in_date: IsoDate
     check_out_date: IsoDate
     adults: int = Field(default=2, ge=1, le=10)
     children: int = Field(default=0, ge=0, le=10)
     rooms: int = Field(default=1, ge=1, le=10)
+    # Category selector. Defaults to ALL — Phase 0 latency math shows
+    # parallel fanout adds ~0.2s vs a single call, and the merged
+    # result covers the dominant "find me a place to stay" use case.
+    category: StayCategory = StayCategory.ALL
+    # Hotel-only filter (rentals carry no hotel class). Routed to the
+    # hotel call only when category=ALL.
     min_rating: int | None = Field(default=None, ge=1, le=5)
+    # Vacation-rental-only filters. SerpAPI returns HTTP 400 if these
+    # are sent with vacation_rentals=false, so the client routes them
+    # to the rental call only when category=ALL.
+    min_bedrooms: int | None = Field(default=None, ge=0, le=20)
+    min_bathrooms: int | None = Field(default=None, ge=0, le=20)
+    # Cross-category filters — apply to whichever calls run.
     min_review_score: float | None = Field(default=None, ge=0.0, le=5.0)
     max_price_per_night: float | None = Field(default=None, gt=0.0)
     required_amenities: list[str] | None = None
     sort_by: HotelSortBy = HotelSortBy.BEST
     max_results: int = Field(default=10, ge=1, le=25)
     # ISO 4217 three-letter code. Defaults to EUR (matches what fli returns
-    # for European-IP users so flight+hotel totals can be compared directly).
+    # for European-IP users so flight+stay totals can be compared directly).
     # Override per call when the user works in a different currency
     # ("budget ¥30000/night" → currency="JPY"). Validated as 3 uppercase
     # letters; SerpAPI will surface unsupported codes via its error body.
@@ -272,7 +298,7 @@ class SearchHotelsInput(BaseModel):
         return v
 
     @model_validator(mode="after")
-    def _check_out_after_check_in(self) -> "SearchHotelsInput":
+    def _check_out_after_check_in(self) -> "SearchStaysInput":
         ci = date.fromisoformat(self.check_in_date)
         co = date.fromisoformat(self.check_out_date)
         if co <= ci:
@@ -282,7 +308,19 @@ class SearchHotelsInput(BaseModel):
         return self
 
 
-class HotelOffer(BaseModel):
+class Source(BaseModel):
+    """One booking-partner entry derived from SerpAPI's `prices` array.
+
+    Per Phase 0 fixtures, vacation rentals surface OTAs (Booking.com,
+    Hotels.com, Bluepillow.com) — NOT Airbnb / VRBO directly. Hotels in
+    the fixture lacked the `prices` array entirely.
+    """
+    name: str                              # OTA name, canonicalized (e.g. "Booking.com")
+    price_per_night: float | None = None   # in response currency
+    before_taxes_fees: float | None = None # when SerpAPI exposes it
+
+
+class StayOffer(BaseModel):
     offer_id: str
     name: str
     check_in_date: IsoDate
@@ -291,8 +329,12 @@ class HotelOffer(BaseModel):
     price_total: float
     price_per_night: float
     currency: IsoCurrency
+    # "hotel" or "vacation_rental". Mirrored from SerpAPI's `type` field,
+    # mapped to one of these two canonical values. Drives card rendering
+    # ("Hotel" / "Vacation rental" badge).
+    category: Literal["hotel", "vacation_rental"]
     star_rating: int | None
-    # Google Hotels' native 0–5 review scale (preserved as-is, NOT rescaled to 0–10).
+    # Google's native 0–5 review scale (preserved as-is, NOT rescaled to 0–10).
     review_score: float | None
     review_count: int | None
     address: str | None
@@ -300,10 +342,25 @@ class HotelOffer(BaseModel):
     longitude: float | None
     amenities: list[str]
     images: list[str]              # capped at 5 in normalize
-    description: str | None
-    hotel_type: str | None         # "hotel", "vacation rental", etc.
+    description: str | None        # populated on hotels; null on rentals
+    # Vacation-rental-only structured facts parsed from SerpAPI's
+    # `essential_info` (e.g. "Sleeps 8", "2 bedrooms", "2 bathrooms").
+    # Null when SerpAPI didn't surface the value or this is a hotel.
+    bedrooms: int | None = None
+    bathrooms: int | None = None
+    sleeps: int | None = None
+    hotel_type: str | None         # raw `type` value: "hotel", "vacation rental", etc.
+    # OTA price comparison. Empty list when SerpAPI's `prices` was
+    # missing (true for hotels in the Phase 0 fixture). Populated for
+    # vacation rentals.
+    sources: list[Source] = Field(default_factory=list)
     booking_url: str               # Google Hotels URL with the search pre-filled
 
 
-class SearchHotelsResult(BaseModel):
-    results: list[HotelOffer]
+class SearchStaysResult(BaseModel):
+    results: list[StayOffer]
+    # Populated only on the partial-failure path (when category=ALL and
+    # one of the two SerpAPI calls errors but the other succeeds). The
+    # tool description tells Claude to surface these verbatim above the
+    # card grid.
+    warnings: list[str] = Field(default_factory=list)

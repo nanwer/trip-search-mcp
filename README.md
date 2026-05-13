@@ -206,13 +206,16 @@ searches/month — plenty for personal trip planning).
    }
    ```
 
-4. **⌘Q Claude Desktop and reopen.** A third tool, `search_hotels`,
-   appears in the tools menu.
+4. **⌘Q Claude Desktop and reopen.** A third tool, `search_stays`,
+   appears in the tools menu. It covers **both hotels AND vacation
+   rentals** in one call (Google's aggregation of short-term rentals
+   from OTAs like Booking.com, Hotels.com, Vrbo.com — note: **Airbnb is
+   not in Google's aggregation**).
 
 Test it:
 
-> *"Find hotels in Lisbon, June 20 to 23, 2 adults, at least 4 stars,
-> under €200/night."*
+> *"Find me a place to stay in Lisbon, June 20 to 23, 2 adults, at
+> least 4 stars or 4+ review score, under €200/night."*
 
 ---
 
@@ -223,7 +226,7 @@ The four problems you're most likely to hit, with one-line fixes:
 | Symptom | Fix |
 |---|---|
 | The `trip-search` server doesn't appear in the tools menu | You forgot ⌘Q. Fully quit Claude Desktop (not just close the window) and reopen. |
-| `search_hotels` says "SERPAPI_KEY is not set" | The `env` block is missing from your config, or you ⌘Q'd before saving. Re-check step 3 of the optional section, then ⌘Q + reopen. |
+| `search_stays` says "SERPAPI_KEY is not set" | The `env` block is missing from your config, or you ⌘Q'd before saving. Re-check step 3 of the optional section, then ⌘Q + reopen. |
 | Claude says "I called the tool and got a timeout" | Run `pkill -f trip_search_mcp` in a terminal, then ⌘Q + reopen Claude Desktop. The program got stuck on stale code. |
 | "ModuleNotFoundError: No module named 'trip_search_mcp'" | The `command` path in your config points to the wrong Python. Re-run step 4 and paste that exact path into the config. |
 
@@ -269,14 +272,17 @@ and adapt to your trip.
 > *"I want a 3-month trip to Australia leaving sometime between June and
 > September. When's it cheapest?"*
 
-### Hotels (requires SERPAPI_KEY)
+### Stays — hotels + vacation rentals (requires SERPAPI_KEY)
 
-> *"Hotels in Tampere from June 15 to June 18, 2 adults."*
+> *"Find me a place to stay in Tampere from June 15 to June 18, 2 adults."* — returns mixed hotels + vacation rentals
 
-> *"Hotels in Lisbon next weekend, 2 adults, under €150/night, at least
-> 4 stars."*
+> *"Just hotels in Lisbon next weekend, 2 adults, under €150/night, at
+> least 4 stars."* — `category="hotels"`
 
-> *"Hotels in central London for 3 nights starting October 12, must have
+> *"Find me a 2-bedroom rental in Lisbon for a week starting July 5,
+> sleeps 4."* — `category="vacation_rentals"`, `min_bedrooms=2`
+
+> *"Stays in central London for 3 nights starting October 12, must have
 > pool and gym."*
 
 > *"Best-reviewed hotels in Kyoto for the first week of November, 1
@@ -284,13 +290,14 @@ and adapt to your trip.
 
 > *"Family hotel in Orlando from July 5–12: 2 adults, 2 kids, one room."*
 
-### Trip planning (combining flights + hotels)
+### Trip planning (combining flights + stays)
 
 > *"I want to spend two weeks in Lisbon. When's the cheapest time to go
 > in the next 3 months, and what does the cheapest itinerary look like?"*
 
 > *"I want to spend 3 nights in Tampere in June. Find me a flight and a
-> hotel — keep the hotel cheap but at least 4 stars."*
+> place to stay — flexible on hotel or rental, but keep it cheap and at
+> least 4 stars or strong reviews."*
 
 ---
 
@@ -299,6 +306,9 @@ and adapt to your trip.
 - **It doesn't book for you.** Claude returns a "Book on Google Flights"
   or "Book on Google Hotels" link per result — you click it to finish on
   the airline / booking partner's site.
+- **Airbnb-only listings.** Google's vacation-rental aggregation
+  surfaces OTAs (Booking.com, Hotels.com, Vrbo.com, Bluepillow.com) but
+  not Airbnb directly. If a property is Airbnb-only, it won't appear.
 - **No multi-city / open-jaw itineraries in one shot.** Workaround: ask
   Claude to search one leg at a time.
 - **No "Washington DC" → all-airports expansion.** Use the specific
@@ -333,7 +343,7 @@ If you want to read the code, extend the tools, or run the test suite:
 Run the test suite:
 
 ```bash
-.venv/bin/pytest -q          # 193 tests, all fixture-driven, no live API calls
+.venv/bin/pytest -q          # 219 tests, all fixture-driven, no live API calls
 ```
 
 Capture fresh real-data fixtures (uses live APIs):
@@ -384,7 +394,11 @@ version for humans.
 | `departure_window` | none | Same format and semantics. |
 | `airlines` | none | Same semantics. |
 
-### `search_hotels` *(requires `SERPAPI_KEY`)*
+### `search_stays` *(requires `SERPAPI_KEY`)*
+
+Covers both hotels AND vacation rentals. Default `category="all"` makes
+**2 SerpAPI calls in parallel** and merges; `category="hotels"` or
+`category="vacation_rentals"` makes 1 call.
 
 | Parameter | Default | Notes |
 |---|---|---|
@@ -394,17 +408,43 @@ version for humans.
 | `adults` | 2 | 1–10. |
 | `children` | 0 | 0–10. |
 | `rooms` | 1 | 1–10. |
-| `min_rating` | none | Star rating 1–5. Properties without a star rating are excluded when set. |
+| `category` | `"all"` | `"all"` / `"hotels"` / `"vacation_rentals"`. `"all"` costs 2 SerpAPI calls per query. |
+| `min_rating` | none | Star rating 1–5. **Hotels-only filter.** Vacation rentals pass through unfiltered (they have no hotel class). |
+| `min_bedrooms` | none | **Vacation-rental-only filter.** Hotels pass through. |
+| `min_bathrooms` | none | Same scoping as `min_bedrooms`. |
 | `min_review_score` | none | Google's native 0–5 review score (NOT 0–10). |
 | `max_price_per_night` | none | Per-night ceiling, in the response currency. |
 | `required_amenities` | none | List of free-text amenity names. Case- and punctuation-insensitive substring match ("wifi" matches "Free Wi-Fi"). |
 | `sort_by` | `BEST` | `BEST` / `PRICE_LOW` / `PRICE_HIGH` / `RATING` / `REVIEW_SCORE`. |
-| `max_results` | 10 | 1–25. |
+| `max_results` | 10 | 1–25. Applies to the *merged* result set when `category="all"`. |
 | `currency` | `EUR` | ISO 4217 code (`"USD"`, `"JPY"`, `"GBP"`, …). Match it to the units the user spoke in for `max_price_per_night`. |
+
+Each `StayOffer` carries: `offer_id`, `name`, `category` (`"hotel"` or
+`"vacation_rental"`), `nights`, `price_total`, `price_per_night`,
+`currency`, `star_rating` (hotels only), `review_score` (0–5 scale),
+`review_count`, GPS coordinates, `amenities`, `images`, `description`
+(hotels only), `bedrooms` / `bathrooms` / `sleeps` (vacation rentals
+only, parsed from SerpAPI's `essential_info`), `sources` (per-OTA price
+comparison; empty list for hotels in current data), `hotel_type`, and
+`booking_url` (deep link to the property's Google Hotels entity page).
+
+**`sources`**: per-offer list of `{name, price_per_night,
+before_taxes_fees}` entries showing the same property listed across
+booking partners. For vacation rentals this surfaces OTAs like
+Booking.com, Hotels.com, Vrbo.com — **NOT Airbnb** (Google's
+aggregation doesn't include it).
+
+**`address` is always null** — SerpAPI's google_hotels list endpoint
+doesn't carry per-property addresses.
+
+The success envelope is `{"results": [...], "warnings": [...]}`.
+`warnings` is populated only on the partial-failure path (when
+`category="all"` and one of the two SerpAPI calls fails but the other
+succeeds).
 
 ### Errors
 
-Every tool returns either a `results` array on success, or an error
+Every tool returns either a success envelope on success, or an error
 envelope on failure:
 
 ```json
@@ -412,7 +452,7 @@ envelope on failure:
 ```
 
 Codes: `invalid_input`, `no_results`, `rate_limited`, `upstream_error`,
-`auth_failed` (the last only fires from `search_hotels` when
+`auth_failed` (the last only fires from `search_stays` when
 `SERPAPI_KEY` is missing or rejected).
 
 ---

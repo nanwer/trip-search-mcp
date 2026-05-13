@@ -88,3 +88,12 @@ def serpapi_hotels_success() -> dict:
 @pytest.fixture
 def serpapi_hotels_empty() -> dict:
     return _load("serpapi_hotels_empty.json")
+
+
+@pytest.fixture
+def serpapi_vacation_rentals_success() -> dict:
+    """3-property synthetic vacation_rentals=true response:
+    a 2BR apartment with multi-source prices (Booking.com + Hotels.com),
+    a studio with one source (Bluepillow.com), and a 3BR villa (Vrbo.com).
+    Used for sources/dedup/category/essential_info tests."""
+    return _load("serpapi_vacation_rentals_success.json")

@@ -267,3 +267,151 @@ def test_filters_apply_before_limit(serpapi_hotels_success):
 def test_empty_response_returns_empty_list(serpapi_hotels_empty):
     offers = _build(serpapi_hotels_empty)
     assert offers == []
+
+
+# ----- vacation-rental shape: sources, essential_info, category -------------
+
+
+def test_rentals_fixture_normalizes_with_category_vacation_rental(
+    serpapi_vacation_rentals_success,
+):
+    offers = _build(serpapi_vacation_rentals_success)
+    assert len(offers) == 3
+    assert all(o.category == "vacation_rental" for o in offers)
+
+
+def test_rentals_carry_sources_from_prices_array(serpapi_vacation_rentals_success):
+    offers = _build(serpapi_vacation_rentals_success)
+    apt = next(o for o in offers if "Modern 2BR" in o.name)
+    source_names = [s.name for s in apt.sources]
+    assert "Booking.com" in source_names
+    assert "Hotels.com" in source_names  # canonicalized from "hotels.com"
+
+
+def test_source_names_canonicalized(serpapi_vacation_rentals_success):
+    """Verify the canonical-name map normalizes input casing to a
+    known canonical form so downstream filters can match by exact name."""
+    offers = _build(serpapi_vacation_rentals_success)
+    studio = next(o for o in offers if "Studio" in o.name)
+    # Fixture has "BluePillow.com" (mixed case); canonical "Bluepillow.com".
+    assert studio.sources[0].name == "Bluepillow.com"
+
+    villa = next(o for o in offers if "Villa" in o.name)
+    # Fixture has "Vrbo.com" → canonical "VRBO".
+    assert villa.sources[0].name == "VRBO"
+
+
+def test_source_carries_before_taxes_fees_when_present(
+    serpapi_vacation_rentals_success,
+):
+    offers = _build(serpapi_vacation_rentals_success)
+    apt = next(o for o in offers if "Modern 2BR" in o.name)
+    booking = next(s for s in apt.sources if s.name == "Booking.com")
+    assert booking.price_per_night == 150
+    assert booking.before_taxes_fees == 130
+
+    hotels = next(s for s in apt.sources if s.name == "Hotels.com")
+    # Fixture deliberately omits before_taxes_fees on this entry.
+    assert hotels.before_taxes_fees is None
+
+
+def test_essential_info_parses_bedrooms_bathrooms_sleeps(
+    serpapi_vacation_rentals_success,
+):
+    offers = _build(serpapi_vacation_rentals_success)
+    apt = next(o for o in offers if "Modern 2BR" in o.name)
+    assert apt.bedrooms == 2
+    assert apt.bathrooms == 1
+    assert apt.sleeps == 4
+
+    villa = next(o for o in offers if "Villa" in o.name)
+    assert villa.bedrooms == 3
+    assert villa.bathrooms == 2
+    assert villa.sleeps == 8
+
+
+def test_essential_info_missing_bedroom_count_leaves_null(
+    serpapi_vacation_rentals_success,
+):
+    """Studio fixture has 'Studio' (no bedroom count), '1 bathroom', 'Sleeps 2'.
+    bedrooms should stay None while bathrooms/sleeps parse."""
+    offers = _build(serpapi_vacation_rentals_success)
+    studio = next(o for o in offers if "Studio" in o.name)
+    assert studio.bedrooms is None
+    assert studio.bathrooms == 1
+    assert studio.sleeps == 2
+
+
+def test_hotels_carry_empty_sources_when_prices_absent(serpapi_hotels_success):
+    """The synthetic hotels fixture has no `prices` field; sources should
+    come back as an empty list, not crash. (The fixture is mixed-type —
+    one Backpackers entry is typed 'vacation rental' — so we only assert
+    the absence of prices, not the category.)"""
+    offers = _build(serpapi_hotels_success)
+    for o in offers:
+        assert o.sources == []
+
+
+# ----- merge_and_dedup pure-function tests ----------------------------------
+
+
+def _stub_offer(*, offer_id: str, name: str, price: float,
+                lat: float = 0.0, lon: float = 0.0,
+                category: str = "hotel"):
+    """Tiny helper: build a minimum-viable StayOffer for dedup tests."""
+    from trip_search_mcp.models import StayOffer
+    return StayOffer(
+        offer_id=offer_id,
+        name=name,
+        check_in_date="2026-06-15",
+        check_out_date="2026-06-18",
+        nights=3,
+        price_total=price * 3,
+        price_per_night=price,
+        currency="EUR",
+        category=category,
+        star_rating=None,
+        review_score=None,
+        review_count=None,
+        address=None,
+        latitude=lat,
+        longitude=lon,
+        amenities=[],
+        images=[],
+        description=None,
+        hotel_type=category,
+        sources=[],
+        booking_url="https://x",
+    )
+
+
+def test_merge_dedups_by_token_keeping_lower_price():
+    from trip_search_mcp.serpapi_hotels_backend.normalize import merge_and_dedup
+    hotels = [_stub_offer(offer_id="tok_A", name="X", price=200)]
+    rentals = [_stub_offer(offer_id="tok_A", name="X", price=150,
+                           category="vacation_rental")]
+    merged = merge_and_dedup(hotels, rentals)
+    assert len(merged) == 1
+    assert merged[0].price_per_night == 150
+
+
+def test_merge_dedups_by_name_and_coords_fallback_when_tokens_differ():
+    """No token (or distinct tokens) but same name+coords → still collapsed."""
+    from trip_search_mcp.serpapi_hotels_backend.normalize import merge_and_dedup
+    hotels = [_stub_offer(offer_id="h:abc", name="Same Place", price=200,
+                          lat=61.5000, lon=23.7610)]
+    rentals = [_stub_offer(offer_id="h:def", name="same place", price=150,
+                           lat=61.5000, lon=23.7610,
+                           category="vacation_rental")]
+    merged = merge_and_dedup(hotels, rentals)
+    assert len(merged) == 1
+    assert merged[0].price_per_night == 150
+
+
+def test_merge_keeps_distinct_properties_apart():
+    from trip_search_mcp.serpapi_hotels_backend.normalize import merge_and_dedup
+    hotels = [_stub_offer(offer_id="tok_A", name="Hotel A", price=200)]
+    rentals = [_stub_offer(offer_id="tok_B", name="Rental B", price=150,
+                           category="vacation_rental")]
+    merged = merge_and_dedup(hotels, rentals)
+    assert len(merged) == 2

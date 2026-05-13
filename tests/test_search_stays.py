@@ -1,4 +1,4 @@
-"""Orchestration tests for the search_hotels tool function.
+"""Orchestration tests for the search_stays tool function.
 
 Covers the lazy-fail auth path (which is what makes this tool different
 from the flight tools — server can run without SERPAPI_KEY).
@@ -10,7 +10,7 @@ import pytest
 
 from trip_search_mcp.cache import TTLCache
 from trip_search_mcp.serpapi_hotels_backend.client import SerpAPIHotelsClient
-from trip_search_mcp.tools.search_hotels import search_hotels
+from trip_search_mcp.tools.search_stays import search_stays
 
 
 def _client_with(handler) -> SerpAPIHotelsClient:
@@ -32,7 +32,7 @@ async def test_returns_success_envelope(serpapi_hotels_success):
     client = _client_with(_ok_handler(serpapi_hotels_success))
     cache = TTLCache(ttl_seconds=300)
 
-    result = await search_hotels(
+    result = await search_stays(
         client=client, cache=cache,
         location="Tampere",
         check_in_date="2026-06-15", check_out_date="2026-06-18",
@@ -48,7 +48,7 @@ async def test_returns_success_envelope(serpapi_hotels_success):
 async def test_sort_by_price_low_returns_cheapest_first(serpapi_hotels_success):
     client = _client_with(_ok_handler(serpapi_hotels_success))
     cache = TTLCache(ttl_seconds=300)
-    result = await search_hotels(
+    result = await search_stays(
         client=client, cache=cache,
         location="Tampere",
         check_in_date="2026-06-15", check_out_date="2026-06-18",
@@ -63,13 +63,13 @@ async def test_sort_by_changes_first_result(serpapi_hotels_success):
     yield different first results (when fixture allows it)."""
     client = _client_with(_ok_handler(serpapi_hotels_success))
     cache = TTLCache(ttl_seconds=300)
-    cheapest = await search_hotels(
+    cheapest = await search_stays(
         client=client, cache=cache,
         location="Tampere",
         check_in_date="2026-06-15", check_out_date="2026-06-18",
         sort_by="PRICE_LOW",
     )
-    rated = await search_hotels(
+    rated = await search_stays(
         client=client, cache=cache,
         location="Tampere",
         check_in_date="2026-06-15", check_out_date="2026-06-18",
@@ -85,7 +85,7 @@ async def test_no_client_returns_auth_failed_with_actionable_message():
     """When the server starts without SERPAPI_KEY, the hotels client is
     None and the tool surfaces an auth_failed envelope rather than crashing."""
     cache = TTLCache(ttl_seconds=300)
-    result = await search_hotels(
+    result = await search_stays(
         client=None, cache=cache,
         location="Tampere",
         check_in_date="2026-06-15", check_out_date="2026-06-18",
@@ -103,7 +103,7 @@ async def test_invalid_input_returns_error_envelope(serpapi_hotels_success):
     client = _client_with(_ok_handler(serpapi_hotels_success))
     cache = TTLCache(ttl_seconds=300)
     # check_out before check_in
-    result = await search_hotels(
+    result = await search_stays(
         client=client, cache=cache,
         location="Tampere",
         check_in_date="2026-06-18", check_out_date="2026-06-15",
@@ -114,7 +114,7 @@ async def test_invalid_input_returns_error_envelope(serpapi_hotels_success):
 async def test_no_results_returns_clean_envelope(serpapi_hotels_empty):
     client = _client_with(_ok_handler(serpapi_hotels_empty))
     cache = TTLCache(ttl_seconds=300)
-    result = await search_hotels(
+    result = await search_stays(
         client=client, cache=cache,
         location="Atlantis",
         check_in_date="2026-06-15", check_out_date="2026-06-18",
@@ -128,7 +128,7 @@ async def test_upstream_401_returns_auth_failed_envelope():
 
     client = _client_with(handler)
     cache = TTLCache(ttl_seconds=300)
-    result = await search_hotels(
+    result = await search_stays(
         client=client, cache=cache,
         location="Tampere",
         check_in_date="2026-06-15", check_out_date="2026-06-18",
@@ -142,7 +142,7 @@ async def test_rate_limit_returns_retryable_envelope():
 
     client = _client_with(handler)
     cache = TTLCache(ttl_seconds=300)
-    result = await search_hotels(
+    result = await search_stays(
         client=client, cache=cache,
         location="Tampere",
         check_in_date="2026-06-15", check_out_date="2026-06-18",
@@ -155,6 +155,9 @@ async def test_rate_limit_returns_retryable_envelope():
 
 
 async def test_second_identical_call_is_cache_hit(serpapi_hotels_success):
+    """Cache works at the tool-function level: a repeat call with identical
+    inputs hits the cache, regardless of how many SerpAPI calls the first
+    invocation made (1 for single-category, 2 for category='all')."""
     call_count = {"n": 0}
 
     def handler(request: httpx.Request) -> httpx.Response:
@@ -167,10 +170,15 @@ async def test_second_identical_call_is_cache_hit(serpapi_hotels_success):
         client=client, cache=cache,
         location="Tampere",
         check_in_date="2026-06-15", check_out_date="2026-06-18",
+        category="hotels",  # pin single-call so the call-count assertion stays clean
     )
-    await search_hotels(**kwargs)
-    await search_hotels(**kwargs)
-    assert call_count["n"] == 1
+    await search_stays(**kwargs)
+    calls_after_first = call_count["n"]
+    await search_stays(**kwargs)
+    # Second call shouldn't add any SerpAPI calls — cache hit.
+    assert call_count["n"] == calls_after_first
+    # For category='hotels' specifically, that's exactly 1 SerpAPI call.
+    assert calls_after_first == 1
 
 
 async def test_cache_key_namespaced_per_tool(serpapi_hotels_success):
@@ -181,7 +189,7 @@ async def test_cache_key_namespaced_per_tool(serpapi_hotels_success):
     # only proves both tools can coexist in one cache without crosstalk.
     cache = TTLCache(ttl_seconds=300)
     hotels_client = _client_with(_ok_handler(serpapi_hotels_success))
-    result = await search_hotels(
+    result = await search_stays(
         client=hotels_client, cache=cache,
         location="Tampere",
         check_in_date="2026-06-15", check_out_date="2026-06-18",
@@ -202,7 +210,7 @@ async def test_cache_key_namespaced_per_tool(serpapi_hotels_success):
 async def test_full_shape_matches_documented(serpapi_hotels_success):
     client = _client_with(_ok_handler(serpapi_hotels_success))
     cache = TTLCache(ttl_seconds=300)
-    result = await search_hotels(
+    result = await search_stays(
         client=client, cache=cache,
         location="Tampere",
         check_in_date="2026-06-15", check_out_date="2026-06-18",

@@ -8,7 +8,7 @@ import httpx
 import pytest
 
 from trip_search_mcp.errors import ErrorCode, ToolError
-from trip_search_mcp.models import HotelSortBy, SearchHotelsInput
+from trip_search_mcp.models import HotelSortBy, SearchStaysInput
 from trip_search_mcp.serpapi_hotels_backend.client import SerpAPIHotelsClient
 
 
@@ -22,14 +22,18 @@ def _ok(body: dict) -> httpx.Response:
     return httpx.Response(200, json=body)
 
 
-def _input(**overrides) -> SearchHotelsInput:
+def _input(**overrides) -> SearchStaysInput:
+    """Default to category='hotels' for legacy single-call tests so each
+    test makes exactly one SerpAPI request (matches the pre-Phase-1
+    behaviour). Tests that exercise the merge path override `category`."""
     base = dict(
         location="Tampere",
         check_in_date="2026-06-15",
         check_out_date="2026-06-18",
+        category="hotels",
     )
     base.update(overrides)
-    return SearchHotelsInput(**base)
+    return SearchStaysInput(**base)
 
 
 # ----- happy path -----------------------------------------------------------
@@ -43,8 +47,9 @@ async def test_search_returns_normalized_offers(serpapi_hotels_success):
         return _ok(serpapi_hotels_success)
 
     client = _make_client(handler)
-    offers = await client.search(_input())
-    assert len(offers) == 3
+    result = await client.search(_input())
+    assert len(result.results) == 3
+    assert result.warnings == []
     # SerpAPI request shape:
     assert captured["params"]["engine"] == "google_hotels"
     assert captured["params"]["q"] == "Tampere"
@@ -65,9 +70,9 @@ async def test_currency_threads_through_to_request_and_response(serpapi_hotels_s
         return _ok(serpapi_hotels_success)
 
     client = _make_client(handler)
-    offers = await client.search(_input(currency="JPY"))
+    result = await client.search(_input(currency="JPY"))
     assert captured["params"]["currency"] == "JPY"
-    assert all(o.currency == "JPY" for o in offers)
+    assert all(o.currency == "JPY" for o in result.results)
 
 
 async def test_currency_defaults_to_eur(serpapi_hotels_success):
@@ -80,9 +85,9 @@ async def test_currency_defaults_to_eur(serpapi_hotels_success):
         return _ok(serpapi_hotels_success)
 
     client = _make_client(handler)
-    offers = await client.search(_input())
+    result = await client.search(_input())
     assert captured["params"]["currency"] == "EUR"
-    assert all(o.currency == "EUR" for o in offers)
+    assert all(o.currency == "EUR" for o in result.results)
 
 
 async def test_max_results_caps_response(serpapi_hotels_success):
@@ -90,8 +95,8 @@ async def test_max_results_caps_response(serpapi_hotels_success):
         return _ok(serpapi_hotels_success)
 
     client = _make_client(handler)
-    offers = await client.search(_input(max_results=2))
-    assert len(offers) == 2
+    result = await client.search(_input(max_results=2))
+    assert len(result.results) == 2
 
 
 async def test_sort_by_threads_through(serpapi_hotels_success):
@@ -99,8 +104,8 @@ async def test_sort_by_threads_through(serpapi_hotels_success):
         return _ok(serpapi_hotels_success)
 
     client = _make_client(handler)
-    offers = await client.search(_input(sort_by="PRICE_LOW"))
-    prices = [o.price_total for o in offers]
+    result = await client.search(_input(sort_by="PRICE_LOW"))
+    prices = [o.price_total for o in result.results]
     assert prices == sorted(prices)
 
 

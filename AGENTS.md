@@ -73,19 +73,41 @@ doesn't exist wastes the user's time and breeds wrong fixes.
   change input/output shapes or filter semantics.
 - Cache keys are namespaced by tool name (`{"tool": TOOL_NAME, ...}`).
   Add the prefix when introducing a new tool.
-- The hotels tool is OPT-IN via SERPAPI_KEY. `search_hotels` checks at
-  call time whether the hotels client was configured; if not, returns a
+- The stays tool is OPT-IN via SERPAPI_KEY. `search_stays` checks at
+  call time whether the stays client was configured; if not, returns a
   structured `auth_failed` envelope. The SERVER does NOT require
   SERPAPI_KEY at startup — flights staying key-free is a deliberate
   product property. Don't change that.
+- `search_stays(category="all")` makes **2 SerpAPI calls per query**
+  (one for hotels, one for vacation rentals). This is intentional and
+  doubles quota burn vs `category="hotels"` or `"vacation_rentals"`.
+  100/month free tier covers ~50 merged queries. Don't change the
+  default without thinking through the user's quota budget.
+- SerpAPI returns HTTP 400 if you send `hotel_class` with
+  `vacation_rentals=true` or `bedrooms`/`bathrooms` with
+  `vacation_rentals=false`. The client's `_build_query` keeps these
+  scoped per mode. There's a regression test at
+  `test_stays_merge.py::test_min_bedrooms_routed_only_to_rentals_request`.
+- Google's vacation-rental aggregation does NOT include Airbnb. The
+  `sources` field surfaces OTAs (Booking.com, Hotels.com, Vrbo.com,
+  Bluepillow.com). If a user asks for "Airbnb" specifically, explain
+  the limitation rather than promising it.
 
 ## Useful repo entry points
 
-- `MIGRATION-FLI-SPEC.md` — phased migration plan (Phase 1 + 2 + 2.5 done).
+- `SEARCH-STAYS-SPEC.md` — phase plan for the unified stays tool (all
+  phases shipped).
+- `MIGRATION-FLI-SPEC.md` — phased flights migration plan (Phase 1 + 2
+  + 2.5 done).
 - `docs/SETUP.md` — install + connect walkthrough for end users.
-- `scripts/verify_fli.py` — capture fresh real-data fixtures (one live
-  SearchFlights + one SearchDates call).
-- The latest behavior-affecting change shipped in commit `a3791e7`
-  (Phase 2.5: exclusive-end window semantics, airlines wording, offer_id
-  collision fix). If a Desktop subprocess predates this commit, it's
-  running pre-2.5 behavior and the user should ⌘Q + reopen.
+- `scripts/verify_fli.py` — capture fresh fli fixtures.
+- `scripts/verify_serpapi_hotels.py` — capture fresh hotel fixture.
+- `scripts/verify_vacation_rentals.py` — capture fresh vacation-rentals
+  fixture + compare against the hotels response (used for Phase 0 of
+  the search_stays work).
+- The latest behavior-affecting change shipped with the search_stays
+  rollout: `search_hotels` is GONE, replaced by `search_stays` with a
+  `category` dispatcher. If a Desktop subprocess predates this commit,
+  it's still running search_hotels and the user should ⌘Q + reopen
+  (AND update their config — `-m trip_search_mcp.server` is unchanged,
+  but the tool name in the menu changed).

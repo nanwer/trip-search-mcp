@@ -1,0 +1,133 @@
+{
+  "properties": [
+    {
+      "type": "vacation rental",
+      "name": "Modern 2BR Apartment near Pyynikki",
+      "property_token": "VRtok_AAA001",
+      "gps_coordinates": {"latitude": 61.4998, "longitude": 23.7610},
+      "rate_per_night": {
+        "lowest": "€150",
+        "extracted_lowest": 150,
+        "before_taxes_fees": "€130",
+        "extracted_before_taxes_fees": 130
+      },
+      "total_rate": {
+        "lowest": "€450",
+        "extracted_lowest": 450
+      },
+      "amenities": ["Free Wi-Fi", "Kitchen", "Washer", "Sauna"],
+      "essential_info": [
+        "Entire apartment",
+        "Sleeps 4",
+        "2 bedrooms",
+        "1 bathroom",
+        "3 beds"
+      ],
+      "images": [
+        {"thumbnail": "https://example.com/t1.jpg", "original_image": "https://example.com/o1.jpg"}
+      ],
+      "overall_rating": 4.5,
+      "reviews": 120,
+      "location_rating": 4.4,
+      "check_in_time": "3:00 PM",
+      "check_out_time": "11:00 AM",
+      "prices": [
+        {
+          "source": "Booking.com",
+          "num_guests": 4,
+          "rate_per_night": {
+            "lowest": "€150",
+            "extracted_lowest": 150,
+            "before_taxes_fees": "€130",
+            "extracted_before_taxes_fees": 130
+          }
+        },
+        {
+          "source": "hotels.com",
+          "num_guests": 4,
+          "rate_per_night": {
+            "lowest": "€155",
+            "extracted_lowest": 155
+          }
+        }
+      ]
+    },
+    {
+      "type": "vacation rental",
+      "name": "Cozy Studio Downtown",
+      "property_token": "VRtok_AAA002",
+      "gps_coordinates": {"latitude": 61.4985, "longitude": 23.7620},
+      "rate_per_night": {
+        "lowest": "€85",
+        "extracted_lowest": 85
+      },
+      "total_rate": {
+        "lowest": "€255",
+        "extracted_lowest": 255
+      },
+      "amenities": ["Free Wi-Fi", "Air conditioning"],
+      "essential_info": [
+        "Entire apartment",
+        "Sleeps 2",
+        "Studio",
+        "1 bathroom"
+      ],
+      "images": [],
+      "overall_rating": 4.2,
+      "reviews": 45,
+      "prices": [
+        {
+          "source": "BluePillow.com",
+          "rate_per_night": {
+            "lowest": "€85",
+            "extracted_lowest": 85
+          }
+        }
+      ]
+    },
+    {
+      "type": "vacation rental",
+      "name": "Lakeside 3BR Villa with Sauna",
+      "property_token": "VRtok_AAA003",
+      "gps_coordinates": {"latitude": 61.5102, "longitude": 23.7400},
+      "rate_per_night": {
+        "lowest": "€260",
+        "extracted_lowest": 260
+      },
+      "total_rate": {
+        "lowest": "€780",
+        "extracted_lowest": 780
+      },
+      "amenities": ["Free Wi-Fi", "Sauna", "Kitchen", "Free parking", "Pet-friendly"],
+      "essential_info": [
+        "Entire villa",
+        "Sleeps 8",
+        "3 bedrooms",
+        "2 bathrooms",
+        "5 beds",
+        "1500 sq ft"
+      ],
+      "images": [
+        {"thumbnail": "https://example.com/v1t.jpg", "original_image": "https://example.com/v1.jpg"},
+        {"thumbnail": "https://example.com/v2t.jpg", "original_image": "https://example.com/v2.jpg"}
+      ],
+      "overall_rating": 4.9,
+      "reviews": 88,
+      "location_rating": 4.7,
+      "prices": [
+        {
+          "source": "Vrbo.com",
+          "rate_per_night": {
+            "lowest": "€260",
+            "extracted_lowest": 260,
+            "before_taxes_fees": "€230",
+            "extracted_before_taxes_fees": 230
+          }
+        }
+      ]
+    }
+  ],
+  "search_metadata": {
+    "total_time_taken": {"float": 2.5}
+  }
+}

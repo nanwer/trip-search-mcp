@@ -1,4 +1,4 @@
-"""Translate SerpAPI google_hotels response into our HotelOffer shape.
+"""Translate SerpAPI google_hotels response into our StayOffer shape.
 
 Pure functions, no I/O. Called by `client.py` after each upstream HTTP call.
 All filtering and sorting that isn't naturally handled by SerpAPI's query
@@ -10,11 +10,106 @@ import hashlib
 from datetime import date
 from urllib.parse import quote_plus
 
-from trip_search_mcp.models import HotelOffer, HotelSortBy
+from trip_search_mcp.models import HotelSortBy, Source, StayOffer
 from trip_search_mcp.serpapi_hotels_backend.raw import (
     SerpHotelProperty,
     SerpHotelsResponse,
 )
+
+# Canonical OTA names. SerpAPI returns sources with inconsistent casing
+# ("booking.com" vs "Booking.com" vs "Booking.Com" across queries) — we
+# rewrite to a known-canonical form. Title-casing a name like
+# "booking.com" produces "Booking.Com" (uppercase C), which is wrong, so
+# this map exists. Anything not in the map gets title-cased.
+_CANONICAL_OTA_NAMES: dict[str, str] = {
+    "booking.com": "Booking.com",
+    "hotels.com": "Hotels.com",
+    "bluepillow.com": "Bluepillow.com",
+    "expedia": "Expedia",
+    "expedia.com": "Expedia",
+    "agoda": "Agoda",
+    "agoda.com": "Agoda",
+    "vrbo": "VRBO",
+    "vrbo.com": "VRBO",
+    "airbnb": "Airbnb",
+    "airbnb.com": "Airbnb",
+    "vacasa": "Vacasa",
+    "vacasa.com": "Vacasa",
+    "trivago": "Trivago",
+    "trip.com": "Trip.com",
+    "kayak": "Kayak",
+}
+
+
+def _canonicalize_source_name(raw_name: str | None) -> str:
+    if not raw_name:
+        return "Unknown"
+    key = raw_name.strip().casefold()
+    if key in _CANONICAL_OTA_NAMES:
+        return _CANONICAL_OTA_NAMES[key]
+    # Fall back to title case, but preserve dotted suffixes like ".com" lowercase.
+    base = raw_name.strip()
+    if "." in base:
+        head, _, tail = base.rpartition(".")
+        return f"{head.title()}.{tail.lower()}" if head else base
+    return base.title()
+
+
+def _category_from_type(raw_type: str | None) -> str:
+    """Map SerpAPI's free-text `type` to our canonical category.
+
+    Per Phase 0 fixtures the values observed are "hotel" and "vacation
+    rental"; we map both. Unknown values fall back to "hotel" because
+    that's the only category SerpAPI returns when vacation_rentals=false
+    and the historical default behavior.
+    """
+    if raw_type and "vacation" in raw_type.casefold():
+        return "vacation_rental"
+    return "hotel"
+
+
+def _parse_essential_info(facts: list[str]) -> tuple[int | None, int | None, int | None]:
+    """Pull (bedrooms, bathrooms, sleeps) out of SerpAPI's essential_info.
+
+    Phase 0 captured strings like "Sleeps 8", "2 bedrooms", "1 bathroom".
+    Singular and plural both appear. Anything we can't parse stays None.
+    """
+    bedrooms: int | None = None
+    bathrooms: int | None = None
+    sleeps: int | None = None
+    for fact in facts:
+        s = (fact or "").strip().casefold()
+        if not s:
+            continue
+        # Match patterns like "2 bedrooms" / "1 bedroom" / "Sleeps 8".
+        parts = s.split()
+        # "2 bedrooms" / "1 bedroom"
+        if len(parts) >= 2 and parts[0].isdigit() and parts[1].rstrip("s") == "bedroom":
+            bedrooms = int(parts[0])
+            continue
+        if len(parts) >= 2 and parts[0].isdigit() and parts[1].rstrip("s") == "bathroom":
+            bathrooms = int(parts[0])
+            continue
+        # "Sleeps 8"
+        if len(parts) >= 2 and parts[0] == "sleeps" and parts[1].isdigit():
+            sleeps = int(parts[1])
+            continue
+    return bedrooms, bathrooms, sleeps
+
+
+def _sources_from_prices(prices) -> list[Source]:
+    """Build the offer's `sources` list from SerpAPI's `prices` array."""
+    out: list[Source] = []
+    for p in prices or []:
+        rpn = p.rate_per_night
+        out.append(
+            Source(
+                name=_canonicalize_source_name(p.source),
+                price_per_night=(rpn.extracted_lowest if rpn else None),
+                before_taxes_fees=(rpn.extracted_before_taxes_fees if rpn else None),
+            )
+        )
+    return out
 
 # Tool-side cap on images to keep response payloads tight. SerpAPI returns
 # 8-9 per property; 5 covers a card carousel without bloating Claude's
@@ -87,8 +182,8 @@ def _to_offer(
     check_in: str,
     check_out: str,
     currency: str,
-) -> HotelOffer | None:
-    """Build a single HotelOffer. Returns None if the property is missing
+) -> StayOffer | None:
+    """Build a single StayOffer. Returns None if the property is missing
     enough data to be useful (no name, no price)."""
     if not raw.name:
         return None
@@ -109,7 +204,9 @@ def _to_offer(
         if url:
             images.append(url)
 
-    return HotelOffer(
+    bedrooms, bathrooms, sleeps = _parse_essential_info(raw.essential_info)
+
+    return StayOffer(
         offer_id=_compute_offer_id(
             property_token=raw.property_token,
             name=raw.name,
@@ -124,6 +221,7 @@ def _to_offer(
         price_total=float(total),
         price_per_night=float(per_night),
         currency=currency,
+        category=_category_from_type(raw.type),
         star_rating=raw.extracted_hotel_class,
         review_score=raw.overall_rating,
         review_count=raw.reviews,
@@ -133,7 +231,11 @@ def _to_offer(
         amenities=list(raw.amenities),
         images=images,
         description=raw.description,
+        bedrooms=bedrooms,
+        bathrooms=bathrooms,
+        sleeps=sleeps,
         hotel_type=raw.type,
+        sources=_sources_from_prices(raw.prices),
         booking_url=booking_url_for(
             location,
             check_in,
@@ -146,7 +248,7 @@ def _to_offer(
 # ----- post-filters (apply when SerpAPI doesn't natively filter) ------------
 
 
-def _passes_min_rating(offer: HotelOffer, min_rating: int | None) -> bool:
+def _passes_min_rating(offer: StayOffer, min_rating: int | None) -> bool:
     if min_rating is None:
         return True
     if offer.star_rating is None:
@@ -155,7 +257,7 @@ def _passes_min_rating(offer: HotelOffer, min_rating: int | None) -> bool:
     return offer.star_rating >= min_rating
 
 
-def _passes_min_review_score(offer: HotelOffer, min_review_score: float | None) -> bool:
+def _passes_min_review_score(offer: StayOffer, min_review_score: float | None) -> bool:
     if min_review_score is None:
         return True
     if offer.review_score is None:
@@ -163,14 +265,14 @@ def _passes_min_review_score(offer: HotelOffer, min_review_score: float | None) 
     return offer.review_score >= min_review_score
 
 
-def _passes_max_price(offer: HotelOffer, max_price_per_night: float | None) -> bool:
+def _passes_max_price(offer: StayOffer, max_price_per_night: float | None) -> bool:
     if max_price_per_night is None:
         return True
     return offer.price_per_night <= max_price_per_night
 
 
 def _passes_required_amenities(
-    offer: HotelOffer, required: list[str] | None,
+    offer: StayOffer, required: list[str] | None,
 ) -> bool:
     """Best-effort match, case-insensitive AND punctuation-insensitive.
 
@@ -189,7 +291,7 @@ def _passes_required_amenities(
     return all(_norm(want) in haystack for want in required)
 
 
-def _sort_key(offer: HotelOffer, sort_by: HotelSortBy):
+def _sort_key(offer: StayOffer, sort_by: HotelSortBy):
     """Return a tuple used as a stable sort key. Lower-is-better in every
     branch, so we use negative for descending dimensions."""
     if sort_by is HotelSortBy.PRICE_LOW:
@@ -214,26 +316,26 @@ def _sort_key(offer: HotelOffer, sort_by: HotelSortBy):
     return (0,)
 
 
-def build_offers(
+def normalize_and_filter(
     response: SerpHotelsResponse,
     *,
     location: str,
     check_in: str,
     check_out: str,
     currency: str,
-    sort_by: HotelSortBy,
     min_rating: int | None,
     min_review_score: float | None,
     max_price_per_night: float | None,
     required_amenities: list[str] | None,
-    limit: int,
-) -> list[HotelOffer]:
-    """Normalize, post-filter, sort, and truncate to `limit`.
+) -> list[StayOffer]:
+    """Normalize raw SerpAPI properties into offers, then apply post-filters.
 
-    Post-filters run BEFORE truncation so a tight filter doesn't silently
-    shrink the result list because of unrelated pagination cutoff.
+    NO sort, NO truncation — caller decides. Used both by the single-call
+    `build_offers` path and the merge path (which needs to combine before
+    sorting). Splitting this out makes the merge orchestration testable
+    end-to-end without re-doing normalize work.
     """
-    offers: list[HotelOffer] = []
+    offers: list[StayOffer] = []
     for raw in response.properties:
         offer = _to_offer(
             raw, location=location, check_in=check_in,
@@ -250,6 +352,106 @@ def build_offers(
         if not _passes_required_amenities(offer, required_amenities):
             continue
         offers.append(offer)
+    return offers
 
-    offers.sort(key=lambda o: _sort_key(o, sort_by))
-    return offers[:limit]
+
+def sort_and_truncate(
+    offers: list[StayOffer], sort_by: HotelSortBy, limit: int,
+) -> list[StayOffer]:
+    """Sort by user preference and truncate to `limit`. Python's sort is
+    stable, so for BEST (which returns a zero key) input order is preserved."""
+    offers_sorted = sorted(offers, key=lambda o: _sort_key(o, sort_by))
+    return offers_sorted[:limit]
+
+
+def build_offers(
+    response: SerpHotelsResponse,
+    *,
+    location: str,
+    check_in: str,
+    check_out: str,
+    currency: str,
+    sort_by: HotelSortBy,
+    min_rating: int | None,
+    min_review_score: float | None,
+    max_price_per_night: float | None,
+    required_amenities: list[str] | None,
+    limit: int,
+) -> list[StayOffer]:
+    """Normalize, post-filter, sort, and truncate to `limit`.
+
+    Thin wrapper composing normalize_and_filter + sort_and_truncate, kept
+    for the single-call code path. Merge path bypasses this and orchestrates
+    dedup between the two pieces.
+    """
+    offers = normalize_and_filter(
+        response,
+        location=location, check_in=check_in, check_out=check_out,
+        currency=currency,
+        min_rating=min_rating, min_review_score=min_review_score,
+        max_price_per_night=max_price_per_night,
+        required_amenities=required_amenities,
+    )
+    return sort_and_truncate(offers, sort_by, limit)
+
+
+# ----- merge / dedup --------------------------------------------------------
+
+
+def _dedup_key_fallback(offer: StayOffer) -> tuple:
+    """Stable tuple identifying a property when its property_token is
+    missing or unreliable across category modes.
+
+    Tolerance of 4 decimal places on lat/lon ≈ 11m at the equator —
+    tight enough that two different properties on the same block don't
+    collapse, loose enough that float-precision drift between SerpAPI's
+    hotel and vacation_rental responses doesn't break dedup.
+    """
+    lat = round(offer.latitude, 4) if offer.latitude is not None else None
+    lon = round(offer.longitude, 4) if offer.longitude is not None else None
+    return (offer.name.casefold().strip(), lat, lon)
+
+
+def merge_and_dedup(
+    hotels: list[StayOffer], rentals: list[StayOffer],
+) -> list[StayOffer]:
+    """Combine hotel and rental offers, dedup with two-tier strategy.
+
+    Pass 1: property_token equality. Properties without a token (rare)
+    pass through to pass 2.
+    Pass 2: (name.casefold(), round(lat,4), round(lon,4)) tuple.
+
+    When duplicates collide, the lower-priced variant wins (price_per_night).
+    This handles the case where the same property is listed in both modes
+    at different rates — show the user the better deal, don't show both.
+
+    Order of the input lists determines tie-breaking when prices match
+    exactly (hotels first by convention — they're the historical default).
+    """
+    combined: list[StayOffer] = [*hotels, *rentals]
+    if not combined:
+        return []
+
+    # Pass 1: bucket by property_token.
+    by_token: dict[str, StayOffer] = {}
+    no_token: list[StayOffer] = []
+    for offer in combined:
+        if offer.offer_id and not offer.offer_id.startswith("h:"):
+            # Real property_token (not our SHA fallback).
+            existing = by_token.get(offer.offer_id)
+            if existing is None or offer.price_per_night < existing.price_per_night:
+                by_token[offer.offer_id] = offer
+        else:
+            no_token.append(offer)
+
+    # Pass 2: bucket the no-token offers by name+coords tuple.
+    by_fallback: dict[tuple, StayOffer] = {}
+    for offer in no_token:
+        key = _dedup_key_fallback(offer)
+        existing = by_fallback.get(key)
+        if existing is None or offer.price_per_night < existing.price_per_night:
+            by_fallback[key] = offer
+
+    # Order: token-keyed first (in original encounter order), then fallback.
+    # We preserve input order via dict insertion order in Python 3.7+.
+    return [*by_token.values(), *by_fallback.values()]

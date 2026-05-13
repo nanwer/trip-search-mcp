@@ -33,9 +33,9 @@ from trip_search_mcp.tools.search_cheapest_dates import (
     search_cheapest_dates,
 )
 from trip_search_mcp.tools.search_flights import TOOL_DESCRIPTION, search_flights
-from trip_search_mcp.tools.search_hotels import (
-    TOOL_DESCRIPTION as HOTELS_DESCRIPTION,
-    search_hotels,
+from trip_search_mcp.tools.search_stays import (
+    TOOL_DESCRIPTION as STAYS_DESCRIPTION,
+    search_stays,
 )
 
 _logger = configure_logging()
@@ -130,15 +130,18 @@ async def search_cheapest_dates_tool(
     )
 
 
-@mcp.tool(name="search_hotels", description=HOTELS_DESCRIPTION)
-async def search_hotels_tool(
+@mcp.tool(name="search_stays", description=STAYS_DESCRIPTION)
+async def search_stays_tool(
     location: str,
     check_in_date: str,
     check_out_date: str,
     adults: int = 2,
     children: int = 0,
     rooms: int = 1,
+    category: str = "all",
     min_rating: int | None = None,
+    min_bedrooms: int | None = None,
+    min_bathrooms: int | None = None,
     min_review_score: float | None = None,
     max_price_per_night: float | None = None,
     required_amenities: list[str] | None = None,
@@ -146,7 +149,7 @@ async def search_hotels_tool(
     max_results: int = 10,
     currency: str = "EUR",
 ) -> dict[str, Any]:
-    return await search_hotels(
+    return await search_stays(
         client=_HOTELS_CLIENT,
         cache=_CACHE,
         location=location,
@@ -155,7 +158,10 @@ async def search_hotels_tool(
         adults=adults,
         children=children,
         rooms=rooms,
+        category=category,
         min_rating=min_rating,
+        min_bedrooms=min_bedrooms,
+        min_bathrooms=min_bathrooms,
         min_review_score=min_review_score,
         max_price_per_night=max_price_per_night,
         required_amenities=required_amenities,
@@ -166,7 +172,7 @@ async def search_hotels_tool(
 
 
 def main() -> None:
-    log_event(_logger, "server.start", hotels_enabled=bool(_HOTELS_CLIENT))
+    log_event(_logger, "server.start", stays_enabled=bool(_HOTELS_CLIENT))
     mcp.run()
 
 
