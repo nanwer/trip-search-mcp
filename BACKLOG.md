@@ -6,12 +6,18 @@ Each entry is sized so a fresh Claude Code session can act on it cold.
 
 ---
 
-## 1. Booking URL deep-linking
+## 1. Booking URL deep-linking (flights AND hotels)
 
-**Today:** Every `FlightOffer.booking_url` is the same generic Google
-Flights search URL for the (origin, destination, dates) tuple. Clicking
-it lands the user on the search results page; they then have to find
-"the same offer" Claude told them about and click through.
+**Today (flights):** Every `FlightOffer.booking_url` is the same generic
+Google Flights search URL for the (origin, destination, dates) tuple.
+Clicking it lands the user on the search results page; they then have to
+find "the same offer" Claude told them about and click through.
+
+**Today (hotels):** Every `HotelOffer.booking_url` is the same generic
+Google Hotels search URL for the (location, check-in, check-out) tuple,
+even though SerpAPI returns a `property_token` per result. A
+`serpapi_property_details_link` follow-up call would surface direct
+booking partner URLs for the specific property.
 
 **Wanted:** A URL that opens the offer's specific booking flow on the
 airline (or Google Flights') booking page.

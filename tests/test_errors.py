@@ -6,9 +6,11 @@ def test_error_code_values_match_spec():
     assert ErrorCode.INVALID_INPUT.value == "invalid_input"
     assert ErrorCode.RATE_LIMITED.value == "rate_limited"
     assert ErrorCode.UPSTREAM_ERROR.value == "upstream_error"
-    # quota_exceeded and auth_failed were dropped with the fli migration —
-    # fli has no quota and no auth, so neither code can ever fire.
-    assert len(ErrorCode) == 4
+    # auth_failed was dropped during the fli migration (fli needs no auth)
+    # and re-introduced with hotels (SerpAPI key required for search_hotels).
+    # quota_exceeded stays retired — SerpAPI quota issues map to upstream_error.
+    assert ErrorCode.AUTH_FAILED.value == "auth_failed"
+    assert len(ErrorCode) == 5
 
 
 def test_error_response_shape():

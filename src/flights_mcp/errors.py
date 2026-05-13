@@ -10,6 +10,10 @@ class ErrorCode(str, Enum):
     INVALID_INPUT = "invalid_input"
     RATE_LIMITED = "rate_limited"
     UPSTREAM_ERROR = "upstream_error"
+    # Reintroduced for hotels (SerpAPI key required). Flights have no auth
+    # and never raise this; the code exists for tool-level auth failures
+    # like missing SERPAPI_KEY when calling search_hotels.
+    AUTH_FAILED = "auth_failed"
 
 
 class ToolError(Exception):

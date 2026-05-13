@@ -229,3 +229,75 @@ class DatePriceOffer(BaseModel):
 
 class SearchCheapestDatesResult(BaseModel):
     results: list[DatePriceOffer]
+
+
+# ----- search_hotels (Google Hotels via SerpAPI) -----------------------------
+
+
+class HotelSortBy(str, Enum):
+    BEST = "BEST"                  # preserve SerpAPI's returned order
+    PRICE_LOW = "PRICE_LOW"        # price_total ascending
+    PRICE_HIGH = "PRICE_HIGH"      # price_total descending
+    RATING = "RATING"              # star_rating descending (then review_score)
+    REVIEW_SCORE = "REVIEW_SCORE"  # review_score descending (then review_count)
+
+
+class SearchHotelsInput(BaseModel):
+    location: str = Field(min_length=1)
+    check_in_date: IsoDate
+    check_out_date: IsoDate
+    adults: int = Field(default=2, ge=1, le=10)
+    children: int = Field(default=0, ge=0, le=10)
+    rooms: int = Field(default=1, ge=1, le=10)
+    min_rating: int | None = Field(default=None, ge=1, le=5)
+    min_review_score: float | None = Field(default=None, ge=0.0, le=5.0)
+    max_price_per_night: float | None = Field(default=None, gt=0.0)
+    required_amenities: list[str] | None = None
+    sort_by: HotelSortBy = HotelSortBy.BEST
+    max_results: int = Field(default=10, ge=1, le=25)
+
+    @field_validator("check_in_date")
+    @classmethod
+    def _check_in_not_in_past(cls, v: str) -> str:
+        d = date.fromisoformat(v)
+        today_utc = datetime.now(tz=timezone.utc).date()
+        if d < today_utc:
+            raise ValueError(f"check_in_date {v} is before today (UTC) {today_utc.isoformat()}")
+        return v
+
+    @model_validator(mode="after")
+    def _check_out_after_check_in(self) -> "SearchHotelsInput":
+        ci = date.fromisoformat(self.check_in_date)
+        co = date.fromisoformat(self.check_out_date)
+        if co <= ci:
+            raise ValueError(
+                f"check_out_date {self.check_out_date} must be strictly after check_in_date {self.check_in_date}"
+            )
+        return self
+
+
+class HotelOffer(BaseModel):
+    offer_id: str
+    name: str
+    check_in_date: IsoDate
+    check_out_date: IsoDate
+    nights: int = Field(ge=1)
+    price_total: float
+    price_per_night: float
+    currency: IsoCurrency
+    star_rating: int | None
+    # Google Hotels' native 0–5 review scale (preserved as-is, NOT rescaled to 0–10).
+    review_score: float | None
+    review_count: int | None
+    address: str | None
+    latitude: float | None
+    longitude: float | None
+    amenities: list[str]
+    images: list[str]              # capped at 5 in normalize
+    description: str | None
+    hotel_type: str | None         # "hotel", "vacation rental", etc.
+    booking_url: str               # Google Hotels URL with the search pre-filled
+
+
+class SearchHotelsResult(BaseModel):
+    results: list[HotelOffer]

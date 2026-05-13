@@ -1,10 +1,15 @@
-# Flight Search MCP
+# Flight & Hotel Search MCP
 
 A Model Context Protocol server that lets Claude search live Google Flights
-data. **No API key required** — talks to Google Flights directly via the
-[fli](https://github.com/punitarani/fli) library. Plug the server into Claude
-Desktop, Claude Code, or any MCP-aware client, then ask Claude to find you
-flights in plain English.
+AND Google Hotels data. Plug it into Claude Desktop, Claude Code, or any
+MCP-aware client, then ask in plain English.
+
+- **Flights** — no API key required. Talks to Google Flights directly via
+  the [fli](https://github.com/punitarani/fli) library.
+- **Hotels** — optional, requires a free [SerpAPI](https://serpapi.com) key
+  (free tier: 100 searches/month). The server starts fine without a key;
+  the hotels tool surfaces a clear "set SERPAPI_KEY" message if called
+  unconfigured, while flights keep working.
 
 ```
 You:   Find me round-trips from Helsinki to Washington DC for May 18 returning May 29,
@@ -61,6 +66,23 @@ right tool and fills in the filters.
 
 **Capped results for a focused list**
 > *"Just give me the top 5 cheapest options from HEL to LHR for next weekend."* → `max_results=5`
+
+### Hotel searches (uses `search_hotels`, requires SERPAPI_KEY)
+
+**Simple city search**
+> *"Find me hotels in Tampere from June 15 to June 18, 2 adults."*
+
+**Budget + quality floor**
+> *"Hotels in Lisbon next weekend, 2 adults, under €150/night, at least 4 stars."* → `max_price_per_night=150`, `min_rating=4`
+
+**Amenity requirements**
+> *"Hotels in central London for 3 nights starting October 12, must have pool and gym."* → `required_amenities=["pool", "gym"]` (case-insensitive substring match; "wifi" matches "Free Wi-Fi" because we strip punctuation)
+
+**Sort by review score**
+> *"Find the best-reviewed hotels in Kyoto for the first week of November, 1 traveler."* → `sort_by="REVIEW_SCORE"`
+
+**Family**
+> *"Looking for a family hotel in Orlando from July 5-12: 2 adults, 2 kids, one room."* → `adults=2`, `children=2`, `rooms=1`
 
 ### Flexible-dates searches (uses `search_cheapest_dates`)
 
@@ -169,7 +191,7 @@ Then start a Claude Code session and the tool is available.
 
 ## Tool reference
 
-Two tools. Claude reads richer descriptions than these tables; this is the
+Three tools. Claude reads richer descriptions than these tables; this is the
 short version.
 
 ### `search_flights` — flight options for specific dates
@@ -209,6 +231,29 @@ short version.
 Returns a `results` array of `{departure_date, return_date, price, currency}`
 entries sorted cheapest first. `return_date` is `null` for one-way.
 
+### `search_hotels` — Google Hotels for specific dates *(requires SERPAPI_KEY)*
+
+| Parameter | Default | Notes |
+|---|---|---|
+| `location` | required | City, neighborhood, or area. Free-text. |
+| `check_in_date` | required | `YYYY-MM-DD`. Today (UTC) or later. |
+| `check_out_date` | required | Must be **strictly after** `check_in_date`. |
+| `adults` | 2 | 1–10. |
+| `children` | 0 | 0–10. |
+| `rooms` | 1 | 1–10. |
+| `min_rating` | none | Star rating 1–5. Properties without a star rating are excluded when set. |
+| `min_review_score` | none | Google's native 0–5 review score (NOT 0–10). Properties without a review score are excluded when set. |
+| `max_price_per_night` | none | Per-night ceiling in the response currency (USD by default). |
+| `required_amenities` | none | List of free-text amenity names. Best-effort substring match, case- and punctuation-insensitive ("wifi" matches "Free Wi-Fi"). |
+| `sort_by` | `BEST` | `BEST` / `PRICE_LOW` / `PRICE_HIGH` / `RATING` / `REVIEW_SCORE`. |
+| `max_results` | 10 | 1–25. |
+
+Returns a `results` array of `HotelOffer` entries with `offer_id`, `name`,
+nights, `price_total`, `price_per_night`, `currency`, `star_rating`,
+`review_score` (0–5 scale), `review_count`, GPS coordinates, `amenities`,
+`images` (up to 5 URLs), `description`, `hotel_type`, and `booking_url`
+(Google Hotels search page with the query pre-filled).
+
 ### Window semantics
 
 `departure_window` and `inbound_window` are **inclusive of the start hour
@@ -244,39 +289,43 @@ The `currency` field reflects whatever Google Flights returns for your
 request region (typically EUR for European IPs, USD for US IPs). You can't
 pick it.
 
-Errors on either tool: `{"error": {"code": ..., "message": ..., "retryable": ...}}`.
-The four codes are `invalid_input`, `no_results`, `rate_limited`,
-`upstream_error`.
+Errors on any tool: `{"error": {"code": ..., "message": ..., "retryable": ...}}`.
+The five codes are `invalid_input`, `no_results`, `rate_limited`,
+`upstream_error`, and `auth_failed` (the last only fires from `search_hotels`
+when `SERPAPI_KEY` is missing or rejected).
 
 ---
 
 ## Architecture
 
 ```
-search_flights()           search_cheapest_dates()
-    │                              │
-    ├── Pydantic input validation, tool-namespaced cache key
-    │
-    └── FliClient
-            ├── fli.search.SearchFlights → list[FlightOffer]
-            │     (round-trip pairs arrive as tuples; one upstream call)
-            └── fli.search.SearchDates   → list[DatePriceOffer]
-                  (sorted by price after normalization)
+search_flights()    search_cheapest_dates()    search_hotels()
+        │                    │                       │
+        └── Pydantic input validation, tool-namespaced cache key ──┐
+                                                                   │
+        FliClient (no auth, fli library)            SerpAPIHotelsClient
+              │                                       (optional, SERPAPI_KEY)
+              ├── fli.SearchFlights → list[FlightOffer]      │
+              └── fli.SearchDates   → list[DatePriceOffer]   └── google_hotels → list[HotelOffer]
 ```
 
-`fli` handles HTTP, retries, and rate-limit backoff internally. The MCP
-server's only job is shaping requests and translating responses into our
-provider-neutral output models. `inbound_window` is enforced as a
-post-filter in `normalize.py` since fli's native time filter doesn't bind
-the return leg.
+The flights backend (`fli`) handles HTTP, retries, and rate-limit backoff
+internally. The hotels backend uses `httpx` directly against SerpAPI's
+google_hotels endpoint.
+
+The server starts even when `SERPAPI_KEY` is unset — flights work key-free.
+When the key is missing, `_HOTELS_CLIENT` is `None` and the `search_hotels`
+tool returns a structured `auth_failed` envelope at call time. Same
+process, three tools, two backends.
 
 ---
 
 ## Development
 
 ```bash
-pytest                                       # 135 tests, all fixture-driven, no live API calls
-.venv/bin/python scripts/verify_fli.py       # capture fresh real-data fixtures (1 SearchFlights + 1 SearchDates call)
+pytest                                            # 186 tests, all fixture-driven, no live API calls
+.venv/bin/python scripts/verify_fli.py            # capture fresh real-data fixtures (1 SearchFlights + 1 SearchDates call)
+.venv/bin/python scripts/verify_serpapi_hotels.py # capture a fresh hotels fixture (1 SerpAPI call)
 ```
 
 See [SPEC.md](./SPEC.md) for the original Phase 1 spec and

@@ -75,3 +75,16 @@ def fli_dates_flex() -> list[DatePrice]:
 @pytest.fixture
 def fli_empty() -> list:
     return _load("fli_empty_results.json")
+
+
+@pytest.fixture
+def serpapi_hotels_success() -> dict:
+    """3-property synthetic SerpAPI google_hotels response covering:
+    a 4-star inn with full data, a vacation rental with sparse data
+    (no hotel_class), and a 5-star hotel for sort-order tests."""
+    return _load("serpapi_hotels_success.json")
+
+
+@pytest.fixture
+def serpapi_hotels_empty() -> dict:
+    return _load("serpapi_hotels_empty.json")

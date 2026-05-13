@@ -461,3 +461,96 @@ def test_search_cheapest_dates_result_wraps():
     )
     r = SearchCheapestDatesResult(results=[o])
     assert len(r.results) == 1
+
+
+# ----- SearchHotelsInput (hotels extension) ---------------------------------
+
+
+def test_hotels_accepts_minimal_input():
+    from flights_mcp.models import HotelSortBy, SearchHotelsInput
+    m = SearchHotelsInput(
+        location="Tampere",
+        check_in_date=TOMORROW.isoformat(),
+        check_out_date=NEXT_WEEK.isoformat(),
+    )
+    assert m.adults == 2  # hotels-specific default
+    assert m.rooms == 1
+    assert m.sort_by is HotelSortBy.BEST
+    assert m.max_results == 10
+
+
+def test_hotels_rejects_check_out_before_check_in():
+    from flights_mcp.models import SearchHotelsInput
+    with pytest.raises(ValidationError):
+        SearchHotelsInput(
+            location="Tampere",
+            check_in_date=NEXT_WEEK.isoformat(),
+            check_out_date=TOMORROW.isoformat(),
+        )
+
+
+def test_hotels_rejects_same_day_check_in_check_out():
+    """check_out_date must be STRICTLY after check_in_date."""
+    from flights_mcp.models import SearchHotelsInput
+    with pytest.raises(ValidationError):
+        SearchHotelsInput(
+            location="Tampere",
+            check_in_date=TOMORROW.isoformat(),
+            check_out_date=TOMORROW.isoformat(),
+        )
+
+
+def test_hotels_rejects_check_in_in_past():
+    from flights_mcp.models import SearchHotelsInput
+    yesterday = (TODAY - timedelta(days=1)).isoformat()
+    with pytest.raises(ValidationError):
+        SearchHotelsInput(
+            location="Tampere",
+            check_in_date=yesterday,
+            check_out_date=NEXT_WEEK.isoformat(),
+        )
+
+
+def test_hotels_rejects_empty_location():
+    from flights_mcp.models import SearchHotelsInput
+    with pytest.raises(ValidationError):
+        SearchHotelsInput(
+            location="",
+            check_in_date=TOMORROW.isoformat(),
+            check_out_date=NEXT_WEEK.isoformat(),
+        )
+
+
+def test_hotels_min_rating_bounded():
+    from flights_mcp.models import SearchHotelsInput
+    # 0 and 6 are out of [1, 5]
+    for bad in (0, 6):
+        with pytest.raises(ValidationError):
+            SearchHotelsInput(
+                location="Tampere",
+                check_in_date=TOMORROW.isoformat(),
+                check_out_date=NEXT_WEEK.isoformat(),
+                min_rating=bad,
+            )
+
+
+def test_hotels_max_results_capped_at_25():
+    from flights_mcp.models import SearchHotelsInput
+    with pytest.raises(ValidationError):
+        SearchHotelsInput(
+            location="Tampere",
+            check_in_date=TOMORROW.isoformat(),
+            check_out_date=NEXT_WEEK.isoformat(),
+            max_results=26,
+        )
+
+
+def test_hotels_sort_by_enum_coercion():
+    from flights_mcp.models import HotelSortBy, SearchHotelsInput
+    m = SearchHotelsInput(
+        location="Tampere",
+        check_in_date=TOMORROW.isoformat(),
+        check_out_date=NEXT_WEEK.isoformat(),
+        sort_by="PRICE_LOW",
+    )
+    assert m.sort_by is HotelSortBy.PRICE_LOW

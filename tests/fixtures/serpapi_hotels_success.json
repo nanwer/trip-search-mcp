@@ -1,0 +1,61 @@
+{
+  "properties": [
+    {
+      "name": "Lillan Hotel & Kök",
+      "property_token": "ChoI4oTlisut8aeaARoNL2cvMTFkZjgyOXc2ORAB",
+      "description": "Charming rooms in a cozy, country-chic inn with a restaurant and a garden.",
+      "type": "hotel",
+      "hotel_class": "4-star hotel",
+      "extracted_hotel_class": 4,
+      "overall_rating": 4.6,
+      "reviews": 686,
+      "amenities": ["Free breakfast", "Free Wi-Fi", "Free parking", "Bar", "Pet-friendly"],
+      "gps_coordinates": {"latitude": 61.5, "longitude": 23.78},
+      "images": [
+        {"thumbnail": "https://example.com/lillan-thumb-1.jpg", "original_image": "https://example.com/lillan-1.jpg"},
+        {"thumbnail": "https://example.com/lillan-thumb-2.jpg", "original_image": "https://example.com/lillan-2.jpg"},
+        {"thumbnail": "https://example.com/lillan-thumb-3.jpg", "original_image": "https://example.com/lillan-3.jpg"},
+        {"thumbnail": "https://example.com/lillan-thumb-4.jpg", "original_image": "https://example.com/lillan-4.jpg"},
+        {"thumbnail": "https://example.com/lillan-thumb-5.jpg", "original_image": "https://example.com/lillan-5.jpg"},
+        {"thumbnail": "https://example.com/lillan-thumb-6.jpg", "original_image": "https://example.com/lillan-6.jpg"}
+      ],
+      "rate_per_night": {"lowest": "$111", "extracted_lowest": 111.0, "before_taxes_fees": "$98", "extracted_before_taxes_fees": 98.0},
+      "total_rate": {"lowest": "$333", "extracted_lowest": 333.0, "before_taxes_fees": "$293", "extracted_before_taxes_fees": 293.0}
+    },
+    {
+      "name": "Tampere Backpackers Loft",
+      "property_token": "ChoI4oTlisut8aeaARoNL2cvMTFiYzEyM3c0NRAB",
+      "description": "Budget bunks in a converted warehouse near the train station.",
+      "type": "vacation rental",
+      "hotel_class": null,
+      "extracted_hotel_class": null,
+      "overall_rating": 3.8,
+      "reviews": 142,
+      "amenities": ["Free Wi-Fi", "Shared kitchen"],
+      "gps_coordinates": {"latitude": 61.498, "longitude": 23.775},
+      "images": [
+        {"thumbnail": "https://example.com/loft-thumb-1.jpg", "original_image": "https://example.com/loft-1.jpg"}
+      ],
+      "rate_per_night": {"lowest": "$35", "extracted_lowest": 35.0},
+      "total_rate": {"lowest": "$105", "extracted_lowest": 105.0}
+    },
+    {
+      "name": "Solo Sokos Hotel Torni",
+      "property_token": "ChoI4oTlisut8aeaARoNL2cvMTFkZjgyOXc4MBAB",
+      "description": "Modern 5-star high-rise with rooftop bar and city views.",
+      "type": "hotel",
+      "hotel_class": "5-star hotel",
+      "extracted_hotel_class": 5,
+      "overall_rating": 4.8,
+      "reviews": 2104,
+      "amenities": ["Free Wi-Fi", "Gym", "Pool", "Bar", "Restaurant", "Sauna"],
+      "gps_coordinates": {"latitude": 61.4969, "longitude": 23.7681},
+      "images": [
+        {"thumbnail": "https://example.com/torni-thumb-1.jpg", "original_image": "https://example.com/torni-1.jpg"},
+        {"thumbnail": "https://example.com/torni-thumb-2.jpg", "original_image": "https://example.com/torni-2.jpg"}
+      ],
+      "rate_per_night": {"lowest": "$240", "extracted_lowest": 240.0},
+      "total_rate": {"lowest": "$720", "extracted_lowest": 720.0}
+    }
+  ]
+}

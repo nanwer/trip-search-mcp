@@ -66,12 +66,18 @@ doesn't exist wastes the user's time and breeds wrong fixes.
 ## Code-quality conventions worth honoring
 
 - Tests are fixture-driven. No live API calls in the suite.
-- The injectable-searcher pattern for `FliClient` is intentional — keep
-  it. Tests substitute `_MockSearcher` instances.
+- The injectable-searcher pattern (`FliClient` for flights,
+  `httpx.MockTransport` for `SerpAPIHotelsClient`) is intentional — keep
+  it. Tests substitute mocks.
 - Tool descriptions are the LLM-facing contract. Update them when you
   change input/output shapes or filter semantics.
 - Cache keys are namespaced by tool name (`{"tool": TOOL_NAME, ...}`).
   Add the prefix when introducing a new tool.
+- The hotels tool is OPT-IN via SERPAPI_KEY. `search_hotels` checks at
+  call time whether the hotels client was configured; if not, returns a
+  structured `auth_failed` envelope. The SERVER does NOT require
+  SERPAPI_KEY at startup — flights staying key-free is a deliberate
+  product property. Don't change that.
 
 ## Useful repo entry points
 
