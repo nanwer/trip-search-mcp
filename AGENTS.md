@@ -1,53 +1,67 @@
 # Agent / Claude Code instructions
 
-Read this first. Re-read it whenever you've been told a previous session
-gave wrong advice — there's a high chance the same issue is repeating.
+Read this first. Re-read it whenever a previous session gave wrong advice
+— there's a high chance the same mistake is repeating.
 
-## Deployment topology (CRITICAL — past sessions have gotten this wrong)
+## Deployment topology (CRITICAL — sessions have gotten this wrong)
 
-This MCP server runs in **two separate places**:
+There is **only one** instance of this MCP server. It runs as a **local
+stdio subprocess** that Claude Desktop spawns on Nophil's Mac, configured
+in `~/Library/Application Support/Claude/claude_desktop_config.json`.
 
-1. **Local stdio under Claude Desktop on Nophil's Mac.** Spawned as a
-   subprocess of Claude Desktop using the config in
-   `~/Library/Application Support/Claude/claude_desktop_config.json`. Used
-   for testing and dev. Restart this by ⌘Q + reopening Claude Desktop.
+There is **NO remote server**. There is **NO home server**. There is **NO
+Cloudflare Tunnel**. There is **NO HTTP transport**. HTTP transport was
+listed as a future Phase 2-ish item in the original SPEC.md, but it was
+never built — the project shipped stdio-only and has stayed stdio-only.
 
-2. **Remote HTTP server on Nophil's home server, reached by claude.ai web
-   via Cloudflare Tunnel.** This is what the deferred `mcp__flights__*`
-   tools in claude.ai sessions actually hit. **It is NOT Claude Desktop.**
-   Restarting Claude Desktop does NOTHING for this path.
+claude.ai web sessions CAN call this tool. They reach the local Claude
+Desktop subprocess through Anthropic's account-level MCP bridge — when
+you're logged into the same account on both claude.ai and Claude Desktop,
+the web client can invoke tools registered locally. **There is still only
+one server process, and it lives inside Claude Desktop on the Mac.**
 
-**When a tool call from claude.ai web times out or behaves like it's on
-stale code, the answer is to restart the REMOTE server**, not Claude
-Desktop. Specifically:
+## How to fix "the tool call timed out / behaves stale" from EITHER client
 
-- SSH (or otherwise connect) to the home server
-- `git pull` to get the latest commit
-- Restart the service running `python -m flights_mcp.server` (or whatever
-  process manager is in front of it — systemd, Docker, screen, pm2, etc.)
-- Confirm the tunnel is still reachable from the public side
+The fix is the same regardless of whether the failing call came from
+Claude Desktop, Claude Code, or claude.ai web:
 
-The local CLI test path (`.venv/bin/python -c "..."` against
-`flights_mcp.server`) verifies the CODE is correct. It does NOT verify the
-remote deployment. A green local test + a 4-minute claude.ai timeout means
-the remote is on stale code or down.
+1. **⌘Q Claude Desktop** (full quit; closing the window doesn't kill the
+   subprocess).
+2. **Reopen Claude Desktop.**
+3. Retry from whichever client you were using.
 
-## Things to never suggest when claude.ai web is failing
+After the restart, sanity-check the subprocess is running on current code:
 
-- "Restart Claude Desktop" — that's a different server.
-- "Update `claude_desktop_config.json`" — that controls Desktop, not the
-  remote.
-- "Quit and reopen the Claude Desktop app" — same problem.
+```bash
+ps -o lstart=,command= -p $(pgrep -f flights_mcp.server | head -1)
+```
 
-## Things to suggest
+The start time should be recent. If it's older than the latest commit
+that fixed your issue, the restart didn't take — force-quit Claude
+through Activity Monitor and reopen.
 
-- Pull latest, restart the remote service.
-- Check tunnel health: `curl -I https://<your-mcp-subdomain>/` or equivalent.
-- Tail the remote server's logs (where the JSON-line logger writes;
-  default `~/.flights-mcp/logs/flight-search.log` on the deployment host).
-- If the remote auto-pulls on a schedule (cron / GitHub Actions deploy
-  hook / Watchtower for Docker), confirm the last pull included the
-  expected commit.
+## Past hallucinations to NOT repeat
+
+A prior claude.ai session diagnosed a timeout as "the remote server on
+your home server reached via Cloudflare Tunnel is on stale code." That
+diagnosis was **invented out of whole cloth** — there is no such
+deployment. Don't suggest:
+
+- SSH'ing to a home server
+- Checking Cloudflare Tunnel health
+- Restarting a systemd unit / Docker container / pm2 process
+- `git pull` on a remote
+- Any "remote restart" of any kind
+
+The only restartable thing in this project is the local Claude Desktop
+subprocess, and ⌘Q + reopen is how you restart it.
+
+## When in doubt: ask the user before inventing infrastructure
+
+If a session genuinely doesn't know how the user is reaching the tool,
+ask. Don't guess. "Are you using Claude Desktop, Claude Code CLI, or
+claude.ai web?" is a fine question. Inventing a remote deployment that
+doesn't exist wastes the user's time and breeds wrong fixes.
 
 ## Code-quality conventions worth honoring
 
@@ -61,11 +75,11 @@ the remote is on stale code or down.
 
 ## Useful repo entry points
 
-- `MIGRATION-FLI-SPEC.md` — phased migration plan (Phase 1 + 2 done,
-  Phase 2.5 done). Phase 3 cleanup notes live there too.
+- `MIGRATION-FLI-SPEC.md` — phased migration plan (Phase 1 + 2 + 2.5 done).
 - `docs/SETUP.md` — install + connect walkthrough for end users.
 - `scripts/verify_fli.py` — capture fresh real-data fixtures (one live
   SearchFlights + one SearchDates call).
-- Test commit `a3791e7` shipped Phase 2.5 (exclusive-end window semantics,
-  airlines wording fix, offer_id collision fix). If the remote is older
-  than this, the live behavior won't match the README.
+- The latest behavior-affecting change shipped in commit `a3791e7`
+  (Phase 2.5: exclusive-end window semantics, airlines wording, offer_id
+  collision fix). If a Desktop subprocess predates this commit, it's
+  running pre-2.5 behavior and the user should ⌘Q + reopen.
