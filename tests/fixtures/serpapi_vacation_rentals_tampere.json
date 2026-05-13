@@ -1,0 +1,2282 @@
+{
+  "search_metadata": {
+    "id": "6a04bcb280a078969c2d925a",
+    "status": "Success",
+    "json_endpoint": "https://serpapi.com/searches/5XmqwUbWphryEj4zp4UEEQ/6a04bcb280a078969c2d925a.json",
+    "created_at": "2026-05-13T18:02:26.349Z",
+    "processed_at": "2026-05-13T18:02:26.351Z",
+    "google_hotels_url": "https://www.google.com/travel/search?q=Tampere&hl=en&gl=us",
+    "raw_html_file": "https://serpapi.com/searches/5XmqwUbWphryEj4zp4UEEQ/6a04bcb280a078969c2d925a.html",
+    "prettify_html_file": "https://serpapi.com/searches/5XmqwUbWphryEj4zp4UEEQ/6a04bcb280a078969c2d925a.prettify",
+    "total_time_taken": {
+      "float": 2.6575515270233154
+    }
+  },
+  "search_parameters": {
+    "engine": "google_hotels",
+    "q": "Tampere",
+    "gl": "us",
+    "hl": "en",
+    "currency": "EUR",
+    "check_in_date": "2026-06-15",
+    "check_out_date": "2026-06-18",
+    "adults": 2,
+    "children": 0,
+    "vacation_rentals": true,
+    "bedrooms": 2
+  },
+  "search_information": {
+    "total_results": 303
+  },
+  "properties": [
+    {
+      "type": "vacation rental",
+      "name": "Luxurious 7th Floor Penthouse | Private Jacuzzi & Sauna",
+      "link": "https://book.shillinki.com/listings/484105?googleVR=1&utm_source=google&utm_medium=vacation_rentals",
+      "property_token": "ChoQ7cre3vCRr9naARoNL2cvMTF6MjFqODVqcBAC",
+      "serpapi_property_details_link": "https://serpapi.com/search.json?adults=2&bedrooms=2&check_in_date=2026-06-15&check_out_date=2026-06-18&children=0&currency=EUR&engine=google_hotels&gl=us&hl=en&property_token=ChoQ7cre3vCRr9naARoNL2cvMTF6MjFqODVqcBAC&q=Tampere&vacation_rentals=true",
+      "gps_coordinates": {
+        "latitude": 61.50650405883789,
+        "longitude": 23.710979461669922
+      },
+      "check_in_time": "4:00\u202fPM",
+      "check_out_time": "12:00\u202fPM",
+      "rate_per_night": {
+        "lowest": "\u20ac272",
+        "extracted_lowest": 272,
+        "before_taxes_fees": "\u20ac243",
+        "extracted_before_taxes_fees": 243
+      },
+      "total_rate": {
+        "lowest": "\u20ac816",
+        "extracted_lowest": 816,
+        "before_taxes_fees": "\u20ac730",
+        "extracted_before_taxes_fees": 730
+      },
+      "prices": [
+        {
+          "source": "Hotels.com",
+          "logo": "https://www.gstatic.com/travel-hotels/branding/16815192664768424423.png",
+          "num_guests": 2,
+          "rate_per_night": {
+            "lowest": "\u20ac225",
+            "extracted_lowest": 225,
+            "before_taxes_fees": "\u20ac198",
+            "extracted_before_taxes_fees": 198
+          },
+          "free_cancellation": true,
+          "free_cancellation_until_date": "Jun 1",
+          "free_cancellation_until_time": "6:00\u202fPM"
+        }
+      ],
+      "nearby_places": [
+        {
+          "name": "Santalahti B",
+          "transportations": [
+            {
+              "type": "Walking",
+              "duration": "10 min"
+            }
+          ]
+        },
+        {
+          "name": "Tampere-Pirkkala Airport",
+          "transportations": [
+            {
+              "type": "Taxi",
+              "duration": "25 min"
+            },
+            {
+              "type": "Public transport",
+              "duration": "50 min"
+            }
+          ]
+        },
+        {
+          "name": "Ola - Ravintola"
+        }
+      ],
+      "images": [
+        {
+          "thumbnail": "https://lh6.googleusercontent.com/proxy/KlyGP5ELfNvcpq7p2SU6nd8mbjcCE914tqnFlbX5c1IT0nTmwApdssLxJjJ7bGI7r0qkjfXcnYbTVkc9WYTBQDSDW2G1STYalxQsAaK-aAP8cL6etwlzC0gdVJFOYpUe6l7knIfWv28vauh5gPiAm0BjP_Bk8A=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://images.trvl-media.com/lodging/128000000/127730000/127725200/127725117/w2032h1365x0y0-fa125c33_z.jpg"
+        },
+        {
+          "thumbnail": "https://lh4.googleusercontent.com/proxy/IfJwBL2VenVVEJMFFIE2IdiFxlRhU92hnb_zyxfmzdQsDMM5uqBxnotvldlx8Nkr3Ha-P0MBXl1j8XAX0SpPPu9wadgGS3KKom-OZRuvUs_TeweaajSggD8KbDtWiK0IKdHUc5cqOTg8LQtvFO_20Bzl9Dx9Zw=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://media.vrbo.com/lodging/126000000/125860000/125854900/125854865/e377204b.jpg"
+        },
+        {
+          "thumbnail": "https://lh4.googleusercontent.com/proxy/S3pGjl6cMn-sDlKeE_ETlhq3YFWVYUFTGBAgax0TtRpR1rDu0TobPfaHZ2RQOl152uuqMskib4EiY5y2acHLM9tFo135vXK4UKXcEL-iQr_v6mC2hvoFE4D2WSsL7QqZAguo_t3OS-LGnJ9CyI_ATGO9KtmL7yA=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://hostaway-platform.s3.us-west-2.amazonaws.com/listing/139163-484105-iwwRvN6P1GadUnUTfTF4--1OyplMhwA5U2-bqbAhZo3k-698ec3087231d-medium"
+        },
+        {
+          "thumbnail": "https://lh6.googleusercontent.com/proxy/TOcb9pJvaHP0GA4s2q-4PYGYdOGw00sbF0i9guP0DpzNY5Edo3fSAxTfHgxXCLil9FqAlRm2lUfmAz7nTnxP5nl7CfukfwYaqot5y4MV68RXshQ3pUpew6q-ZgR_aToY8LfBbUYe6jhUEzy7v8VQY-AEkq1b00s=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://hostaway-platform.s3.us-west-2.amazonaws.com/listing/139163-484105-E6mI5VuNyHPh0uDL7TjBnDu8Q0g87-ZAc4yivgyQwmc-698ec381d20d0-medium"
+        },
+        {
+          "thumbnail": "https://lh5.googleusercontent.com/proxy/b09PUFbZcn6ouRailIGBGMkZrz4F89hdYcJO2ieLpZ3Sa5soM6jWqBWwKPOlRs5SakuAdxiZuKKnW1futrvYbS59KmbsNfwybXLcWR8T40OlhN2wjALwLmNkFvvc4wSFgCmMi3M5IeKwpejmWk__iICtxFTbcA=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://hostaway-platform.s3.us-west-2.amazonaws.com/listing/139163-484105-usUeSKzNR4xx6iZcnANSqTpRMUX5zoSo0cTIn5bjGQE-698ec31c6ecea-medium"
+        },
+        {
+          "thumbnail": "https://lh4.googleusercontent.com/proxy/LB3nI0N_xSHkh62BTa7FY8TktSpkN6dWsEoh2x2Xp0Jh6JGWYUXqJjjVohAy5qV8_bCTLE6vO4ZEWM4b7XyN3EC8cnBoKgo5BKinNLlER2osiYKYCUrqy9LR6_ml56pYDUZpic6p_JBghpnMwkaq-oY1MtN-x9Y=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://p.fih.io/v2/nSr0o-3gbZN8o1xMecXCcG-BkDeQVo3k-wOeVogkTe7ajuFOX7O-WA8aRWhXz1jsToZif_TsA_xCWfhWRa0Z38W1sQAqtUAIPxWue8BatynPs0D8ILSEmSjgP5HJju-jFFRHzrXsUU7tHzF4en3ketkYyx1j1dLbUfhlOgkNcIcn9PwNtk_AU2csbUk6dd9sGo49Qn31qiMVOoIxofR_2o8VcZA3AAhCPReYBoJ8vY2Gq2593GaA4u4OT_bb2nQda_hO30Az3Jmsq7VLLkiv-8O4z7ScYnZA-_xXuuyYfAdwFxNRWDeIbPQ9a8t4UCJM_RJyYFlIURe6blhdvk_2497wQhMp30ZtnmdI_mKyWNKfa6OdQw"
+        },
+        {
+          "thumbnail": "https://lh5.googleusercontent.com/proxy/STeg_cPvmnPcLyejO4sk2i3eLv7vJqiyYnYnmsB00ZTFPt5G2QazdA4aydIehXlOwz36hbLKlXAU98av6sGvUWW6-U0kLtnmqxZMjz7o0nKlCipReFnNoZFdYTi0vgu8ci67Zp86qQ0XPPN-Jz3eo2C1cCXJhCs=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://hostaway-platform.s3.us-west-2.amazonaws.com/listing/139163-484105-jPatdGGg4M81dXSIAiCbrxIf--csO28uN5MdQdTPrKGY-698ec3151dbeb-medium"
+        },
+        {
+          "thumbnail": "https://lh3.googleusercontent.com/proxy/2e6tR8kIp0rxt68nSf1BUhpWRgGoIbSpXwT6a4_uZMmBa-tnPcO88DzmQD3gGkdDEy54jj_CwHz4KD8lG6tKDVDrHcq76utPmiS8oCTOgTdnv32LBXZllgFTUoLGv6Vv6VBZJcamdhLKVXgeAIbNqYHVNUIXERc=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://p.fih.io/v2/nSr0o-3gbZN8o1xMecXCcG-BkDeQVo3k-wOeVogkTe7ajuFOX7O-WA8aRWhXz1jsToZif_TsA_xCWfhWRa0Znsu7rywGsyMzbEaGdJNlsWfMpHTJNbGqhQzENYD3jaidFRxh8IrfE0qxAzF4en3ketkYyx1j1dLbUfhlOgkNcIcn9PwNtk_AU2csbUk6dd9sGo49Qn31qiMVOoIxofR_2o8VcZA3AAhCPReYBoJ8vY2Gq2593GaA4u4OT_bb2nQda_hO30Az3Jmsq7VLLkiv-8O4z7ScYnZA-_xXuuyYfAdwFxNRWDeIbPQ9a8t4U1dE_xNPQQRLQQu6blhdvk_2497wQhMpxVu3GHVcLmuFnNtuuZ7XPw"
+        },
+        {
+          "thumbnail": "https://lh5.googleusercontent.com/proxy/iY_8FirzTbb3tCFk6xT45A0d1oph5v6XlQ80zwurOGMGJN1178b-vbbqGeJ8z_dMLnEgL4S-KRnceCazYPPBwIhbxLIoUBcZMhmOwkTZPhYKf2TIh5IZaKm_XMqF4GcBc4SYO6dtemx_qBzaaxAlLV4jj7WDEQ=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://hostaway-platform.s3.us-west-2.amazonaws.com/listing/139163-484105-khweEGvkwipVmJPC30tvT-HC9HFnqIHbT95BbABETwc-698ec2f23a6a6-medium"
+        }
+      ],
+      "overall_rating": 4.5,
+      "reviews": 6,
+      "location_rating": 3.6,
+      "amenities": [
+        "Air conditioning",
+        "Balcony",
+        "Kid-friendly",
+        "Elevator",
+        "Heating",
+        "Hot tub",
+        "Kitchen",
+        "Microwave",
+        "Oven stove",
+        "Patio",
+        "Pet-friendly",
+        "Smoke-free",
+        "Cable TV",
+        "Wheelchair accessible",
+        "Free parking",
+        "Free Wi-Fi"
+      ],
+      "excluded_amenities": [
+        "No airport shuttle",
+        "No beach access",
+        "No fireplace",
+        "No fitness center",
+        "No indoor pool",
+        "No outdoor pool"
+      ],
+      "health_and_safety": {
+        "groups": [
+          {
+            "title": "Enhanced cleaning",
+            "list": [
+              {
+                "title": "Enhanced cleaning of the property",
+                "available": true
+              },
+              {
+                "title": "Disinfectant used to clean the property",
+                "available": true
+              }
+            ]
+          },
+          {
+            "title": "Minimized contact",
+            "list": [
+              {
+                "title": "No-contact check-in and check-out",
+                "available": true
+              }
+            ]
+          }
+        ]
+      },
+      "essential_info": [
+        "Entire apartment",
+        "Sleeps 8",
+        "2 bedrooms",
+        "2 bathrooms",
+        "5 beds",
+        "786 sq ft"
+      ],
+      "serpapi_google_hotels_reviews_link": "https://serpapi.com/search.json?engine=google_hotels_reviews&hl=en&property_token=ChoQ7cre3vCRr9naARoNL2cvMTF6MjFqODVqcBAC",
+      "serpapi_google_hotels_photos_link": "https://serpapi.com/search.json?engine=google_hotels_photos&property_token=ChoQ7cre3vCRr9naARoNL2cvMTF6MjFqODVqcBAC"
+    },
+    {
+      "type": "vacation rental",
+      "name": "Modern 1BR Apt with Amazing Views, Balcony Sauna",
+      "link": "https://www.bluepillow.com/search/68115e95a74f8eb5bd2a1b26?dest=bpex&cat=Apartment&lat=61.49272&lng=23.76513&language=en",
+      "property_token": "ChkQjO-Qy6Piq9QlGg0vZy8xMXo5eGRfeHloEAI",
+      "serpapi_property_details_link": "https://serpapi.com/search.json?adults=2&bedrooms=2&check_in_date=2026-06-15&check_out_date=2026-06-18&children=0&currency=EUR&engine=google_hotels&gl=us&hl=en&property_token=ChkQjO-Qy6Piq9QlGg0vZy8xMXo5eGRfeHloEAI&q=Tampere&vacation_rentals=true",
+      "gps_coordinates": {
+        "latitude": 61.49272155761719,
+        "longitude": 23.76512908935547
+      },
+      "rate_per_night": {
+        "lowest": "\u20ac131",
+        "extracted_lowest": 131,
+        "before_taxes_fees": "\u20ac131",
+        "extracted_before_taxes_fees": 131
+      },
+      "total_rate": {
+        "lowest": "\u20ac394",
+        "extracted_lowest": 394,
+        "before_taxes_fees": "\u20ac394",
+        "extracted_before_taxes_fees": 394
+      },
+      "prices": [
+        {
+          "source": "Bluepillow.com",
+          "logo": "https://www.gstatic.com/travel-hotels/branding/190ff319-d0fd-4c45-bfc8-bad6f5f395f2.png",
+          "num_guests": 2,
+          "rate_per_night": {
+            "lowest": "\u20ac131",
+            "extracted_lowest": 131
+          },
+          "free_cancellation": true,
+          "free_cancellation_until_date": "Jun 1",
+          "free_cancellation_until_time": "11:59\u202fPM"
+        }
+      ],
+      "images": [
+        {
+          "thumbnail": "https://lh3.googleusercontent.com/proxy/OsLLxHkcXzJpUkju92G2rOJCPlM5_tXxkiyo0jmf7KwUojYx-wNuEcV5JhZDaWLfNajIuqRNxgfAjR9i3k8Z_wdgkhh9g00uv7qkuo_BhO21jKJozUSgBu87YKUjWHDED2vyTziN8PmuaUaxv8elyhG0jSQ-5vM=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://media.vrbo.com/lodging/114000000/113830000/113822200/113822147/5231c634.jpg?impolicy=ccrop&w=1000&h=666&q=medium"
+        },
+        {
+          "thumbnail": "https://lh4.googleusercontent.com/proxy/T8zoZ000J4jS2WbzJ5IMnW6ZkFKbmizM6a2gem9adq3ieNYZDPcyLtvJG87K_ZFR2Rhb5t9h02zH4yCDzSTA_07mcML9CkCPALr4ZCPyr-9IMhKreM_Up2nvN8qVDAXq90_ofub7dzOFjr-HWgl5lQViLbOtznA=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://media.vrbo.com/lodging/114000000/113830000/113822200/113822147/e9785f0f.jpg?impolicy=ccrop&w=1000&h=666&q=medium"
+        },
+        {
+          "thumbnail": "https://lh3.googleusercontent.com/proxy/x-oiz_6iXRntiYfc8ICFr2ULJvp1DZHgARZT_ZoKTp5VrkOgt-BBr8u7Z7XMksnEkGg3oDZeAHaGrkdypaiY3iztgZBeSkjbEEPCSlI_pi3UdwYzDhSJUPbGV51jt15Eyh5wSOs6sb4R39bo-FZihljwefRKSA=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://media.vrbo.com/lodging/114000000/113830000/113822200/113822147/9c6780b3.jpg?impolicy=ccrop&w=1000&h=666&q=medium"
+        },
+        {
+          "thumbnail": "https://lh5.googleusercontent.com/proxy/RoORAW4dmlI07S0pSN9hPviObLrMaxb2YCjxTqBiJSO6FsnHXqdePYQ2rkEeqWtYaymYXCLsbPVOH04RhjPY8CZnA2Xl-Rb8muv6otDhPmbjEn8M6NTaUlsbMpOkuY2DWtZOzi4rTYwfwSmYJByzByF6EN0NTw=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://media.vrbo.com/lodging/114000000/113830000/113822200/113822147/0707a5b0.jpg?impolicy=ccrop&w=1000&h=666&q=medium"
+        },
+        {
+          "thumbnail": "https://lh6.googleusercontent.com/proxy/gpbqkypSxwNISzLZt6SbCs6oF0jxF6eAIuUJpc0tHgPC7SnZmHHHp0a5mrMtQb4rMrVvorNYtsUjMZ3S7T7kchQ35eXngwen13CJSfeaLUqwqALirqAdHcRzUv3sfcwENDLf-hykCwnnLB9jDROaJ8eUWBidYf8=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://media.vrbo.com/lodging/114000000/113830000/113822200/113822147/8bd67988.jpg?impolicy=ccrop&w=1000&h=666&q=medium"
+        },
+        {
+          "thumbnail": "https://lh6.googleusercontent.com/proxy/cCQ1RURKpPmXcgBDbvrQHUXdmFbuUpjDBRJvNoFLGlbtoBAXRpTUJoRKjjigXiRozw5dcY9_ezs2IEOj-2rFiqEljJ-lBYjZ2viZQqwbNQD4LKl4eaAvVFlZziRyoMkKDcNnTKmKUPqg6GV4-E4QMl3mnOklOg=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://media.vrbo.com/lodging/114000000/113830000/113822200/113822147/d9a369de.jpg?impolicy=ccrop&w=1000&h=666&q=medium"
+        },
+        {
+          "thumbnail": "https://lh4.googleusercontent.com/proxy/ciP4RbTCBREeyw99QWwN4YI2mpp9TwRjFQhn0s44aPFzovOf8eBCx4f51JKKsvIvqvwEth22cp5IRTobXMMSf8iZ9UUZRUq94Lf82dbF2ghxspU-WSYYgKAnQE9ixs0lns2Ng--3glvy5eCZFs2Jg1L4ha5raKI=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://media.vrbo.com/lodging/114000000/113830000/113822200/113822147/6b3ade2e.jpg?impolicy=ccrop&w=1000&h=666&q=medium"
+        }
+      ],
+      "amenities": [
+        "Kid-friendly",
+        "Elevator",
+        "Ironing board",
+        "Kitchen",
+        "Smoke-free",
+        "Washer"
+      ],
+      "excluded_amenities": [
+        "No parking",
+        "No Wi-Fi"
+      ],
+      "essential_info": [
+        "Entire apartment",
+        "Sleeps 4",
+        "2 bedrooms",
+        "2 bathrooms",
+        "2 beds"
+      ],
+      "serpapi_google_hotels_reviews_link": "https://serpapi.com/search.json?engine=google_hotels_reviews&hl=en&property_token=ChkQjO-Qy6Piq9QlGg0vZy8xMXo5eGRfeHloEAI",
+      "serpapi_google_hotels_photos_link": "https://serpapi.com/search.json?engine=google_hotels_photos&property_token=ChkQjO-Qy6Piq9QlGg0vZy8xMXo5eGRfeHloEAI"
+    },
+    {
+      "type": "vacation rental",
+      "name": "12th Floor Sauna Retreat with Stunning Views",
+      "link": "https://www.booking.com/hotel/fi/2ndhomes-tampere-luxurious-76m2-2br-apt-sviitti-sauna-amp-amazing-views.en-gb.html?aid=2068758&utm_source=seogooglelocal&utm_medium=description&utm_term=hotel-9702158&utm_campaign=en-gb&label=seogooglelocal-link-imagesaow-hotel-9702158_grp-2_gendate-20260503",
+      "property_token": "ChoQ3evS-6Hc7sa2ARoNL2cvMTF6NndxbTUweRAC",
+      "serpapi_property_details_link": "https://serpapi.com/search.json?adults=2&bedrooms=2&check_in_date=2026-06-15&check_out_date=2026-06-18&children=0&currency=EUR&engine=google_hotels&gl=us&hl=en&property_token=ChoQ3evS-6Hc7sa2ARoNL2cvMTF6NndxbTUweRAC&q=Tampere&vacation_rentals=true",
+      "gps_coordinates": {
+        "latitude": 61.49491882324219,
+        "longitude": 23.77402687072754
+      },
+      "check_in_time": "4:00\u202fPM",
+      "check_out_time": "11:00\u202fAM",
+      "rate_per_night": {
+        "lowest": "\u20ac147",
+        "extracted_lowest": 147,
+        "before_taxes_fees": "\u20ac132",
+        "extracted_before_taxes_fees": 132
+      },
+      "total_rate": {
+        "lowest": "\u20ac440",
+        "extracted_lowest": 440,
+        "before_taxes_fees": "\u20ac397",
+        "extracted_before_taxes_fees": 397
+      },
+      "prices": [
+        {
+          "source": "Booking.com",
+          "logo": "https://www.gstatic.com/travel-hotels/branding/61aadbe1-e141-4d2e-a831-b6a18727e130.png",
+          "num_guests": 2,
+          "rate_per_night": {
+            "lowest": "\u20ac147",
+            "extracted_lowest": 147,
+            "before_taxes_fees": "\u20ac132",
+            "extracted_before_taxes_fees": 132
+          }
+        }
+      ],
+      "images": [
+        {
+          "thumbnail": "https://lh3.googleusercontent.com/proxy/pgLknS7UStXjTXWor0DNKl0WysszRvzeZDHRMbdN8_nPPApYuUCcRETD4sAOXILXf7HrAmYm65RNPrs1LNwKwpNsY7R72u8Kopom3kbGdvjgFswXgoAgryofIQlsxNDF9jBzfTIXplOm5aAdcoIxPKIWDpacRw=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://xx.bstatic.com/xdata/w/hotel/840x460_watermarked_standard/UlbWNZwXU4abzOGMvFLdspgYpva0aRnmBqIOD74oxJgH9T8WAk4MWOBeevBPBDR7CkP44AdQxAkG94mfROKW4oR-o09fiq6fobCktjLKlNhuldsCrbCkRQ==.jpg"
+        },
+        {
+          "thumbnail": "https://lh6.googleusercontent.com/proxy/MGxyyyzqMiFaWV7wuI644TMd-AWs54zVCr6s1I7Bmfa3TGfVlOsJHUE8mbtiJxwNXhCSD8ruKvBFx4QEpDmqQGW6itbWqsEggCaVzcv4lwyvLFMoPvnt3j5KRBE8Fn1YxEPpdPZhu31mjd1f9ZtxenYpfImCyEg=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://xx.bstatic.com/xdata/w/hotel/840x460_watermarked_standard/UlbWNZwXU4abzNEYDzpzWhNtvx-vCAQxLmL3pL7QC-LkCVuQiOEMv51JuKMn9M5hNFz65dQLyb_7YuLsrWT2cx7_MZa5eIJ2tKgN8dV1k61fnIazp3M2Sw==.jpg"
+        },
+        {
+          "thumbnail": "https://lh4.googleusercontent.com/proxy/HHQK2tGmcC0ZVgDIUIPBERvWpHQly4v7Z9cRsMOZq0P8mipmb6PZP5awat8sStMe_qb1lIk8P-aQMSJSBN63zz3QWkZUBbVo27o_Kh8OmY0v3u1o5cCuQUEfm5TybXQz5XJHfMOH_LZBmWGTGC_2XCrCrMlJgrs=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://xx.bstatic.com/xdata/w/hotel/840x460_watermarked_standard/UlbWNZwXU4abzBMCRvu3vgyWOd9ws0pkvtah04_WAysh2cGC7OHH7-ZM6v4xB8k6otBFO-cxuHg87MRUCQvb3r1ekxWZypB55dD_u3KVWTXbr6Ltb96qkw==.jpg"
+        },
+        {
+          "thumbnail": "https://lh4.googleusercontent.com/proxy/l-B1lctYNXF_1X-ua8UcJFRb6__jK9vtHGVjbiUco_mqj5jTCWuFBdQ9Q8ptLsoEpJWjAFiLz2UE3AlrjhGi6Eao4OHRO4swAZwLjwwjS-URaxosR9mjxeH3JAHrrvrIFcOAxADTz_a1lJrfHaf7BCtrrif1QGU=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://xx.bstatic.com/xdata/w/hotel/840x460_watermarked_standard/UlbWNZwXU4abzKbjGr0yZKm4BezLRVSdbnpI0HCWWafazR68nyD0yQKDIi4HXDdL_oMYkvnDegzjF9f89j4EUhvb1_DQoI_3njE_no4yb3K4vhak-KHEjQ==.jpg"
+        },
+        {
+          "thumbnail": "https://lh4.googleusercontent.com/proxy/26-9TorfGVIpPe8Ez-pLxMjDO7h_9ruE_k-rgZ8gFBuG6inTwYtfCkeGFRoaVVWJ80fLBlIr7E9PUtgQTAwEHjR8Msm9gN_jydYfSLcMmzNTNZ5loIATa9ydDNErn4UBxwGS9xXPuT62ARx_5mUz47uCcrQURw=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://xx.bstatic.com/xdata/w/hotel/840x460_watermarked_standard/UlbWNZwXU4abzMuj_mYPpFRxCYWEr_ZNQbd9WW7DS-bX5OjxrqEI0mliMSD8v9XR-seCMIRCUJUgNR-vKy0YmWuxGxo0ladeEq9_5GeJIJzjYWcZrQFFfA==.jpg"
+        },
+        {
+          "thumbnail": "https://lh3.googleusercontent.com/proxy/zw282WhL1NeGIKBmir_LTmJELB9M6oqDXm4ReLCHoiTimiXXX-YWW2Ac25Zu9XqH3MNS8Th9dyz4KdGXU1Jpfwmb6c3_MX3EIpSuIW0LO4d09gZEVvQzmk3fhL3FVYz875aM05JX4ynRCecxiLdErovMlDDfAA=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://xx.bstatic.com/xdata/w/hotel/840x460_watermarked_standard/UlbWNZwXU4abzBoWZWCorBMvPAKpRvFGSfqtUnT5-zmXHKndqli5dV3f1rURHIGnDFOClH7K33YO73N7zRhLPX9aTURFtKZQ3heGfO4gvZ_qfaVvyjCHPA==.jpg"
+        },
+        {
+          "thumbnail": "https://lh4.googleusercontent.com/proxy/PYOwTObWfiih5mkOtlodDlJTPWB5k4q0IIRkNE7rkPBwXjTRBrJU7ahlWVvBWWxx-FWa-xMt6TlypsQxgafRdzAl3verzVeLTYDqoYv511nAzL5pb5xPzWxRZbcA5AvdhZpt575t-QJFupKWhNkLXhaJ15A6ZNM=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://xx.bstatic.com/xdata/w/hotel/840x460_watermarked_standard/UlbWNZwXU4abzH6rh69KdQNN5JQNRvL_V202tZJY3cMa_FyIRXwr34-8YgqOvkdbEb_BJOzKINzThkALzb-XqgIFMbOQIxmtItXKw9ZJ0hYef_Qhfk1kfw==.jpg"
+        },
+        {
+          "thumbnail": "https://lh4.googleusercontent.com/proxy/sd0HosVfPEU-8DGkc8iVYhMP5Keytxwf78yM8Jieo7kcVYTG0H2hvIutftZ-6GP68qwQ-2Eq44f4c9BG89zvhOxHIsz5_48n5qGX5YQQYMEnwOkpUVmpCKKunzjnV4SdFNtmTzytuX3hsrZEQCISGn8V-8HNue4=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://xx.bstatic.com/xdata/w/hotel/840x460_watermarked_standard/UlbWNZwXU4abzNi0Pv2HDu1QEbP2y9rTYOlaYRj4WMAjPoBHgTY-zFjy23h5W8BbaHZUT1tQmzBcmW8wDmeRiWEzuR9zHFNJfVm5nqc4wPZFVX3FXMcaVQ==.jpg"
+        },
+        {
+          "thumbnail": "https://lh5.googleusercontent.com/proxy/TxOfn0lbjXMSF7d0HfFEJXLoHdY4NQG86LqLb9kIu97TGLinrNe9OVFAd8R-bMkogME3M1eoW_9NHznhfOcxoqSGPdHZ4XRJs7kiSn6uhAZ0b3x1SZ23EyUCKkCcWJYBE7ek0tJ6ErqWQbH3M4Up5-l2Cbklew=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://xx.bstatic.com/xdata/w/hotel/840x460_watermarked_standard/UlbWNZwXU4abzF9lw6NIlsau7PSy2yzyrlYYv7p1l1ILB_4ZVac2IRgNEZNeSQiclz7obbFFR_YNhK1px9k8QPQgDxW_qSpvqLfJg8XVyQJO0DxJks5fNg==.jpg"
+        }
+      ],
+      "overall_rating": 4.8,
+      "reviews": 8,
+      "amenities": [
+        "Elevator",
+        "Heating",
+        "Ironing board",
+        "Kitchen",
+        "Microwave",
+        "Oven stove",
+        "Pet-friendly",
+        "Smoke-free",
+        "Cable TV",
+        "Washer",
+        "Wheelchair accessible"
+      ],
+      "excluded_amenities": [
+        "No air conditioning",
+        "No crib",
+        "No fitness center",
+        "No outdoor grill",
+        "No patio"
+      ],
+      "essential_info": [
+        "Entire apartment",
+        "Sleeps 6",
+        "2 bedrooms",
+        "1 bathroom",
+        "3 beds",
+        "818 sq ft"
+      ],
+      "serpapi_google_hotels_reviews_link": "https://serpapi.com/search.json?engine=google_hotels_reviews&hl=en&property_token=ChoQ3evS-6Hc7sa2ARoNL2cvMTF6NndxbTUweRAC",
+      "serpapi_google_hotels_photos_link": "https://serpapi.com/search.json?engine=google_hotels_photos&property_token=ChoQ3evS-6Hc7sa2ARoNL2cvMTF6NndxbTUweRAC"
+    },
+    {
+      "type": "vacation rental",
+      "name": "Next to Nokia Arena 12th Floor Sauna Retreat with Stunning City Views",
+      "link": "https://book.shillinki.com/listings/449111?googleVR=1&utm_source=google&utm_medium=vacation_rentals",
+      "property_token": "ChoQq9ygo9THuv2uARoNL2cvMTF6MjFiOXlnNBAC",
+      "serpapi_property_details_link": "https://serpapi.com/search.json?adults=2&bedrooms=2&check_in_date=2026-06-15&check_out_date=2026-06-18&children=0&currency=EUR&engine=google_hotels&gl=us&hl=en&property_token=ChoQq9ygo9THuv2uARoNL2cvMTF6MjFiOXlnNBAC&q=Tampere&vacation_rentals=true",
+      "gps_coordinates": {
+        "latitude": 61.49477767944336,
+        "longitude": 23.774368286132812
+      },
+      "check_in_time": "4:00\u202fPM",
+      "check_out_time": "11:00\u202fAM",
+      "rate_per_night": {
+        "lowest": "\u20ac175",
+        "extracted_lowest": 175,
+        "before_taxes_fees": "\u20ac156",
+        "extracted_before_taxes_fees": 156
+      },
+      "total_rate": {
+        "lowest": "\u20ac526",
+        "extracted_lowest": 526,
+        "before_taxes_fees": "\u20ac469",
+        "extracted_before_taxes_fees": 469
+      },
+      "prices": [
+        {
+          "source": "Hotels.com",
+          "logo": "https://www.gstatic.com/travel-hotels/branding/16815192664768424423.png",
+          "num_guests": 2,
+          "rate_per_night": {
+            "lowest": "\u20ac140",
+            "extracted_lowest": 140,
+            "before_taxes_fees": "\u20ac123",
+            "extracted_before_taxes_fees": 123
+          },
+          "free_cancellation": true,
+          "free_cancellation_until_date": "Jun 1",
+          "free_cancellation_until_time": "6:00\u202fPM"
+        }
+      ],
+      "nearby_places": [
+        {
+          "name": "Yliopisto C",
+          "transportations": [
+            {
+              "type": "Walking",
+              "duration": "10 min"
+            }
+          ]
+        },
+        {
+          "name": "Tampere-Pirkkala Airport",
+          "transportations": [
+            {
+              "type": "Taxi",
+              "duration": "20 min"
+            },
+            {
+              "type": "Public transport",
+              "duration": "50 min"
+            }
+          ]
+        },
+        {
+          "name": "Los Pollos Grill & Bar",
+          "transportations": [
+            {
+              "type": "Walking",
+              "duration": "10 min"
+            }
+          ]
+        }
+      ],
+      "images": [
+        {
+          "thumbnail": "https://lh5.googleusercontent.com/proxy/KqRY2vL-hKQCxge7T9xkn1wwPm6za-xs643f8KZ3mfdozatEeicsRLWFvbDFKBUB89u78LDHsGo6IYEsm2Qn4-HZm_sfkiCBajsM7DkqLaB5Nu4qtNuXd98-0VP87KZC50jVot_csYtsgQ-pjb7OKQDjVqUdolo=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://p.fih.io/v2/nSr0o-3gbZN8o1xMecXCcG-BkDeQVo3k-wOeVogkTe7ajuFOX7O-WA8aRWhXz1jsToZif_TsA_xCWfhWRa0ZnpCPtj8SwkE9MD6CdM5LwgvhqFqAJrCGuA6fKKjT4omTQlBJqujkJ23fAzF4en3ketkYyx1j1dLbUfhlOgkNcIcn9PwNtk_AU2csbUk6dd9sGo49Qn31qiMVOoIxofR_2o8VcZA3AAhCPReYBoJ8vY2Gq2593GaA4u4OT9zb2nQda_hO30Az3Jnmq4tDLkiv-8O4z7ScYWZy9f1XtuyYfAdwFxN7WzemUvs_a_14Uw9Y_xJPSl9cUg-6blhdvk_2497wQhMpNwpV3hvSxVMnLU47A0vssw"
+        },
+        {
+          "thumbnail": "https://lh3.googleusercontent.com/proxy/z2vE48HSav-YIdKF35hjG0JVxe7ls-BWX9crtmpN2qf1vUMarvEb1q3qD62Gu48ZF0mPFDsNzqEOI8p5tDcElIduxntP6ZuHGWOn_gj123qK6j-GK-xrS5DJ-ZcPvkUjyl9pxL9L1ILrHJrhLDBRG-vf_F3ECQ=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://q-xx.bstatic.com/xdata/images/hotel/max1024x683/369870762.jpg?k=1aa9a8849c81d5b1675c40c373c15d0143960d38bb0dcc56a24ba7c245a5ea07&o=&a=1538557"
+        },
+        {
+          "thumbnail": "https://lh6.googleusercontent.com/proxy/FrLPnqnAo4u3fCInr6s9H4bN-lX-u-P-rFQA8rBz0xtyWxwuu8MOubeWReF8juGsgY_CmMSZAZ1kAWv2aDNwU_cuC84-VWHz12zQ2oPR1DyFWaGBIoBZxXSSU7j7EsIS1ORwIxE085jR_RJmrG5kyvdjZsT5dw=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://q-xx.bstatic.com/xdata/images/hotel/max1024x683/369870791.jpg?k=5259f161f134c925fe9f11d1bb5f8af997370564b5c8d57e1e34d6558e0f5864&o=&a=1538557"
+        },
+        {
+          "thumbnail": "https://lh3.googleusercontent.com/proxy/_F-ZmUKts58Upq9DSBiEHN1Px17-xCndklKsXLHYJZkilyyP0_xxzMMoF0rl1ZMP8hDsDWXGCB5LG9XbLCJjNh2SQhL251khAVtJAZLbFYBdcIrDaOV5Hjp3g_jmzN18aFESko6UeZLBEP5JPiYMrKjNu4FlsPg=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://q-xx.bstatic.com/xdata/images/hotel/max1024x683/369870818.jpg?k=80471293fc7f8d26af7d75f20c042701d966382311dad26a4abc7f0798ad17d4&o=&a=1538557"
+        },
+        {
+          "thumbnail": "https://lh4.googleusercontent.com/proxy/bg77B3MmyrKzNOLFGqs_mQAjfBsnZwOYsjzOA1jL5RGEzcbPakWjZSelEKjDV1eUJmk2KyfT1dfVxjxv0aDS7wyUTFezB5IOubrIMgu2gC51AzBoL8vWUYWFJJLaYmUJhWOo9u5au7VTW0FbsnFQT8MOLTETiAM=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://q-xx.bstatic.com/xdata/images/hotel/max1024x683/486542987.jpg?k=a693030d20fc90877c6af362bf0b8d7eb144fb7af29a9f634d2ad6cefeb7b9db&o=&a=1538557"
+        },
+        {
+          "thumbnail": "https://lh3.googleusercontent.com/proxy/GnlfOhXNWe2YXgsvHP3WXG2N8WFE6roGLZ4cTOjSvbb2lEAdMEYPd_yyPqy9Bz85cZ4yEDkRoSzWdr6nExrD2SElk2aHkW1XLn7ZExP53D71EH2ZaPqwXp1F0ZOFALi7wY83WfhegmBX-_55b9RXiitvb5hh--o=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://hostaway-platform.s3.us-west-2.amazonaws.com/listing/139163-449111-5SKlSi97ObP2MbIvXWKZcBcVUFXN0e2RhS6FczmihD4-69a58cdfcc073-medium"
+        },
+        {
+          "thumbnail": "https://lh6.googleusercontent.com/proxy/kmUQvIY_aiiTIHSbuU_FCZTqXOLPPSyUep8zKcWzsMAgkHVNXAubgxEP3890KZPsbixafTp38YVLvJeDwCJBts_x84Rir6-nVZezcDNVSCHTo6kULjJ3ctowClaUymOxq0vSAhFE8U9AD1hbrdrvAjEdZWKqay8=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://hostaway-platform.s3.us-west-2.amazonaws.com/listing/139163-449111-o9cuflqi0Kid8FtpC3gInMMgdxE6i2LHyph0JeJuSLg-69a58cd4b88d6-medium"
+        },
+        {
+          "thumbnail": "https://lh3.googleusercontent.com/proxy/wrjD0zKLExZpxIIWWugRIMS8AR06hda-TkXjcuc1MJpwPifSEsk-xF5bCX-1FMoVkDA2tLIanD8HxttheuTXaXjE34BoJuhrkyPfym8IlphJtxXCAuWjYNe7HHpbBX7xSRywEuyl5-zV5fBPTCSg7bQOzjjaRg=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://p.fih.io/v2/nSr0o-3gbZN8o1xMecXCcG-BkDeQVo3k-wOeVogkTe7ajuFOX7O-WA8aRWhXz1jsToZif_TsA_xCWfhWRa0Zv6KSsiEe1HcXDCmRfIBJ-TeSo3aAA5K5og3bGdDVnp-aSgl814XYNXbidjF4en3ketkYyx1j1dLbUfhlOgkNcIcn9PwNtk_AU2csbUk6dd9sGo49Qn31qiMVOoIxofR_2o8VcZA3AAhCPReYBoJ8vY2Gq2593GaA4u4OT9zb2nQda_hO30Az3Jnmq4tDLkiv-8O4z7ScYWZy9f1XtuyYfAdwFxN7WzemUvs_a_14RTJY-hJcQl5faBO6blhdvk_2497wQhMpac8gLFpJPNzCOELnaN52nw"
+        },
+        {
+          "thumbnail": "https://lh3.googleusercontent.com/proxy/gtM7z5WIKf2Wsna1hPT6iFb2J_4QDXtTj_n23JmgT1_YRvWfSJRm9SMPvcz_n9PkPhgTNLfEmfxfAj1_9suMO_tM2rTXBHCE7dDlEiVQj4GmbLMmy8Vbplrdk0d5K0BQK1T1xNPsM-f7f4R9Le0KdX7K8RSm8JA=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://q-xx.bstatic.com/xdata/images/hotel/max1024x683/369870802.jpg?k=cc3a4f504de0848e95ac50e773e86bca929ab66eb9a2af0d9096dc5d2596117a&o=&a=1538557"
+        }
+      ],
+      "overall_rating": 4.7772417,
+      "reviews": 29,
+      "location_rating": 4.7,
+      "amenities": [
+        "Kid-friendly",
+        "Crib",
+        "Elevator",
+        "Heating",
+        "Ironing board",
+        "Kitchen",
+        "Microwave",
+        "Oven stove",
+        "Smoke-free",
+        "Cable TV",
+        "Washer",
+        "Wheelchair accessible",
+        "Paid parking",
+        "Free Wi-Fi"
+      ],
+      "excluded_amenities": [
+        "No air conditioning",
+        "No airport shuttle",
+        "No beach access",
+        "No fireplace",
+        "No fitness center",
+        "No hot tub",
+        "No indoor pool",
+        "No outdoor pool",
+        "Not pet-friendly"
+      ],
+      "health_and_safety": {
+        "groups": [
+          {
+            "title": "Enhanced cleaning",
+            "list": [
+              {
+                "title": "Enhanced cleaning of the property",
+                "available": true
+              }
+            ]
+          },
+          {
+            "title": "Minimized contact",
+            "list": [
+              {
+                "title": "No-contact check-in and check-out",
+                "available": true
+              }
+            ]
+          }
+        ]
+      },
+      "essential_info": [
+        "Entire apartment",
+        "Sleeps 6",
+        "2 bedrooms",
+        "1 bathroom",
+        "3 beds",
+        "818 sq ft"
+      ],
+      "serpapi_google_hotels_reviews_link": "https://serpapi.com/search.json?engine=google_hotels_reviews&hl=en&property_token=ChoQq9ygo9THuv2uARoNL2cvMTF6MjFiOXlnNBAC",
+      "serpapi_google_hotels_photos_link": "https://serpapi.com/search.json?engine=google_hotels_photos&property_token=ChoQq9ygo9THuv2uARoNL2cvMTF6MjFiOXlnNBAC"
+    },
+    {
+      "type": "vacation rental",
+      "name": "Kaski, three-room condo in a prime location, free parking",
+      "property_token": "ChkQ3oaM6crGveNBGg0vZy8xMXo1Y2g5NV9yEAI",
+      "serpapi_property_details_link": "https://serpapi.com/search.json?adults=2&bedrooms=2&check_in_date=2026-06-15&check_out_date=2026-06-18&children=0&currency=EUR&engine=google_hotels&gl=us&hl=en&property_token=ChkQ3oaM6crGveNBGg0vZy8xMXo1Y2g5NV9yEAI&q=Tampere&vacation_rentals=true",
+      "gps_coordinates": {
+        "latitude": 61.49703598022461,
+        "longitude": 23.794401168823242
+      },
+      "check_in_time": "2:00\u202fPM",
+      "check_out_time": "12:00\u202fPM",
+      "rate_per_night": {
+        "lowest": "\u20ac176",
+        "extracted_lowest": 176,
+        "before_taxes_fees": "\u20ac155",
+        "extracted_before_taxes_fees": 155
+      },
+      "total_rate": {
+        "lowest": "\u20ac528",
+        "extracted_lowest": 528,
+        "before_taxes_fees": "\u20ac465",
+        "extracted_before_taxes_fees": 465
+      },
+      "prices": [
+        {
+          "source": "Booking.com",
+          "logo": "https://www.gstatic.com/travel-hotels/branding/61aadbe1-e141-4d2e-a831-b6a18727e130.png",
+          "num_guests": 4,
+          "rate_per_night": {
+            "lowest": "\u20ac176",
+            "extracted_lowest": 176,
+            "before_taxes_fees": "\u20ac155",
+            "extracted_before_taxes_fees": 155
+          },
+          "free_cancellation": true,
+          "free_cancellation_until_date": "Jun 9",
+          "free_cancellation_until_time": "11:59\u202fPM"
+        }
+      ],
+      "images": [
+        {
+          "thumbnail": "https://lh6.googleusercontent.com/proxy/6Z2EosiKU6bfkijwDPaG4qJNXBkSsppcuDTqOIgNhT1FRYSuqE-bKv0Ag0XT4cepOpCCF3qgP_WQz-mVwZql7tLSKInsV7AAyB6SRY29rsHjn4HEEafAbsQdbniTvfFtWnopIk6iNTDE_peHfE9WoT69jqihjw=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://xx.bstatic.com/xdata/w/hotel/840x460_watermarked_standard/UlbWNZwXU4abzJ8U_j4z_4ujBKpOv-PJN42XfsbKuIkq_VHX2YMUvxowfOvjnV2jPXoCoKT8pxAJ1CQAS10mcg0Bw6VyGTy9RQWNy8xO31Cdr1-xJGWufA==.jpg"
+        },
+        {
+          "thumbnail": "https://lh6.googleusercontent.com/proxy/D9uqG6Du-F08KbiPASHtbGg0GH1UykUlLxI63dIZe2lstvwzneznwoBrVK-RMzs1f1HLOD6hCNu0PbAq4d6XFeQr2adT4MuR5th9cgB8Q70PEoGyBarNwp70y5_q6ZeJus9NFQDEfTyGcWCqSGl9fb-DD5tozA=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://freecancellationscdn-hsbgcwfragasdpfe.z01.azurefd.net/remote/static.cupid.travel/hotels/491155698.jpg?w=1024&h=683&mode=crop&scale=both&anchor=middlecenter&quality=80"
+        },
+        {
+          "thumbnail": "https://lh3.googleusercontent.com/proxy/bNfRpl6UcYHh5URU3m4Y9Sx6pXKUjAwylYztzycyHlcsjfkXs9HeV-UsJVxSb060SX6Nx8_VJn6P-En0qUvQEGdrIT0BEdZ6B0PnwjsALFdcHbfciaEcUAGAyKgbIEPbFoZTgiRAlqVBjgzOAw6KIYKX8GB0pw=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://xx.bstatic.com/xdata/w/hotel/840x460_watermarked_standard/UlbWNZwXU4abzFaO7OvwTbAWHagQIuIHRNEbhoxvOrr8krhf1xx9G4HNIQDti1vpWkY6CFUJe7ResJTD0iTfubPYyONkR4z6CT_AOikGxcvmn5vE_u2nSg==.jpg"
+        },
+        {
+          "thumbnail": "https://lh5.googleusercontent.com/proxy/9h53vIqjde9SEDLtmrmHcSjZJr6gnvzwpbXDu7p4EeUyBToMUNi_V3FXG19xd6DtDMzGU6a-HjwnzO--XhOakoTXvCmZ6kOtHF6xXkvH-ZPYGwmHJzV1eJB-nWIlCa8vvVgRxmsJxnOGHpl6jUKIEYE8XgplQg=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://xx.bstatic.com/xdata/w/hotel/840x460_watermarked_standard/UlbWNZwXU4abzIiSx2NUqxWchKZDHm7mVOgtyPnO569FkUKP_UL7zjKEhQfdFm28BXjnKBW7_02eeOQCSzU3rS4PeXTVnGMkvJMVoRBlPEhy9ZgojOMmgA==.jpg"
+        },
+        {
+          "thumbnail": "https://lh4.googleusercontent.com/proxy/s8JJBrQ809ogZr1BB8z9bs0hqV3Fl4OuGMMcpv92cdyebqqnCsHcCsFW_zJ_qukFucMwn2YyiwZ8LiZYjFXAWaz-F-RRiKHP-H8DZajnQMPthDwesd1GGhV16pbrnMMX_qq0-bctp_yc3MAvZQiivGbbNBSNHJQ=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://freecancellationscdn-hsbgcwfragasdpfe.z01.azurefd.net/remote/static.cupid.travel/hotels/491611785.jpg?w=1024&h=683&mode=crop&scale=both&anchor=middlecenter&quality=80"
+        },
+        {
+          "thumbnail": "https://lh6.googleusercontent.com/proxy/LmjkgD3MJmJiu_WYTOM15LCYEjs0MQ26rUx67WbM06yaFkzaXRdtoMr7enQcfB0Yd-TEI5Vxi1sbtj_yYi-hrvGjdIFR9JW7kATUTyvrKV6rqvU2HZMzUbzO_AKeDxufGJbYI-AOOT0nzcbCDFTt0BqcBwIGZkM=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://freecancellationscdn-hsbgcwfragasdpfe.z01.azurefd.net/remote/static.cupid.travel/hotels/491155651.jpg?w=1024&h=683&mode=crop&scale=both&anchor=middlecenter&quality=80"
+        },
+        {
+          "thumbnail": "https://lh3.googleusercontent.com/proxy/in6zZbipjmfYPWwh63zLbB3aey7F1LZFNTEzu627RP1wwaHlshGUrVQH4S7b1GfE29_f-2h80EjgAaHYVtg6fCMvsG71eHtUKouZeQUBkXe6oL9Aso314y4bYyl-uN8JbgXqWYVyG-OS0qCd8TJ0yNl1htycPr0=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://xx.bstatic.com/xdata/w/hotel/840x460_watermarked_standard/UlbWNZwXU4abzCTLS9MfWr8MQf1pIhxPd54oeZYtLK5zhUmwEoIC2HvRxC40GvWntzzmshKBWtN0DxngPdnTlxVqanIDSOZMo1JppLHJFddnGHQc0i4aew==.jpg"
+        },
+        {
+          "thumbnail": "https://lh4.googleusercontent.com/proxy/7OcOb4AjOPNyu4Zf2TJE68PifyaWQFt-m-snTVDts5c6cHE7Fz-j-JLg9ql4pU_t6sKZO6SOln1DuEnk-HwqGNBFyGKWznSAyGuo1kW8Q2Bq6ogsVKN35Pcn857VBlM7xGm4SAKHzZbbvL6P8GlyukBrq9MDdw=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://freecancellationscdn-hsbgcwfragasdpfe.z01.azurefd.net/remote/static.cupid.travel/hotels/559791403.jpg?w=1024&h=683&mode=crop&scale=both&anchor=middlecenter&quality=80"
+        },
+        {
+          "thumbnail": "https://lh5.googleusercontent.com/proxy/z9FK4r0fyJPzcNltO-DQ7yxGrNVZgFudg887bma6K69VwGyVNMfx9ga9FvbTpyevVbBnxDQN22kWTrSmK5BLnjoItgVFkT71qlc6tHTx5XICLA1fWBZA6iJbuZygeOBjGxH7oYEDFT-S4g8p7W6m7Ev5hcONdI8=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://freecancellationscdn-hsbgcwfragasdpfe.z01.azurefd.net/remote/static.cupid.travel/hotels/491611986.jpg?w=1024&h=683&mode=crop&scale=both&anchor=middlecenter&quality=80"
+        }
+      ],
+      "overall_rating": 4.8209305,
+      "reviews": 43,
+      "amenities": [
+        "Kid-friendly",
+        "Crib",
+        "Heating",
+        "Ironing board",
+        "Kitchen",
+        "Microwave",
+        "Oven stove",
+        "Smoke-free",
+        "Cable TV",
+        "Washer",
+        "Free parking"
+      ],
+      "excluded_amenities": [
+        "No air conditioning",
+        "No airport shuttle",
+        "No elevator",
+        "No fitness center",
+        "No outdoor grill",
+        "No patio",
+        "Not pet-friendly",
+        "Not wheelchair accessible",
+        "No Wi-Fi"
+      ],
+      "essential_info": [
+        "Entire apartment",
+        "Sleeps 6",
+        "2 bedrooms",
+        "1 bathroom",
+        "3 beds",
+        "624 sq ft"
+      ],
+      "serpapi_google_hotels_reviews_link": "https://serpapi.com/search.json?engine=google_hotels_reviews&hl=en&property_token=ChkQ3oaM6crGveNBGg0vZy8xMXo1Y2g5NV9yEAI",
+      "serpapi_google_hotels_photos_link": "https://serpapi.com/search.json?engine=google_hotels_photos&property_token=ChkQ3oaM6crGveNBGg0vZy8xMXo1Y2g5NV9yEAI"
+    },
+    {
+      "type": "vacation rental",
+      "name": "Renovated 1BR Penthouse Private Rooftop Terrace",
+      "link": "https://www.bluepillow.com/search/68115fc7a74f8eb5bd2a6188?dest=bpex&cat=Apartment&lat=61.49934&lng=23.76983&language=en",
+      "property_token": "ChoQ2vq-vZOd5reyARoNL2cvMTF5eWJzdm5tMxAC",
+      "serpapi_property_details_link": "https://serpapi.com/search.json?adults=2&bedrooms=2&check_in_date=2026-06-15&check_out_date=2026-06-18&children=0&currency=EUR&engine=google_hotels&gl=us&hl=en&property_token=ChoQ2vq-vZOd5reyARoNL2cvMTF5eWJzdm5tMxAC&q=Tampere&vacation_rentals=true",
+      "gps_coordinates": {
+        "latitude": 61.49934005737305,
+        "longitude": 23.76983070373535
+      },
+      "rate_per_night": {
+        "lowest": "\u20ac170",
+        "extracted_lowest": 170,
+        "before_taxes_fees": "\u20ac170",
+        "extracted_before_taxes_fees": 170
+      },
+      "total_rate": {
+        "lowest": "\u20ac509",
+        "extracted_lowest": 509,
+        "before_taxes_fees": "\u20ac509",
+        "extracted_before_taxes_fees": 509
+      },
+      "prices": [
+        {
+          "source": "Bluepillow.com",
+          "logo": "https://www.gstatic.com/travel-hotels/branding/190ff319-d0fd-4c45-bfc8-bad6f5f395f2.png",
+          "num_guests": 2,
+          "rate_per_night": {
+            "lowest": "\u20ac170",
+            "extracted_lowest": 170
+          },
+          "free_cancellation": true,
+          "free_cancellation_until_date": "Jun 1",
+          "free_cancellation_until_time": "11:59\u202fPM"
+        }
+      ],
+      "nearby_places": [
+        {
+          "name": "Rautatieasema A",
+          "transportations": [
+            {
+              "type": "Walking",
+              "duration": "2 min"
+            }
+          ]
+        },
+        {
+          "name": "Tampere-Pirkkala Airport",
+          "transportations": [
+            {
+              "type": "Taxi",
+              "duration": "21 min"
+            },
+            {
+              "type": "Public transport",
+              "duration": "45 min"
+            }
+          ]
+        },
+        {
+          "name": "Ristorante Pulcinella",
+          "transportations": [
+            {
+              "type": "Walking",
+              "duration": "1 min"
+            }
+          ]
+        }
+      ],
+      "images": [
+        {
+          "thumbnail": "https://lh5.googleusercontent.com/proxy/bqjIDU20mngh6ngGCmvAosBd8JU-aWl4eM4UsLII_my39A8tKhsCzfFbaeFIjFQZFhLakg3jHMJESc9_Alanix6TwXkTOzP1zC-m6j7qypAaeXQ9g5JZH9omgI1uqeuqaaduHKZiB5bcNfu3g_bE0Tu0W-_cSw=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://media.vrbo.com/lodging/115000000/114170000/114169600/114169512/0d0df32e.jpg?impolicy=ccrop&w=1000&h=666&q=medium"
+        },
+        {
+          "thumbnail": "https://lh3.googleusercontent.com/proxy/hvJMfxcjKnqW_GyGL930WdYSRPSQBqIO4HbAYJTKKy4EZVY7lK0s5IuAMCBOT09goEhvuAFgRt-5wOVxtqURTE2SBnhizWCTKu4wASZsLjwfAUIeUBSM9a6LIw5WLR0HSNOa8fNOGECZ5ammGpQefQQPS9Y-YA=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://media.vrbo.com/lodging/115000000/114170000/114169600/114169512/027d1484.jpg?impolicy=ccrop&w=1000&h=666&q=medium"
+        },
+        {
+          "thumbnail": "https://lh3.googleusercontent.com/proxy/CPeUP8CkhAm8iPqsEg7LgFBwkBt8KrHYlhSteyDEA9nTYeB_nfhFIg5rE4_PrSUmIZZxvCISpWPWr3BukxAIYNg4XWJGIdQ6KJW_Juv1fJTiS_hT1hDAfPFv6bpgP1HoYRp7iLHHs4z73pgFSZXpV6q9YdlOnQ=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://media.vrbo.com/lodging/115000000/114170000/114169600/114169512/5ccc82d2.jpg?impolicy=ccrop&w=1000&h=666&q=medium"
+        }
+      ],
+      "location_rating": 4.7,
+      "amenities": [
+        "Kid-friendly",
+        "Elevator",
+        "Ironing board",
+        "Kitchen",
+        "Smoke-free",
+        "Washer"
+      ],
+      "excluded_amenities": [
+        "No parking",
+        "No Wi-Fi"
+      ],
+      "essential_info": [
+        "Entire apartment",
+        "Sleeps 4",
+        "2 bedrooms",
+        "2 bathrooms",
+        "2 beds"
+      ],
+      "serpapi_google_hotels_reviews_link": "https://serpapi.com/search.json?engine=google_hotels_reviews&hl=en&property_token=ChoQ2vq-vZOd5reyARoNL2cvMTF5eWJzdm5tMxAC",
+      "serpapi_google_hotels_photos_link": "https://serpapi.com/search.json?engine=google_hotels_photos&property_token=ChoQ2vq-vZOd5reyARoNL2cvMTF5eWJzdm5tMxAC"
+    },
+    {
+      "type": "vacation rental",
+      "name": "8th Floor 1BR Home with Sauna, Balcony Views",
+      "link": "https://www.bluepillow.com/search/68115fc1a74f8eb5bd2a6082?dest=bpex&cat=Apartment&lat=61.49204&lng=23.75358&language=en",
+      "property_token": "ChoQzPeM9-CK7avZARoNL2cvMTFta3kyN3I1ZBAC",
+      "serpapi_property_details_link": "https://serpapi.com/search.json?adults=2&bedrooms=2&check_in_date=2026-06-15&check_out_date=2026-06-18&children=0&currency=EUR&engine=google_hotels&gl=us&hl=en&property_token=ChoQzPeM9-CK7avZARoNL2cvMTFta3kyN3I1ZBAC&q=Tampere&vacation_rentals=true",
+      "gps_coordinates": {
+        "latitude": 61.49203872680664,
+        "longitude": 23.75358009338379
+      },
+      "rate_per_night": {
+        "lowest": "\u20ac134",
+        "extracted_lowest": 134,
+        "before_taxes_fees": "\u20ac134",
+        "extracted_before_taxes_fees": 134
+      },
+      "total_rate": {
+        "lowest": "\u20ac401",
+        "extracted_lowest": 401,
+        "before_taxes_fees": "\u20ac401",
+        "extracted_before_taxes_fees": 401
+      },
+      "prices": [
+        {
+          "source": "Bluepillow.com",
+          "logo": "https://www.gstatic.com/travel-hotels/branding/190ff319-d0fd-4c45-bfc8-bad6f5f395f2.png",
+          "num_guests": 2,
+          "rate_per_night": {
+            "lowest": "\u20ac134",
+            "extracted_lowest": 134
+          },
+          "free_cancellation": true,
+          "free_cancellation_until_date": "Jun 15",
+          "free_cancellation_until_time": "3:00\u202fAM"
+        }
+      ],
+      "nearby_places": [
+        {
+          "name": "Etel\u00e4puisto",
+          "transportations": [
+            {
+              "type": "Walking",
+              "duration": "1 min"
+            }
+          ]
+        },
+        {
+          "name": "Tampere-Pirkkala Airport",
+          "transportations": [
+            {
+              "type": "Taxi",
+              "duration": "18 min"
+            },
+            {
+              "type": "Public transport",
+              "duration": "55 min"
+            }
+          ]
+        },
+        {
+          "name": "Ravintola Piha",
+          "transportations": [
+            {
+              "type": "Walking",
+              "duration": "3 min"
+            }
+          ]
+        }
+      ],
+      "images": [
+        {
+          "thumbnail": "https://lh3.googleusercontent.com/proxy/Ty5MUd_HDpcrMtVxKfPoIAYkK7DnWa4ca-9Z5dHOOF42EaUDTASX-7l9CD9BPjSURcc3Ko9XYtSigpnTe2ijveg0ZMa5pS2uW2pqt2vOFW4LeHw-O0ZiTRwbx7loiMI1r4eFyFK5qSDr6VGTRZF9B1sLX9FBtcU=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://media.vrbo.com/lodging/115000000/114170000/114164900/114164874/77ff1141.jpg?impolicy=ccrop&w=1000&h=666&q=medium"
+        }
+      ],
+      "location_rating": 4.5,
+      "amenities": [
+        "Kid-friendly",
+        "Elevator",
+        "Ironing board",
+        "Kitchen",
+        "Pet-friendly",
+        "Smoke-free",
+        "Washer"
+      ],
+      "excluded_amenities": [
+        "No parking",
+        "No Wi-Fi"
+      ],
+      "essential_info": [
+        "Entire apartment",
+        "Sleeps 4",
+        "2 bedrooms",
+        "2 bathrooms",
+        "2 beds"
+      ],
+      "serpapi_google_hotels_reviews_link": "https://serpapi.com/search.json?engine=google_hotels_reviews&hl=en&property_token=ChoQzPeM9-CK7avZARoNL2cvMTFta3kyN3I1ZBAC",
+      "serpapi_google_hotels_photos_link": "https://serpapi.com/search.json?engine=google_hotels_photos&property_token=ChoQzPeM9-CK7avZARoNL2cvMTFta3kyN3I1ZBAC"
+    },
+    {
+      "type": "vacation rental",
+      "name": "2BR Downtown Home with Balcony & BEST Location",
+      "link": "https://book.shillinki.com/listings/361420?googleVR=1&utm_source=google&utm_medium=vacation_rentals",
+      "property_token": "ChkQwePv-uGRjfFNGg0vZy8xMXkzel8ybjR0EAI",
+      "serpapi_property_details_link": "https://serpapi.com/search.json?adults=2&bedrooms=2&check_in_date=2026-06-15&check_out_date=2026-06-18&children=0&currency=EUR&engine=google_hotels&gl=us&hl=en&property_token=ChkQwePv-uGRjfFNGg0vZy8xMXkzel8ybjR0EAI&q=Tampere&vacation_rentals=true",
+      "gps_coordinates": {
+        "latitude": 61.499942779541016,
+        "longitude": 23.766569137573242
+      },
+      "check_in_time": "4:00\u202fPM",
+      "check_out_time": "11:00\u202fAM",
+      "rate_per_night": {
+        "lowest": "\u20ac122",
+        "extracted_lowest": 122,
+        "before_taxes_fees": "\u20ac107",
+        "extracted_before_taxes_fees": 107
+      },
+      "total_rate": {
+        "lowest": "\u20ac366",
+        "extracted_lowest": 366,
+        "before_taxes_fees": "\u20ac322",
+        "extracted_before_taxes_fees": 322
+      },
+      "prices": [
+        {
+          "source": "Bluepillow.com",
+          "logo": "https://www.gstatic.com/travel-hotels/branding/190ff319-d0fd-4c45-bfc8-bad6f5f395f2.png",
+          "num_guests": 2,
+          "rate_per_night": {
+            "lowest": "\u20ac121",
+            "extracted_lowest": 121,
+            "before_taxes_fees": "\u20ac109",
+            "extracted_before_taxes_fees": 109
+          }
+        }
+      ],
+      "nearby_places": [
+        {
+          "name": "Tammerinpuisto",
+          "transportations": [
+            {
+              "type": "Walking",
+              "duration": "5 min"
+            }
+          ]
+        },
+        {
+          "name": "Tampere-Pirkkala Airport",
+          "transportations": [
+            {
+              "type": "Taxi",
+              "duration": "25 min"
+            },
+            {
+              "type": "Public transport",
+              "duration": "50 min"
+            }
+          ]
+        },
+        {
+          "name": "5 StarPizza",
+          "transportations": [
+            {
+              "type": "Walking",
+              "duration": "10 min"
+            }
+          ]
+        }
+      ],
+      "images": [
+        {
+          "thumbnail": "https://lh4.googleusercontent.com/proxy/ebr9_MIHbftkaWs2YQq_1wiicMEZW4L-2EjXJzmvWtZd9n6_jowvjblu3-mGb0nuz28QLAw3ZdbrB1FrE8XF9AQYumZQxaEzJezHIW2DEFxhJ2FAeDPTOXp2yJfd1F7PQL_u44NvQQYM74GBLv1WjWVdlKR578g=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://media.vrbo.com/lodging/115000000/114170000/114169500/114169405/260670bc.jpg"
+        },
+        {
+          "thumbnail": "https://lh5.googleusercontent.com/proxy/d2v937vVzwa98o4JqRlDiB-UWZq3X97NOMr6dIXK0qc6j0X29k_RD6pDB-Lla4ZvxWuOw5a_ePLkCMoG9yse8B46XMjCmJzub7iSa2G4Utqc6dLbvQvH6Gjr96Z5yHYKErK_5Xlw0zvspBgUE0udbwrI18fX1g=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://images.trvl-media.com/lodging/72000000/71480000/71471100/71471009/30394a04_z.jpg"
+        },
+        {
+          "thumbnail": "https://lh4.googleusercontent.com/proxy/vXZHkhZDs0gSoZ41m45nJxBQfofVBnHTzT5LMp9i29T1N-d3yUD3_dzA8Lu61EUXSEBGIZQs6cvLPKA5cxYJ6oY2CHNM-zHE5osRDb4ZxJ9JWL4ibLb4gssSCST6U7pgwRg83XEbNyBPCLcoihldSq5Qi0nIhQ=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://hostaway-platform.s3.us-west-2.amazonaws.com/listing/139163-361420-uI1LuPC2YZbhgEAcbIj357CLXGBB8QamfE8VRiv7LcI-67b07d345fce8-medium"
+        },
+        {
+          "thumbnail": "https://lh3.googleusercontent.com/proxy/MaqZOVpRyxhr0rN0EJPWo6PEgNWquf3Q9qv0rr9VytSJXGNTEG34ysffj9HM-Kkrgbdm4Fv350V37xfU4X9bLMRpg1TnSTuem3Pw-P0F1cOa3j1wWkNrdZCpBjyYACuUz_Wwv-t4U93przlv7c0iWzs786fsK3o=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://images.trvl-media.com/lodging/115000000/114170000/114169500/114169405/3b71f5e7_z.jpg"
+        },
+        {
+          "thumbnail": "https://lh4.googleusercontent.com/proxy/hcQFv2LpHL6gBiPUQPraUckj7VyPLTlR_1ay8YvkSc_70R0NYarPNZh_cCHO79X6nK8L2ZiGi2bYCiqdRv-KP4XniR3LYAobnlPbn539mvUwGG5ZEVHY-GJfDBn8qujpvcQXEq0pZ79ftOeHX1HSYtNk0r6eVA=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://static.cupid.travel/hotels/439707684.jpg"
+        },
+        {
+          "thumbnail": "https://lh3.googleusercontent.com/proxy/OpVrd9N36T13ROElHByi-g6dwOyKSWDhpKu_1ibmU7H0Thwj3Wrm44O3VV0FGwgYsHWyj9ZJVoO4QW5WfG0c7W7ocbDIXHxDOFH7BYzidk8dtFgVPSVW2o-aO687IeYIEZFNXH843MlhhGqCmMPo-PPXYLjdaUQ=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://images.trvl-media.com/lodging/72000000/71480000/71471100/71471009/89d26af1_z.jpg"
+        },
+        {
+          "thumbnail": "https://lh6.googleusercontent.com/proxy/x8mBUTolvFvCn-S7hDBDRTdJbQeonefsxwuMiqMP5rSkQUNsG08TlZlDOcpKrB_z7K9OlKyv_sfk2JkBKKNtzQfopiH2wLkORFUbKSS2f2ixLkzDgdlgEKNFCFpdyqfWGB_NG2G2qf-PrEQ9jB9PyHogxBAJIA=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://images.trvl-media.com/lodging/72000000/71480000/71471100/71471009/d3928c15_z.jpg"
+        },
+        {
+          "thumbnail": "https://lh4.googleusercontent.com/proxy/UD7MD8EilQR7fTwY54AygspQBCJ1IOVlJAed-PrKBPBHxemvyStOdXVDLVEk3ZZgWCTjgFdIwO-zhBPToxwkpxDUuL8kpzPLYGUIkp8h6WPYEeUaY3DGYfgKa78C1v484vND-gWvB4AS2Ts8RLrPWZWLw0lZokE=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://static.cupid.travel/hotels/323252943.jpg"
+        },
+        {
+          "thumbnail": "https://lh5.googleusercontent.com/proxy/dBLBXtulSX_FfT1BT1-6I-UYDTqbHO1kCyg85ggh3EYrkVTf5kit-PS7n-vh7p5uQcw03QCpqff-OOAGGnP_FkRiUGkcVMQ0kOyei9MmYTji7qBKZlBowWb9R2Ys6joN80xMkB4dFVI4zC88uJeLkUsrE18nug=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://static.cupid.travel/hotels/321003742.jpg"
+        }
+      ],
+      "overall_rating": 4.573585,
+      "reviews": 53,
+      "location_rating": 4.8,
+      "amenities": [
+        "Balcony",
+        "Kid-friendly",
+        "Crib",
+        "Elevator",
+        "Heating",
+        "Ironing board",
+        "Kitchen",
+        "Microwave",
+        "Oven stove",
+        "Smoke-free",
+        "Cable TV",
+        "Washer",
+        "Wheelchair accessible",
+        "Paid parking",
+        "Free Wi-Fi"
+      ],
+      "excluded_amenities": [
+        "No airport shuttle",
+        "No indoor pool",
+        "No outdoor pool",
+        "Not pet-friendly"
+      ],
+      "health_and_safety": {
+        "groups": [
+          {
+            "title": "Minimized contact",
+            "list": [
+              {
+                "title": "No-contact check-in and check-out",
+                "available": true
+              }
+            ]
+          }
+        ]
+      },
+      "essential_info": [
+        "Entire apartment",
+        "Sleeps 6",
+        "2 bedrooms",
+        "1 bathroom",
+        "3 beds",
+        "538 sq ft"
+      ],
+      "serpapi_google_hotels_reviews_link": "https://serpapi.com/search.json?engine=google_hotels_reviews&hl=en&property_token=ChkQwePv-uGRjfFNGg0vZy8xMXkzel8ybjR0EAI",
+      "serpapi_google_hotels_photos_link": "https://serpapi.com/search.json?engine=google_hotels_photos&property_token=ChkQwePv-uGRjfFNGg0vZy8xMXkzel8ybjR0EAI"
+    },
+    {
+      "type": "vacation rental",
+      "name": "1BR Apartment with Balcony next to Railway Station",
+      "link": "https://www.bluepillow.com/search/68115fc7a74f8eb5bd2a618b?dest=bpex&cat=Apartment&lat=61.49465&lng=23.76592&language=en",
+      "property_token": "ChoQv_S5udjOwYvoARoNL2cvMTFuOW1yM3hxcxAC",
+      "serpapi_property_details_link": "https://serpapi.com/search.json?adults=2&bedrooms=2&check_in_date=2026-06-15&check_out_date=2026-06-18&children=0&currency=EUR&engine=google_hotels&gl=us&hl=en&property_token=ChoQv_S5udjOwYvoARoNL2cvMTFuOW1yM3hxcxAC&q=Tampere&vacation_rentals=true",
+      "gps_coordinates": {
+        "latitude": 61.494651794433594,
+        "longitude": 23.765920639038086
+      },
+      "rate_per_night": {
+        "lowest": "\u20ac119",
+        "extracted_lowest": 119,
+        "before_taxes_fees": "\u20ac119",
+        "extracted_before_taxes_fees": 119
+      },
+      "total_rate": {
+        "lowest": "\u20ac357",
+        "extracted_lowest": 357,
+        "before_taxes_fees": "\u20ac357",
+        "extracted_before_taxes_fees": 357
+      },
+      "prices": [
+        {
+          "source": "Bluepillow.com",
+          "logo": "https://www.gstatic.com/travel-hotels/branding/190ff319-d0fd-4c45-bfc8-bad6f5f395f2.png",
+          "num_guests": 2,
+          "rate_per_night": {
+            "lowest": "\u20ac119",
+            "extracted_lowest": 119
+          },
+          "free_cancellation": true,
+          "free_cancellation_until_date": "Jun 1",
+          "free_cancellation_until_time": "11:59\u202fPM"
+        }
+      ],
+      "nearby_places": [
+        {
+          "name": "Sorin aukio B",
+          "transportations": [
+            {
+              "type": "Walking",
+              "duration": "6 min"
+            }
+          ]
+        },
+        {
+          "name": "Tampere-Pirkkala Airport",
+          "transportations": [
+            {
+              "type": "Taxi",
+              "duration": "19 min"
+            },
+            {
+              "type": "Public transport",
+              "duration": "42 min"
+            }
+          ]
+        },
+        {
+          "name": "Roka Street Bistro Tampere",
+          "transportations": [
+            {
+              "type": "Walking",
+              "duration": "7 min"
+            }
+          ]
+        }
+      ],
+      "images": [
+        {
+          "thumbnail": "https://lh4.googleusercontent.com/proxy/-HIJE8BEeiZL2vrRRy63A2LTC5M5pbQqRcyxV220vjqHaHClyz40gs3-K7_6FfjBAPENtkJhW-9sH9VkLisKeCh-DHnovO9G5YYqKMC-9ObU5hUbgIKzgQKG0i_HV2m799EXDuKnHzRDFtO4koTGRMfvNL5xfw=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://media.vrbo.com/lodging/115000000/114170000/114169600/114169548/56f6c3bd.jpg?impolicy=ccrop&w=1000&h=666&q=medium"
+        },
+        {
+          "thumbnail": "https://lh3.googleusercontent.com/proxy/HWKfLV5OzUSUvuliKkb0OWraWjrK2veIpR3ZhgVRoQJGy-fWa9Z3rQPtnQ4Tqdmkvn6APG8_v5fRyT3wF_yUgV9sVmmN3K0QxV7YWSF_ACkmUTjpsFvaBqMb4W3_ZzzUJ0EgrkY_iZwUi4HN3dwykuyTIvzIF8s=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://media.vrbo.com/lodging/115000000/114170000/114169600/114169548/4cd92188.jpg?impolicy=ccrop&w=1000&h=666&q=medium"
+        },
+        {
+          "thumbnail": "https://lh5.googleusercontent.com/proxy/V3wFNxoIxUXndLQgt5lZyhGWFWDzqlcxkSm5Cpy9WoxcwvxtZoPvzT9b7V_Yi4kx_AeZe8jQ-pNwmfXjOvGPdg3qtVplCg-h5gZzREmHx_NlxjlwoYz-6Q-q-fNdPrkNsXtnLkAK_zvqqfDKlsh_vDSoPU04M4A=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://media.vrbo.com/lodging/115000000/114170000/114169600/114169548/ac057b72.jpg?impolicy=ccrop&w=1000&h=666&q=medium"
+        }
+      ],
+      "location_rating": 4.8,
+      "amenities": [
+        "Kid-friendly",
+        "Elevator",
+        "Ironing board",
+        "Kitchen",
+        "Washer"
+      ],
+      "excluded_amenities": [
+        "No parking",
+        "No Wi-Fi"
+      ],
+      "essential_info": [
+        "Entire apartment",
+        "Sleeps 4",
+        "2 bedrooms",
+        "2 bathrooms",
+        "2 beds"
+      ],
+      "serpapi_google_hotels_reviews_link": "https://serpapi.com/search.json?engine=google_hotels_reviews&hl=en&property_token=ChoQv_S5udjOwYvoARoNL2cvMTFuOW1yM3hxcxAC",
+      "serpapi_google_hotels_photos_link": "https://serpapi.com/search.json?engine=google_hotels_photos&property_token=ChoQv_S5udjOwYvoARoNL2cvMTFuOW1yM3hxcxAC"
+    },
+    {
+      "type": "vacation rental",
+      "name": "Large apartment with 4 bedrooms, central location",
+      "property_token": "ChkQl-Tnr6eZzalVGg0vZy8xMXc4MDM3eDB6EAI",
+      "serpapi_property_details_link": "https://serpapi.com/search.json?adults=2&bedrooms=2&check_in_date=2026-06-15&check_out_date=2026-06-18&children=0&currency=EUR&engine=google_hotels&gl=us&hl=en&property_token=ChkQl-Tnr6eZzalVGg0vZy8xMXc4MDM3eDB6EAI&q=Tampere&vacation_rentals=true",
+      "gps_coordinates": {
+        "latitude": 61.50001525878906,
+        "longitude": 23.782995223999023
+      },
+      "check_in_time": "4:00\u202fPM",
+      "check_out_time": "12:00\u202fPM",
+      "rate_per_night": {
+        "lowest": "\u20ac230",
+        "extracted_lowest": 230,
+        "before_taxes_fees": "\u20ac203",
+        "extracted_before_taxes_fees": 203
+      },
+      "total_rate": {
+        "lowest": "\u20ac691",
+        "extracted_lowest": 691,
+        "before_taxes_fees": "\u20ac609",
+        "extracted_before_taxes_fees": 609
+      },
+      "prices": [
+        {
+          "source": "Booking.com",
+          "logo": "https://www.gstatic.com/travel-hotels/branding/61aadbe1-e141-4d2e-a831-b6a18727e130.png",
+          "num_guests": 2,
+          "rate_per_night": {
+            "lowest": "\u20ac230",
+            "extracted_lowest": 230,
+            "before_taxes_fees": "\u20ac203",
+            "extracted_before_taxes_fees": 203
+          }
+        }
+      ],
+      "nearby_places": [
+        {
+          "name": "Sammonaukio A",
+          "transportations": [
+            {
+              "type": "Walking",
+              "duration": "10 min"
+            }
+          ]
+        },
+        {
+          "name": "Tampere-Pirkkala Airport",
+          "transportations": [
+            {
+              "type": "Taxi",
+              "duration": "25 min"
+            },
+            {
+              "type": "Public transport",
+              "duration": "1 hr"
+            }
+          ]
+        },
+        {
+          "name": "Ravintola Borneo",
+          "transportations": [
+            {
+              "type": "Walking",
+              "duration": "5 min"
+            }
+          ]
+        }
+      ],
+      "images": [
+        {
+          "thumbnail": "https://lh4.googleusercontent.com/proxy/jZPbXgm2PQTiVx-JfL4ur5atRwl7QQABBqOc9KP88VOj8qWhm3uJ3IXbCvmZSD3mr8OohQ1siDs1wIEB9JkbzOo8oJqoqkWt8jC1HLpo15Ee3hlsRppsvXfT-bI-ocRN_LH7mnB-8PJ59aZ42pedEOTaNd8xMQ=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://freecancellationscdn-hsbgcwfragasdpfe.z01.azurefd.net/remote/static.cupid.travel/hotels/516859744.jpg?w=1024&h=683&mode=crop&scale=both&anchor=middlecenter&quality=80"
+        },
+        {
+          "thumbnail": "https://lh5.googleusercontent.com/proxy/01M8an4QmhcI0Y1bN3r6NKNSyKgfWueg8Q2--KiMno2bL5Xbmt7TwtqvkhNJflr4NZmQnLiZWInxI-yI4NycSwe_OCcZPqy5KvnP8KvR7phR6ve_dOvoBygbLhuPfeikdXSO5L65Hb-AMtNogLWVN2tWszE_mJw=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://freecancellationscdn-hsbgcwfragasdpfe.z01.azurefd.net/remote/static.cupid.travel/hotels/362250068.jpg?w=1024&h=683&mode=crop&scale=both&anchor=middlecenter&quality=80"
+        },
+        {
+          "thumbnail": "https://lh5.googleusercontent.com/proxy/Zaj2T1tsj9hJ6Gaf6tFZtjny199XVGP02tHFg1199LZOT4jiPhcL1PoHRHEER2yhUCC5Snh0wJbWvsf8GRtRRV8cnhe_bDi1KPyhFVTvJFpoM6Ytm3hxr2CufAwRES4OOukq1mL5IMC4nrKIzB8rDfwx1qW4A6I=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://freecancellationscdn-hsbgcwfragasdpfe.z01.azurefd.net/remote/static.cupid.travel/hotels/463074737.jpg?w=1024&h=683&mode=crop&scale=both&anchor=middlecenter&quality=80"
+        },
+        {
+          "thumbnail": "https://lh5.googleusercontent.com/proxy/EM5c81S5U0AE5f79Vj812TT3GrUByZALn-QldroCrbRpsBStjlHU1YUFyO_s8kiZTzvgGD8nvLZKiy-YwGmqTA_OUC1TM4EAkBu_6pVD2D3vhOQ72NATy5nE9WpzrZ50UUlXZEGOY9JbOzqyy25vulXs6eg5zA=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://freecancellationscdn-hsbgcwfragasdpfe.z01.azurefd.net/remote/static.cupid.travel/hotels/387955036.jpg?w=1024&h=683&mode=crop&scale=both&anchor=middlecenter&quality=80"
+        },
+        {
+          "thumbnail": "https://lh6.googleusercontent.com/proxy/gw0MrkVsVnDF9zuniC8WMxSdKFO02F1uLTTF-sA5k0f3-SefmoZ8eMXuzmzJwLycoKGXLO_J6QCPaXMhMvnnOS8janOa1DC1uH7hQiZRcdtE6so-gv3uPjhlHNvOUsCdOw4iWb3gXTkXUfA7k-uDaSRSNqfSHA=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://freecancellationscdn-hsbgcwfragasdpfe.z01.azurefd.net/remote/static.cupid.travel/hotels/387954450.jpg?w=1024&h=683&mode=crop&scale=both&anchor=middlecenter&quality=80"
+        },
+        {
+          "thumbnail": "https://lh4.googleusercontent.com/proxy/68YrafduT-f7bG6Dp8mFt0ctVQ-_52j6ao2SCjXrCiTcjI3DndNQgeLaafsAcrE9CCJUpWBHv6ESU7quoZ1l1bMYfrHFIRwIY1QGKocwSrY3m3PLUJzSpewR0j1JqDgiYzMsSPrJdwo1pcDuTrcaKtiG6mf5oQ=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://freecancellationscdn-hsbgcwfragasdpfe.z01.azurefd.net/remote/static.cupid.travel/hotels/516859760.jpg?w=1024&h=683&mode=crop&scale=both&anchor=middlecenter&quality=80"
+        },
+        {
+          "thumbnail": "https://lh6.googleusercontent.com/proxy/2oa7TqDLt0jWO8bSvP-8buYhdAYgW1ksYzxl-kq3L4VY0xY0_Ax6l7x3ag8APXnd6z_WUaUDGrE7FJGWPrj2SwC4-jVKQtZihIIipxgP2WAL_p_MmUEYv2iavGNY8mwolgwMPfyd0ot82kWOJlqS8CuReuMTHg=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://freecancellationscdn-hsbgcwfragasdpfe.z01.azurefd.net/remote/static.cupid.travel/hotels/494177721.jpg?w=1024&h=683&mode=crop&scale=both&anchor=middlecenter&quality=80"
+        },
+        {
+          "thumbnail": "https://lh6.googleusercontent.com/proxy/DWM6RSv9msHL-fdHr4mU2Rie7RMVKX22KXdyDCTKGptMb5qnAwzM24S85wDNSxMJGnGokogV1gHqVrAWBgBabO7SSeu7ubYvbx902V67kN9VS_Pl9lcyG9Zdl8lB6w77TwwgwsTRKRIUbQd9Buk_Fbs9qu1hRQ=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://freecancellationscdn-hsbgcwfragasdpfe.z01.azurefd.net/remote/static.cupid.travel/hotels/489319250.jpg?w=1024&h=683&mode=crop&scale=both&anchor=middlecenter&quality=80"
+        },
+        {
+          "thumbnail": "https://lh5.googleusercontent.com/proxy/iTDlMbifIDs597oUrqaD4lgnlcP5XGMOd8sR4RIrRK5iq0kACg9xTznFj9IMzWjGfZ0EbpzA8zBIQbm8roZj1zcJXaEQkXT6x6bgkfoTUYtRUAao0iRKX3M38gIqdJ9hbT6bYbjd2WPL-RlKs2ujd1b4BToCYkc=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://xx.bstatic.com/xdata/w/hotel/840x460_watermarked_standard/UlbWNZwXU4abzIzhVTKhNVqh8z0CGflOUp0HZSTtQc_d66__3h2kEsDX37pbD74IIUnMvdn1_Dbkd5v5bYRqbAJZJqBgrzzT1ptfiMNJx1d8dD8SYZ_zlQ==.jpg"
+        }
+      ],
+      "overall_rating": 4.76626,
+      "reviews": 123,
+      "location_rating": 4.5,
+      "amenities": [
+        "Air conditioning",
+        "Kid-friendly",
+        "Crib",
+        "Elevator",
+        "Heating",
+        "Ironing board",
+        "Kitchen",
+        "Microwave",
+        "Oven stove",
+        "Pet-friendly",
+        "Smoke-free",
+        "Cable TV",
+        "Washer",
+        "Wheelchair accessible",
+        "Free parking"
+      ],
+      "excluded_amenities": [
+        "No airport shuttle",
+        "No fitness center",
+        "No outdoor grill",
+        "No patio",
+        "No Wi-Fi"
+      ],
+      "essential_info": [
+        "Entire apartment",
+        "Sleeps 9",
+        "4 bedrooms",
+        "8 beds",
+        "1,249 sq ft"
+      ],
+      "serpapi_google_hotels_reviews_link": "https://serpapi.com/search.json?engine=google_hotels_reviews&hl=en&property_token=ChkQl-Tnr6eZzalVGg0vZy8xMXc4MDM3eDB6EAI",
+      "serpapi_google_hotels_photos_link": "https://serpapi.com/search.json?engine=google_hotels_photos&property_token=ChkQl-Tnr6eZzalVGg0vZy8xMXc4MDM3eDB6EAI"
+    },
+    {
+      "type": "vacation rental",
+      "name": "Tasokas huoneisto kaupungin keskustassa.",
+      "link": "https://www.booking.com/hotel/fi/tasokas-huoneisto-kaupungin-keskustassa-tampere.en-gb.html?aid=2068758&utm_source=seogooglelocal&utm_medium=description&utm_term=hotel-10612789&utm_campaign=en-gb&label=seogooglelocal-link-imagesaow-hotel-10612789_grp-1_gendate-20260503",
+      "property_token": "ChkQ2vz4pbLmybdAGg0vZy8xMW5obDl4aDkwEAI",
+      "serpapi_property_details_link": "https://serpapi.com/search.json?adults=2&bedrooms=2&check_in_date=2026-06-15&check_out_date=2026-06-18&children=0&currency=EUR&engine=google_hotels&gl=us&hl=en&property_token=ChkQ2vz4pbLmybdAGg0vZy8xMW5obDl4aDkwEAI&q=Tampere&vacation_rentals=true",
+      "gps_coordinates": {
+        "latitude": 61.49818801879883,
+        "longitude": 23.744796752929688
+      },
+      "check_in_time": "4:00\u202fPM",
+      "check_out_time": "12:00\u202fPM",
+      "rate_per_night": {
+        "lowest": "\u20ac144",
+        "extracted_lowest": 144,
+        "before_taxes_fees": "\u20ac127",
+        "extracted_before_taxes_fees": 127
+      },
+      "total_rate": {
+        "lowest": "\u20ac431",
+        "extracted_lowest": 431,
+        "before_taxes_fees": "\u20ac380",
+        "extracted_before_taxes_fees": 380
+      },
+      "prices": [
+        {
+          "source": "Booking.com",
+          "logo": "https://www.gstatic.com/travel-hotels/branding/61aadbe1-e141-4d2e-a831-b6a18727e130.png",
+          "num_guests": 4,
+          "rate_per_night": {
+            "lowest": "\u20ac144",
+            "extracted_lowest": 144,
+            "before_taxes_fees": "\u20ac127",
+            "extracted_before_taxes_fees": 127
+          }
+        }
+      ],
+      "images": [
+        {
+          "thumbnail": "https://lh3.googleusercontent.com/proxy/F8ze_1D5YyEMjgaosGBk5qHuLUuaIDcUcWMAy9OMKAhsWFSdwft-CRLZUatT1F1MLH4Ez963PYrBFzJ7ybaBxbtqY0TJReIKBsEzkPOSxWKLHmGRd0EFCMk6kFnWeColXKkCP1beS9ZITGWfpB-zsH2lJflNXyw=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://xx.bstatic.com/xdata/w/hotel/840x460_watermarked_standard/UlbWNZwXU4abzJOd6LniSllbeWyd7M-Ib6aK7tnfNMwfCkq_Ne3rDOY4KtbU_HElA1rKyP4E80eV56ljbsUk9TsLQ5NR2ka9GtnC-vnk7dyPd-7vvKcs-w==.jpg"
+        },
+        {
+          "thumbnail": "https://lh6.googleusercontent.com/proxy/ilKhKVdslrBbfqtrLA8arW4WJ2eKCxd-FhqidwGMkYBN5LEUx9FXKFW8D3CA7XVIKAYMigEgzNCy7jaWk-TpLJPYnz5xro0IzyHx_7FrnhHkwpYVC0fejqDEd5-mOiA-tn3jIxSwzI3FPxYogd1O1W2eWqHeqt8=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://xx.bstatic.com/xdata/w/hotel/840x460_watermarked_standard/UlbWNZwXU4abzHns6bjx9y0pSkhr69-Ox_5XxwgxoZEwMw-k7woTUw3xflFi5l83Kgv_0XG2Mxoe1Mti_mwKKricDFaL6LeqT6kBMBn9NPFJ4SANS51Y3Q==.jpg"
+        },
+        {
+          "thumbnail": "https://lh6.googleusercontent.com/proxy/1_Fv3_IeAZUPSSxGwVKhHgpWKJTBWZLHnnr0YnER1b4n0ih62-1pCrQr22FaV5Lzk2nk2soXrp_iIK2dh9s4pkk0OyOCQ-fKPSZkwfYFYzsonbUObsXI40cjQycQ5zv26OWkGIvZMjrss_AQUe5tgkZtkBYkKA=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://xx.bstatic.com/xdata/w/hotel/840x460_watermarked_standard/UlbWNZwXU4abzLpSQDvqxn2-0FwlQzk2464vTZRMNjz1dWYA75r1XD5x6EwfCrui1LqsW3HFhwZkGzbcPBAVGGLTP9JLSfbm3wHNzNWCYshS_xX7L--g-Q==.jpg"
+        },
+        {
+          "thumbnail": "https://lh4.googleusercontent.com/proxy/mkfQv9FcuGThTHe_UPSU6jFQW3SRYEJC0txaRk-_qKQkeQsQ8e5yKp5JcSn070Ys7YU3sa8rayxhFa_Z8EmKK2gbctDuOA1Td7yuHdxZV0uX7xyChYbczq_pkpGk7_NODlsrPG1akYC11oiJwa5H-ZAhE1DWlg=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://xx.bstatic.com/xdata/w/hotel/840x460_watermarked_standard/UlbWNZwXU4abzKhxABZKwxTHqsiXtHq--LSSnaqBn4CTT3hA0hIPbUXBr5HcYfzNubXtHscn0m3wrwvyujAJsMyj8cTGu96eMkpM7S7YNN3cSCbMLR3KEw==.jpg"
+        },
+        {
+          "thumbnail": "https://lh5.googleusercontent.com/proxy/RejWv1HU_zpsOJyUcmsbDVdArnCMbpy0_boQbj_IcnYG8QhVUhwTgc7oVO01hZF0i_BTlbsdv04m7_fWky51GNLc-VqDGuCNYZrzhF4_Q4zNEj0hI7AwHYXKDPLVLWLxM5mb9SW-Q9wFSmHbPV22AX13g1tLndk=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://xx.bstatic.com/xdata/w/hotel/840x460_watermarked_standard/UlbWNZwXU4abzDcbD7U4qUlIfrejbdH32-Ina-Tv2xD6FQOG69cLWHc07u2-2Ue3hE7wQLUp7GGT7xgdUuZLSMVEBy6XNsBonOeH_MDWcyMOswiGHekrQg==.jpg"
+        },
+        {
+          "thumbnail": "https://lh3.googleusercontent.com/proxy/rnUksjFtFv2YCWneYiW2dSeKI-LNIauwz1UfITxvMFPRGT1JfsotN-f4_xw5OQstJRdKkPbiaretx7rhj_wHkH3xPyywaSqH4xRnhA71YACaB2G3vJSOhKuZHH75JltqKegdU4kUCtkS7qG5MqTjJkiU8uMyig=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://xx.bstatic.com/xdata/w/hotel/840x460_watermarked_standard/UlbWNZwXU4abzKdfO0BToPwdw7J1mvaARdC506Lc7U0MKWQWc4HIXbcyaugBrKXxUUX6Nn9Wp7qqeH9ec8NEsE6foVT3fm4xjgKHxobppxrkXrN-vp-Gbg==.jpg"
+        },
+        {
+          "thumbnail": "https://lh5.googleusercontent.com/proxy/EVF84R78K0tk_fBhXvdSuxpUCyTtw-oMrKw6k7F2GIM8xgKOKGyrvGRU-uvPIIz03iYGH6OluZimsIJ8L7McQ-sZDcBgi4wzJrkE5k0aNJEjSjFLMysYNezovSsWsWjsCTjr94--okb3T2b567Ult0g4tFHT2A=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://xx.bstatic.com/xdata/w/hotel/840x460_watermarked_standard/UlbWNZwXU4abzB1O2Ro8P2kqWOvV6xak3hsg3Kkb6_akeVK3BHNncifnH-oCbXi15IaGyovXPkW8-Nd1eE-BD0mUyRoNn-TGVVQC-GJxZHGaDQ6DrF_rKQ==.jpg"
+        },
+        {
+          "thumbnail": "https://lh4.googleusercontent.com/proxy/_kJHwCYIfShghNmH6kExX7qQylPlmUb33BJBn-6ZbHbhEh3zYWsT0ykKY5ZMjV5sjZTEeIIKMXt7leDt7rlApZ2aMOuqBwxuCY8Q_r3pYL4Ve2bZc_P8dm5YUocOPfxX42ggtqidvlk3HO4KY7ylxTQB2yMeug=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://xx.bstatic.com/xdata/w/hotel/840x460_watermarked_standard/UlbWNZwXU4abzE2rHKmmmwGpLHsy8HMa2C9t2PxVFg6dz-yXXv985Sr7RUbZJRBSFLIkuzmnTOVbQLFv7IeI6Rzn4DZjSKRYfqFgxCzptnC6Vtk92FApeQ==.jpg"
+        },
+        {
+          "thumbnail": "https://lh3.googleusercontent.com/proxy/pDHr3IaG67f3UZ6pN-BbdrvIR275aotYlsHKmG3HM0nsiW25les5-JDJSfE92oELlzOrITca17aH7BauYKEt0eMPKv4smbIVpugDYnQkCYfEmlyHKifh54Yqx-II1vuW1Iq9FNhZ1KxJDkuyUOxJ-9oI8lqiJiU=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://xx.bstatic.com/xdata/w/hotel/840x460_watermarked_standard/UlbWNZwXU4abzGF21CC7oCPMfw9QTqSD4oCEsYWk-7uyZ2ibpNZM6ilrDiXDNJi31IFtl3qzKrWkIv-YyjCKvxFc5NCAcz5HcbMO64kMHnBj9RFNEfNj5g==.jpg"
+        }
+      ],
+      "overall_rating": 4.8,
+      "reviews": 98,
+      "amenities": [
+        "Crib",
+        "Elevator",
+        "Heating",
+        "Ironing board",
+        "Kitchen",
+        "Microwave",
+        "Oven stove",
+        "Pet-friendly",
+        "Cable TV",
+        "Washer"
+      ],
+      "excluded_amenities": [
+        "No air conditioning",
+        "No fitness center",
+        "No outdoor grill",
+        "No patio",
+        "Not smoke-free",
+        "Not wheelchair accessible"
+      ],
+      "essential_info": [
+        "Entire apartment",
+        "Sleeps 6",
+        "2 bedrooms",
+        "1 bathroom",
+        "5 beds",
+        "678 sq ft"
+      ],
+      "serpapi_google_hotels_reviews_link": "https://serpapi.com/search.json?engine=google_hotels_reviews&hl=en&property_token=ChkQ2vz4pbLmybdAGg0vZy8xMW5obDl4aDkwEAI",
+      "serpapi_google_hotels_photos_link": "https://serpapi.com/search.json?engine=google_hotels_photos&property_token=ChkQ2vz4pbLmybdAGg0vZy8xMW5obDl4aDkwEAI"
+    },
+    {
+      "type": "vacation rental",
+      "name": "2BR Downtown Home with Balcony BEST Location",
+      "link": "https://www.bluepillow.com/search/68115fc7a74f8eb5bd2a6181?dest=bpex&cat=Apartment&lat=61.50392&lng=23.7602&language=en",
+      "property_token": "ChkQheTE2evxsK0YGg0vZy8xMW45YzNza2xyEAI",
+      "serpapi_property_details_link": "https://serpapi.com/search.json?adults=2&bedrooms=2&check_in_date=2026-06-15&check_out_date=2026-06-18&children=0&currency=EUR&engine=google_hotels&gl=us&hl=en&property_token=ChkQheTE2evxsK0YGg0vZy8xMW45YzNza2xyEAI&q=Tampere&vacation_rentals=true",
+      "gps_coordinates": {
+        "latitude": 61.50392150878906,
+        "longitude": 23.76020050048828
+      },
+      "rate_per_night": {
+        "lowest": "\u20ac142",
+        "extracted_lowest": 142,
+        "before_taxes_fees": "\u20ac142",
+        "extracted_before_taxes_fees": 142
+      },
+      "total_rate": {
+        "lowest": "\u20ac427",
+        "extracted_lowest": 427,
+        "before_taxes_fees": "\u20ac427",
+        "extracted_before_taxes_fees": 427
+      },
+      "prices": [
+        {
+          "source": "Bluepillow.com",
+          "logo": "https://www.gstatic.com/travel-hotels/branding/190ff319-d0fd-4c45-bfc8-bad6f5f395f2.png",
+          "num_guests": 2,
+          "rate_per_night": {
+            "lowest": "\u20ac142",
+            "extracted_lowest": 142
+          },
+          "free_cancellation": true,
+          "free_cancellation_until_date": "Jun 1",
+          "free_cancellation_until_time": "11:59\u202fPM"
+        }
+      ],
+      "nearby_places": [
+        {
+          "name": "Tampella",
+          "transportations": [
+            {
+              "type": "Walking",
+              "duration": "4 min"
+            }
+          ]
+        },
+        {
+          "name": "Tampere-Pirkkala Airport",
+          "transportations": [
+            {
+              "type": "Taxi",
+              "duration": "19 min"
+            },
+            {
+              "type": "Public transport",
+              "duration": "53 min"
+            }
+          ]
+        },
+        {
+          "name": "Restaurant Tampella",
+          "transportations": [
+            {
+              "type": "Walking",
+              "duration": "5 min"
+            }
+          ]
+        }
+      ],
+      "images": [
+        {
+          "thumbnail": "https://lh6.googleusercontent.com/proxy/CMpDJeYbYqKdBxZ8KlTIcyKy8VebZv0-3O3_qRXkPN3maoG1XeKEMAu2Uyvp7_ZDfDZI-erEHhKDsEuLa3sORY_FvmHMNHnIak3VPCRHV_oHYXI2hPwXCWne8YSifCFsVnR41hEWH90Y8ksZ1A0ucbadwSII-A=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://media.vrbo.com/lodging/115000000/114170000/114169500/114169405/311f9de5.jpg?impolicy=ccrop&w=1000&h=666&q=medium"
+        },
+        {
+          "thumbnail": "https://lh5.googleusercontent.com/proxy/6DZVAob23VyfCVBUlOlRm_zv6iAAfvIEUDvA1yP7ZbTKL6XANq5m49y0d7WswZekV1BIiinPwxRJ3J1Hs9OleLrODcyu4vIc4HHeVUVHQQFvzn_6fGxISmhLA5uBBOB3YIrmdVyO4LBPPPybxeFNjG7atdIj0g=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://media.vrbo.com/lodging/115000000/114170000/114169500/114169405/d2129912.jpg?impolicy=ccrop&w=1000&h=666&q=medium"
+        },
+        {
+          "thumbnail": "https://lh6.googleusercontent.com/proxy/i3N8KPCc9XnuF-d85HfbJdgxeKy8c8K2OTHi-WgQVqKiZDMwV3mNHBWDiqXZ4I6zAkyPbwuQAiTr4qAxhFa4hU2USOH01TZuNjw8buZ3sUuKLVyxoxHCSOJTAcqyK7ji35jMhNQ76qo5397iuIuG4ezwB0aMnBo=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://media.vrbo.com/lodging/115000000/114170000/114169500/114169405/e327339c.jpg?impolicy=ccrop&w=1000&h=666&q=medium"
+        }
+      ],
+      "location_rating": 4.7,
+      "amenities": [
+        "Kid-friendly",
+        "Elevator",
+        "Ironing board",
+        "Kitchen",
+        "Smoke-free",
+        "Washer"
+      ],
+      "excluded_amenities": [
+        "No parking",
+        "No Wi-Fi"
+      ],
+      "essential_info": [
+        "Entire apartment",
+        "Sleeps 6",
+        "3 bedrooms",
+        "2 bathrooms",
+        "3 beds"
+      ],
+      "serpapi_google_hotels_reviews_link": "https://serpapi.com/search.json?engine=google_hotels_reviews&hl=en&property_token=ChkQheTE2evxsK0YGg0vZy8xMW45YzNza2xyEAI",
+      "serpapi_google_hotels_photos_link": "https://serpapi.com/search.json?engine=google_hotels_photos&property_token=ChkQheTE2evxsK0YGg0vZy8xMW45YzNza2xyEAI"
+    },
+    {
+      "type": "vacation rental",
+      "name": "City Home Finland Big Luxury Suite - Spacious Suite with Own SAUNA, One Bedroom and Furnished Balcony next to Train Station - Two-Bedroom Apartment",
+      "property_token": "ChkQ0P3F8NHPuqUMGg0vZy8xMXhjX3pjanBxEAI",
+      "serpapi_property_details_link": "https://serpapi.com/search.json?adults=2&bedrooms=2&check_in_date=2026-06-15&check_out_date=2026-06-18&children=0&currency=EUR&engine=google_hotels&gl=us&hl=en&property_token=ChkQ0P3F8NHPuqUMGg0vZy8xMXhjX3pjanBxEAI&q=Tampere&vacation_rentals=true",
+      "gps_coordinates": {
+        "latitude": 61.499149322509766,
+        "longitude": 23.777240753173828
+      },
+      "check_in_time": "4:00\u202fPM",
+      "check_out_time": "12:00\u202fPM",
+      "rate_per_night": {
+        "lowest": "\u20ac138",
+        "extracted_lowest": 138,
+        "before_taxes_fees": "\u20ac123",
+        "extracted_before_taxes_fees": 123
+      },
+      "total_rate": {
+        "lowest": "\u20ac415",
+        "extracted_lowest": 415,
+        "before_taxes_fees": "\u20ac369",
+        "extracted_before_taxes_fees": 369
+      },
+      "prices": [
+        {
+          "source": "Bluepillow.com",
+          "logo": "https://www.gstatic.com/travel-hotels/branding/190ff319-d0fd-4c45-bfc8-bad6f5f395f2.png",
+          "num_guests": 2,
+          "rate_per_night": {
+            "lowest": "\u20ac138",
+            "extracted_lowest": 138,
+            "before_taxes_fees": "\u20ac123",
+            "extracted_before_taxes_fees": 123
+          },
+          "free_cancellation": true,
+          "free_cancellation_until_date": "May 31",
+          "free_cancellation_until_time": "8:59\u202fPM"
+        }
+      ],
+      "nearby_places": [
+        {
+          "name": "Tulli A",
+          "transportations": [
+            {
+              "type": "Walking",
+              "duration": "1 min"
+            }
+          ]
+        },
+        {
+          "name": "Tampere-Pirkkala Airport",
+          "transportations": [
+            {
+              "type": "Taxi",
+              "duration": "19 min"
+            },
+            {
+              "type": "Public transport",
+              "duration": "50 min"
+            }
+          ]
+        },
+        {
+          "name": "Ola - Ravintola",
+          "transportations": [
+            {
+              "type": "Walking",
+              "duration": "1 min"
+            }
+          ]
+        }
+      ],
+      "images": [
+        {
+          "thumbnail": "https://lh6.googleusercontent.com/proxy/gdaekFChg2pCwlD20gDBijetIObbNEY4h5PGHr6tOxnESfg0GhHR7WJR-eufUi5yEq33pARj7iLC-k5mY2BU6kortKVUSRmow6-Z2kwUITgK5PwC8zwMBmz2M-xR6fL1Em3B6tD3OhLA7VkpnfQ4H035NjXgb7M=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://q-xx.bstatic.com/xdata/images/hotel/max1024x683/681144570.jpg?k=98024f710e52f07618b2ac52a540947da195c5fc5557e4ab47153736ed8a3a2f&o=&a=1538557"
+        },
+        {
+          "thumbnail": "https://lh3.googleusercontent.com/proxy/QtrgOa801ISkUPmRTuRF1W8PkDW2hQVv4mddP1E2s6rEOjY30f_G-pC4lgmHBZXUdDkr9U_3k9DoN4bAnHr-WvltY7c5nRa7DYv7JUEl8vEGwB-PritYcM3hqfidLCOEUQ59SXfqK-Se4Tofw7gl4uH6AufeCw=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://xx.bstatic.com/xdata/w/hotel/840x460_watermarked_standard/UlbWNZwXU4abzAaMN8pgikpVLgAICge3B0vYeCRk2qR7UFeZUvYDKUBgt-TJsB7yaHC2yaxyWxU6ucDPgwNAkdTrJ5Ejoipr3itA-Mer9vfgN__BPjniLw==.jpg"
+        },
+        {
+          "thumbnail": "https://lh4.googleusercontent.com/proxy/iLrR7K9X6zN9lQD6mGKM6klgwcf6g8VrL2D8mTImcJHA2cPrAKgkJRwk0eUoddMBBn1c7gCJMKoLELyz7p0N3eOoh3XyKnzWh_GAouXpVrncFl27p2K9j3bNqrYTxGuTI5REuhMCafoeGOEWwO5Bb1Fj6I6BVy8=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://static.cupid.travel/hotels/287890223.jpg"
+        },
+        {
+          "thumbnail": "https://lh4.googleusercontent.com/proxy/HP7rZ18LKamrwN6Cvj1JvMFGfwEEy1MvLUs3FiWA0JKTDYCTJkxVmqvGXCqXkdYkutdDxaOUusQWCFXYaFt9qZJFd4LYKpTBYt4yVw3VhDnwSQSFE8wB3pPx-xz0Q-HfaLP_nf7zIcKrMNzuJk61Fur1AFY2KYU=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://static.cupid.travel/hotels/204009812.jpg"
+        },
+        {
+          "thumbnail": "https://lh4.googleusercontent.com/proxy/SrBppa-kep_PcVdA9FvnSsjEtUK1z36eg2ZLzwOnBOxtcTDieOSbIWqF5VM4NuqjovlNujikdPV3QDbQ_DDgqU9OJtyx4eJSyOu631-WVlrieSpKN2rzCW6usCu7omO7IdLCnLYci5WEN1-YBeAmuq0eJc-kEw=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://static.cupid.travel/hotels/287890009.jpg"
+        },
+        {
+          "thumbnail": "https://lh4.googleusercontent.com/proxy/w5rQ-N5aFuvMgVZMkNoFF1Aex5QCICPAp5Pob8C7sUJPrsL3wZtvnpvJtqMiZqmbwhnWTIvtz7ElCq1z0B2Tz8_z-F2krbsFzZ8Hfk-fXFWGVZdq0_Da-rOZySo7Wqa5VUrL438jUUFwq1Q5wX-EOc9tXYdBYg4=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://xx.bstatic.com/xdata/w/hotel/840x460_watermarked_standard/UlbWNZwXU4abzDBrghNX-tApDZ0Eu7U6beUxOk_NaZMmdlYb1iXG6yj1AQMdoF1h1QJDge3dYQN_vbTHld04TMLnQgATwY_wLvwqiZRH-y_FrUSUgV9uVg==.jpg"
+        },
+        {
+          "thumbnail": "https://lh6.googleusercontent.com/proxy/hMck9fE4lzxTRoLmx2PoX8mKCK1ANnIzHEgn5p-OFJChXnd2HvcBbGjuT3aruCh2mV2a4ZF-voIrf9QWToBUKoWCKkCX6Kxur8plxJUBl8OkMvLtg5dXZhStanJg5NXsTvdx2gmRMfvVbCbuwgJAB_tENROqjw=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://static.cupid.travel/hotels/287889846.jpg"
+        },
+        {
+          "thumbnail": "https://lh5.googleusercontent.com/proxy/FzJJX27azK5KncvzI4DT7v23BGpEnK574NpxoNbjcww7_YrcfCWUCDLLrmOtNvX8VGyQgMGbd1TZTIUlSW5AhbjZkB1xkDkQpL2uebG4zZYDdHBla3Lzb0NiwTscvqh3gCkBcHcCty_V59ayWoRB8XifP9mVclM=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://static.cupid.travel/hotels/287889999.jpg"
+        },
+        {
+          "thumbnail": "https://lh6.googleusercontent.com/proxy/-R5Ok35mEoUtL5XDL-B9_Uovm_Zq0ZxgWi7-giDiyPcPcoajyRms0zTHoLfOENtFH_Kc88sc8wruRtcBEswE7YCdLUdwUFF_yIbQAUXT8bHGnE2zcza8jTDI8WCCraBXcKfm01_hVr9dS-eKnMspYba0JUVF5ZY=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://static.cupid.travel/hotels/204009724.jpg"
+        }
+      ],
+      "overall_rating": 4.8,
+      "reviews": 16,
+      "location_rating": 4.6,
+      "amenities": [
+        "Air conditioning",
+        "Airport shuttle",
+        "Crib",
+        "Elevator",
+        "Heating",
+        "Kitchen",
+        "Microwave",
+        "Oven stove",
+        "Smoke-free",
+        "Cable TV",
+        "Wheelchair accessible",
+        "Free Wi-Fi"
+      ],
+      "excluded_amenities": [
+        "No parking"
+      ],
+      "health_and_safety": {
+        "groups": [
+          {
+            "title": "Minimized contact",
+            "list": [
+              {
+                "title": "No-contact check-in and check-out",
+                "available": true
+              }
+            ]
+          }
+        ]
+      },
+      "essential_info": [
+        "Entire apartment",
+        "Sleeps 7",
+        "2 bedrooms",
+        "1 bathroom",
+        "4 beds"
+      ],
+      "serpapi_google_hotels_reviews_link": "https://serpapi.com/search.json?engine=google_hotels_reviews&hl=en&property_token=ChkQ0P3F8NHPuqUMGg0vZy8xMXhjX3pjanBxEAI",
+      "serpapi_google_hotels_photos_link": "https://serpapi.com/search.json?engine=google_hotels_photos&property_token=ChkQ0P3F8NHPuqUMGg0vZy8xMXhjX3pjanBxEAI"
+    },
+    {
+      "type": "vacation rental",
+      "name": "1BR Apt with Free Parking next to Lake Pyh\u00e4j\u00e4rvi",
+      "link": "https://www.bluepillow.com/search/68115fc1a74f8eb5bd2a608c?dest=bpex&cat=Apartment&lat=61.49352&lng=23.75759&language=en",
+      "property_token": "ChkQ3Mf8t6-b5eFWGg0vZy8xMXprdmRucG03EAI",
+      "serpapi_property_details_link": "https://serpapi.com/search.json?adults=2&bedrooms=2&check_in_date=2026-06-15&check_out_date=2026-06-18&children=0&currency=EUR&engine=google_hotels&gl=us&hl=en&property_token=ChkQ3Mf8t6-b5eFWGg0vZy8xMXprdmRucG03EAI&q=Tampere&vacation_rentals=true",
+      "gps_coordinates": {
+        "latitude": 61.4935188293457,
+        "longitude": 23.75758934020996
+      },
+      "rate_per_night": {
+        "lowest": "\u20ac113",
+        "extracted_lowest": 113,
+        "before_taxes_fees": "\u20ac113",
+        "extracted_before_taxes_fees": 113
+      },
+      "total_rate": {
+        "lowest": "\u20ac338",
+        "extracted_lowest": 338,
+        "before_taxes_fees": "\u20ac338",
+        "extracted_before_taxes_fees": 338
+      },
+      "prices": [
+        {
+          "source": "Bluepillow.com",
+          "logo": "https://www.gstatic.com/travel-hotels/branding/190ff319-d0fd-4c45-bfc8-bad6f5f395f2.png",
+          "num_guests": 2,
+          "rate_per_night": {
+            "lowest": "\u20ac113",
+            "extracted_lowest": 113
+          },
+          "free_cancellation": true,
+          "free_cancellation_until_date": "Jun 15",
+          "free_cancellation_until_time": "3:00\u202fAM"
+        }
+      ],
+      "images": [
+        {
+          "thumbnail": "https://lh5.googleusercontent.com/proxy/4OT8uIWNacqDkofChwDRAD5Ulml7ImfWpXXUMRQlz4fu5YQDEaP-UwCvdS5AnALHsInIzi1nptw-VEcPG-vz_o4w0gQ8mF5WC7UWtQCHPFgOf348k2t0rFf6raEjDQTMi7ctbvv8BGw2j9I5g9dVpnJZZlx7GQ=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://media.vrbo.com/lodging/115000000/114170000/114165000/114164904/5277dc07.jpg?impolicy=ccrop&w=1000&h=666&q=medium"
+        },
+        {
+          "thumbnail": "https://lh6.googleusercontent.com/proxy/qIZ649OPgZBNAEmyurchyHgY6OBaTJiczpljNjEPmm5PglEF03HOqWFAqAUU5Cl3i_6uWgpAlBUsrhIaLCB1-MCjPEWx4263V2_ztHAWjNv4vutGHKPzDLc9Ha7waFaYdnnRYPf5YBppOiwB7geS0TPJW3bC6Q=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://media.vrbo.com/lodging/115000000/114170000/114165000/114164904/d960b0e1_edited_fb62.jpg?impolicy=ccrop&w=1000&h=666&q=medium"
+        },
+        {
+          "thumbnail": "https://lh5.googleusercontent.com/proxy/FqsVpNoR6h4_F32ONW5atWON9HnZpA10hhmcqUkd7I6aGWrRrJnDx8Z_Kb3TVTx23w2ouxokzgQ9FYzlOatuy98jNwVNuUZZqGP1Qyh362XncVKSu4GOP510VtUOa6SJfD6kuvEZpLjHg0h1TUsPZe8wYigFT0w=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://media.vrbo.com/lodging/115000000/114170000/114165000/114164904/8b77fb1c.jpg?impolicy=ccrop&w=1000&h=666&q=medium"
+        },
+        {
+          "thumbnail": "https://lh3.googleusercontent.com/proxy/U1FrT4hxkzhtNAIXryUtOsXqbrHJbFzs_iegXUTwVZk9c6FDGSXrD9QGeoXOPdrpG-UyLEMrp_jQCpLJK_31MNsKHLjKhtyLqH4HJReIjc-1mexqTsWsO7g8nxrrTFvkLhJBfczrUBIObR5--8z8nzBhKI0f3g=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://media.vrbo.com/lodging/115000000/114170000/114165000/114164904/be6e3a7d.jpg?impolicy=ccrop&w=1000&h=666&q=medium"
+        },
+        {
+          "thumbnail": "https://lh6.googleusercontent.com/proxy/HCyjUWiKGSkBAhHPEp3_Dl6EjSwJlZ1GYLw4XnHannxgw55I23lPpJq4mS7IGjnjQjDhrLz7XPVY0EgXHfI4OajIzsju7tDc-RjjdPIDnsTA5obxmBPkDNGo_EKfSFkqQP6W2R06ZlA3eEmijWA6jKmEa2uG2YI=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://media.vrbo.com/lodging/115000000/114170000/114165000/114164904/541a0dba.jpg?impolicy=ccrop&w=1000&h=666&q=medium"
+        },
+        {
+          "thumbnail": "https://lh3.googleusercontent.com/proxy/amnRxd570YKgZCbCJ3X2ZOctlXjz-XsnajceI71Phy44vYQzvtxQSN6XCaxrCiTRKTCUpCRfBTx1GSyYVGgQErzarctlRi7xbqglLmF9xsE_nSP0dJXnCeTzoJ_cR5aln0CJmHztiN251HJ-YmrXW1CHLrjroQ=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://media.vrbo.com/lodging/115000000/114170000/114165000/114164904/62789ebe.jpg?impolicy=ccrop&w=1000&h=666&q=medium"
+        },
+        {
+          "thumbnail": "https://lh6.googleusercontent.com/proxy/B0uve0k2K3APuUiX8gPPqONyVfsfFPNcPPLHMQLlCpIR7alb2umAROyRJRCcg8kqhcksZqpcVGPvnS-tX9T-vrlL3ChC-LVkAJocxfG5amOdw_P0IyfGLRTpoEIZe4CVPfdStq4I0SvJHY9DQyQ7S-Z5OYCYPtg=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://media.vrbo.com/lodging/115000000/114170000/114165000/114164904/b67d3f08.jpg?impolicy=ccrop&w=1000&h=666&q=medium"
+        }
+      ],
+      "amenities": [
+        "Kid-friendly",
+        "Elevator",
+        "Ironing board",
+        "Kitchen",
+        "Smoke-free"
+      ],
+      "excluded_amenities": [
+        "No parking",
+        "No Wi-Fi"
+      ],
+      "essential_info": [
+        "Entire apartment",
+        "Sleeps 4",
+        "2 bedrooms",
+        "2 bathrooms",
+        "2 beds"
+      ],
+      "serpapi_google_hotels_reviews_link": "https://serpapi.com/search.json?engine=google_hotels_reviews&hl=en&property_token=ChkQ3Mf8t6-b5eFWGg0vZy8xMXprdmRucG03EAI",
+      "serpapi_google_hotels_photos_link": "https://serpapi.com/search.json?engine=google_hotels_photos&property_token=ChkQ3Mf8t6-b5eFWGg0vZy8xMXprdmRucG03EAI"
+    },
+    {
+      "type": "vacation rental",
+      "name": "Matilda Apartment with Peaceful environment and Barbecue facilities",
+      "link": "https://www.booking.com/hotel/fi/matilda-apartment-with-peaceful-environment-and-barbecue-facilities.en-gb.html?aid=2068758&utm_source=seogooglelocal&utm_medium=description&utm_term=hotel-14944849&utm_campaign=en-gb&label=seogooglelocal-link-imagesaow-hotel-14944849_grp-1_gendate-20260503",
+      "property_token": "ChkQn6fp1o7niNM0Gg0vZy8xMXo2YmQ2ZnFkEAI",
+      "serpapi_property_details_link": "https://serpapi.com/search.json?adults=2&bedrooms=2&check_in_date=2026-06-15&check_out_date=2026-06-18&children=0&currency=EUR&engine=google_hotels&gl=us&hl=en&property_token=ChkQn6fp1o7niNM0Gg0vZy8xMXo2YmQ2ZnFkEAI&q=Tampere&vacation_rentals=true",
+      "gps_coordinates": {
+        "latitude": 61.5225715637207,
+        "longitude": 23.68570327758789
+      },
+      "check_in_time": "3:00\u202fPM",
+      "check_out_time": "12:00\u202fPM",
+      "rate_per_night": {
+        "lowest": "\u20ac166",
+        "extracted_lowest": 166,
+        "before_taxes_fees": "\u20ac146",
+        "extracted_before_taxes_fees": 146
+      },
+      "total_rate": {
+        "lowest": "\u20ac497",
+        "extracted_lowest": 497,
+        "before_taxes_fees": "\u20ac438",
+        "extracted_before_taxes_fees": 438
+      },
+      "prices": [
+        {
+          "source": "Booking.com",
+          "logo": "https://www.gstatic.com/travel-hotels/branding/61aadbe1-e141-4d2e-a831-b6a18727e130.png",
+          "num_guests": 2,
+          "rate_per_night": {
+            "lowest": "\u20ac166",
+            "extracted_lowest": 166,
+            "before_taxes_fees": "\u20ac146",
+            "extracted_before_taxes_fees": 146
+          },
+          "free_cancellation": true,
+          "free_cancellation_until_date": "Jun 12",
+          "free_cancellation_until_time": "11:59\u202fPM"
+        }
+      ],
+      "images": [
+        {
+          "thumbnail": "https://lh3.googleusercontent.com/proxy/XkhZ8P89f_zYoaCsyEB2DuyRTf31fkVg8Zz_Ru2ZA8Dv6xQ3ljtXN9eqAwqTcm8EF3SEoicxcb6Q6OnwgJeYNHP-GgHrvXxACFtrtAVeCc9F9Kojeb0E9LpwiHTjAQkxz75j8t8lSnmeuxoDeg2X38zPG0_TQWE=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://xx.bstatic.com/xdata/w/hotel/840x460_watermarked_standard/UlbWNZwXU4abzCOAW3py4JTfzHJWRuw7V67Ni47A9IJEewUMCnbt11hv1mgEhRjyIHIY3gZfTfBDYfWM0m9QQM5qYzDSdJSIfel657Y1IU-haqD0EPXiow==.jpg"
+        },
+        {
+          "thumbnail": "https://lh5.googleusercontent.com/proxy/2UUU8Wr9fgKBUVOaqgmhlTlAoh0bkq2Z-kGvYm4EliMitLszSazWaXWA_T7hvlZdJPx6zPuWzbwMQt5CG_M7tVIs1-O0suVhN9AGz_yuFgNibQ06aJRIagYpqVy47i07WEBmwnaIrJCIN0OPhzKFMR83ducZOg=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://xx.bstatic.com/xdata/w/hotel/840x460_watermarked_standard/UlbWNZwXU4abzNre42JNggQ2YHjrHwaWhLtKQqf5cCq_eeUE2gz0chQ4NJTuU9V3sBIZDEIHj4unuWE7dqH_CHNjqOWcBvBFSiQrsSAAD3X0rWQT1nuqFg==.jpg"
+        },
+        {
+          "thumbnail": "https://lh5.googleusercontent.com/proxy/-sbKNBb6HxBH_zrtqEH_thgnvv9mXsA-VqbVQ3mQALeGZJ-rW0_-AYKX4jVlw1DIEQ8-H-kJqc5FC0RZcYrZtFZNJ_dZ0Xv9AmalvZVJnLlTWCtVgUCSPrCjWp0I_Htfmxb-arhQJeK4NPCx-pjYKppF1BoazuQ=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://xx.bstatic.com/xdata/w/hotel/840x460_watermarked_standard/UlbWNZwXU4abzAfOWpdZ1bgQMfasm2xR4Vug46eoc12Z1x6gdhcKzorsdlLRYrkGSjxvqWRzTm9CicDPSFgfWPhlANEjQU4ftkxBYDgraIxPM9KAiXetsQ==.jpg"
+        },
+        {
+          "thumbnail": "https://lh5.googleusercontent.com/proxy/6-CIGeffeVa3cbk9CZ-3MadlWAT4b7h7vZHnbtkFLv36d0KAdok5HgEleHaWSHBBh1ntBmXyDr6ejTxgkoSNNlOb4vT8u4pKb-9Fg-cauMb3siXdVSW3aMbcNG_DRABpvya8CgpvtRECFycTXHSQVnC7CTaYaA=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://xx.bstatic.com/xdata/w/hotel/840x460_watermarked_standard/UlYG65CxyC0DxVGKQFjzmDX4AYONpfsdqf_c4tKlGkXqVmFuW9GPwJn2_PsnuvrxKzi8vgz1tS3VcfTo4Qz3ZChcPx05b9HPah0rnLqVVL7nTG3wPwCWBg==.jpg"
+        },
+        {
+          "thumbnail": "https://lh5.googleusercontent.com/proxy/-845d7Q1T2_M1OPt8RUQDCVQYxVJ4nYs-lPCRRUVjP8DdFaF2hnGRi206FOTgargFCNsRVfrE8s2gXbIWXYLL_xH8QndbVXP1rKEVcPRZtW55e6l_h1RYHwRAA1bNeVy1KlQF7yNcuQJvpMPdhDTfSUQAoNozA=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://xx.bstatic.com/xdata/w/hotel/840x460_watermarked_standard/UlbWNZwXU4abzNjShDRmCrhj_zbjoyZCdgqzgviAY6ZjsFS5VvybfI8s1tgF7XM5r3rEiQ6uUZ-LZwH-UuxY2QyLu3UTl7JF0tvoatIDvhpz8w_mjTkAgw==.jpg"
+        },
+        {
+          "thumbnail": "https://lh4.googleusercontent.com/proxy/LhKlyYN6cjyOYT0HOGWzFoVZg7c_fHpWjAT9QjM2ZQXnnyN1_76vEUttUBds8zbUkZp2zVn5FKYIy7-aPt1bjoI0XAn1lJN7IwJdcH7bsQ9oS7QOXupBwRMeYrZl0sLaXSzG0VhRXeT0iMi-gXHRN9_ay2-XVz0=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://xx.bstatic.com/xdata/w/hotel/840x460_watermarked_standard/UlbWNZwXU4abzC0wGqNll6pMLfgLcoskoGeGo59QOXSETz5MMaf5qCPcW0w5f4Xq3anKp5HuU9lV0Ly-NBYP-U8g5UFSvVcgOYhOSVJhLs9uqHsgpNzdPg==.jpg"
+        },
+        {
+          "thumbnail": "https://lh6.googleusercontent.com/proxy/I6dhvLjKCqaxRxCM7J3D8zMee1tswLeT0RJqCLSOfddHWYmK2obOqgModgbQYZhYwZm3eklKyZrP6wX4AoLh4Wv8MwhcGnEzEzW2mkc3TPvL3lMdL-54uw1B-5kpPuYHi2uTOyhU7OiseB_bWvVjfbHox3mYzNA=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://xx.bstatic.com/xdata/w/hotel/840x460_watermarked_standard/UlbWNZwXU4abzCo5qjJ-TJoU8LOrj8kEsIcJLG5x2h67wzM1RfMWKRBY0kTfEf22C-RGZW6DxuU9KndHxdDrpE079loAEfr-vApicHJH1v7h2heGOxWiMg==.jpg"
+        },
+        {
+          "thumbnail": "https://lh5.googleusercontent.com/proxy/DlEZaUMXyCTTAqGHn7zK2BWu2RFafFx_ZzOG_yTW6xqFUZ7fbX2g2WH892AVW7AmeDCNy9-qEt68XOztjc0O2MFu5GxtImAiAbAeCcChi_lI8OCiCf8MyyJ7cNkucOBa_EMyJx1p9VCv7q_RuVMwjPVYlkDRWA=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://xx.bstatic.com/xdata/w/hotel/840x460_watermarked_standard/UlbWNZwXU4abzMK19WGON3JcJoGxoJj9N_LTzahigHPqbgtr3W-1ZLAMJs3GH_zdJqa-zSFVWQUFWHP5AQmI6kDBzR8JlvFniGji8iYwf9r-ks1jXTP9GQ==.jpg"
+        },
+        {
+          "thumbnail": "https://lh5.googleusercontent.com/proxy/ORfdL5db_1lOzJIYBNSjPH0qDfyAwnP2mjI3t1aFt0KAcXX6U2QdXsXnrgWfIgVJB11clmdYMCGZRrirSfvzdPuq8AU4AfdJgyPkqFTe2tf7hGkBVsT2EWxbbvGJ7wcfauSKyF-lM3pSSDrxVqGSmgJmZ80Ft-0=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://xx.bstatic.com/xdata/w/hotel/840x460_watermarked_standard/UlbWNZwXU4abzJLkXRDouh5_HRjtf5DuUegaFKB8IX4mLzg59aUNusgWA4UxlcALoFNq17sIKaIDTQwFev4cRIGiCo3uPR9t_IZ-qg2sGDPt-Ntw-7SN4w==.jpg"
+        }
+      ],
+      "overall_rating": 5,
+      "reviews": 3,
+      "amenities": [
+        "Heating",
+        "Ironing board",
+        "Kitchen",
+        "Microwave",
+        "Outdoor grill",
+        "Oven stove",
+        "Pet-friendly",
+        "Smoke-free",
+        "Cable TV",
+        "Washer",
+        "Wheelchair accessible"
+      ],
+      "excluded_amenities": [
+        "No air conditioning",
+        "No crib",
+        "No elevator",
+        "No fitness center",
+        "No patio"
+      ],
+      "essential_info": [
+        "Entire apartment",
+        "Sleeps 4",
+        "2 bedrooms",
+        "1 bathroom",
+        "2 beds",
+        "624 sq ft"
+      ],
+      "serpapi_google_hotels_reviews_link": "https://serpapi.com/search.json?engine=google_hotels_reviews&hl=en&property_token=ChkQn6fp1o7niNM0Gg0vZy8xMXo2YmQ2ZnFkEAI",
+      "serpapi_google_hotels_photos_link": "https://serpapi.com/search.json?engine=google_hotels_photos&property_token=ChkQn6fp1o7niNM0Gg0vZy8xMXo2YmQ2ZnFkEAI"
+    },
+    {
+      "type": "vacation rental",
+      "name": "Villa Rajaportti Luxury Loft House",
+      "link": "https://www.booking.com/hotel/fi/villa-rajaportti-with-lakeview-all-windows.en-gb.html?aid=2068758&utm_source=seogooglelocal&utm_medium=description&utm_term=hotel-6995899&utm_campaign=en-gb&label=seogooglelocal-link-imagesaow-hotel-6995899_grp-3_gendate-20260503",
+      "property_token": "ChkQ-uvUz-C-zrRJGg0vZy8xMXdobmpsbXpiEAI",
+      "serpapi_property_details_link": "https://serpapi.com/search.json?adults=2&bedrooms=2&check_in_date=2026-06-15&check_out_date=2026-06-18&children=0&currency=EUR&engine=google_hotels&gl=us&hl=en&property_token=ChkQ-uvUz-C-zrRJGg0vZy8xMXdobmpsbXpiEAI&q=Tampere&vacation_rentals=true",
+      "gps_coordinates": {
+        "latitude": 61.50205612182617,
+        "longitude": 23.718555450439453
+      },
+      "check_in_time": "4:00\u202fPM",
+      "check_out_time": "12:00\u202fPM",
+      "rate_per_night": {
+        "lowest": "\u20ac285",
+        "extracted_lowest": 285,
+        "before_taxes_fees": "\u20ac276",
+        "extracted_before_taxes_fees": 276
+      },
+      "total_rate": {
+        "lowest": "\u20ac854",
+        "extracted_lowest": 854,
+        "before_taxes_fees": "\u20ac829",
+        "extracted_before_taxes_fees": 829
+      },
+      "prices": [
+        {
+          "source": "Booking.com",
+          "logo": "https://www.gstatic.com/travel-hotels/branding/61aadbe1-e141-4d2e-a831-b6a18727e130.png",
+          "num_guests": 4,
+          "rate_per_night": {
+            "lowest": "\u20ac285",
+            "extracted_lowest": 285,
+            "before_taxes_fees": "\u20ac276",
+            "extracted_before_taxes_fees": 276
+          },
+          "free_cancellation": true,
+          "free_cancellation_until_date": "May 17",
+          "free_cancellation_until_time": "11:59\u202fPM"
+        }
+      ],
+      "nearby_places": [
+        {
+          "name": "Pispalan portaat",
+          "transportations": [
+            {
+              "type": "Walking",
+              "duration": "5 min"
+            }
+          ]
+        },
+        {
+          "name": "Tampere-Pirkkala Airport",
+          "transportations": [
+            {
+              "type": "Taxi",
+              "duration": "25 min"
+            },
+            {
+              "type": "Public transport",
+              "duration": "50 min"
+            }
+          ]
+        },
+        {
+          "name": "Pikante Kupari",
+          "transportations": [
+            {
+              "type": "Taxi",
+              "duration": "10 min"
+            },
+            {
+              "type": "Public transport",
+              "duration": "10 min"
+            }
+          ]
+        }
+      ],
+      "images": [
+        {
+          "thumbnail": "https://lh4.googleusercontent.com/proxy/tZFu18zKaV3ONBC9lQJii4BOptxaTnF05Jl24SJPtJ1rO3y6fLaZVjspUChXKnVHokMiiaugF3yx0D8_d0O5nK0_FbOGiVMLIhXdir4aSRIecUjZqHKO1kbUK3Y7v5JVBrwJsvBveKaU8P0E3ieNVJNDKhoMPQ=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://xx.bstatic.com/xdata/w/hotel/840x460_watermarked_standard/UlbWNZwXU4abzENaTxj0LM9mDtZcBuCfrAwFhWC5cb7KUK2h3EcUnq-Lid-RQSkBZcadufhDN-fey-g1cIPxgDJ5WArn3CfmjEGVWXRPQPTkeaxr_AOwCQ==.jpg"
+        },
+        {
+          "thumbnail": "https://lh3.googleusercontent.com/proxy/2LPBHFsVBzC759JpB5bXBJ5ltglLYJ8sb8jfL8WA-jHuXcbwc--F2qgzzOm2rJgDi82mCjZojC4EZo6H0t-ZrC4GjtY17r709nDhRQPVHepd9eVHTVYEz-YfSXSJemY1uIP_TMQTrJiKLWS6543nz-Uf37vAOg=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://xx.bstatic.com/xdata/w/hotel/840x460_watermarked_standard/UlbWNZwXU4abzN_KO37lDmoOWaAejGJOr1wqstwcDKIh_9zgUPXa1KE6M7kxV0ssQ1hcUlxIaTEl7i7c6SA22mDOfDaoziMz4I0MuI-iKi-GGFIoKV8Lyw==.jpg"
+        },
+        {
+          "thumbnail": "https://lh6.googleusercontent.com/proxy/4-t1-EpmYn4_1ejTapMvqWMQNxN6tOdBNVgDrP3dEZAzh0iq-rQFRy5iiuF4hZycnV4mjR8Bv3Uvhx_Zctt7C7RLuQzn-Xcsa3-lpoTVl_ifoCweF5CGYITBxpR6_LkoO8z8kG4FG4lAPGew1aYKxc2FCMDOyCs=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://xx.bstatic.com/xdata/w/hotel/840x460_watermarked_standard/UlbWNZwXU4abzIykiL-_CZ9u9-amzYOOF2YOeLIcgq6nRhBTiHIgD0sgf4f86h5tV2UG6mUa2zbxpz3umihJwFJq7vViZbzS1uZXmPbaZhWxBu3_bSLccg==.jpg"
+        },
+        {
+          "thumbnail": "https://lh3.googleusercontent.com/proxy/7TU-bHx_AJ31EVA1jADtK3Fa8zAfNbSfkF4aX9iTEWw30qX4EZLNP6LFo0xU1QoJCmhJUcUfcRLjzIhFmmMffw2T8svHGR8wgGGk42V1Ar42KvAkpxUUFW7nBXHDb50J-tEq9bEVwz5s6sbgDsT-0qOVsxeGVT0=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://xx.bstatic.com/xdata/w/hotel/840x460_watermarked_standard/UlbWNZwXU4abzO2h_a6PwQPTkfbWzytooUgpocL2wp6PL96fAjs9rSLKXAJC2Z_JNdUrWdjj_-h5u-weGssShRj72woL0syFpPfGF0i9wojBL2fKpHxadQ==.jpg"
+        },
+        {
+          "thumbnail": "https://lh6.googleusercontent.com/proxy/QzrgRYzQTUwvS55Eln3VQgi2KaYnI8yNujnIzPSBeqWGAWwVMig520x9hOBlEXvSoOMVoGcvGDl8-fewZv-IExXNSzJvTHibUnQo7vugjHwZtn6ZTU-JM1pHNP4b8iUnuJjOaxZsoCJtCHis1UI8xLgQckFcvhs=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://xx.bstatic.com/xdata/w/hotel/840x460_watermarked_standard/UlbWNZwXU4abzPyo1OHLvJ4IgG1Zof4qtnDZ0boSVUYT2AaRx8YZtAstb_LbP_rS_eWV6Obs7dPjV2bysk8BAQXD8cA_6UQ3CyjNQfes_ZTC6yYI8_IB_g==.jpg"
+        },
+        {
+          "thumbnail": "https://lh4.googleusercontent.com/proxy/jTGIIVnieF0I2mhyTdmhHoj9aQxtji3rr2J4DxP16PsACNmzCmXAKNVaYbk6DoFA5oFE93k7ZIDzcD4QAd3yuVVN6tesnKmcjR-lFKeBY7HZX0BO1eRm6XCgOZIF0C1cdH-8ENzqeU9YME3p7HEFmS9eLYTnu7M=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://xx.bstatic.com/xdata/w/hotel/840x460_watermarked_standard/UlbWNZwXU4abzAXYzhWQ7XUwJBDVToLebISvZ4lDdB7pkCdmZwZYQgKk_jH3evVMoCUWGPYpIKMF_4fzARlWbMy2gMlhKKuHjARLtwLc-JrLBaYI24jgtA==.jpg"
+        },
+        {
+          "thumbnail": "https://lh4.googleusercontent.com/proxy/1kAK4aRZKyrJCT3FgxhS0Ggvwkg_-cTF7N4ZeH0qnlAKCc8jNUdFqESkzuYs4zxp6WToChpHLNhJWoEojg358B4PxHnsBkTPokN_IbGEImLZw8KbNkFPTegrQVRADOOHYsUzi_aobVqXtEvsRfoiZVehNnLrVg=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://xx.bstatic.com/xdata/w/hotel/840x460_watermarked_standard/UlbWNZwXU4abzGSsuKcVauUJ9JKvlXtEHPnoO4BRzKUQjr1m_R7r255opaoTVZ-Iuu6cFRcKh1K6Hk7GciAVKrR5W3A8K3KUfQRmpEq9t3bGa5wFG8NN9A==.jpg"
+        },
+        {
+          "thumbnail": "https://lh5.googleusercontent.com/proxy/m_n2i16_6ebhoFzHAvws271ptS7ZPJTa2TTolnrBqpE_KsKkZIdCuFn3zauqBMusc-2WZ2SiWMVBjtJOEDkk0Uu1Eiau30hM3zmUtu62fkt-rRDh7cPTRbKyi-XjAfTv53_VSoQWpNwzGuBJAcANY34hXfijVw=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://xx.bstatic.com/xdata/w/hotel/840x460_watermarked_standard/UlbWNZwXU4abzFlzrN6_dkFBlHPqZlz46l37BUn9BhH-oeRoXjjOb-VUlIFHlWnwiBof3CpDPXaIsfulNZ0wKMPHqj6LIJVqfrEiTIm5C00sQGT7YqxnyQ==.jpg"
+        },
+        {
+          "thumbnail": "https://lh5.googleusercontent.com/proxy/TLychJWZXOfcSJFsRQLSoiGaNsspSYIiKR3uT-RZLltUDLw_IhDWk8fDjsvPieFqYORswNC4QRR_ULJp_V4Sx1yrE2x9d5nAyyQoptfT0Ay0ddaJQNJ-jGOzZXQTmJxm6zPrtyNjC0-oK1kLkzBV1gE7CNSKGoM=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://xx.bstatic.com/xdata/w/hotel/840x460_watermarked_standard/UlbWNZwXU4abzECc_pKX8-xv2N-pquMTc78g2NPmsKS71bRxlEabuXzTSFNWj4Afi0BCBF8grYbQDAjzCUY374pjTTJ2zGb5sP-B5u4TX0MBmo0KwRR7ZA==.jpg"
+        }
+      ],
+      "overall_rating": 4.9,
+      "reviews": 113,
+      "location_rating": 3.5,
+      "amenities": [
+        "Air conditioning",
+        "Crib",
+        "Heating",
+        "Ironing board",
+        "Kitchen",
+        "Microwave",
+        "Outdoor grill",
+        "Oven stove",
+        "Patio",
+        "Pet-friendly",
+        "Smoke-free",
+        "Cable TV",
+        "Washer"
+      ],
+      "excluded_amenities": [
+        "No elevator",
+        "No fitness center",
+        "Not wheelchair accessible"
+      ],
+      "essential_info": [
+        "Entire apartment",
+        "Sleeps 14",
+        "6 bedrooms",
+        "3 bathrooms",
+        "11 beds",
+        "958 sq ft"
+      ],
+      "serpapi_google_hotels_reviews_link": "https://serpapi.com/search.json?engine=google_hotels_reviews&hl=en&property_token=ChkQ-uvUz-C-zrRJGg0vZy8xMXdobmpsbXpiEAI",
+      "serpapi_google_hotels_photos_link": "https://serpapi.com/search.json?engine=google_hotels_photos&property_token=ChkQ-uvUz-C-zrRJGg0vZy8xMXdobmpsbXpiEAI"
+    },
+    {
+      "type": "vacation rental",
+      "name": "Top Floor Luxury | 2BR Scandi Home in City Center",
+      "link": "https://book.shillinki.com/listings/510249?googleVR=1&utm_source=google&utm_medium=vacation_rentals",
+      "property_token": "ChkQlsu9uuLzoopaGg0vZy8xMXpiMl9nYms2EAI",
+      "serpapi_property_details_link": "https://serpapi.com/search.json?adults=2&bedrooms=2&check_in_date=2026-06-15&check_out_date=2026-06-18&children=0&currency=EUR&engine=google_hotels&gl=us&hl=en&property_token=ChkQlsu9uuLzoopaGg0vZy8xMXpiMl9nYms2EAI&q=Tampere&vacation_rentals=true",
+      "gps_coordinates": {
+        "latitude": 61.4970817565918,
+        "longitude": 23.769302368164062
+      },
+      "check_in_time": "4:00\u202fPM",
+      "check_out_time": "11:00\u202fAM",
+      "rate_per_night": {
+        "lowest": "\u20ac153",
+        "extracted_lowest": 153,
+        "before_taxes_fees": "\u20ac137",
+        "extracted_before_taxes_fees": 137
+      },
+      "total_rate": {
+        "lowest": "\u20ac460",
+        "extracted_lowest": 460,
+        "before_taxes_fees": "\u20ac410",
+        "extracted_before_taxes_fees": 410
+      },
+      "prices": [
+        {
+          "source": "Expedia.com",
+          "logo": "https://www.gstatic.com/travel-hotels/branding/384478467102568077.png",
+          "num_guests": 2,
+          "rate_per_night": {
+            "lowest": "\u20ac153",
+            "extracted_lowest": 153,
+            "before_taxes_fees": "\u20ac137",
+            "extracted_before_taxes_fees": 137
+          },
+          "free_cancellation": true,
+          "free_cancellation_until_date": "Jun 1",
+          "free_cancellation_until_time": "11:59\u202fPM"
+        }
+      ],
+      "images": [
+        {
+          "thumbnail": "https://lh6.googleusercontent.com/proxy/8VBwDZfUO8rCH9pD4ajzpCm6WO72tVjTPHGNP6SIOWljVzmU7piZDOYtgO3nrWABR51fV9ufqY2gktK4Dlb6ZWfmGinHew3ZFC8PPRy3NspODObd8Gly1XXbOxS8flel4KuFJXvmIXehY_f3uRgKXet0iCwMMw=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://hostaway-platform.s3.us-west-2.amazonaws.com/listing/139163-510249-xSgJXA--QnvfQk3BcBrLFV-UgqbXkgR4t4bbDFdF--MGA-69e901457c612-medium"
+        },
+        {
+          "thumbnail": "https://lh6.googleusercontent.com/proxy/kSzxi8kMxHU7JHidgEAiwWHMK2qP9AisrYClhQFz8s79YOzMiS3zJxijt3J-vMvR7l88wiRdWdWJLxF0bWyYKx5i-_Kwdw4tOuAvDt8FhYtZOWaNJvlGENjPOdhaCaTvXOfir1CpWJvL14fLbYnrQcKOmN1y1g=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://images.trvl-media.com/lodging/129000000/128980000/128970300/128970268/0656a73d_z.jpg"
+        },
+        {
+          "thumbnail": "https://lh4.googleusercontent.com/proxy/pn12s6p1foaMP4AChPW5aMOgOfTOfoAj_DQOrbHBAunYb2e5rhqOUGb3x_-Ej7499hjgM5lRuYVCbcRjSuzZog1mP6frYrTbKcTzJfbd6M-5sRUBX281V0JYJw9kPozeZKXDngzsw_bqxsMCDyfPojIXrylf_A=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://hostaway-platform.s3.us-west-2.amazonaws.com/listing/139163-510249-pkLp-mp7lRIZcu6--97v0sLOQYap5isUWMKe8PIbBqvw-69e9025b581fc-medium"
+        },
+        {
+          "thumbnail": "https://lh3.googleusercontent.com/proxy/86657cjrlCtLvKz4fC05Ch7MCz1YvicXHHghI5D7wDjdd_oydmxW9ov83GVH1EOdcTUxUY7nfKJXPq6u02UeunYWTSUqbwkpbav9NEXL1FjyYjx0h_-J6Ggv11y1WLbwmxku4igV0xDmssfTojwnJ8uc5AwdeQ=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://hostaway-platform.s3.us-west-2.amazonaws.com/listing/139163-510249-2MvzxguZuRl8t6nzq7Le22Z-y8rq8nddS38Z2YbJMG8-69e9026a621a7-medium"
+        },
+        {
+          "thumbnail": "https://lh3.googleusercontent.com/proxy/pIJo_9foJtapF22pWHaBp5YoX7RsPeAt0NgVjI5bfObmqmZ-ZWrTpZkg4IlFSdCgyjRHT_G6Rmz3ianPhfWzBfVWf0m_P88YDWi074j5JTHYKFK8oJlKtOdEEWAls6lX1TWIbrocxZWdlePLd8wRuwXQtlDA7w=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://hostaway-platform.s3.us-west-2.amazonaws.com/listing/139163-510249-mDQQAhdk38txtk2nrh2GJbocMTI09UPfRRTcK2PPlMw-69e901f96b71b-medium"
+        },
+        {
+          "thumbnail": "https://lh3.googleusercontent.com/proxy/FTd96mpoW7mlrggNUaPJMUhl-lHlyETnYgSpTDXa34oG5DZrPi9UWo780XyRsxA6HMyrPOoUXIn_UU9lpG6xluQm9b26pNtrcSR-1W32hzp-U78izPGtPTqXV2y-LJewrie05KNgPITpprXpo82BjeduO0rncTw=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://hostaway-platform.s3.us-west-2.amazonaws.com/listing/139163-510249-YQAOwio3PtA--AvZ----gQ3E88ot48Nx3FQZSP5roWveng-69e9019080631-medium"
+        },
+        {
+          "thumbnail": "https://lh4.googleusercontent.com/proxy/weqMp3YjO8fULIo4dGaPhMbTFYgJZ510NZuE-9OovRVTgbhdVyLm_dNpYtsUyCk5TLQDqaH7FfftEfOITIYS0q8L65peWvdx4Z2zXonBYwLgn1ZvThYQbt02Q86t5PCK768XD9UQhQGxLLk-6MqMhhq59XREpw=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://images.trvl-media.com/lodging/129000000/128980000/128970300/128970268/edd53a30_z.jpg"
+        },
+        {
+          "thumbnail": "https://lh6.googleusercontent.com/proxy/_yZk3BkRrw4SUi9qvNJ6fk5uDe26VSlKj6Ns-4Qe_--AjbHLjEjhCTjvi2um7yNhEvnEMh3PscGJEJN-klBFM7XD_j3v-juUFEd0KYrRSesLuU1iVoMofnM9fcxRj1iWNVBYak-KsDd_fPhNvuPa06xjNlWT5Q=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://hostaway-platform.s3.us-west-2.amazonaws.com/listing/139163-510249-6SyncRuLGPd--01xIU6Snommi4whYdofOdKuBSWsNR1A-69e9014ea0747-medium"
+        },
+        {
+          "thumbnail": "https://lh6.googleusercontent.com/proxy/C-gYDtKcBQhayZuTbcbx5_Hjz4lo_fsMLbX2VrCFZU2gkqa12LEk4EjKxO8s_uz9RKjm7O-QF74ip98nNXfP9SGXNarHy8MbQnhKhNoRuFy0Hl81nPKnUA9HJ4O8UsyP9wWNoJ7-HAC4DITgRllmxabL0s_27A=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://hostaway-platform.s3.us-west-2.amazonaws.com/listing/139163-510249-yO2zg4JQiQFzr-APCk7kpk-PhnvEpo0tu--8s0-wOzxg-69e901c0877ea-medium"
+        }
+      ],
+      "amenities": [
+        "Balcony",
+        "Kid-friendly",
+        "Crib",
+        "Elevator",
+        "Heating",
+        "Ironing board",
+        "Kitchen",
+        "Microwave",
+        "Oven stove",
+        "Smoke-free",
+        "Cable TV",
+        "Paid parking",
+        "Free Wi-Fi"
+      ],
+      "excluded_amenities": [
+        "No indoor pool",
+        "No outdoor pool",
+        "Not pet-friendly"
+      ],
+      "health_and_safety": {
+        "groups": [
+          {
+            "title": "Enhanced cleaning",
+            "list": [
+              {
+                "title": "Enhanced cleaning of the property",
+                "available": true
+              }
+            ]
+          }
+        ]
+      },
+      "essential_info": [
+        "Entire apartment",
+        "Sleeps 6",
+        "2 bedrooms",
+        "1 bathroom",
+        "4 beds",
+        "732 sq ft"
+      ],
+      "serpapi_google_hotels_reviews_link": "https://serpapi.com/search.json?engine=google_hotels_reviews&hl=en&property_token=ChkQlsu9uuLzoopaGg0vZy8xMXpiMl9nYms2EAI",
+      "serpapi_google_hotels_photos_link": "https://serpapi.com/search.json?engine=google_hotels_photos&property_token=ChkQlsu9uuLzoopaGg0vZy8xMXpiMl9nYms2EAI"
+    },
+    {
+      "type": "vacation rental",
+      "name": "Cosy Loft apartment with glazed balcony - Two-Bedroom Apartment",
+      "link": "https://www.bluepillow.com/search/648583607f7e24c1922d3114?dest=bkng&cat=Apartment&lat=61.50276&lng=23.72138&language=en",
+      "property_token": "ChoQ2syZmI_-1KXVARoNL2cvMTF4MG40eW0yZhAC",
+      "serpapi_property_details_link": "https://serpapi.com/search.json?adults=2&bedrooms=2&check_in_date=2026-06-15&check_out_date=2026-06-18&children=0&currency=EUR&engine=google_hotels&gl=us&hl=en&property_token=ChoQ2syZmI_-1KXVARoNL2cvMTF4MG40eW0yZhAC&q=Tampere&vacation_rentals=true",
+      "gps_coordinates": {
+        "latitude": 61.50276184082031,
+        "longitude": 23.72138023376465
+      },
+      "check_in_time": "4:00\u202fPM",
+      "check_out_time": "11:00\u202fAM",
+      "rate_per_night": {
+        "lowest": "\u20ac256",
+        "extracted_lowest": 256,
+        "before_taxes_fees": "\u20ac230",
+        "extracted_before_taxes_fees": 230
+      },
+      "total_rate": {
+        "lowest": "\u20ac767",
+        "extracted_lowest": 767,
+        "before_taxes_fees": "\u20ac690",
+        "extracted_before_taxes_fees": 690
+      },
+      "prices": [
+        {
+          "source": "Bluepillow.com",
+          "logo": "https://www.gstatic.com/travel-hotels/branding/190ff319-d0fd-4c45-bfc8-bad6f5f395f2.png",
+          "num_guests": 2,
+          "rate_per_night": {
+            "lowest": "\u20ac256",
+            "extracted_lowest": 256,
+            "before_taxes_fees": "\u20ac230",
+            "extracted_before_taxes_fees": 230
+          }
+        }
+      ],
+      "nearby_places": [
+        {
+          "name": "Tikkutehdas B",
+          "transportations": [
+            {
+              "type": "Walking",
+              "duration": "3 min"
+            }
+          ]
+        },
+        {
+          "name": "Tampere-Pirkkala Airport",
+          "transportations": [
+            {
+              "type": "Taxi",
+              "duration": "19 min"
+            },
+            {
+              "type": "Public transport",
+              "duration": "46 min"
+            }
+          ]
+        },
+        {
+          "name": "Ola - Ravintola",
+          "transportations": [
+            {
+              "type": "Taxi",
+              "duration": "7 min"
+            }
+          ]
+        }
+      ],
+      "images": [
+        {
+          "thumbnail": "https://lh5.googleusercontent.com/proxy/ybt5WzrjGOMPl9f-KieyyY_IC4PAHg1hZyRG6zNvZJQzu3a-48NqK2-SIHinb0vsORkrfOHW7Q_zfrUlnsmCDKConj7c-Pt3SoaKid9mhutPXXTepqb-8kJ39eqdbuS6mFu-l_9OBrC0z-VLhFkpRwvEwKgTtC4=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://q-xx.bstatic.com/xdata/images/hotel/max1024x683/533763393.jpg?k=828a91b36b9e74ce16d2fe0567b370a707d85e20dc57b7506268a10067aabf64&o=&a=1538557"
+        },
+        {
+          "thumbnail": "https://lh6.googleusercontent.com/proxy/l2bVtghBKLHDjIW35OrmIoXcMzu9IyNmtG66cHfP0y03hkLclxKCNxdpqU4rbK2dksDEO0IC0UWJGe-LT8XXod9bLeyWTXBYLdxEvIztsEgq7tAzI_bS4tdwe4VzUftqdjQNX06m9A5v79aO7CjWtq89PcxWXZk=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://q-xx.bstatic.com/xdata/images/hotel/max1024x683/529301273.jpg?k=33f899f784ce461a0a39029b92462c33110b555db694df903bc9bb972cfdc8ad&o=&a=1538557"
+        },
+        {
+          "thumbnail": "https://lh4.googleusercontent.com/proxy/WEKkRWxdci7U4pMKQWjMdCXkTxPaUT47LCqLdjDchK01ywEYs_vaXdL_zwaKvRvTCYYzMYOf0zZw3OepQbnd8jdu86aEkCD8VgVRk6TXmKZNpsui9EPYpqAjEIlyyE8hNd_PMs5SAIA-aGEwGFTMjfQk_icoHw=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://static.cupid.travel/hotels/503101828.jpg"
+        },
+        {
+          "thumbnail": "https://lh5.googleusercontent.com/proxy/s3VxJZ40810gOZk5-mmMshw55_dJmJmsnXiVsxZiTo2898zBjN6I8VRX3PzwbJFtKd4v4__Zqg0WNnFV0cmhjQiNO1o7IrUooFrBhS5pZfuxWmu5F86MhRAm_kjuDHMCBTQnC-MO7RX9mcj92sTTX2MelKx3Tlo=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://static.cupid.travel/hotels/482181028.jpg"
+        },
+        {
+          "thumbnail": "https://lh6.googleusercontent.com/proxy/M2ZpNsiW7dKsP005MlqVERCWgBZOCL3GPyGOI5vO-A_B0B1ziyg8ONENKGou0yeXsDTHEmkRprYnhlz0ih0pKOvZCpG8qAGeXLv-PCFZGBcL3zk6piS8zcUzq2a-jbsE2BKylCh7NkabUsGeQki-hI_PBc7Uo9U=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://static.cupid.travel/hotels/504121160.jpg"
+        },
+        {
+          "thumbnail": "https://lh4.googleusercontent.com/proxy/ol7ymrM1EdNrrUB4JSU_mi7um2SJqE-YFWAFgb44V49DbIrBfDTv5QxsCytwoq-vS0SiT7-P5tob11Nf6svfvGXFWH4qib7pBG_sm6rs-9eSo5y6CbOtZFMQK4LOBdOM1WKYjYXIYwGcTj3X2V9NUGSFU6gb1w=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://q-xx.bstatic.com/xdata/images/hotel/max1024x683/529302114.jpg?k=3243c52cbd11e446bd076948a3ad0beb838ca206baa3512f957a1024631c438e&o=&a=1538557"
+        },
+        {
+          "thumbnail": "https://lh3.googleusercontent.com/proxy/xKl8q-zYlbB4LivsyffqRBkriuuQOyqelGi0abvXsDR50-J19FNiDi6ul7Yz_qVbyzyNriV1mo336gV2YK-aOznogJCCBbDrkjMj1xfcTzmFRGfXoRvbe2UTXQ4TDj7YLrpT91fVYqwVX0NLKaAvBVdml5InxA=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://q-xx.bstatic.com/xdata/images/hotel/max1024x683/529302102.jpg?k=9cdf4bf98eace050b6d2c3cda0379ac65dbe56ff5a570077878c83915e6d3ada&o=&a=1538557"
+        },
+        {
+          "thumbnail": "https://lh3.googleusercontent.com/proxy/VI77N0NjZuyuOPQJQprySeyN-byCh69BiVzOvlUFmLuw_m4HATvS2W29566ILZytIIj5slPnxT2bjMUgienP00nBERI2R4K0afegMvyhZUCDAEyjXrejDJJcMwcpaiTRSXzr0a8IQtHtRyjadGrfkNm2J9MT91o=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://q-xx.bstatic.com/xdata/images/hotel/max1024x683/502842690.jpg?k=fe1031602176c75a1a4fa38e9b0d01527904f06112c5453b9c308829638fafed&o=&a=1538557"
+        },
+        {
+          "thumbnail": "https://lh5.googleusercontent.com/proxy/0DIjbcvgH6HHOILhjW7rh87rV7Xx_Z0eI2eNFzMeGnicRW7qn-KdEPomFry5qXl5WC8o8EIHPQy3Kq1pK3I6wvQ2KftKN4HnYuy2lUcDRXrg1VypUThjSr55P8nKFraIfSX3MxprnYUKwia5Wegcd0AXU9H0yg=s287-w287-h192-n-k-no-v1",
+          "original_image": "https://static.cupid.travel/hotels/503101837.jpg"
+        }
+      ],
+      "overall_rating": 4.75,
+      "reviews": 6,
+      "location_rating": 3.5,
+      "amenities": [
+        "Air conditioning",
+        "Crib",
+        "Elevator",
+        "Heating",
+        "Ironing board",
+        "Kitchen",
+        "Microwave",
+        "Oven stove",
+        "Pet-friendly",
+        "Smoke-free",
+        "Cable TV",
+        "Washer",
+        "Wheelchair accessible",
+        "Free parking",
+        "Free Wi-Fi"
+      ],
+      "excluded_amenities": [
+        "No airport shuttle"
+      ],
+      "essential_info": [
+        "Entire apartment",
+        "Sleeps 8",
+        "2 bedrooms",
+        "7 beds"
+      ],
+      "serpapi_google_hotels_reviews_link": "https://serpapi.com/search.json?engine=google_hotels_reviews&hl=en&property_token=ChoQ2syZmI_-1KXVARoNL2cvMTF4MG40eW0yZhAC",
+      "serpapi_google_hotels_photos_link": "https://serpapi.com/search.json?engine=google_hotels_photos&property_token=ChoQ2syZmI_-1KXVARoNL2cvMTF4MG40eW0yZhAC"
+    }
+  ],
+  "serpapi_pagination": {
+    "current_from": 1,
+    "current_to": 18,
+    "next_page_token": "CBI=",
+    "next": "https://serpapi.com/search.json?adults=2&bedrooms=2&check_in_date=2026-06-15&check_out_date=2026-06-18&children=0&currency=EUR&engine=google_hotels&gl=us&hl=en&next_page_token=CBI%3D&q=Tampere&vacation_rentals=true"
+  }
+}
