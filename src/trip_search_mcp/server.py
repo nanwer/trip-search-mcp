@@ -28,6 +28,7 @@ from trip_search_mcp.cache import TTLCache
 from trip_search_mcp.fli_backend.client import FliClient
 from trip_search_mcp.logging_config import configure_logging, log_event
 from trip_search_mcp.airbnb_backend.client import AirbnbClient
+from trip_search_mcp.open_meteo_backend.client import OpenMeteoClient
 from trip_search_mcp.serpapi_hotels_backend.client import SerpAPIHotelsClient
 from trip_search_mcp.tools.search_cheapest_dates import (
     TOOL_DESCRIPTION as CHEAPEST_DATES_DESCRIPTION,
@@ -41,6 +42,10 @@ from trip_search_mcp.tools.cancel_watch import (
 from trip_search_mcp.tools.get_stay_details import (
     TOOL_DESCRIPTION as STAY_DETAILS_DESCRIPTION,
     get_stay_details,
+)
+from trip_search_mcp.tools.get_weather_forecast import (
+    TOOL_DESCRIPTION as WEATHER_DESCRIPTION,
+    get_weather_forecast,
 )
 from trip_search_mcp.tools.list_active_watches import (
     TOOL_DESCRIPTION as LIST_WATCHES_DESCRIPTION,
@@ -80,6 +85,8 @@ _HOTELS_CLIENT = _build_hotels_client()
 # Airbnb client is always available — pyairbnb is a hard dependency and
 # has no API key requirement. Geocoding uses Nominatim (also key-free).
 _AIRBNB_CLIENT = AirbnbClient()
+# Open-Meteo client is always available — free, no API key.
+_WEATHER_CLIENT = OpenMeteoClient()
 
 mcp = FastMCP("trip-search-mcp")
 
@@ -208,6 +215,30 @@ async def get_stay_details_tool(
         check_out_date=check_out_date,
         adults=adults,
         currency=currency,
+    )
+
+
+# ----- trip-planning context tools -------------------------------------------
+
+
+@mcp.tool(name="get_weather_forecast", description=WEATHER_DESCRIPTION)
+async def get_weather_forecast_tool(
+    location: str | None = None,
+    latitude: float | None = None,
+    longitude: float | None = None,
+    start_date: str | None = None,
+    end_date: str | None = None,
+    units: str = "metric",
+) -> dict[str, Any]:
+    return await get_weather_forecast(
+        client=_WEATHER_CLIENT,
+        cache=_CACHE,
+        location=location,
+        latitude=latitude,
+        longitude=longitude,
+        start_date=start_date,
+        end_date=end_date,
+        units=units,
     )
 
 

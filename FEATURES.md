@@ -139,7 +139,27 @@ What you'll get back:
 
 ---
 
-## 5. Track flight prices — "tell me if it gets cheaper"
+## 5. Check the weather
+
+*(uses `get_weather_forecast`)*
+
+Get a 7-day daily forecast for any city or specific coordinates. Powered by [Open-Meteo](https://open-meteo.com/) — free, global, no API key.
+
+**You can ask Claude:**
+
+- *"What's the weather in Tampere from June 15 to 18?"*
+- *"Will it rain in Lisbon next week?"*
+- *"Show me the forecast for Tokyo for the first week of November in Fahrenheit."*
+- *"Compare weather in Lisbon vs Barcelona for the second week of June — which is sunnier?"* → Claude calls the tool twice and compares.
+- *"Forecast for these coordinates: 38.96, -77.36"* → skips the geocoding step.
+
+Each day comes back with: max/min temp, condition summary (clear / partly cloudy / rain / thunderstorm / …), precipitation probability, sunrise, sunset, and the IANA timezone for the location.
+
+> Forecast horizon is capped at 7 days from today. For longer-range "what's the weather typically like in October" questions, the tool isn't the right answer — Claude can answer those from general knowledge.
+
+---
+
+## 6. Track flight prices — "tell me if it gets cheaper"
 
 *(uses `watch_flight_price`)*
 
@@ -153,7 +173,7 @@ Register a price threshold on a specific route + date. The watch persists foreve
 
 Claude tells you a `watch_id` you can use to cancel later.
 
-### 5a. Check on your watches
+### 6a. Check on your watches
 
 *(uses `list_active_watches`)*
 
@@ -168,7 +188,7 @@ You'll see each watch's current price, how far it is from your threshold ("€53
 
 > **How fresh is "fresh"?** By default, watches refresh every 6 hours. Within that window, the answer comes from cache (no extra API calls). If you want a forced refresh, ask "force a refresh on all my watches".
 
-### 5b. Cancel a watch
+### 6b. Cancel a watch
 
 *(uses `cancel_watch`)*
 
@@ -232,6 +252,16 @@ Claude naturally chains the tools when you give it a trip-planning problem inste
 3. *"Want me to find a hotel in DC for May 18–22 to go with it?"* → `search_stays(location="Washington DC", check_in_date="2026-05-18", ...)`.
 4. Quotes the combined trip cost.
 
+### Workflow G: "Bias the plan by weather"
+
+**You ask:** *"Two-week trip to Lisbon in October — which week looks better weather-wise?"*
+
+**Claude does:**
+1. Calls `get_weather_forecast` for Lisbon for week 1 and week 2 of October.
+2. Compares rainy days, average highs, conditions.
+3. Calls `search_cheapest_dates` constrained to the better week.
+4. Recommends the sunnier-AND-cheaper week (or surfaces the trade-off if they conflict).
+
 ### Workflow F: "Drill in before booking"
 
 **You ask:** *"Find me a hotel in Tokyo for first week of November, then tell me more about your top pick."*
@@ -263,6 +293,7 @@ Claude naturally chains the tools when you give it a trip-planning problem inste
 | "Find me an Airbnb" | `search_stays(category="airbnb")` |
 | "Find me a vacation rental" | `search_stays(category="vacation_rentals")` |
 | "Tell me more about [hotel]" | `get_stay_details` |
+| "Will it rain in X?" / "weather for [dates]" | `get_weather_forecast` |
 | "Watch this route for me" | `watch_flight_price` |
 | "Any deals on my watches?" | `list_active_watches` |
 | "Stop watching the [...] one" | `cancel_watch` |
@@ -274,6 +305,7 @@ Claude naturally chains the tools when you give it a trip-planning problem inste
 - **Flights** → [fli](https://github.com/punitarani/fli), a community library that talks to Google Flights' public endpoints directly. No API key required.
 - **Hotels & vacation rentals** → [SerpAPI's google_hotels endpoint](https://serpapi.com/google-hotels-api). Free tier 100 searches/month.
 - **Airbnb** → [pyairbnb](https://github.com/johnbalvin/pyairbnb), a community library that talks to Airbnb's GraphQL search endpoint. No API key required.
-- **Geocoding** (for the Airbnb category) → [OpenStreetMap Nominatim](https://nominatim.openstreetmap.org/). Free, no key. Used only for `category="airbnb"`.
+- **Weather** → [Open-Meteo](https://open-meteo.com/). Free, no API key, global coverage, 7-day daily forecast.
+- **Geocoding** (for `category="airbnb"` and `get_weather_forecast`) → [OpenStreetMap Nominatim](https://nominatim.openstreetmap.org/). Free, no key.
 
 All providers are queried live — no stale cached results from yesterday's prices.

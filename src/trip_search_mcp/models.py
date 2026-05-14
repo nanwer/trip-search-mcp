@@ -455,3 +455,87 @@ class GetStayDetailsInput(BaseModel):
                 f"check_out_date {self.check_out_date} must be strictly after check_in_date {self.check_in_date}"
             )
         return self
+
+
+# ----- get_weather_forecast --------------------------------------------------
+
+
+class WeatherUnits(str, Enum):
+    METRIC = "metric"     # °C, km/h
+    IMPERIAL = "imperial" # °F, mph
+
+
+class WeatherDay(BaseModel):
+    """One day of forecast — high/low, condition, precipitation, sun times.
+
+    Normalized from Open-Meteo's daily endpoint. `weather_code` is the
+    raw WMO numeric code (0–99); `condition_summary` is the human-readable
+    mapping (e.g. "Partly cloudy", "Light rain"). LLMs can use either.
+    """
+    date: IsoDate
+    high_temp: float
+    low_temp: float
+    temp_unit: Literal["C", "F"]
+    condition_summary: str
+    weather_code: int                # raw WMO code 0–99
+    precipitation_probability_percent: int | None = None
+    sunrise: str | None = None       # local time (zone is on the parent result)
+    sunset: str | None = None
+
+
+class GetWeatherForecastResult(BaseModel):
+    location: str                    # echo the resolved/input label
+    latitude: float
+    longitude: float
+    timezone: str                    # IANA, e.g. "Europe/Helsinki"
+    units: WeatherUnits
+    days: list[WeatherDay]
+
+
+class GetWeatherForecastInput(BaseModel):
+    """One of (location) or (latitude+longitude) is required.
+
+    The model accepts both — the tool resolves the location to coordinates
+    via the existing Nominatim helper if `latitude`/`longitude` are not
+    passed.
+    """
+    location: str | None = None
+    latitude: float | None = Field(default=None, ge=-90.0, le=90.0)
+    longitude: float | None = Field(default=None, ge=-180.0, le=180.0)
+    start_date: IsoDate | None = None
+    end_date: IsoDate | None = None
+    units: WeatherUnits = WeatherUnits.METRIC
+
+    @model_validator(mode="after")
+    def _has_location_or_coords(self) -> "GetWeatherForecastInput":
+        if self.location is None and (self.latitude is None or self.longitude is None):
+            raise ValueError(
+                "Either `location` (free-text city) or BOTH `latitude` and "
+                "`longitude` are required."
+            )
+        return self
+
+    @model_validator(mode="after")
+    def _date_range_within_7_days(self) -> "GetWeatherForecastInput":
+        """Open-Meteo supports 16 days but we cap at 7 to keep responses
+        useful and to match the historical NWS limit. start_date defaults
+        to today; end_date defaults to start+6 (so 7 days inclusive)."""
+        today = datetime.now(tz=timezone.utc).date()
+        start = date.fromisoformat(self.start_date) if self.start_date else today
+        end = date.fromisoformat(self.end_date) if self.end_date else (start.fromordinal(start.toordinal() + 6))
+        if start < today:
+            raise ValueError(f"start_date {start.isoformat()} is before today (UTC) {today.isoformat()}")
+        if end < start:
+            raise ValueError(f"end_date {end.isoformat()} is before start_date {start.isoformat()}")
+        from datetime import timedelta
+        if (end - today) > timedelta(days=6):
+            raise ValueError(
+                "Forecast horizon is capped at 7 days. "
+                f"end_date {end.isoformat()} is {(end-today).days+1} days from today."
+            )
+        # Normalize back to strings on the model.
+        if self.start_date is None:
+            self.start_date = start.isoformat()
+        if self.end_date is None:
+            self.end_date = end.isoformat()
+        return self

@@ -1,0 +1,19 @@
+{
+  "provider": "nws",
+  "label": "Tampere FI (expect failure)",
+  "outside_coverage": true,
+  "points_request": {
+    "url": "https://api.weather.gov/points/61.5,23.79"
+  },
+  "points_status_code": 404,
+  "points_latency_seconds": 0.382,
+  "points_response": {
+    "correlationId": "ee74e93",
+    "title": "Data Unavailable For Requested Point",
+    "type": "https://api.weather.gov/problems/InvalidPoint",
+    "status": 404,
+    "detail": "Unable to provide data for requested point 61.5,23.79",
+    "instance": "https://api.weather.gov/requests/ee74e93"
+  },
+  "forecast_response": null
+}

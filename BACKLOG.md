@@ -114,3 +114,21 @@ Three issues worth filing on `punitarani/fli` when there's a window:
   currency follows IP geolocation; users can't pick).
 - Native city-code support (we work around with our own expansion
   layer; doing it upstream would be cleaner).
+
+
+---
+
+## Trip-planning expansion (5 tracks)
+
+Tracked separately in `TRIP-PLANNING-EXPANSION-SPEC.md`. Status:
+
+| Track | Tool | Status |
+|---|---|---|
+| C | `get_weather_forecast` | **SHIPPED** (Open-Meteo, no API key) |
+| B | `convert_currency` | Queued (ECB feed, no API key) |
+| E | `search_events` | Queued (SerpAPI google_events) |
+| D | `search_activities` | Queued (SerpAPI Tripadvisor) |
+| F | `get_activity_details` | Queued (depends on Track D) |
+
+Each track is its own Claude Code session per the spec. See the spec's
+"How to hand this to Claude Code" section for hand-off prompts.

@@ -1,0 +1,102 @@
+{
+  "provider": "open-meteo",
+  "label": "Reston VA",
+  "request": {
+    "url": "https://api.open-meteo.com/v1/forecast?latitude=38.96&longitude=-77.36&daily=temperature_2m_max%2Ctemperature_2m_min%2Cprecipitation_probability_max%2Cweathercode%2Csunrise%2Csunset&timezone=auto&forecast_days=7&temperature_unit=celsius&wind_speed_unit=kmh&precipitation_unit=mm",
+    "params": {
+      "latitude": 38.96,
+      "longitude": -77.36,
+      "daily": "temperature_2m_max,temperature_2m_min,precipitation_probability_max,weathercode,sunrise,sunset",
+      "timezone": "auto",
+      "forecast_days": 7,
+      "temperature_unit": "celsius",
+      "wind_speed_unit": "kmh",
+      "precipitation_unit": "mm"
+    }
+  },
+  "status_code": 200,
+  "latency_seconds": 0.208,
+  "response": {
+    "latitude": 38.949566,
+    "longitude": -77.3655,
+    "generationtime_ms": 0.21386146545410156,
+    "utc_offset_seconds": -14400,
+    "timezone": "America/New_York",
+    "timezone_abbreviation": "GMT-4",
+    "elevation": 119.0,
+    "daily_units": {
+      "time": "iso8601",
+      "temperature_2m_max": "\u00b0C",
+      "temperature_2m_min": "\u00b0C",
+      "precipitation_probability_max": "%",
+      "weathercode": "wmo code",
+      "sunrise": "iso8601",
+      "sunset": "iso8601"
+    },
+    "daily": {
+      "time": [
+        "2026-05-14",
+        "2026-05-15",
+        "2026-05-16",
+        "2026-05-17",
+        "2026-05-18",
+        "2026-05-19",
+        "2026-05-20"
+      ],
+      "temperature_2m_max": [
+        15.7,
+        21.3,
+        27.1,
+        32.0,
+        34.1,
+        34.7,
+        21.8
+      ],
+      "temperature_2m_min": [
+        9.9,
+        7.8,
+        9.9,
+        16.1,
+        17.7,
+        20.4,
+        19.2
+      ],
+      "precipitation_probability_max": [
+        16,
+        2,
+        8,
+        29,
+        13,
+        18,
+        41
+      ],
+      "weathercode": [
+        3,
+        3,
+        3,
+        3,
+        0,
+        51,
+        51
+      ],
+      "sunrise": [
+        "2026-05-14T05:57",
+        "2026-05-15T05:56",
+        "2026-05-16T05:55",
+        "2026-05-17T05:54",
+        "2026-05-18T05:53",
+        "2026-05-19T05:53",
+        "2026-05-20T05:52"
+      ],
+      "sunset": [
+        "2026-05-14T20:14",
+        "2026-05-15T20:15",
+        "2026-05-16T20:16",
+        "2026-05-17T20:16",
+        "2026-05-18T20:17",
+        "2026-05-19T20:18",
+        "2026-05-20T20:19"
+      ]
+    }
+  }
+}
