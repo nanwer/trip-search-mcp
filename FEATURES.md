@@ -399,19 +399,21 @@ Claude naturally chains the tools when you give it a trip-planning problem inste
 
 ---
 
-## Getting Claude to render cards + buttons reliably
+## Card + button rendering is baked into the server
 
-Tool descriptions instruct Claude to render multi-result responses as **interactive HTML artifacts** (cards with prominent "Book on X" buttons). Claude usually does this for a focused query like *"find me hotels in Lisbon"*, but for a complex trip-planning chain ("plan me a trip with flights, hotel, activities, events"), Claude may default to a single prose summary instead of multiple artifacts.
+You shouldn't have to ask for it per-prompt. The server publishes **server-level instructions** (via MCP's `serverInfo.instructions` field) at handshake time. Claude Desktop reads these once when the server connects and keeps them in scope for the whole chat. They say:
 
-If you want guaranteed card rendering, **add this addendum to your prompt:**
+1. Multi-result responses MUST render as an HTML/React artifact with one card per item.
+2. Each booking partner gets a button side-by-side; never collapse to a single "best" link.
+3. Single-result responses may use prose; `convert_currency` always uses prose.
 
-> *"Render every multi-result tool output as an HTML/React artifact card with prominent buttons — don't summarize as prose."*
+This is the right place for behavioral rules that apply to every tool — it's loaded once, not per-message, and Claude treats it as system-level guidance.
 
-Or for a combined trip-plan artifact:
+If for a specific query you want extra emphasis (Claude has discretion), append:
 
-> *"Put the final trip plan in a single HTML artifact. Each item (flight, stay, activity, event) is a card with a big rounded 'Book on X' button — not a markdown link."*
+> *"Render every multi-result tool output as an HTML artifact card with prominent buttons — don't summarize as prose."*
 
-The MCP server can't force this — artifact rendering is a Claude-side decision based on the prompt context. The prompt addendum is the most reliable lever.
+Edit `src/trip_search_mcp/server.py` (look for `_SERVER_INSTRUCTIONS`) if you want to tune the directive for your own taste.
 
 ---
 

@@ -125,7 +125,61 @@ _WEATHER_CLIENT = OpenMeteoClient()
 # ECB client is always available — free, no API key, daily XML feed.
 _ECB_CLIENT = EcbClient()
 
-mcp = FastMCP("trip-search-mcp")
+# Server-level instructions. Surfaced to the LLM client at MCP handshake
+# time — i.e. ONCE when Claude Desktop loads the server, persisting across
+# the whole session. This is the right place for "behavioral rules that
+# apply to every tool" so we don't have to repeat them in each
+# TOOL_DESCRIPTION (and so the LLM doesn't have to re-read them every
+# call). The per-tool RENDERING DIRECTIVE blocks are reinforcement.
+_SERVER_INSTRUCTIONS = """\
+You are connected to trip-search-mcp — an MCP server that gives you live access to flights, hotels, vacation rentals, Airbnb, activities, events, weather, currency conversion, and persistent flight-price watches. Eleven tools total.
+
+## TWO BEHAVIORAL RULES — APPLY TO EVERY RESPONSE THAT USES THESE TOOLS
+
+### 1. Render multi-result responses as HTML artifacts, NOT prose
+
+When ANY tool in this server returns 2+ results (flights, stays, activities, events, weather days, watches), you MUST render the output as an **interactive HTML/React artifact** with one CARD per result. Each card MUST have a prominent "Book on X" / "Tickets on X" / "Cancel watch" **button** styled as a real HTML `<button>` or large rounded link — NOT a markdown hyperlink like `[Book](url)`.
+
+Plain prose with markdown hyperlinks is INSUFFICIENT — the user perceives it as un-clickable wall-of-text.
+
+Single-result responses may use prose. `convert_currency` (single value) always uses prose.
+
+When you chain multiple tools for one user request (e.g. "plan me a trip"), produce a SINGLE artifact that contains all the cards from all the tools, with section headers. Do NOT default to a prose-summary "trip plan" that hides the cards.
+
+### 2. Surface direct booking partner links, prominently
+
+When `search_stays` returns offers with a non-empty `sources` array, OR when `get_stay_details` returns `booking_partners`, list ALL of them as buttons side-by-side ("Book on Booking.com €150/night", "Book on Hotels.com €155/night"). The user wants to comparison-shop on the booking page; do not collapse to a single "best" partner.
+
+When `search_events` returns offers with a non-empty `ticket_sources` array, same rule: one "Tickets on [vendor]" button per vendor.
+
+## TOOL QUICK-REFERENCE
+
+| What the user wants | Call |
+|---|---|
+| Live flight prices for specific dates | `search_flights` |
+| Cheapest day to fly in a date range | `search_cheapest_dates` |
+| Hotels + vacation rentals + Airbnb | `search_stays` (category=all / hotels / vacation_rentals / airbnb) |
+| Drill into one stay (partner booking URLs) | `get_stay_details(property_token)` |
+| Things to do (sights + bookable tours) | `search_activities` |
+| Time-bound events (concerts, festivals) | `search_events` |
+| Weather forecast (≤7 days) | `get_weather_forecast` |
+| Currency conversion | `convert_currency` |
+| Track a flight price | `watch_flight_price` |
+| Check active watches (lazy refresh on demand) | `list_active_watches` |
+| Stop watching | `cancel_watch` |
+
+## KEY GOTCHAS
+
+- City codes (WAS, NYC, LON, PAR, TYO, …) work on `search_flights` and `search_cheapest_dates`; they auto-expand to the metro's airports.
+- For Airbnb specifically, use `category="airbnb"` on `search_stays` — Google's aggregation does NOT include Airbnb.
+- Weather forecast horizon is 7 days from today. Beyond that, answer from general knowledge ("Lisbon in June is typically warm and dry").
+- `get_stay_details.address` is always null — SerpAPI doesn't surface postal addresses. Use lat/long + nearby_places instead.
+- `search_activities` results carry no price; surface a "starting from" estimate in the card only if you note it's an estimate.
+
+Follow rule 1 strictly. Card rendering is the user-perceived quality bar for this server.
+"""
+
+mcp = FastMCP("trip-search-mcp", instructions=_SERVER_INSTRUCTIONS)
 
 
 @mcp.tool(name="search_flights", description=TOOL_DESCRIPTION)

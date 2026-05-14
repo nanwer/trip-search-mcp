@@ -206,19 +206,23 @@ Hotels and vacation-rental search use [SerpAPI](https://serpapi.com) — free ti
 
 ---
 
-## Forcing card / button rendering
+## Card / button rendering — baked into the server
 
-Each tool's description tells Claude to render multi-result responses as **interactive artifacts** with clickable booking buttons. Claude still has discretion — when several tools run in sequence ("plan me a trip"), Claude may default to one prose summary instead of N artifacts.
+The MCP server publishes **server-level instructions** at handshake time that tell Claude:
+1. Render multi-result tool output as an HTML artifact with one card per result (not as prose).
+2. Every booking partner gets its own button, side-by-side.
 
-If you want guaranteed card rendering, add this one-liner to the start of any trip-planning prompt:
+These instructions load **once** when Claude Desktop connects to the server and persist for the whole chat — you don't have to remember to add anything to your prompts.
+
+If you still see prose-with-markdown-links for a specific query (Claude has discretion), you can reinforce with:
 
 > *"Render every multi-result tool output as an HTML/React artifact card with prominent buttons — don't summarize as prose."*
 
-Or, for an even stronger directive when you want a single combined artifact:
+Or for a single combined trip-plan artifact:
 
-> *"Put the final trip plan in a single HTML artifact. Each item (flight, stay, activity, event) is a card with a big rounded 'Book on X' button — not a markdown link."*
+> *"Put the final trip plan in a single HTML artifact. Each item is a card with a big rounded 'Book on X' button — not a markdown link."*
 
-You can also save this as a Claude Desktop Style or memory so it applies everywhere.
+The directive lives in `src/trip_search_mcp/server.py` as `_SERVER_INSTRUCTIONS`. Edit it there if you want to tune the behavior for your own use.
 
 ---
 
