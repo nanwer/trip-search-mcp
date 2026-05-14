@@ -113,6 +113,37 @@ doesn't exist wastes the user's time and breeds wrong fixes.
   for very long — TTLCache default 5 min). Use it sparingly; surface
   the `booking_partners` array prominently in card rendering since
   those are the direct booking-flow links.
+- **The trip-planning expansion (Tracks B/C/D/E) shipped.** As of
+  commit `9897e36`+, the server exposes **11 MCP tools**:
+  `search_flights`, `search_cheapest_dates`, `search_stays`,
+  `get_stay_details`, `search_activities`, `search_events`,
+  `convert_currency`, `get_weather_forecast`, `watch_flight_price`,
+  `list_active_watches`, `cancel_watch`. Track F (`get_activity_details`)
+  was closed without code — see BACKLOG.md for the Phase 0 verdict.
+- **`search_activities`** uses SerpAPI's Tripadvisor engine with
+  `ssrc=A`. Results carry no price and no GPS coordinates — those
+  fields aren't on the search endpoint. Don't promise a price; if the
+  user asks, say "click through to Tripadvisor for the actual price".
+- **`search_events`** uses SerpAPI's google_events engine. The
+  `htichips` parameter accepts named ranges only
+  (today/tomorrow/week/weekend/next_week/month/next_month) — NOT
+  arbitrary date strings. For specific calendar months bake the
+  month/year into the `q` string instead.
+- **`get_weather_forecast`** uses Open-Meteo (no API key, global,
+  free). Hard cap of 7 days from today. For longer-range "typically
+  what's the weather like in October" questions, answer from general
+  knowledge — the tool isn't the right answer.
+- **`convert_currency`** uses the European Central Bank's daily feed
+  (no API key, free). 29+ currencies, EUR-pivoted internally.
+  Same-currency conversions short-circuit without fetching.
+- **Server-level `instructions` are LIVE** (added in `9897e36`).
+  FastMCP's `instructions=...` kwarg surfaces a string at MCP
+  handshake time that Claude reads ONCE per session and keeps in
+  scope across all messages. Used for the card-rendering directive
+  and tool quick-reference. Located at the top of `server.py` as
+  `_SERVER_INSTRUCTIONS`. **Edit there for behavioral rules that
+  apply to every tool** — don't repeat them across individual
+  TOOL_DESCRIPTIONs.
 - **City-expansion fanout is SERIAL, not parallel.** Earlier code used
   `asyncio.gather` to fan out `WAS → IAD/DCA/BWI` searches in parallel.
   That triggered Google's rate limiter, fli retried with backoff on
@@ -135,6 +166,12 @@ doesn't exist wastes the user's time and breeds wrong fixes.
 
 ## Useful repo entry points
 
+- `FEATURES.md` — user-facing catalog of capabilities with example
+  prompts. Read first if you need to understand what the server can do
+  end-to-end.
+- `TRIP-PLANNING-EXPANSION-SPEC.md` — phase plan for the 5-track
+  expansion (weather, currency, events, activities, drill-down).
+  Tracks C/B/E/D shipped; Track F closed as not viable.
 - `SEARCH-STAYS-SPEC.md` — phase plan for the unified stays tool (all
   phases shipped).
 - `MIGRATION-FLI-SPEC.md` — phased flights migration plan (Phase 1 + 2
@@ -143,11 +180,21 @@ doesn't exist wastes the user's time and breeds wrong fixes.
 - `scripts/verify_fli.py` — capture fresh fli fixtures.
 - `scripts/verify_serpapi_hotels.py` — capture fresh hotel fixture.
 - `scripts/verify_vacation_rentals.py` — capture fresh vacation-rentals
-  fixture + compare against the hotels response (used for Phase 0 of
-  the search_stays work).
-- The latest behavior-affecting change shipped with the search_stays
-  rollout: `search_hotels` is GONE, replaced by `search_stays` with a
-  `category` dispatcher. If a Desktop subprocess predates this commit,
-  it's still running search_hotels and the user should ⌘Q + reopen
-  (AND update their config — `-m trip_search_mcp.server` is unchanged,
-  but the tool name in the menu changed).
+  fixture + compare against the hotels response.
+- `scripts/verify_property_details.py` — capture get_stay_details
+  fixture.
+- `scripts/verify_google_events.py` — capture search_events fixture.
+- `scripts/verify_tripadvisor_activities.py` — capture
+  search_activities fixture.
+- `scripts/verify_tripadvisor_place_details.py` — captures the
+  underwhelming place_details response that closed out Track F.
+- `scripts/verify_weather_providers.py` — Open-Meteo + NWS comparison
+  (Track C Phase 0).
+- `scripts/verify_ecb_rates.py` — ECB daily-rates fetch (Track B
+  Phase 0).
+- The latest behavior-affecting change shipped with `9897e36`: the
+  server now exposes 11 tools (was 7), and the
+  `_SERVER_INSTRUCTIONS` block at the top of `server.py` is the
+  authoritative place for behavioral rules. If a Desktop subprocess
+  predates `9897e36`, it won't see the card-rendering directive — the
+  user should ⌘Q + reopen.

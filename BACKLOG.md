@@ -70,9 +70,10 @@ alive. Instead we use lazy refresh: every call to
 than `refresh_after_hours` (default 6h) and surfaces alerts in the
 response.
 
-The server now exposes **7 MCP tools total**: search_flights,
-search_cheapest_dates, search_stays, get_stay_details,
-watch_flight_price, list_active_watches, cancel_watch.
+At the time of this item's completion, the server exposed **7 MCP
+tools**. The total has since grown to 11 with the expansion tracks
+(weather, currency, events, activities) — see the table further down
+in this file.
 
 ---
 
