@@ -606,3 +606,56 @@ class EventOffer(BaseModel):
 
 class SearchEventsResult(BaseModel):
     results: list[EventOffer]
+
+
+# ----- search_activities -----------------------------------------------------
+
+
+class ActivityType(str, Enum):
+    """The two place_type values SerpAPI's Tripadvisor ssrc=A surfaces.
+
+    Per Phase 0:
+    - ATTRACTION_PRODUCT → bookable experience (a tour with a Viator URL
+      surfacing via Track F's get_activity_details).
+    - ATTRACTION → free / non-bookable sight (a landmark, viewpoint,
+      neighborhood). No Viator URL.
+    """
+    SIGHT = "sight"
+    EXPERIENCE = "experience"
+
+
+class PlaceTypeFilter(str, Enum):
+    """Optional input filter to scope `search_activities` results."""
+    SIGHTS = "sights"
+    EXPERIENCES = "experiences"
+    BOTH = "both"
+
+
+class SearchActivitiesInput(BaseModel):
+    location: str = Field(min_length=1)
+    query: str | None = None
+    place_type_filter: PlaceTypeFilter = PlaceTypeFilter.BOTH
+    min_rating: float | None = Field(default=None, ge=0.0, le=5.0)
+    max_results: int = Field(default=15, ge=1, le=50)
+
+
+class HighlightedReview(BaseModel):
+    text: str
+    mention_count: int | None = None
+
+
+class ActivityOffer(BaseModel):
+    offer_id: str                        # SerpAPI's place_id, stable per property
+    name: str
+    activity_type: ActivityType
+    rating: float | None
+    review_count: int | None
+    description: str | None
+    location: str | None                 # "Lisbon, Portugal"
+    thumbnail: str | None                # NOT hotlink-safe; don't render as <img>
+    highlighted_review: HighlightedReview | None
+    booking_url: str                     # Tripadvisor listing URL
+
+
+class SearchActivitiesResult(BaseModel):
+    results: list[ActivityOffer]

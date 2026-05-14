@@ -127,8 +127,44 @@ Tracked separately in `TRIP-PLANNING-EXPANSION-SPEC.md`. Status:
 | C | `get_weather_forecast` | **SHIPPED** (Open-Meteo, no API key) |
 | B | `convert_currency` | **SHIPPED** (ECB feed, no API key) |
 | E | `search_events` | **SHIPPED** (SerpAPI google_events, ticket-vendor multi-source) |
-| D | `search_activities` | Queued (SerpAPI Tripadvisor) |
-| F | `get_activity_details` | Queued (depends on Track D) |
+| D | `search_activities` | **SHIPPED** (SerpAPI Tripadvisor ssrc=A) |
+| F | `get_activity_details` | **NOT VIABLE** (Phase 0 verdict — see below) |
 
 Each track is its own Claude Code session per the spec. See the spec's
 "How to hand this to Claude Code" section for hand-off prompts.
+
+
+---
+
+### Track F closure note (added 2026-05-13)
+
+`get_activity_details` was originally planned as the activity drill-down
+tool — pass a `place_id` from a `search_activities` result, get back
+price + duration + direct Viator URL + long-form description.
+
+Phase 0 verification against SerpAPI's `engine=tripadvisor_place` for two
+real place_ids (one ATTRACTION, one ATTRACTION_PRODUCT) returned only:
+
+```
+{
+  "place_result": {
+    "type": "hotel",          // always "hotel" — incorrect for activities
+    "images": [<20 image URLs on hotlink-protected CDN>]
+  }
+}
+```
+
+NO price. NO duration. NO description. NO Viator URL. NO booking info.
+The endpoint is essentially a photo-gallery endpoint, and the photos are
+hotlink-protected (same CDN family as the hotel images we already chose
+not to render).
+
+**Verdict: not viable as scoped.** Shipping a drill-down tool that
+returns only image URLs (which can't be rendered anyway) would be
+misleading. Closed without code.
+
+If a future SerpAPI release adds the rich fields, or if a different
+provider (Viator's own API, Tripadvisor Content API directly) surfaces
+them, this is worth revisiting. Fixture captured at
+`tests/fixtures/serpapi_tripadvisor_place_details.json` for future
+comparison.

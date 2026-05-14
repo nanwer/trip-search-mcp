@@ -139,7 +139,34 @@ What you'll get back:
 
 ---
 
-## 5. Search events — what's happening while I'm there
+## 5. Search activities — things to do at a destination
+
+*(uses `search_activities`, requires SERPAPI_KEY)*
+
+Find sights and bookable experiences (cooking classes, boat tours, museums, walking tours, …) at a destination. Powered by Tripadvisor's Things-to-Do listing via SerpAPI.
+
+**You can ask Claude:**
+
+- *"What should I do in Lisbon?"* → Claude asks a clarifying question if your interests aren't known, then searches.
+- *"Find cooking classes in Lisbon."* → `query="cooking class"`.
+- *"Boat tours in Lisbon, only bookable ones."* → `place_type_filter="experiences"`.
+- *"Top-rated museums in Paris."* → `query="museums"`, `min_rating=4.5`.
+- *"Things to do in Notting Hill, London."*
+
+Each card shows: name + sight/experience badge, rating + review count, location, a 1-line highlighted review, and a "Find on Tripadvisor" button.
+
+### Sights vs experiences
+
+- **Sights** (`activity_type="sight"`) — free or just-walk-in attractions: museums, viewpoints, neighborhoods.
+- **Experiences** (`activity_type="experience"`) — bookable tours and classes with a Tripadvisor / Viator listing.
+
+`place_type_filter` accepts `"sights"`, `"experiences"`, or `"both"` (default).
+
+> **Heads-up on what's not in the response:** no `price`, no exact GPS coordinates, no direct Viator booking URL. Tripadvisor's search endpoint doesn't surface those — you have to click the listing link to see them. A `get_activity_details` drill-down was planned but Phase 0 verification revealed SerpAPI's Tripadvisor place_details endpoint only returns image URLs (no price, duration, or Viator URL), so that tool wasn't built. See BACKLOG.md.
+
+---
+
+## 6. Search events — what's happening while I'm there
 
 *(uses `search_events`, requires SERPAPI_KEY)*
 
@@ -159,7 +186,7 @@ Each event card surfaces title, full date string (e.g. "Fri, Jul 17, 8 – 11 PM
 
 ---
 
-## 6. Convert currencies
+## 7. Convert currencies
 
 *(uses `convert_currency`)*
 
@@ -178,7 +205,7 @@ Supports 29+ currencies: USD, EUR, JPY, GBP, CAD, AUD, CHF, SEK, NOK, DKK, INR, 
 
 ---
 
-## 7. Check the weather
+## 8. Check the weather
 
 *(uses `get_weather_forecast`)*
 
@@ -198,7 +225,7 @@ Each day comes back with: max/min temp, condition summary (clear / partly cloudy
 
 ---
 
-## 8. Track flight prices — "tell me if it gets cheaper"
+## 9. Track flight prices — "tell me if it gets cheaper"
 
 *(uses `watch_flight_price`)*
 
@@ -212,7 +239,7 @@ Register a price threshold on a specific route + date. The watch persists foreve
 
 Claude tells you a `watch_id` you can use to cancel later.
 
-### 8a. Check on your watches
+### 9a. Check on your watches
 
 *(uses `list_active_watches`)*
 
@@ -227,7 +254,7 @@ You'll see each watch's current price, how far it is from your threshold ("€53
 
 > **How fresh is "fresh"?** By default, watches refresh every 6 hours. Within that window, the answer comes from cache (no extra API calls). If you want a forced refresh, ask "force a refresh on all my watches".
 
-### 8b. Cancel a watch
+### 9b. Cancel a watch
 
 *(uses `cancel_watch`)*
 
@@ -291,6 +318,16 @@ Claude naturally chains the tools when you give it a trip-planning problem inste
 3. *"Want me to find a hotel in DC for May 18–22 to go with it?"* → `search_stays(location="Washington DC", check_in_date="2026-05-18", ...)`.
 4. Quotes the combined trip cost.
 
+### Workflow J: "Plan a themed day"
+
+**You ask:** *"I'm in Lisbon next week and I love food. Build me a half-day food itinerary — somewhere to eat lunch (maybe a cooking class), then a walking tour, then drinks."*
+
+**Claude does:**
+1. Calls `search_activities(location="Lisbon", query="cooking class")` for the cooking class.
+2. Calls `search_activities(location="Lisbon", query="food walking tour")` for the walking tour.
+3. Optionally `search_events(location="Lisbon", query="wine tasting", date_filter="next_week")` for an evening event.
+4. Sequences the three into a half-day with travel-time gaps and presents as one itinerary.
+
 ### Workflow I: "Anchor a trip around a specific event"
 
 **You ask:** *"Is BTS playing anywhere I could realistically fly to in July? If yes, find me flights and a hotel for those dates."*
@@ -352,6 +389,7 @@ Claude naturally chains the tools when you give it a trip-planning problem inste
 | "Find me an Airbnb" | `search_stays(category="airbnb")` |
 | "Find me a vacation rental" | `search_stays(category="vacation_rentals")` |
 | "Tell me more about [hotel]" | `get_stay_details` |
+| "Things to do in X" / "cooking classes" / "tours" | `search_activities` |
 | "What's happening in X?" / "concerts in X" / "any events" | `search_events` |
 | "Will it rain in X?" / "weather for [dates]" | `get_weather_forecast` |
 | "How much is X in Y?" / "convert price to my currency" | `convert_currency` |
@@ -369,6 +407,7 @@ Claude naturally chains the tools when you give it a trip-planning problem inste
 - **Weather** → [Open-Meteo](https://open-meteo.com/). Free, no API key, global coverage, 7-day daily forecast.
 - **Currency rates** → [European Central Bank daily reference rates](https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml). Free, no API key, 29+ currencies, updates daily ~16:00 CET.
 - **Events** → [SerpAPI's google_events engine](https://serpapi.com/google-events-api). Requires the same SERPAPI_KEY as stays. Surfaces ticket vendor links (Viagogo, StubHub, Eventbrite, Spotify Concerts, etc.).
+- **Activities** → [SerpAPI's Tripadvisor engine](https://serpapi.com/tripadvisor-api) (`ssrc=A` for Things to Do). Requires the same SERPAPI_KEY.
 - **Geocoding** (for `category="airbnb"` and `get_weather_forecast`) → [OpenStreetMap Nominatim](https://nominatim.openstreetmap.org/). Free, no key.
 
 All providers are queried live — no stale cached results from yesterday's prices.

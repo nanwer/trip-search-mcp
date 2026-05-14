@@ -1,0 +1,456 @@
+{
+  "search_metadata": {
+    "id": "6a058f669f0700781d4b4cd5",
+    "status": "Success",
+    "json_endpoint": "https://serpapi.com/searches/Aq2TSoPmdSNBz6eYx9w_Ew/6a058f669f0700781d4b4cd5.json",
+    "created_at": "2026-05-14 09:01:26 UTC",
+    "processed_at": "2026-05-14 09:01:26 UTC",
+    "tripadvisor_url": "https://www.tripadvisor.com/Search?q=cooking+class+Lisbon&ssrc=A&geo=1&offset=0&limit=30",
+    "raw_html_file": "https://serpapi.com/searches/Aq2TSoPmdSNBz6eYx9w_Ew/6a058f669f0700781d4b4cd5.html",
+    "prettify_html_file": "https://serpapi.com/searches/Aq2TSoPmdSNBz6eYx9w_Ew/6a058f669f0700781d4b4cd5.prettify",
+    "total_time_taken": 0.99
+  },
+  "search_parameters": {
+    "engine": "tripadvisor",
+    "q": "cooking class Lisbon",
+    "tripadvisor_domain": "www.tripadvisor.com",
+    "ssrc": "A",
+    "offset": 0,
+    "limit": 30
+  },
+  "places": [
+    {
+      "position": 1,
+      "title": "Cooking Lisbon",
+      "place_type": "ATTRACTION",
+      "place_id": "5603536",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g189158-d5603536-Reviews-Cooking_Lisbon-Lisbon_Lisbon_District_Central_Portugal.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=5603536&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Cooking Lisbon (Portugal) provides Portuguese Cooking Experiences through several services. All classes are hands-on and participants get unlimited access to all recipes. Regular services : Pasty Class, Cooking Classes, Seafood Experiences, Market Tour with Cooking Class and Gourmet Portuguese Class. Groups : Bachelorette parties, corporate team building , winemaker for a day experience, cheeses and wines experiences.",
+      "rating": 4.8,
+      "reviews": 1054,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/ba/ba/c2/mise-en-place-team-building.jpg",
+      "highlighted_review": {
+        "text": "I booked a cooking class and then days before the class, Cooking Lisbon",
+        "highlighted_texts": [
+          "cooking",
+          "class",
+          "class",
+          "Cooking",
+          "Lisbon"
+        ],
+        "mention_count": 138
+      }
+    },
+    {
+      "position": 2,
+      "title": "Portuguese Cooking Experience in Lisbon",
+      "place_type": "ATTRACTION_PRODUCT",
+      "place_id": "11475796",
+      "link": "https://www.tripadvisor.com/AttractionProductReview-g189158-d11475796-Portuguese_Cooking_Experience_in_Lisbon-Lisbon_Lisbon_District_Central_Portugal.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=11475796&tripadvisor_domain=www.tripadvisor.com",
+      "description": "During this cooking experience in Lisbon, learn to prepare Portuguese dishes under the guidance of an expert chef. Instead of just eating culinary classics, master basic techniques, prepare ingredients, taste wine and olive oil, and learn about the history of Portuguese cuisine. Enjoy the satisfaction of eating a 3-course meal that you\u2019ve prepared while chatting with fellow foodies.",
+      "rating": 4.8,
+      "reviews": 119,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/33/0a/6a/07/caption.jpg",
+      "highlighted_review": {
+        "text": "If you like to be a part of the cooking experience then this class is for you.",
+        "mention_count": 5
+      }
+    },
+    {
+      "position": 3,
+      "title": "Lisbon Portuguese Cooking Class with 3-Course Dinner",
+      "place_type": "ATTRACTION_PRODUCT",
+      "place_id": "11849468",
+      "link": "https://www.tripadvisor.com/AttractionProductReview-g189158-d11849468-Lisbon_Portuguese_Cooking_Class_with_3_Course_Dinner-Lisbon_Lisbon_District_Centra.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=11849468&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Learn the secrets and spices of the Portuguese kitchen at a Lisbon cooking class pairing\u00a0hands-on cooking experience with Portuguese wines and delicious food. You'll nibble on olives, chorizo, and fresh bread as you prepare a 3-course menu that uses seasonal ingredients in a fish dish, meat recipe, and dessert, then sit down to enjoy the meal you've prepared. Limited to a small group to ensure personal help from the chef, this cooking class is a great introduction to Portuguese cuisine.",
+      "rating": 4.9,
+      "reviews": 265,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/33/0a/6d/51/caption.jpg",
+      "highlighted_review": {
+        "text": "Chef Paulo and Fernanda made this cooking class an educational and very enjoyable experience!",
+        "mention_count": 4
+      }
+    },
+    {
+      "position": 4,
+      "title": "Kiss the Cook",
+      "place_type": "ATTRACTION",
+      "place_id": "7108627",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g189158-d7108627-Reviews-Kiss_the_Cook-Lisbon_Lisbon_District_Central_Portugal.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=7108627&tripadvisor_domain=www.tripadvisor.com",
+      "rating": 4.7,
+      "reviews": 72,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/07/e8/49/9f/kiss-the-cook.jpg",
+      "highlighted_review": {
+        "mention_count": 4
+      }
+    },
+    {
+      "position": 5,
+      "title": "Lisbon Cooking Academy",
+      "place_type": "ATTRACTION",
+      "place_id": "13114919",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g189158-d13114919-Reviews-Lisbon_Cooking_Academy-Lisbon_Lisbon_District_Central_Portugal.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=13114919&tripadvisor_domain=www.tripadvisor.com",
+      "description": "We love food, and believe that we can use it to create and experience unforgettable moments. That\u2019s why in 2017 we opened the Lisbon Cooking Academy, a school where everybody can learn and share their food experiences, always in a casual and relaxed atmosphere. We love to have guests from all over the world to share with them the best of Portugal\u2019s rich and diverse gastronomy.",
+      "rating": 5,
+      "reviews": 159,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/16/14/25/0a/attention-please.jpg",
+      "highlighted_review": {
+        "mention_count": 33
+      }
+    },
+    {
+      "position": 6,
+      "title": "Time Out Market Lisboa",
+      "place_type": "ATTRACTION",
+      "place_id": "3214902",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g189158-d3214902-Reviews-Time_Out_Market_Lisboa-Lisbon_Lisbon_District_Central_Portugal.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=3214902&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Time Out Market, created from scratch by Time Out Portugal, has all the very best under one roof in Lisbon. The market is home to top-notch restaurants, bars, a cooking school and a high-end music venue. Here, you can find some of the freshest fish, meat and fruit in town, try the tastiest local wine and dine at over 40 restaurants specializing in both Portuguese cuisine and food from around the world. Sit inside to enjoy the ambience of the century-old market or outside to bask in the Lisbon sun. You can easily reach the market with the Lisbon Metro.",
+      "rating": 4.3,
+      "reviews": 25122,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/16/8c/72/38/time-out-market-lisboa.jpg",
+      "highlighted_review": {
+        "mention_count": 4
+      }
+    },
+    {
+      "position": 7,
+      "title": "Pastel de Nata Masterclass at Bakery Nat'elier in Downtown Lisbon",
+      "place_type": "ATTRACTION_PRODUCT",
+      "place_id": "15041107",
+      "link": "https://www.tripadvisor.com/AttractionProductReview-g189158-d15041107-Pastel_de_Nata_Masterclass_at_Bakery_Nat_elier_in_Downtown_Lisbon-Lisbon_Lisbon_Di.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=15041107&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Go behind the scenes and learn about pastry making at a real Portuguese bakery with this exclusive Pastel de Nata workshop. Get hands-on in a professional setting as you expertly craft your own pastry and custard alongside a host who can answer any questions you may have. At the end, enjoy the fruits of your labor paired with barista-prepared hot or cold drinks.",
+      "rating": 5,
+      "reviews": 269,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/32/97/cd/0d/caption.jpg",
+      "highlighted_review": {
+        "text": "I am a cooking instructor and took this class so I could learn the technique to teach it when I return to the states.",
+        "mention_count": 5
+      }
+    },
+    {
+      "position": 8,
+      "title": "Compadre Cooking School",
+      "place_type": "ATTRACTION",
+      "place_id": "15535550",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g189158-d15535550-Reviews-Compadre_Cooking_School-Lisbon_Lisbon_District_Central_Portugal.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=15535550&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Join us at Compadre Cooking School for the most authentic hands on cooking classes and lessons in Lisbon. Experience traditional Portuguese food and gastronomy at our kitchen! Cooking is like life, meant for sharing! Doesn\u2019t matter if you\u00b4re travelling alone, with your better half, friends or family, at our kitchen everyone will have a chance to discover the tastiest aspect of Portuguese culture, our gastronomy! Our Compadres will be here to welcome you!",
+      "rating": 4.9,
+      "reviews": 284,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/18/6e/ce/ef/danish-ambassadors-of.jpg",
+      "highlighted_review": {
+        "mention_count": 7
+      }
+    },
+    {
+      "position": 9,
+      "title": "Pastel De Nata Masterclass By Nat'elier",
+      "place_type": "ATTRACTION",
+      "place_id": "14963612",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g189158-d14963612-Reviews-Pastel_De_Nata_Masterclass_By_Nat_elier-Lisbon_Lisbon_District_Central_Portugal.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=14963612&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Nat\u2019elier welcomes guests to a Pastel de Nata Masterclass inside a real professional bakery in the heart of Lisbon. Led by one of our in-house pastry chefs, the class is practical, immersive, and designed so that each step is clearly explained, making the experience approachable and enjoyable even for beginners. Our chefs are trained by Chef Jo\u00e3o Batalha, co-founder of Nat\u2019elier, who has taught more than 30,000 students worldwide. Over the course of two hours, you will make Portugal\u2019s most iconic pastry from scratch, from hand-rolling puff pastry to preparing the custard, shaping the tarts, and baking them in a professional oven. This is a truly hands-on experience, with each participant making at least 3 past\u00e9is de nata by hand while learning the traditional method in a real production kitchen. At the end of the class, you will enjoy your warm past\u00e9is de nata with a hot or cold drink prepared by Nat\u2019elier\u2019s baristas.",
+      "rating": 5,
+      "reviews": 66,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2c/69/dc/5a/team-building-at-nat.jpg"
+    },
+    {
+      "position": 10,
+      "title": "Baipai Thai Cooking School",
+      "place_type": "ATTRACTION",
+      "place_id": "631407",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g293916-d631407-Reviews-Baipai_Thai_Cooking_School-Bangkok.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=631407&tripadvisor_domain=www.tripadvisor.com",
+      "description": "A Unique Thai Cooking School in Bangkok. If you keen on learning new experience, love cooking or finding fun activity to do and enjoy eating your good Thai Food. Baipai is offering you the cooking experiences. It's only THB2,200.-nett per person per half day class",
+      "rating": 4.9,
+      "reviews": 813,
+      "location": "Bangkok, Thailand",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/10/9f/05/5c/demon-time-before-team.jpg"
+    },
+    {
+      "position": 11,
+      "title": "Sydney Cooking School",
+      "place_type": "ATTRACTION",
+      "place_id": "7263984",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g910794-d7263984-Reviews-Sydney_Cooking_School-Neutral_Bay_North_Sydney_Greater_Sydney_New_South_Wales.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=7263984&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Sydney Cooking School teaches practical, entertaining and informative cooking classes specialising in International cuisines, desserts and a range of outdoor BBQ classes such as Aussie BBQ and American BBQ. If you enjoy delicious, creative and home-cooked food, cooking and eating in a friendly and fun atmosphere then visit Sydney Cooking School for a fabulous and fun cooking experience!",
+      "rating": 4.8,
+      "reviews": 143,
+      "location": "Neutral Bay, New South Wales, Australia",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/22/3b/c8/88/sydney-cooking-school.jpg"
+    },
+    {
+      "position": 12,
+      "title": "Culinary Studio CulinaryOn",
+      "place_type": "ATTRACTION",
+      "place_id": "4074811",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g298484-d4074811-Reviews-Culinary_Studio_CulinaryOn-Moscow_Central_Russia.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=4074811&tripadvisor_domain=www.tripadvisor.com",
+      "description": "CULINARYON is the biggest and most prestigious cooking studio in Moscow custom-built to provide fun cooking experience. The place to celebrate a special evening in a cozy atmosphere. Our beautiful facilities are very flexible and developed for all types of events: culinary classes, Birthday Party, Hen's Night, Teambuilding, Conference (in a conference room). Cooking is fun!",
+      "rating": 4.8,
+      "reviews": 1209,
+      "location": "Moscow, Russia",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/22/6d/c3/32/350.jpg"
+    },
+    {
+      "position": 13,
+      "title": "Samui Institute of Thai Culinary Arts",
+      "place_type": "ATTRACTION",
+      "place_id": "1022245",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g676072-d1022245-Reviews-Samui_Institute_of_Thai_Culinary_Arts-Chaweng_Bophut_Ko_Samui_Surat_Thani_Provinc.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=1022245&tripadvisor_domain=www.tripadvisor.com",
+      "rating": 4.9,
+      "reviews": 354,
+      "location": "Chaweng, Thailand",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0f/b2/74/e0/photo1jpg.jpg"
+    },
+    {
+      "position": 14,
+      "title": "Helen's Kitchen Cooking School",
+      "place_type": "ATTRACTION",
+      "place_id": "8388707",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g41698-d8388707-Reviews-Helen_s_Kitchen_Cooking_School-Natick_Massachusetts.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=8388707&tripadvisor_domain=www.tripadvisor.com",
+      "description": "We teach hands-on cooking and baking classes for enthusiastic home cooks. Topics include: knife skills, fish, meat, vegetables, beans & grains, sushi, pies & tarts, French pastry, pizza, eggs, grilling, and many more. We also host cooking parties for birthdays, anniversaries, corporate team building, and any special events.",
+      "rating": 5,
+      "reviews": 92,
+      "location": "Natick, Massachusetts",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/08/6a/b2/fa/helen-s-kitchen-cooking.jpg"
+    },
+    {
+      "position": 15,
+      "title": "CulinaryOn",
+      "place_type": "ATTRACTION",
+      "place_id": "8545341",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g294265-d8545341-Reviews-CulinaryOn-Singapore.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=8545341&tripadvisor_domain=www.tripadvisor.com",
+      "description": "CulinaryOn is an exciting and modern space designed for corporate events, parties, private events & dining and world-class cooking experiences. Located in the heart of Robertson Quay, CulinaryOn is the largest culinary edutainment studio in Singapore and Asia, and is able to cater to a variety of events from anywhere between 2-150 participants. As \u2018The Disneyland of cooking schools\u2019, CulinaryOn adopts an edutainment approach in its programmes, curating memorable and personalised culinary themed experiences for everyone to have great fun together.",
+      "rating": 4.7,
+      "reviews": 641,
+      "location": "Singapore, Singapore",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/85/e2/76/our-signature-pasta-making.jpg"
+    },
+    {
+      "position": 16,
+      "title": "Cook and Dine",
+      "place_type": "ATTRACTION",
+      "place_id": "6585995",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g187849-d6585995-Reviews-Cook_and_Dine-Milan_Lombardy.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=6585995&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Cooking lessons,dine and socialize. Morning and evening session of four hours. We cook four recipes (see all the different menu and calendar). Aurora is the guest and certified cook.She will \"open the door\" of her house for a special lunch or dinner cooked by...You! Group of 6 people maximum.Close to Duomo",
+      "rating": 4.9,
+      "reviews": 389,
+      "location": "Milan, Lombardy, Italy",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/9c/c1/19/how-many-thing-can-we.jpg"
+    },
+    {
+      "position": 17,
+      "title": "Culinary studio Clever",
+      "place_type": "ATTRACTION",
+      "place_id": "3840562",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g298484-d3840562-Reviews-Culinary_studio_Clever-Moscow_Central_Russia.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=3840562&tripadvisor_domain=www.tripadvisor.com",
+      "rating": 4.8,
+      "reviews": 441,
+      "location": "Moscow, Russia",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/03/cb/b6/caption.jpg"
+    },
+    {
+      "position": 18,
+      "title": "La Kitchenette de Miss T\u00e2m",
+      "place_type": "ATTRACTION",
+      "place_id": "8703202",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g187147-d8703202-Reviews-La_Kitchenette_de_Miss_Tam-Paris_Ile_de_France.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=8703202&tripadvisor_domain=www.tripadvisor.com",
+      "rating": 5,
+      "reviews": 336,
+      "location": "Paris, Ile-de-France, France",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/16/db/5e/d4/atelier-de-la-kitchenette.jpg"
+    },
+    {
+      "position": 19,
+      "title": "Accademia del Gusto",
+      "place_type": "ATTRACTION",
+      "place_id": "7944249",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g298484-d7944249-Reviews-Accademia_del_Gusto-Moscow_Central_Russia.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=7944249&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Culinary Studio Italian cuisine Accademia del Gusto organizes and conducts cooking classes , culinary teambuilding , PR- actions , business breakfasts, friendly and family holidays on their area and on the road.",
+      "rating": 4.9,
+      "reviews": 322,
+      "location": "Moscow, Russia",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/23/7f/64/f1/caption.jpg"
+    },
+    {
+      "position": 20,
+      "title": "Cuisine sur Cours atelier gastronomique",
+      "place_type": "ATTRACTION",
+      "place_id": "1894256",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g187234-d1894256-Reviews-Cuisine_sur_Cours_atelier_gastronomique-Nice_French_Riviera_Cote_d_Azur_Provence_.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=1894256&tripadvisor_domain=www.tripadvisor.com",
+      "description": "The fisrt cooking school on the riviera, creates in 2006. Our cooking classes are open to all levels and conducted in a warm and friendly atmosphere ! If you love cooking, eating well, or hosting dinner parties, but too often you lack time or ideas.... During the course we will create a meal (based on a specific food, a theme or a menu) that you will eat afterwards in a pleasant setting. We will provide you with the products and recipes, and we will lend you an apron and a kitchen towel on the day. With no more than 9 people per class, each of the participants will be able to contribute to the preparation of the meal and share their knowledge or ask questions.",
+      "rating": 4.6,
+      "reviews": 106,
+      "location": "Nice, French Riviera - Cote d'Azur, France",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/13/5f/02/ee/chocolate-souffle.jpg"
+    },
+    {
+      "position": 21,
+      "title": "Blue Lagoon Cooking School",
+      "place_type": "ATTRACTION",
+      "place_id": "2638958",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g580110-d2638958-Reviews-Blue_Lagoon_Cooking_School-Ko_Chang_Trat_Province.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=2638958&tripadvisor_domain=www.tripadvisor.com",
+      "rating": 5,
+      "reviews": 178,
+      "location": "Ko Chang, Thailand",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/07/71/3e/c7/blue-lagoon-cooking-school.jpg"
+    },
+    {
+      "position": 22,
+      "title": "Cuisine Aptitude",
+      "place_type": "ATTRACTION",
+      "place_id": "3620308",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g187075-d3620308-Reviews-Cuisine_Aptitude-Strasbourg_Bas_Rhin_Grand_Est.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=3620308&tripadvisor_domain=www.tripadvisor.com",
+      "rating": 4.8,
+      "reviews": 255,
+      "location": "Strasbourg, Grand Est, France",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/23/6b/30/df/assaisonnement.jpg"
+    },
+    {
+      "position": 23,
+      "title": "Culinary Studio Julia Vysotskaya",
+      "place_type": "ATTRACTION",
+      "place_id": "3355237",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g298484-d3355237-Reviews-Culinary_Studio_Julia_Vysotskaya-Moscow_Central_Russia.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=3355237&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Culinary Studio Julia Vysotskaya is first and only studio in Moscow there each student have it own working place with whole equipment and grocery to cook every dish from a scratch. Its also a great place to celebrate birthday or just get together for dinner cooked by yourself.",
+      "rating": 4.5,
+      "reviews": 288,
+      "location": "Moscow, Russia",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2c/2d/2a/e4/caption.jpg"
+    },
+    {
+      "position": 24,
+      "title": "Pastel de Nata Cooking Class in Lisbon",
+      "place_type": "ATTRACTION_PRODUCT",
+      "place_id": "15810122",
+      "link": "https://www.tripadvisor.com/AttractionProductReview-g189158-d15810122-Pastel_de_Nata_Cooking_Class_in_Lisbon-Lisbon_Lisbon_District_Central_Portugal.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=15810122&tripadvisor_domain=www.tripadvisor.com",
+      "description": "One of Portugal's most famous dishes is the pastel de nata, or custard tart. This delicious dessert can be found in every cafe around the country but you can learn to prepare the tasty treat during a hands-on cooking class right in the heart of Lisbon. You also learn to make another Portuguese pastry, making this class a 2-for-1 special.",
+      "rating": 4.9,
+      "reviews": 86,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/30/4e/29/4e/caption.jpg",
+      "highlighted_review": {
+        "text": "Wonderful small group cooking class.",
+        "mention_count": 5
+      }
+    },
+    {
+      "position": 25,
+      "title": "Yangshuo Cooking School",
+      "place_type": "ATTRACTION",
+      "place_id": "968612",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g303712-d968612-Reviews-Yangshuo_Cooking_School-Yangshuo_County_Guangxi.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=968612&tripadvisor_domain=www.tripadvisor.com",
+      "description": "China's first cooking school for foreigners. Now in our 11th year of business. A lot of fun and informative too! Come and join us for a class. Or a week long course in 2015",
+      "rating": 4.7,
+      "reviews": 202,
+      "location": "Yangshuo County, Guangxi, China",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/03/ef/ac/4f/yangshuo-cooking-school.jpg"
+    },
+    {
+      "position": 26,
+      "title": "Sri Lankan Cookery Class",
+      "place_type": "ATTRACTION",
+      "place_id": "7217592",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g644047-d7217592-Reviews-Sri_Lankan_Cookery_Class-Unawatuna_Galle_District_Southern_Province.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=7217592&tripadvisor_domain=www.tripadvisor.com",
+      "rating": 4.7,
+      "reviews": 99,
+      "location": "Unawatuna, Sri Lanka",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/07/84/db/d0/das-resultat.jpg"
+    },
+    {
+      "position": 27,
+      "title": "Pastel de Nata Pastry Class: Bake and Enjoy Your Own Treats",
+      "place_type": "ATTRACTION_PRODUCT",
+      "place_id": "23702508",
+      "link": "https://www.tripadvisor.com/AttractionProductReview-g189158-d23702508-Pastel_de_Nata_Pastry_Class_Bake_and_Enjoy_Your_Own_Treats-Lisbon_Lisbon_District_.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=23702508&tripadvisor_domain=www.tripadvisor.com",
+      "description": "You can hardly set foot in Lisbon without running into a pastel de nata stand within minutes of arriving. This egg custard tart is one of the well-known culinary staples of Lisbon and a must-try when visiting. Go beyond sampling and learn how to bake these treats yourself during this cooking class. Step-by-step instructions from a cook with teach you how to make these delicious delights using the same recipe that\u2019s ensured for almost 200 years.",
+      "rating": 4.8,
+      "reviews": 228,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2f/fe/a8/c6/caption.jpg",
+      "highlighted_review": {
+        "text": "We all really enjoyed this cooking class.",
+        "mention_count": 4
+      }
+    },
+    {
+      "position": 28,
+      "title": "Pasteis de Nata Baking Class from Lisbon",
+      "place_type": "ATTRACTION_PRODUCT",
+      "place_id": "24079288",
+      "link": "https://www.tripadvisor.com/AttractionProductReview-g189158-d24079288-Pasteis_de_Nata_Baking_Class_from_Lisbon-Lisbon_Lisbon_District_Central_Portugal.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=24079288&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Perfect the art of making one of Portugal\u2019s sweetest treats during a *pasteis de nata* (custard tart) cooking class in Lisbon. You\u2019ll enjoy personalized instruction in a small group limited to only 12 others, as you make everything\u2014including the pastry\u2014from scratch. Plus, the short duration of this tour means you\u2019ll have plenty of time for sightseeing before and after.",
+      "rating": 4.9,
+      "reviews": 119,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/33/0b/80/43/caption.jpg",
+      "highlighted_review": {
+        "text": "Our class was small and we got to do the whole recipe ourselves with the instructor's guidance.",
+        "mention_count": 5
+      }
+    },
+    {
+      "position": 29,
+      "title": "Cottage Cooking",
+      "place_type": "ATTRACTION",
+      "place_id": "11891610",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g60742-d11891610-Reviews-Cottage_Cooking-Asheville_North_Carolina.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=11891610&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Cottage Cooking is a cooking class business in Asheville, NC. We specialize in dinner party cooking classes for couples, girl's nights, family nights, etc.",
+      "rating": 5,
+      "reviews": 56,
+      "location": "Asheville, North Carolina",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/40/89/7d/cooking-with-beer-photo.jpg"
+    },
+    {
+      "position": 30,
+      "title": "Culinary Studio Caramel",
+      "place_type": "ATTRACTION",
+      "place_id": "10265710",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g294195-d10265710-Reviews-Culinary_Studio_Caramel-Tbilisi.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=10265710&tripadvisor_domain=www.tripadvisor.com",
+      "description": "\"We\u2019re excited to welcome you! At the heart of what brings us together is a shared passion for delicious food and a love for cooking. Join us in our cozy studio in the heart of Tbilisi, where we\u2019ll be sharing authentic Georgian cuisine recipes in a warm and inviting atmosphere. Let\u2019s cook, learn, and enjoy together!\"",
+      "rating": 5,
+      "reviews": 156,
+      "location": "Tbilisi, Georgia",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/0c/ac/30/photo6jpg.jpg"
+    }
+  ],
+  "serpapi_pagination": {
+    "next": "https://serpapi.com/search.json?engine=tripadvisor&limit=30&offset=30&q=cooking+class+Lisbon&ssrc=A&tripadvisor_domain=www.tripadvisor.com"
+  }
+}

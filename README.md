@@ -1,6 +1,6 @@
 # trip-search-mcp
 
-**Let Claude plan trips for you, in plain English.** Live searches against Google Flights, Google Hotels, vacation rentals, Airbnb, and event ticket vendors — plus weather forecasts, currency conversion, persistent price watches, and per-property detail drill-downs. Ten tools, one config block.
+**Let Claude plan trips for you, in plain English.** Live searches against Google Flights, Google Hotels, vacation rentals, Airbnb, Tripadvisor activities, and event ticket vendors — plus weather forecasts, currency conversion, persistent price watches, and per-property detail drill-downs. Eleven tools, one config block.
 
 ```
 You:   Find me round-trip flights Helsinki → Washington DC for May 18,
@@ -145,7 +145,7 @@ Save the file.
 
 ### 7. Test it
 
-Open a new chat in Claude Desktop. Click the hammer/tools icon at the bottom of the message box — you should see `trip-search` with **7 always-on tools** plus 3 more after step 8 below:
+Open a new chat in Claude Desktop. Click the hammer/tools icon at the bottom of the message box — you should see `trip-search` with **7 always-on tools** plus 4 more after step 8 below:
 
 | Tool | Needs SERPAPI_KEY? |
 |---|---|
@@ -158,6 +158,7 @@ Open a new chat in Claude Desktop. Click the hammer/tools icon at the bottom of 
 | `search_stays` (default / hotels / vacation_rentals) | **Yes** |
 | `get_stay_details` | **Yes** |
 | `search_events` | **Yes** |
+| `search_activities` | **Yes** |
 
 Ask Claude:
 
@@ -267,7 +268,7 @@ Older installs used the module name `flights_mcp` (now `trip_search_mcp`). If yo
 ## For developers
 
 ```bash
-.venv/bin/pytest -q          # 325 tests, all fixture-driven, no live API calls
+.venv/bin/pytest -q          # 350 tests, all fixture-driven, no live API calls
 ```
 
 Source layout:
@@ -291,6 +292,7 @@ src/trip_search_mcp/
 ├── fli_backend/             flights — via fli library, no auth
 ├── serpapi_hotels_backend/  hotels + vacation rentals — SerpAPI
 ├── serpapi_events_backend/  concerts + festivals + sports — SerpAPI google_events
+├── tripadvisor_backend/     things-to-do — SerpAPI Tripadvisor (ssrc=A)
 ├── airbnb_backend/          Airbnb direct — pyairbnb + Nominatim geocoding
 ├── open_meteo_backend/      weather forecasts — Open-Meteo, no auth
 ├── ecb_backend/             currency conversion — ECB daily feed, no auth

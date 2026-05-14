@@ -1,0 +1,42 @@
+{
+  "search_metadata": {
+    "id": "6a05909df680d131d8903770",
+    "status": "Success",
+    "json_endpoint": "https://serpapi.com/searches/xfeV-MCK9gA7pvnyzofecg/6a05909df680d131d8903770.json",
+    "created_at": "2026-05-14 09:06:37 UTC",
+    "processed_at": "2026-05-14 09:06:37 UTC",
+    "tripadvisor_place_url": "https://www.tripadvisor.com/5603536",
+    "raw_html_file": "https://serpapi.com/searches/xfeV-MCK9gA7pvnyzofecg/6a05909df680d131d8903770.html",
+    "total_time_taken": 2.44
+  },
+  "search_parameters": {
+    "engine": "tripadvisor_place",
+    "place_id": "5603536",
+    "tripadvisor_domain": "www.tripadvisor.com"
+  },
+  "place_result": {
+    "type": "hotel",
+    "images": [
+      "https://media-cdn.tripadvisor.com/media/photo-o/1a/ba/ba/c2/mise-en-place-team-building.jpg",
+      "https://media-cdn.tripadvisor.com/media/photo-o/1a/ba/ba/c2/mise-en-place-team-building.jpg",
+      "https://media-cdn.tripadvisor.com/media/photo-o/0d/e8/5b/34/cooking-class.jpg",
+      "https://media-cdn.tripadvisor.com/media/photo-o/1a/ba/bb/7a/meal-after-the-team-building.jpg",
+      "https://media-cdn.tripadvisor.com/media/photo-o/1a/ba/bb/79/team-building-event-lisbon.jpg",
+      "https://media-cdn.tripadvisor.com/media/photo-o/1a/ba/bb/76/tasks-assigned-for-the.jpg",
+      "https://media-cdn.tripadvisor.com/media/photo-o/1a/ba/bb/75/cooking-class-hands-on.jpg",
+      "https://media-cdn.tripadvisor.com/media/photo-o/1a/ba/ba/c1/hands-on-pastry-class.jpg",
+      "https://media-cdn.tripadvisor.com/media/photo-o/1a/ba/ba/65/kale-soup-from-hands.jpg",
+      "https://media-cdn.tripadvisor.com/media/photo-o/1a/ba/ba/63/setup-for-the-team-building.jpg",
+      "https://media-cdn.tripadvisor.com/media/photo-o/1a/ba/b9/44/hands-on-cooking-class.jpg",
+      "https://media-cdn.tripadvisor.com/media/photo-m/1280/15/4c/4c/d8/portuguese-fruits-on.jpg",
+      "https://media-cdn.tripadvisor.com/media/photo-m/1280/15/4c/4b/1a/crabs-from-the-local.jpg",
+      "https://media-cdn.tripadvisor.com/media/photo-m/1280/14/09/31/2a/lisbon-cooking-class.jpg",
+      "https://media-cdn.tripadvisor.com/media/photo-m/1280/14/09/31/0f/lisbon-cooking-class.jpg",
+      "https://media-cdn.tripadvisor.com/media/photo-m/1280/14/09/17/8f/cod-fish-dish-cooking.jpg",
+      "https://media-cdn.tripadvisor.com/media/photo-m/1280/14/09/17/76/final-picture-of-the.jpg",
+      "https://media-cdn.tripadvisor.com/media/photo-m/1280/14/09/17/53/hands-on-cleaning-the.jpg",
+      "https://media-cdn.tripadvisor.com/media/photo-o/0d/fc/5e/fc/codfish-fritters-petiscos.jpg",
+      "https://media-cdn.tripadvisor.com/media/photo-o/0d/fc/5d/d2/kale-for-an-amazing-soup.jpg"
+    ]
+  }
+}

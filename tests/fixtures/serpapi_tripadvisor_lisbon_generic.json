@@ -1,0 +1,540 @@
+{
+  "search_metadata": {
+    "id": "6a058f655c2622966de63719",
+    "status": "Success",
+    "json_endpoint": "https://serpapi.com/searches/86CmNA3b2ms7FRB36bZGIQ/6a058f655c2622966de63719.json",
+    "created_at": "2026-05-14 09:01:25 UTC",
+    "processed_at": "2026-05-14 09:01:25 UTC",
+    "tripadvisor_url": "https://www.tripadvisor.com/Search?q=Lisbon&ssrc=A&geo=1&offset=0&limit=30",
+    "raw_html_file": "https://serpapi.com/searches/86CmNA3b2ms7FRB36bZGIQ/6a058f655c2622966de63719.html",
+    "prettify_html_file": "https://serpapi.com/searches/86CmNA3b2ms7FRB36bZGIQ/6a058f655c2622966de63719.prettify",
+    "total_time_taken": 1.02
+  },
+  "search_parameters": {
+    "engine": "tripadvisor",
+    "q": "Lisbon",
+    "tripadvisor_domain": "www.tripadvisor.com",
+    "ssrc": "A",
+    "offset": 0,
+    "limit": 30
+  },
+  "places": [
+    {
+      "position": 1,
+      "title": "Tram 28",
+      "place_type": "ATTRACTION",
+      "place_id": "262792",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g189158-d262792-Reviews-Tram_28-Lisbon_Lisbon_District_Central_Portugal.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=262792&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Vintage trams take passengers on a scenic trip from the city center at sea level up through the narrow maze of streets towards St. George Castle.",
+      "rating": 3.9,
+      "reviews": 25167,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/3b/36/e9/img-20190807-124936-largejpg.jpg",
+      "highlighted_review": {
+        "text": "It is good and cheap way to see main parts of Lisbon.",
+        "mention_count": 5
+      }
+    },
+    {
+      "position": 2,
+      "title": "Miradouro Sao Pedro de Alcantara",
+      "place_type": "ATTRACTION",
+      "place_id": "2353620",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g189158-d2353620-Reviews-Miradouro_Sao_Pedro_de_Alcantara-Lisbon_Lisbon_District_Central_Portugal.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=2353620&tripadvisor_domain=www.tripadvisor.com",
+      "rating": 4.5,
+      "reviews": 3634,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0a/4b/75/30/chateau-sao-jorge-depuis.jpg",
+      "highlighted_review": {
+        "text": "The views of Lisbon are incredible.",
+        "mention_count": 5
+      }
+    },
+    {
+      "position": 3,
+      "title": "Chiado",
+      "place_type": "ATTRACTION",
+      "place_id": "195824",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g189158-d195824-Reviews-Chiado-Lisbon_Lisbon_District_Central_Portugal.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=195824&tripadvisor_domain=www.tripadvisor.com",
+      "description": "This is the fashionable shopping district in Lisbon.",
+      "rating": 4.5,
+      "reviews": 8038,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/3e/f1/f8/statue-of-antonio-riberio.jpg",
+      "highlighted_review": {
+        "text": "A neighborhood of Lisbon that dates back to the 1700's.",
+        "mention_count": 5
+      }
+    },
+    {
+      "position": 4,
+      "title": "Alfama",
+      "place_type": "ATTRACTION",
+      "place_id": "195649",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g189158-d195649-Reviews-Alfama-Lisbon_Lisbon_District_Central_Portugal.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=195649&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Wonderful sights delight walkers at every turn in this culturally rich and charming part of Lisbon, which through its architecture reminds visitors of its Visigothic roots, Arabic influence and fishing port heritage.",
+      "rating": 4.5,
+      "reviews": 21475,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/4b/64/07/miradouro-de-santa-luzia.jpg",
+      "highlighted_review": {
+        "text": "Beautiful part of Lisbon to get lost in.",
+        "mention_count": 5
+      }
+    },
+    {
+      "position": 5,
+      "title": "Best of Lisbon Small-Group Guided Walking Tour",
+      "place_type": "ATTRACTION_PRODUCT",
+      "place_id": "11451440",
+      "link": "https://www.tripadvisor.com/AttractionProductReview-g189158-d11451440-Best_of_Lisbon_Small_Group_Guided_Walking_Tour-Lisbon_Lisbon_District_Central_Port.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=11451440&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Stroll Lisbon\u2019s historic, culture-filled cobblestone streets on a small-group guided walking tour. Walk the city\u2019s oldest quarter, Moorish Alfama, elegant Chiado, and monumental Baixa. This Lisbon walking tour is ideal for first-time visitors who want to experience the city\u2019s rich culture while checking off must-see landmarks such as the Carmo church and Commerce Square. Plus, walk to some of the city\u2019s best caf\u00e9s and boutiques.",
+      "rating": 4.9,
+      "reviews": 3020,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/32/d7/54/73/caption.jpg",
+      "highlighted_review": {
+        "text": "Great crash course on Lisbon.",
+        "mention_count": 5
+      }
+    },
+    {
+      "position": 6,
+      "title": "Elevador de Santa Justa",
+      "place_type": "ATTRACTION",
+      "place_id": "195646",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g189158-d195646-Reviews-Elevador_de_Santa_Justa-Lisbon_Lisbon_District_Central_Portugal.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=195646&tripadvisor_domain=www.tripadvisor.com",
+      "description": "This elevator is located inside a gothic tower, which provides quick and easy transport between Lisbon's Baixa and Bairro Alto districts.",
+      "rating": 3.6,
+      "reviews": 10305,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/16/4f/a2/8f/elevador-de-santa-justa.jpg",
+      "highlighted_review": {
+        "text": "The Santa Justa Elevador (lift) is a charming Art Nouveau structure and National Monument (2002) that was constructed in 1902 in the historic centre of Lisbon, linking the lower streets of Baixa to the elevated grounds of Chiado near Largo de Carmo.",
+        "mention_count": 5
+      }
+    },
+    {
+      "position": 7,
+      "title": "Lisbon City Center Tour - The Unmissable Lisbon",
+      "place_type": "ATTRACTION_PRODUCT",
+      "place_id": "25342109",
+      "link": "https://www.tripadvisor.com/AttractionProductReview-g189158-d25342109-Lisbon_City_Center_Tour_The_Unmissable_Lisbon-Lisbon_Lisbon_District_Central_Portu.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=25342109&tripadvisor_domain=www.tripadvisor.com",
+      "description": "If you\u2019re visiting Lisbon for the first time, don\u2019t waste time getting lost\u2014explore Portugal\u2019s capital like a pro on a tip-based walking tour that lets you choose how much to pay. After just paying a small fee to reserve your slot (as numbers are limited), you\u2019ll explore the city\u2019s top sights on foot, so you can enjoy plenty of opportunities to stop for photos and soak up the finer details.",
+      "rating": 5,
+      "reviews": 23236,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/32/eb/8f/ce/caption.jpg",
+      "highlighted_review": {
+        "text": "I learned so much about Lisbon.",
+        "mention_count": 5
+      }
+    },
+    {
+      "position": 8,
+      "title": "Praca do Comercio",
+      "place_type": "ATTRACTION",
+      "place_id": "199878",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g189158-d199878-Reviews-Praca_do_Comercio-Lisbon_Lisbon_District_Central_Portugal.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=199878&tripadvisor_domain=www.tripadvisor.com",
+      "description": "One of the biggest squares in Europe, this stylish area in downtown Lisbon often displays beautiful works of art and sculpture, and is a great place for a leisurely stroll.",
+      "rating": 4.4,
+      "reviews": 17304,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/8c/e7/e2/vista-centrale.jpg",
+      "highlighted_review": {
+        "text": "Good place to have a walk, sit at the urban beach, watch some art performances and to tune into lisbon vibe.",
+        "mention_count": 5
+      }
+    },
+    {
+      "position": 9,
+      "title": "Private Lisbon Sightseeing Tuk-Tuk Tour: Alfama, Bel\u00e9m & More",
+      "place_type": "ATTRACTION_PRODUCT",
+      "place_id": "11470742",
+      "link": "https://www.tripadvisor.com/AttractionProductReview-g189158-d11470742-Private_Lisbon_Sightseeing_Tuk_Tuk_Tour_Alfama_Belem_More-Lisbon_Lisbon_District_C.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=11470742&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Explore Lisbon without walking for hours thanks to this private tour by electric tuk-tuk\u2014an eco-friendly way to travel around the city\u2019s narrow streets. After handy pickup\u2014from either the city's cruise terminal, your city center hotel, or the Hard Rock Cafe\u2014uncover historical neighborhoods like Alfama and Mouraria, and stop at a viewpoint for photo ops of the city. Pass by attractions such as Pra\u00e7a do Com\u00e9rcio and the Lisbon Cathedral, all while listening to insightful commentary from your driver-guide.",
+      "rating": 4.9,
+      "reviews": 1940,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/30/8d/d5/0d/caption.jpg",
+      "highlighted_review": {
+        "text": "Our guide (Henrique?) was sooo knowledgeable about Lisbon and Portugal, had so many facts and knew all the answers to our questions.",
+        "mention_count": 5
+      }
+    },
+    {
+      "position": 10,
+      "title": "Sintra and Cascais Small-Group Day Trip from Lisbon",
+      "place_type": "ATTRACTION_PRODUCT",
+      "place_id": "11451445",
+      "link": "https://www.tripadvisor.com/AttractionProductReview-g189158-d11451445-Sintra_and_Cascais_Small_Group_Day_Trip_from_Lisbon-Lisbon_Lisbon_District_Central.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=11451445&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Reaching the sights in Sintra and Cascais by rental car or public transport can be a hassle. Instead, see Portugal's natural and architectural wonders stress-free with this small-group, guided tour directly from Lisbon. Experience the natural wonders of Pena Park with a guided tour and enjoy a visit inside Pena National Palace (if option with tickets is selected). Use your free time in Sintra to take in the highlights, then drive along the Atlantic Coast past the bluffs of Roca Cape to Cascais for a leisurely walk through town to its scenic beaches.",
+      "rating": 4.8,
+      "reviews": 2923,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2f/fc/42/7f/caption.jpg",
+      "highlighted_review": {
+        "text": "I wish we spent more time at the beach but I loved the views and being able to see things outside of Lisbon.",
+        "mention_count": 4
+      }
+    },
+    {
+      "position": 11,
+      "title": "True 4Hour Private Tuk Tuk Tour: Discover Lisbon with a Local!",
+      "place_type": "ATTRACTION_PRODUCT",
+      "place_id": "17590955",
+      "link": "https://www.tripadvisor.com/AttractionProductReview-g189158-d17590955-True_4Hour_Private_Tuk_Tuk_Tour_Discover_Lisbon_with_a_Local-Lisbon_Lisbon_Distric.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=17590955&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Go beyond traditional sightseeing tours and fall in love with Lisbon's charm on this private electric TukTuk tour. In just a few hours, cover the historic center of Lisbon and the historic Belem district without breaking a sweat. Immerse yourself in the city's rich history as your local guide takes you past top landmarks like the Senhora do Monte viewpoint, Jer\u00f3nimos Monastery, and much more on a tour that combines authentic connection with a bit of adventure.",
+      "rating": 5,
+      "reviews": 6426,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/32/99/63/33/caption.jpg",
+      "highlighted_review": {
+        "text": "If you want to see and know the city of Lisbon this tour is for you.",
+        "mention_count": 5
+      }
+    },
+    {
+      "position": 12,
+      "title": "Lisbon Traditional Boats - Guided Sightseeing Cruise",
+      "place_type": "ATTRACTION_PRODUCT",
+      "place_id": "13556687",
+      "link": "https://www.tripadvisor.com/AttractionProductReview-g189158-d13556687-Lisbon_Traditional_Boats_Guided_Sightseeing_Cruise-Lisbon_Lisbon_District_Central_.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=13556687&tripadvisor_domain=www.tripadvisor.com",
+      "description": "This River Tagus Guided Sightseeing Cruise will introduce you to Lisbon\u2019s highlights from a spectacular vantage point. Avoid the stress of walking through crowds in Lisbon, and instead, admire city landmarks from afar. You\u2019ll see Commerce Square, Sao Jorge Castle, Belem Tower, Palace of Ajuda, and much more. As your boat sails, a guide will entertain you with live commentary to ensure you don\u2019t miss any highlights.",
+      "rating": 4.8,
+      "reviews": 433,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/32/a5/fe/c2/caption.jpg",
+      "highlighted_review": {
+        "text": "What a relaxing way to see Lisbon.",
+        "mention_count": 5
+      }
+    },
+    {
+      "position": 13,
+      "title": "Welcome Tour to Lisbon in Private Eco Tuk Tuk with a Local",
+      "place_type": "ATTRACTION_PRODUCT",
+      "place_id": "15655483",
+      "link": "https://www.tripadvisor.com/AttractionProductReview-g189158-d15655483-Welcome_Tour_to_Lisbon_in_Private_Eco_Tuk_Tuk_with_a_Local-Lisbon_Lisbon_District_.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=15655483&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Travel through Lisbon's key areas and secrets on a private electric tuk-tuk tour. Save time and cover more ground with stops at iconic monuments and views from the Seven Hills. Learn about Lisbon's history and culture while visiting traditional neighborhoods like Alfama, Gra\u00e7a, and Mouraria, plus modern districts such as Chiado and Bairro Alto.",
+      "rating": 5,
+      "reviews": 867,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/31/8e/21/df/caption.jpg",
+      "highlighted_review": {
+        "text": "It really allowed us to see an overview of Lisbon, while saving our legs!",
+        "mention_count": 5
+      }
+    },
+    {
+      "position": 14,
+      "title": "90 Minute Amphibious Sightseeing Tour in Lisbon",
+      "place_type": "ATTRACTION_PRODUCT",
+      "place_id": "11486684",
+      "link": "https://www.tripadvisor.com/AttractionProductReview-g189158-d11486684-90_Minute_Amphibious_Sightseeing_Tour_in_Lisbon-Lisbon_Lisbon_District_Central_Por.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=11486684&tripadvisor_domain=www.tripadvisor.com",
+      "description": "See the best of land and sea on this amphibious sightseeing tour of Lisbon. A fun-filled experience designed to delight kids and adults alike, this tour covers top Lisbon attractions such as Commerce Square and Avenida da Liberdade. Then, your tour bus transforms into a boat and plunges into the Tagus River, passing Belem Tower and Monument to the Discoveries.",
+      "rating": 4.8,
+      "reviews": 1563,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/7c/3c/43/caption.jpg",
+      "highlighted_review": {
+        "text": "A fun way to see Lisbon sites!",
+        "mention_count": 5
+      }
+    },
+    {
+      "position": 15,
+      "title": "Explore Lisbon by Tuk Tuk: History and Viewpoints",
+      "place_type": "ATTRACTION_PRODUCT",
+      "place_id": "11474203",
+      "link": "https://www.tripadvisor.com/AttractionProductReview-g189158-d11474203-Explore_Lisbon_by_Tuk_Tuk_History_and_Viewpoints-Lisbon_Lisbon_District_Central_Po.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=11474203&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Zip through the streets of Lisbon in a 100% electric tuk tuk on a 1-hour, private tour of the city led by a local guide. Explore iconic sites on a route that goes from Restauradores Square to the Pra\u00e7a do Com\u00e9rcio, with stops to explore Lisbon\u2019s religion, history, music, cuisine and culture. Get unforgettable photos of Lisbon\u2019s most scenic places while learning about life in the city. Enjoy the fun, personal experience of a private tour in an open-air vehicle, and opt for a tour that\u2019s both eco-friendly and unique.",
+      "rating": 4.9,
+      "reviews": 669,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/32/5a/fb/ce/caption.jpg",
+      "highlighted_review": {
+        "text": "We loved discovering Alfama and a bit of Lisbon history. Definitely recommend!",
+        "mention_count": 5
+      }
+    },
+    {
+      "position": 16,
+      "title": "SANDEMANs NEW Europe - Lisbon",
+      "place_type": "ATTRACTION",
+      "place_id": "4541477",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g189158-d4541477-Reviews-SANDEMANs_NEW_Europe_Lisbon-Lisbon_Lisbon_District_Central_Portugal.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=4541477&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Offering free tours in cities across Europe, the Middle East and the US, SANDEMANs NEW Europe Tours is Europe's premier walking tour provider, and offers free walking tours of Lisbon every day.",
+      "rating": 4.8,
+      "reviews": 13753,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/9d/ba/b7/praca-do-comercio.jpg",
+      "highlighted_review": {
+        "text": "We took the free tour of Lisbon with Jaime and found the tour to be exactly",
+        "highlighted_texts": [
+          "Lisbon"
+        ],
+        "mention_count": 3960
+      }
+    },
+    {
+      "position": 17,
+      "title": "Lisbon Highlights: Private Tuk Tuk Tour Adventure Sightseeing",
+      "place_type": "ATTRACTION_PRODUCT",
+      "place_id": "25128070",
+      "link": "https://www.tripadvisor.com/AttractionProductReview-g189158-d25128070-Lisbon_Highlights_Private_Tuk_Tuk_Tour_Adventure_Sightseeing-Lisbon_Lisbon_Distric.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=25128070&tripadvisor_domain=www.tripadvisor.com",
+      "description": "A private tuk-tuk tour is a great way to cover Lisbon's sprawling streets without spending hours on foot or getting tired from the city's many hills. Cover ground effortlessly as your guide drives you to top highlights like the historic center, Bairro Alto, and Chiado. Choose from express, half-day, or full-day options, with hotel pickup included for added convenience.",
+      "rating": 5,
+      "reviews": 2752,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/32/01/47/08/caption.jpg",
+      "highlighted_review": {
+        "text": "Lota of jokes and curiosities about lisbon.",
+        "mention_count": 5
+      }
+    },
+    {
+      "position": 18,
+      "title": "4 Hour Lisbon Private Guided Tour via Tuk Tuk",
+      "place_type": "ATTRACTION_PRODUCT",
+      "place_id": "24134978",
+      "link": "https://www.tripadvisor.com/AttractionProductReview-g189158-d24134978-4_Hour_Lisbon_Private_Guided_Tour_via_Tuk_Tuk-Lisbon_Lisbon_District_Central_Portu.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=24134978&tripadvisor_domain=www.tripadvisor.com",
+      "description": "There are several ways to get to know Lisbon. But the best of them all is, without a doubt, in the company of a friend. A friend who knows the best the city can offer - the food, the best spots, the best stories, but above all, its essence.A friend who is more than just a friend, and who will make a simple visit to Lisbon an experience for a lifetime. Your Portuguese friend will be your most friendliest friend. Your most hospitable friend. Your funniest friend. You will never forget your Portuguese friend.  CHOOSE YOUR TOUR: HISTORIC: Pra\u00e7a do Com\u00e9rcio, S\u00e9 , Castelo S. Jorge, Portas do Sol, Pante\u00e3o Nacional, Alfama, Igreja de S\u00e3o Vicente de Fora, Ermida Nossa Sr\u00aa do Monte TRENDY: Chiado, Principe Real, Bairro Alto, Miradouro S. Pedro de Alc\u00e2ntara, Bas\u00edlica da Estrela, Bica, Adamastor, Pal\u00e1cio de S\u00e3o Bento DISCOVERIES: Av. Ribeira das Naus, Pal\u00e1cio de Bel\u00e9m, Mosteiro dos Jer\u00f3nimos, Bel\u00e9m, Padr\u00e3o dos Descobrimentos, Torre de Bel\u00e9m, Pal\u00e1cio Nacional da Ajuda MONUMENT TO CHRIST-KING",
+      "rating": 5,
+      "reviews": 459,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/25/7a/8d/7b/caption.jpg",
+      "highlighted_review": {
+        "text": "Went all around Lisbon, had the best time visiting many places in such a short time.",
+        "mention_count": 4
+      }
+    },
+    {
+      "position": 19,
+      "title": "Alfama Tour in Lisbon Old Town",
+      "place_type": "ATTRACTION_PRODUCT",
+      "place_id": "25415222",
+      "link": "https://www.tripadvisor.com/AttractionProductReview-g189158-d25415222-Alfama_Tour_in_Lisbon_Old_Town-Lisbon_Lisbon_District_Central_Portugal.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=25415222&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Discover the historic Alfama district in Lisbon on this tip-based guided walking tour. Follow your guide around the narrow maze of streets in Alfama to highlights such as the Chafariz De\u2019el Rei, Miradouro das Portas do Sol, Lisbon Cathedral and much more, while learning about Lisbon\u2019s history, culture, and traditions, from your guide.",
+      "rating": 4.9,
+      "reviews": 5237,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/32/eb/61/fb/caption.jpg",
+      "highlighted_review": {
+        "text": "I really enjoyed walking around the Lisbon and discovering new stories about the city",
+        "mention_count": 5
+      }
+    },
+    {
+      "position": 20,
+      "title": "Small Group Tour to Sintra, Pena Palace, Cabo Roca and Cascais",
+      "place_type": "ATTRACTION_PRODUCT",
+      "place_id": "15831115",
+      "link": "https://www.tripadvisor.com/AttractionProductReview-g189158-d15831115-Small_Group_Tour_to_Sintra_Pena_Palace_Cabo_Roca_and_Cascais-Lisbon_Lisbon_Distric.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=15831115&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Explore beyond Lisbon city limits\u2014and see several of Portugal\u2019s top attractions in one day\u2014on this seamless, small-group tour. Set off in the morning via air-conditioned vehicle and head to UNESCO-listed Sintra. Skip the long lines and explore the rainbow-hued Pena Palace (tickets additional expense) and pass by the Gothic wonder of Quinta da Regaleira. Then, stop by Cabo da Roca (continental Europe\u2019s westernmost point) and Cascais on your way back to Lisbon.",
+      "rating": 4.9,
+      "reviews": 1724,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/32/b1/9d/68/caption.jpg",
+      "highlighted_review": {
+        "text": "We would definitely recommend this to anyone visiting Lisbon.",
+        "mention_count": 3
+      }
+    },
+    {
+      "position": 21,
+      "title": "Lisbon Sintra Cascais (Best Solution Tour) Private Tour",
+      "place_type": "ATTRACTION_PRODUCT",
+      "place_id": "14781802",
+      "link": "https://www.tripadvisor.com/AttractionProductReview-g189158-d14781802-Lisbon_Sintra_Cascais_Best_Solution_Tour_Private_Tour-Lisbon_Lisbon_District_Centr.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=14781802&tripadvisor_domain=www.tripadvisor.com",
+      "description": "If you\u2019ve only got limited time in Lisbon, look no further than this express sightseeing tour, which covers multiple attractions in Lisbon, Cascais, and Sintra even on a time budget. Taking a private tour means that you\u2019ll benefit from the undivided attention and insider knowledge of your guide as you travel between dispersed attractions in air-conditioned comfort, without having to worry about navigation.",
+      "rating": 5,
+      "reviews": 511,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/31/6e/5b/c2/caption.jpg",
+      "highlighted_review": {
+        "text": "You should book this tour next time you are in Lisbon.",
+        "mention_count": 3
+      }
+    },
+    {
+      "position": 22,
+      "title": "Pra\u00e7a Dom Pedro IV",
+      "place_type": "ATTRACTION",
+      "place_id": "195644",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g189158-d195644-Reviews-Praca_Dom_Pedro_IV-Lisbon_Lisbon_District_Central_Portugal.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=195644&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Located in the heart of Lisbon, this vibrant and colorful city square is bursting with flower vendors, shoppers and people bustling to and from their jobs.",
+      "rating": 4.2,
+      "reviews": 2170,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/51/b5/8d/photo3jpg.jpg",
+      "highlighted_review": {
+        "text": "Lisbon is a beautiful city.",
+        "mention_count": 5
+      }
+    },
+    {
+      "position": 23,
+      "title": "Miradouro da Gra\u00e7a",
+      "place_type": "ATTRACTION",
+      "place_id": "4009718",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g189158-d4009718-Reviews-Miradouro_da_Graca-Lisbon_Lisbon_District_Central_Portugal.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=4009718&tripadvisor_domain=www.tripadvisor.com",
+      "rating": 4.6,
+      "reviews": 2686,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0d/08/35/6b/photo5jpg.jpg",
+      "highlighted_review": {
+        "text": "One of the best spots in lisbon to enjoy the views, Sagres and the vibe of Lisboa!",
+        "mention_count": 5
+      }
+    },
+    {
+      "position": 24,
+      "title": "Private Tour of Sintra, Cabo da Roca and Cascais with 2 Palaces",
+      "place_type": "ATTRACTION_PRODUCT",
+      "place_id": "15552340",
+      "link": "https://www.tripadvisor.com/AttractionProductReview-g189158-d15552340-Private_Tour_of_Sintra_Cabo_da_Roca_and_Cascais_with_2_Palaces-Lisbon_Lisbon_Distr.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=15552340&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Head out of the city on a day trip from Lisbon to Sintra and Cascais. This private tour allows you to sightsee at your own pace and choose two palaces to visit out of Sintra's several attractions (entrance fees are at your own expense so you can decide what interests you most). You'll also make a stop at Cabo da Roca on the coast.",
+      "rating": 5,
+      "reviews": 779,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/30/03/9b/b3/caption.jpg",
+      "highlighted_review": {
+        "text": "The experience of visiting Pena Palace, Quinta da Regaleira, Cabo da Roca was a memorable one that we would recommend to any visitor in the Lisbon area.",
+        "mention_count": 5
+      }
+    },
+    {
+      "position": 25,
+      "title": "Best of Lisbon Private Walking Tour",
+      "place_type": "ATTRACTION_PRODUCT",
+      "place_id": "16911185",
+      "link": "https://www.tripadvisor.com/AttractionProductReview-g189158-d16911185-Best_of_Lisbon_Private_Walking_Tour-Lisbon_Lisbon_District_Central_Portugal.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=16911185&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Discover the best that Lisbon has to offer as you embark on a walking tour through the city center. With a private guide, visit the top sights and areas of the city including the ancient neighborhood of Alfama, the ornate Santa Justa lift, the bohemian neighborhood of Bairro Alto, and the Gra\u00e7a viewpoint. While you explore, your guide provides insights into the history and culture of Lisbon and Portugal.",
+      "rating": 5,
+      "reviews": 226,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/32/eb/7f/bb/caption.jpg",
+      "highlighted_review": {
+        "text": "We learned more about Lisbon than I expected, and had a lot of fun doing it.",
+        "mention_count": 4
+      }
+    },
+    {
+      "position": 26,
+      "title": "Inside Lisbon Tours",
+      "place_type": "ATTRACTION",
+      "place_id": "1746966",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g189158-d1746966-Reviews-Inside_Lisbon_Tours-Lisbon_Lisbon_District_Central_Portugal.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=1746966&tripadvisor_domain=www.tripadvisor.com",
+      "description": "1 - Daily TOURS From Lisbon To Sintra Pena Palace; Nazare Obidos Fatima; Arrabida Wine Tours | 2 - Every Day Lisbon WALKING tours with tasting; Food Tours | 3 - PRIVATE Tours",
+      "rating": 4.8,
+      "reviews": 12855,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/32/d3/19/e4/food-wine-tour-in-lisbon.jpg",
+      "highlighted_review": {
+        "text": "We did a 3,5h tour where we got to know the history of Lisbon, got great",
+        "highlighted_texts": [
+          "Lisbon"
+        ],
+        "mention_count": 1403
+      }
+    },
+    {
+      "position": 27,
+      "title": "Lisbon Walking Tour - The Perfect Introduction to the City",
+      "place_type": "ATTRACTION_PRODUCT",
+      "place_id": "20886918",
+      "link": "https://www.tripadvisor.com/AttractionProductReview-g189158-d20886918-Lisbon_Walking_Tour_The_Perfect_Introduction_to_the_City-Lisbon_Lisbon_District_Ce.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=20886918&tripadvisor_domain=www.tripadvisor.com",
+      "description": "For those who are new to Lisbon, this downtown tour is the perfect way to orient yourself. Meet your guide and group in the city center and walk along the ancient streets to uncover Lisbon\u2019s rich history. This free walking tour covers the areas of Baixa and Chiado, covering both hidden gems and significant landmarks.",
+      "rating": 4.9,
+      "reviews": 448,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/4f/94/70/caption.jpg",
+      "highlighted_review": {
+        "text": "Lisbon walk, centrally located.",
+        "mention_count": 5
+      }
+    },
+    {
+      "position": 28,
+      "title": "Guided Tour to Sintra, Pena, Regaleira, Cabo da Roca and Cascais",
+      "place_type": "ATTRACTION_PRODUCT",
+      "place_id": "16807990",
+      "link": "https://www.tripadvisor.com/AttractionProductReview-g189158-d16807990-Guided_Tour_to_Sintra_Pena_Regaleira_Cabo_da_Roca_and_Cascais-Lisbon_Lisbon_Distri.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=16807990&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Escape the bustle of Lisbon and spend the day in the charming Sintra region on a full-day tour. Join a small group to take guided tours through the colorful Palacio da Pena and the mystical Quinta da Regaleira. Your tour also includes time to stroll around the center of the UNESCO-listed Villa de Sintra, as well as to visit Cabo da Roca and Cascais.",
+      "rating": 5,
+      "reviews": 1622,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/32/97/7b/1a/caption.jpg",
+      "highlighted_review": {
+        "text": "We went to Pena Palace and Regaleira Place.",
+        "mention_count": 3
+      }
+    },
+    {
+      "position": 29,
+      "title": "Three Cities in One Day: Porto, Nazare and Obidos from Lisbon",
+      "place_type": "ATTRACTION_PRODUCT",
+      "place_id": "24979819",
+      "link": "https://www.tripadvisor.com/AttractionProductReview-g189158-d24979819-Three_Cities_in_One_Day_Porto_Nazare_and_Obidos_from_Lisbon-Lisbon_Lisbon_District.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=24979819&tripadvisor_domain=www.tripadvisor.com",
+      "description": "If you\u2019re short on time but want to see more than just the Portuguese capital, this full-day tour takes you to three cities in just one day. Depart Lisbon and head to the medieval walled city of Obidos and the fishing town of Nazare for brief walking tours. Then, head up to Portugal\u2019s second city, Porto, for a guided tour of its UNESCO-listed town center.",
+      "rating": 4.8,
+      "reviews": 3261,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/32/97/77/73/caption.jpg",
+      "highlighted_review": {
+        "text": "Guide Joao was excellent!!",
+        "mention_count": 3
+      }
+    },
+    {
+      "position": 30,
+      "title": "Private Tuk Tuk Tour Through Lisbon\u2019s Historical Streets",
+      "place_type": "ATTRACTION_PRODUCT",
+      "place_id": "17825259",
+      "link": "https://www.tripadvisor.com/AttractionProductReview-g189158-d17825259-Private_Tuk_Tuk_Tour_Through_Lisbon_s_Historical_Streets-Lisbon_Lisbon_District_Ce.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=17825259&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Express Tour (1H): Short on time? This quick tour covers Lisbon\u2019s oldest neighborhoods. Visit landmarks like Catedral da S\u00e9, Portas do Sol, S\u00e3o Vicente, Feira da Ladra, and Alfama, with a scenic stop at Senhora do Monte. A short but unforgettable ride through history!  Classic Half-Day (1H30): A more complete experience through Lisbon\u2019s historic heart. We'll explore Catedral da S\u00e9 (stop), Portas do Sol, Senhora do Monte (stop), S\u00e3o Vicente, Feira da Ladra, National Pantheon, and finish with a stop in Alfama.  PREMIUM Tour (2H): The ultimate ride through Lisbon\u2019s past! This extended tour covers all the must-sees in the oldest part of the city, including Catedral da S\u00e9 (stop), Miradouro das Portas do Sol (stop), Miradouro da Senhora do Monte (stop), Mosteiro de S\u00e3o Vicente de Fora, Feira da Ladra, National Pantheon, and a deeper dive into Alfama (stop). A journey rich in history, culture, and breathtaking views\u2014perfect for those who want to truly experience Lisbon.",
+      "rating": 5,
+      "reviews": 365,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/30/02/da/80/caption.jpg",
+      "highlighted_review": {
+        "text": "Great way to explore Lisbon.",
+        "mention_count": 5
+      }
+    }
+  ],
+  "serpapi_pagination": {
+    "next": "https://serpapi.com/search.json?engine=tripadvisor&limit=30&offset=30&q=Lisbon&ssrc=A&tripadvisor_domain=www.tripadvisor.com"
+  }
+}

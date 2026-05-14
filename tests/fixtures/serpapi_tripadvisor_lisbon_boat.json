@@ -1,0 +1,496 @@
+{
+  "search_metadata": {
+    "id": "6a058f67f2593ab5a1404d8d",
+    "status": "Success",
+    "json_endpoint": "https://serpapi.com/searches/LLo8KCaUiWeFntwF1CQT4g/6a058f67f2593ab5a1404d8d.json",
+    "created_at": "2026-05-14 09:01:28 UTC",
+    "processed_at": "2026-05-14 09:01:28 UTC",
+    "tripadvisor_url": "https://www.tripadvisor.com/Search?q=boat+tours+Lisbon&ssrc=A&geo=1&offset=0&limit=30",
+    "raw_html_file": "https://serpapi.com/searches/LLo8KCaUiWeFntwF1CQT4g/6a058f67f2593ab5a1404d8d.html",
+    "prettify_html_file": "https://serpapi.com/searches/LLo8KCaUiWeFntwF1CQT4g/6a058f67f2593ab5a1404d8d.prettify",
+    "total_time_taken": 1.36
+  },
+  "search_parameters": {
+    "engine": "tripadvisor",
+    "q": "boat tours Lisbon",
+    "tripadvisor_domain": "www.tripadvisor.com",
+    "ssrc": "A",
+    "offset": 0,
+    "limit": 30
+  },
+  "places": [
+    {
+      "position": 1,
+      "title": "Lisbon by Boat",
+      "place_type": "ATTRACTION",
+      "place_id": "4289715",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g189158-d4289715-Reviews-Lisbon_by_Boat-Lisbon_Lisbon_District_Central_Portugal.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=4289715&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Lisbon by Boat gives the best Boat trip and the Best Boat tour in Lisbon. Unique views in Lisbon, and an amazing tour with lot's of emotions. We promise one thing: You Will Never Forget Lisbon. Schedule times and private tours available.",
+      "rating": 4.9,
+      "reviews": 2047,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/16/76/b9/38/lisbon-byboat-tours.jpg",
+      "highlighted_review": {
+        "text": "I had with my family an amazing experience on the Lisbon by Boat tour!",
+        "highlighted_texts": [
+          "Lisbon",
+          "Boat",
+          "tour"
+        ],
+        "mention_count": 127
+      }
+    },
+    {
+      "position": 2,
+      "title": "2 Hour Lisbon Sunset and Wine Sailing Tour",
+      "place_type": "ATTRACTION_PRODUCT",
+      "place_id": "11468581",
+      "link": "https://www.tripadvisor.com/AttractionProductReview-g189158-d11468581-2_Hour_Lisbon_Sunset_and_Wine_Sailing_Tour-Lisbon_Lisbon_District_Central_Portugal.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=11468581&tripadvisor_domain=www.tripadvisor.com",
+      "description": "See Lisbon\u2019s monuments from the water during an intimate cruise including wine. Board a sailboat at the harbor and relax while you take in the city views from a unique perspective. See Bel\u00e9m Tower, the neoclassical Ajuda National Palace, Ponte 25 de Abril (25th of April Bridge) and more. Savor this unforgettable experience while you are served Portuguese wine!",
+      "rating": 4.9,
+      "reviews": 1745,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/23/49/57/75/2-hour-lisbon-sunset.jpg",
+      "highlighted_review": {
+        "text": "Me and my friends had an amazing time with the sailing tour.",
+        "mention_count": 5
+      }
+    },
+    {
+      "position": 3,
+      "title": "Royal Marine - Boat Tours",
+      "place_type": "ATTRACTION",
+      "place_id": "14122382",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g189158-d14122382-Reviews-Royal_Marine_Boat_Tours-Lisbon_Lisbon_District_Central_Portugal.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=14122382&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Our boat is a Fantastic and modern catamaran 35 feet long. With a lot of space outside and inside is the perfect boat to observe the river and all the visible monuments in Lisbon. Our Skippers are certified and also very friendly people always available to help and explain the landscape. We have services from boat parties until romantic sunsets! Experienced friendly crew. You will love Lisbon!",
+      "rating": 5,
+      "reviews": 364,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/28/38/84/81/once-in-a-lifetime-sunsets.jpg",
+      "highlighted_review": {
+        "mention_count": 1
+      }
+    },
+    {
+      "position": 4,
+      "title": "Pypas Cruises Lisbon Boat Tours",
+      "place_type": "ATTRACTION",
+      "place_id": "7149046",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g189158-d7149046-Reviews-Pypas_Cruises_Lisbon_Boat_Tours-Lisbon_Lisbon_District_Central_Portugal.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=7149046&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Pypas Cruises Lisbon Boat Tours Come Sail with us and spend a fantastic and unique time in Lisboa. Enjoy the best private sightseeing. You can also have dinner aboard, just a romantic dinner, or a group dinner and experience the sensation of spending the night aboard and sleep two persons with the boat just for them, in the most turistic place in Belem, Lisboa. You'll never Forget .",
+      "rating": 4.9,
+      "reviews": 310,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0b/c1/5d/6a/sailing.jpg",
+      "highlighted_review": {
+        "mention_count": 3
+      }
+    },
+    {
+      "position": 5,
+      "title": "Rent a Boat",
+      "place_type": "ATTRACTION",
+      "place_id": "8381159",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g189158-d8381159-Reviews-Rent_a_Boat-Lisbon_Lisbon_District_Central_Portugal.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=8381159&tripadvisor_domain=www.tripadvisor.com",
+      "description": "We offer a wide range of boat tours, daily and private tours, sailing trips and personalized cruises in Lisbon. Our Tours are specifically designed for discerning customers who want to escape the crowds, offering alternatives and ensuring that quality is never compromised. Our events are always accompanied with a Portuguese wine of choice. Book now to ensure availability date you prefer Welcome aboard and DISCOVER LISBON WITH US.",
+      "rating": 5,
+      "reviews": 2564,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2a/0e/2a/4c/catamaran-2023.jpg",
+      "highlighted_review": {
+        "mention_count": 5
+      }
+    },
+    {
+      "position": 6,
+      "title": "Nosso Tejo",
+      "place_type": "ATTRACTION",
+      "place_id": "10807704",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g189158-d10807704-Reviews-Nosso_Tejo-Lisbon_Lisbon_District_Central_Portugal.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=10807704&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Our company offers daily tours of 45min and 2hours on Lisbon Traditional Boats. Come and sail the river with us, visiting the city's waterfront, watching the two river banks and learning a little more of this cultural heritage that we intend to protect and disclose. Come admire the wonderful heritage of \u201cour Tagus\u201d(\u201cNosso Tejo\u201d)",
+      "rating": 4.8,
+      "reviews": 2831,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/c3/fd/40/clean-safe-travelers.jpg",
+      "highlighted_review": {
+        "mention_count": 28
+      }
+    },
+    {
+      "position": 7,
+      "title": "Palmayachts Boat Tours",
+      "place_type": "ATTRACTION",
+      "place_id": "4801192",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g189158-d4801192-Reviews-Palmayachts_Boat_Tours-Lisbon_Lisbon_District_Central_Portugal.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=4801192&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Palmayachts offers sailing cruises, yacht charter and organizes events in Lisbon, Cascais, Set\u00fabal/Tr\u00f3ia and Algarve. The regular tour in Lisbon and Cascais takes 2h, but we also have other durations. We charge per person or for the whole boat, you can choose between a group or a private tour. Other options for day charter available on request. Palmayachts organizes events such as Parties, Celebrations, Corporate Events, Teambuildinsg, Incentives, and much more! Palmayachts also offers bareboat and skippered yacht charter.",
+      "rating": 4.9,
+      "reviews": 1224,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2f/74/cd/30/palmayachts-sunset-sailing.jpg",
+      "highlighted_review": {
+        "text": "Booked this sunset boat tour for our last night in Lisbon.",
+        "highlighted_texts": [
+          "boat",
+          "tour",
+          "Lisbon."
+        ],
+        "mention_count": 13
+      }
+    },
+    {
+      "position": 8,
+      "title": "Marlin Tours",
+      "place_type": "ATTRACTION",
+      "place_id": "2252149",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g189158-d2252149-Reviews-Marlin_Tours-Lisbon_Lisbon_District_Central_Portugal.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=2252149&tripadvisor_domain=www.tripadvisor.com",
+      "description": "We are one of the most experienced Operators in Lisbon. We love what we do and it is reflected on the kindest way our clients treat us. We give everything for a smile on everyone's faces. See you on a sunny day!",
+      "rating": 4.7,
+      "reviews": 869,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/20/b7/1e/sunset-tour-by-marlin.jpg",
+      "highlighted_review": {
+        "text": "Avoid the crowds and get on a boat.",
+        "highlighted_texts": [
+          "boat."
+        ],
+        "mention_count": 26
+      }
+    },
+    {
+      "position": 9,
+      "title": "HIPPOtrip",
+      "place_type": "ATTRACTION",
+      "place_id": "4316891",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g189158-d4316891-Reviews-HIPPOtrip-Lisbon_Lisbon_District_Central_Portugal.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=4316891&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Fun, laughter and adventure...all wrapped up in the most unique sightseeing experience of Lisboa! Aboard our amphibious vehicle, the first of its kind, explore the many sides and sites of Portugal\u2019s capital during our 90 minute tour, by land and sea, without leaving the comfort of your own seat. Prepare to be entertained by our lively guides and to learn tales of this stunning city\u2019s rich history",
+      "rating": 4.8,
+      "reviews": 3795,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/04/8d/59/7a/hippotrip.jpg",
+      "highlighted_review": {
+        "mention_count": 8
+      }
+    },
+    {
+      "position": 10,
+      "title": "Taguscruises",
+      "place_type": "ATTRACTION",
+      "place_id": "4059052",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g189158-d4059052-Reviews-Taguscruises-Lisbon_Lisbon_District_Central_Portugal.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=4059052&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Taguscruises is a boat tour and yacht charter company, offering immediate boarding with daily sightseeing tours in the region of Lisbon to Cascais. We also offer half day or full day skippered charter and we work all year round. We are located near the Belem Tower, at Doca do Bom Sucesso in Lisbon.",
+      "rating": 4.9,
+      "reviews": 1683,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/03/ca/04/e0/taguscruises.jpg",
+      "highlighted_review": {
+        "mention_count": 22
+      }
+    },
+    {
+      "position": 11,
+      "title": "Halcyon I - Historical Lisbon Boat Tours",
+      "place_type": "ATTRACTION",
+      "place_id": "3954222",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g189158-d3954222-Reviews-Halcyon_I_Historical_Lisbon_Boat_Tours-Lisbon_Lisbon_District_Central_Portugal.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=3954222&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Halcyon I has been my home since 2010. Built in Belem, between 1968 and 1970, and designed in Scotland, by G. L. Watson & Co, it is the last of three boats, made under the same design. Wood is teak, from Goa, in India, weights 35 tons and still has the same, original Leyland six cylinder engines, as in 1970. Every day, all year round, we leave Alcantara harbour, for a two hours sunset tour. We sail down to Belem Tower and up to Alfama, describing the monuments and it's History, in English and French. Then, you can appreciate sunset over the city of Lisbon. Up to eighteen guests, there's lots of space to walk around and enjoy the cruise. Sparkling wine and nibbles included, along the entire cruise. We hoist all sails, almost every day. We also have a private three hours program (lunch or dinner included), a full day private cruise to Cascais, lunch included, and a more than three days charter to Arrabida Natural Park. Take a look to our website for full details.",
+      "rating": 4.9,
+      "reviews": 281,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/56/41/38/passing-by-belem-tower.jpg",
+      "highlighted_review": {
+        "mention_count": 33
+      }
+    },
+    {
+      "position": 12,
+      "title": "Urban Sailors",
+      "place_type": "ATTRACTION",
+      "place_id": "10213025",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g189158-d10213025-Reviews-Urban_Sailors-Lisbon_Lisbon_District_Central_Portugal.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=10213025&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Urban Sailors Lisbon Boat Tours provides an original and exclusive way to see the major Lisbon Monuments. Get closer and take your own postcard day or nigh.",
+      "rating": 5,
+      "reviews": 104,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/25/c3/59/76/urban-sailors-sailing.jpg",
+      "highlighted_review": {
+        "text": "I would highly recommend using this company for a sunset boat tour in Lisbon.",
+        "highlighted_texts": [
+          "boat",
+          "tour",
+          "Lisbon."
+        ],
+        "mention_count": 5
+      }
+    },
+    {
+      "position": 13,
+      "title": "Lisbon Sight Sailing",
+      "place_type": "ATTRACTION",
+      "place_id": "6868354",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g189158-d6868354-Reviews-Lisbon_Sight_Sailing-Lisbon_Lisbon_District_Central_Portugal.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=6868354&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Do you want to see Lisbon like never before? Lisbon Sight Sailing invites you to embark on a unique experience on our boats. With over a decade of experience, we are the most award-winning company offering private, personalized tours with the best views of Lisbon. Our sunset tours are in high demand, but we also organize daytime experiences and even special celebrations such as birthdays, wedding proposals and pre and post-wedding events. Furthermore, if you work for a company and are looking for something different, you should know that we are specialists in corporate events. Solutions for companies range from team building experiences, informal meetings or exclusive events for clients and partners. What do our clients say? Many describe this experience as the best moment of their visit to Lisbon. And we love being part of those memories. Get on board and see Lisbon through different eyes. Book in advance. We're waiting for you!",
+      "rating": 5,
+      "reviews": 208,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/10/60/aa/9b/torre-de-belem-patrimonio.jpg",
+      "highlighted_review": {
+        "mention_count": 2
+      }
+    },
+    {
+      "position": 14,
+      "title": "Feathers & Scales",
+      "place_type": "ATTRACTION",
+      "place_id": "11811366",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g189158-d11811366-Reviews-Feathers_Scales-Lisbon_Lisbon_District_Central_Portugal.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=11811366&tripadvisor_domain=www.tripadvisor.com",
+      "description": "We're a small company offering a range of birdwatching, dolphin watching, wildlife and nature photography tours in Portugal and around Lisbon",
+      "rating": 5,
+      "reviews": 637,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/49/63/42/feathers-scales-dolphin.jpg",
+      "highlighted_review": {
+        "mention_count": 10
+      }
+    },
+    {
+      "position": 15,
+      "title": "Oceanscape",
+      "place_type": "ATTRACTION",
+      "place_id": "14803908",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g189158-d14803908-Reviews-Oceanscape-Lisbon_Lisbon_District_Central_Portugal.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=14803908&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Oceanscape was born from the wish to share the joy and freedom of being in the Ocean. Founded in the Algarve in 2018, we have been committed to offering tailored boat trips, that hope to connect our guests with the sea and it's culture. Our first boat, named after our founder's daughter Noa Asiri, was carefully designed to offer you a comfortable and hip experience on board a remodelled Portuguese fishing boat. All our journeys are crewed by professional captains that are ocean explorers at heart. We are in Lisbon now and are happy to welcome you all year round for Your Oceanscapes!",
+      "rating": 5,
+      "reviews": 50,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/c7/24/5f/your-oceanscape.jpg"
+    },
+    {
+      "position": 16,
+      "title": "Bering Tour",
+      "place_type": "ATTRACTION",
+      "place_id": "19078745",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g189158-d19078745-Reviews-Bering_Tour-Lisbon_Lisbon_District_Central_Portugal.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=19078745&tripadvisor_domain=www.tripadvisor.com",
+      "description": "We are a firm that provides tourist trips on the Tagus River. We do 30-minute, 1-hour and 2-hour tours, taxi boat service and sport fishing",
+      "rating": 4.8,
+      "reviews": 56,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/e8/e9/3d/caption.jpg",
+      "highlighted_review": {
+        "mention_count": 3
+      }
+    },
+    {
+      "position": 17,
+      "title": "Nautica Sic Sic",
+      "place_type": "ATTRACTION",
+      "place_id": "1861625",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g187782-d1861625-Reviews-Nautica_Sic_Sic-Sorrento_Province_of_Naples_Campania.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=1861625&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Nautical sic sic is a boat rental company based at the port of marina piccola in sorrento. The company supplies wide ranging services for pleasure boats: from boat hire, including rubber dinghies, yachts and the sorrento typical boat gozzo, to personalized boat tours to explore the most beautiful places of the sorrento and amalfi coasts and the surrounding islands such the marvelous capri.",
+      "rating": 4.8,
+      "reviews": 940,
+      "location": "Sorrento, Campania, Italy",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/02/26/4e/d5/capri.jpg"
+    },
+    {
+      "position": 18,
+      "title": "Hackshaw's Boat Charters",
+      "place_type": "ATTRACTION",
+      "place_id": "1631227",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g147343-d1631227-Reviews-Hackshaw_s_Boat_Charters-Castries_Castries_Quarter_St_Lucia.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=1631227&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Hackshaw's Boat Charters St. Lucia is the premier charter boat operation in St. Lucia. We offer the very best in, Private Tours, Speed Boat Tours, Sports Fishing, Bottom Fishing, Whale Watching, Day Cruises, Sunset Cruises and Inter Island charters. We operate a fleet of boats ranging in size from 31' to 64'! Come join us for the boating experience of a lifetime.",
+      "rating": 4.7,
+      "reviews": 1017,
+      "location": "Castries, St. Lucia",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/19/a7/3d/16/luxury-50ft-power-cat.jpg"
+    },
+    {
+      "position": 19,
+      "title": "Riverfront Gondola Tours",
+      "place_type": "ATTRACTION",
+      "place_id": "7240271",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g34227-d7240271-Reviews-Riverfront_Gondola_Tours-Fort_Lauderdale_Broward_County_Florida.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=7240271&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Fort Lauderdale's award-winning intimate boat tours - the perfect alternative to crowded tour boats. Private tours of beautiful canals and waterways on super comfortable American gondolas. Maximum 6 passengers per boat creates exclusive sightseeing impossible on large tour boats. Winner \"Best Tour Fort Lauderdale\" 4 years: 2022-2025. Our 90-minute boat tours showcase amazing yachts, stunning mansions & Fort Lauderdale history. Perfect for couples seeking romantic boat tours, small groups wanting personalized attention, anyone preferring boutique experiences over crowded sightseeing boats. Electric gondolas operate silently - no noise, no fumes, eco-friendly. Unlike diesel tour boats, quiet operation allows clear narration & peaceful waterway enjoyment. Unique 'Dinner Cruise' option: Casa Sensei restaurant serves full meals directly to your boat - romantic dining impossible on large tour boats. BYOB welcome. On-site parking. Experience the best boat tour in Fort Lauderdale.",
+      "rating": 4.9,
+      "reviews": 593,
+      "location": "Fort Lauderdale, Florida",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/18/d3/5e/92/right-place-at-the-right.jpg"
+    },
+    {
+      "position": 20,
+      "title": "Southport Boat Rentals",
+      "place_type": "ATTRACTION",
+      "place_id": "12098364",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g49552-d12098364-Reviews-Southport_Boat_Rentals-Southport_North_Carolina.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=12098364&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Southport Boat Rentals and Southport Water Tours are the Only Boat Rental and TourBoat Company in the historic Old Southport Yacht Basin. Our Tour boat can seat up to 28 passengers and we provide a fleet of Carolina Skiffs to rent for the Day, or even longer. No hassle, no clean up, just fun. Join us for a Tour or Rent a Boat to explore the waterways and see a part of the area that you can only access by Water.",
+      "rating": 5,
+      "reviews": 192,
+      "location": "Southport, North Carolina",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/17/95/a1/76/get-on-the-water-today.jpg"
+    },
+    {
+      "position": 21,
+      "title": "Spica Sailing Team",
+      "place_type": "ATTRACTION",
+      "place_id": "6867078",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g189158-d6867078-Reviews-Spica_Sailing_Team-Lisbon_Lisbon_District_Central_Portugal.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=6867078&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Sailing offers an indescribable feeling of freedom, adventure and relationship with the Sea and it's surroundings. We want to share these emotions with everyone that loves the small pleasures of life and always wanted to jump on board. There are all kind of experiences you can have on a sailboat, you can start by taking the helm for a family cruise, or gather all your friends for the best Bachelor Party ever.",
+      "rating": 4.9,
+      "reviews": 233,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/13/a3/ad/9e/sunset-parties.jpg"
+    },
+    {
+      "position": 22,
+      "title": "Lisboat",
+      "place_type": "ATTRACTION",
+      "place_id": "10731454",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g189158-d10731454-Reviews-Lisboat-Lisbon_Lisbon_District_Central_Portugal.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=10731454&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Legend has it that Lisbon was built to impress visitors arriving by boat, and after taking a tour, you\u2019re bound to agree. The sightseeing tour includes a unique view of all of Lisbon\u2019s Seven Hills and a closer look at some of its most important landmarks, including the bridge, Torre de Bel\u00e9m, MAAT Museum, Pra\u00e7a do Com\u00e9rcio, and many more. And that's not all - the Hop On / Hop Off feature lets you visit Lisbon at your own pace: you can jump from boat to land at one of our many pit stops, and get back on board whenever you want. Lisboat - A new way to love Lisbon.",
+      "rating": 4.6,
+      "reviews": 388,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1d/12/7d/45/padrao-dos-descobrimentos.jpg"
+    },
+    {
+      "position": 23,
+      "title": "Guide Sardinia",
+      "place_type": "ATTRACTION",
+      "place_id": "5777223",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g187881-d5777223-Reviews-Guide_Sardinia-Cagliari_Province_of_Cagliari_Sardinia.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=5777223&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Private Taxi Service, villasimius boat tours, cruise shore excursions from Cagliari port to Nora, Barumini, villasimius beach tours and Cagliari city center. Tour guides and beach day tours. Excursions and tours in South Sardinia by minibus and by boat to the protected marine area of Capo Carbonara Villasimius, organised and guided by our professional tour guides. Shore excursions for cruise passengers to Cagliari. Every day from Cagliari, from your hotel, explore with us the coast from Capo Carbonara Capo Teulada. Official drivers and tour guides. Transfers x Sardinia. Gourmet and food&wine tours.",
+      "rating": 5,
+      "reviews": 363,
+      "location": "Cagliari, Italy",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/25/39/ab/3c/guide-sardinia.jpg"
+    },
+    {
+      "position": 24,
+      "title": "Sardegna Luxury Boat Rental & Concierge Services",
+      "place_type": "ATTRACTION",
+      "place_id": "19387821",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g671579-d19387821-Reviews-Sardegna_Luxury_Boat_Rental_Concierge_Services-Cannigione_Arzachena_Province_of_.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=19387821&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Luxury Boat Rental and Yacht Charter Sardinia | Costa Smeralda Cannigione | Porto Cervo. Small boats for rent, Luxury inflatable boats with Skipper, Luxury daily or weekly Yacht Charter and Sailing Boats for your experience of a lifetime in Sardinia. We are multilingual and dynamic. Personalized concierge service luxury car rental, helicopter tours, luxury villa and more we've got you covered.",
+      "rating": 5,
+      "reviews": 91,
+      "location": "Cannigione, Italy",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/43/c0/f5/caption.jpg"
+    },
+    {
+      "position": 25,
+      "title": "MegaVerde",
+      "place_type": "ATTRACTION",
+      "place_id": "6964510",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g189158-d6964510-Reviews-MegaVerde-Lisbon_Lisbon_District_Central_Portugal.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=6964510&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Megaverde is a specialized company in boat trips and nautical events, operating essentially from Santo Amaro\u00b4s Dock, Alc\u00e2ntara, in Lisbon. We organize boat trips, for both companies and individuals, in motor, sail or speed boats, anniversary gatherings, bachelor\u2019s parties, any kind of nautical events for both companies and individuals, transportation from point to point, trips for lunch or dinner by the shore, rides for photographical or filming purposes, fishing trips, amongst other possibilities. We also organize ad-hoc events, totally conceived by the client, provided that all security measures are complied with. Our boats, run by a team with high nautical experience, are new, powerful and safe, gathering the ideal features for our activity.",
+      "rating": 5,
+      "reviews": 46,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/07/87/c2/5c/megaverde.jpg",
+      "highlighted_review": {
+        "mention_count": 1
+      }
+    },
+    {
+      "position": 26,
+      "title": "Sailing with Nigel",
+      "place_type": "ATTRACTION",
+      "place_id": "8424892",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g189158-d8424892-Reviews-Sailing_with_Nigel-Lisbon_Lisbon_District_Central_Portugal.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=8424892&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Come Sailing with Nigel, That's me by the way, and enjoy superb photo opportunities of Lisbon and it's monuments. You can take the wheel and steer the yacht but lazing on deck sipping the complementary champagne is also popular with my guests.Delicious homemade snacks are also provided. The yacht marina with some very nice bars and restaurants is where we meet. On the 2 hour sailing tour we first cruise past Lisbon's city centre and the old town after which we turn towards the ocean sailing past the statue of Christ, under the iconic suspension bridge and on to the Discoveries Monument and the Tower of Belem. On the 6 hour day trip it's all of the above plus we sail to a lagoon and visit a sleepy fishing village for lunch in a riverside restaurant. Hope to see you soon!",
+      "rating": 4.9,
+      "reviews": 267,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/08/62/92/a1/sailing-with-nigel.jpg",
+      "highlighted_review": {
+        "mention_count": 13
+      }
+    },
+    {
+      "position": 27,
+      "title": "Discover Oasis - Boat Tours",
+      "place_type": "ATTRACTION",
+      "place_id": "13838359",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g189158-d13838359-Reviews-Discover_Oasis_Boat_Tours-Lisbon_Lisbon_District_Central_Portugal.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=13838359&tripadvisor_domain=www.tripadvisor.com",
+      "description": "DiscoverOasis - Boat Tours is a company which offers its customers unique and unforgettable experiences, namely boat trips - on sailboats or speedboats. We have several services connected to nautical leisure activities: boat trips along the banks of the Tejo, romantic dinners at sunset, original bachelor parties, nights spent on board, sunset with friends, \u2026",
+      "rating": 4.9,
+      "reviews": 143,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/6b/93/ff/lisbon-boat-tours.jpg",
+      "highlighted_review": {
+        "mention_count": 1
+      }
+    },
+    {
+      "position": 28,
+      "title": "Prague Boats",
+      "place_type": "ATTRACTION",
+      "place_id": "5570527",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g274707-d5570527-Reviews-Prague_Boats-Prague_Bohemia.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=5570527&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Prague Boats has been on the market for more than 25 years and it is the most famous company operating boat tours in Prague. We are proud to have the most modern fleet in Prague and to be eco-friendly. In our fleet you will find not only luxurious and completely newly built boats, but also solar-powered and hybrid boats. All of our boats are in excellent technical condition. In addition to our fleet, we are also proud of the scope, variety and quality of our services. Our boats host company events, conferences, private parties, weddings and much more all year long. We have excellent catering, friendly and professional staff, and we are always ready to arrange much more.",
+      "rating": 3.7,
+      "reviews": 3821,
+      "location": "Prague, Czech Republic",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/17/83/62/08/grand-bohemia.jpg"
+    },
+    {
+      "position": 29,
+      "title": "Around Lisbon",
+      "place_type": "ATTRACTION",
+      "place_id": "3203667",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g189158-d3203667-Reviews-Around_Lisbon-Lisbon_Lisbon_District_Central_Portugal.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=3203667&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Around Lisbon is not your typical Tour Company, as you may have known them. In fact, we don\u2019t like to think of Around Lisbon as a business. It is rather the special life project of two friends, who wanted to develop a friendly local company to cater to like-minded people from all over the world. Our goal is to be your \"local friends\" who help you enjoy Lisbon and Portugal to the fullest. That makes our day too.",
+      "rating": 4.8,
+      "reviews": 1586,
+      "location": "Lisbon, Portugal",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/06/42/ee/b2/around-lisbon-day-tours.jpg",
+      "highlighted_review": {
+        "mention_count": 17
+      }
+    },
+    {
+      "position": 30,
+      "title": "Guleryuz 2 Daily Boat Tours",
+      "place_type": "ATTRACTION",
+      "place_id": "8477908",
+      "link": "https://www.tripadvisor.com/Attraction_Review-g297965-d8477908-Reviews-Guleryuz_2_Daily_Boat_Tours-Kas_Turkish_Mediterranean_Coast.html",
+      "serpapi_link": "https://serpapi.com/search.json?engine=tripadvisor_place&place_id=8477908&tripadvisor_domain=www.tripadvisor.com",
+      "description": "Beautiful islands around Kas between each other and held in a beautiful bay on the mainland Islands Boat Tour, Kekova Boat Tour is the most popular boat tours from the next.",
+      "rating": 5,
+      "reviews": 277,
+      "location": "Kas, T\u00fcrkiye",
+      "thumbnail": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2d/06/4e/86/antalya-kas-in-koylarini.jpg"
+    }
+  ],
+  "serpapi_pagination": {
+    "next": "https://serpapi.com/search.json?engine=tripadvisor&limit=30&offset=30&q=boat+tours+Lisbon&ssrc=A&tripadvisor_domain=www.tripadvisor.com"
+  }
+}
