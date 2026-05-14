@@ -125,7 +125,7 @@ Tracked separately in `TRIP-PLANNING-EXPANSION-SPEC.md`. Status:
 | Track | Tool | Status |
 |---|---|---|
 | C | `get_weather_forecast` | **SHIPPED** (Open-Meteo, no API key) |
-| B | `convert_currency` | Queued (ECB feed, no API key) |
+| B | `convert_currency` | **SHIPPED** (ECB feed, no API key) |
 | E | `search_events` | Queued (SerpAPI google_events) |
 | D | `search_activities` | Queued (SerpAPI Tripadvisor) |
 | F | `get_activity_details` | Queued (depends on Track D) |

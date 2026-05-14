@@ -28,6 +28,7 @@ from trip_search_mcp.cache import TTLCache
 from trip_search_mcp.fli_backend.client import FliClient
 from trip_search_mcp.logging_config import configure_logging, log_event
 from trip_search_mcp.airbnb_backend.client import AirbnbClient
+from trip_search_mcp.ecb_backend.client import EcbClient
 from trip_search_mcp.open_meteo_backend.client import OpenMeteoClient
 from trip_search_mcp.serpapi_hotels_backend.client import SerpAPIHotelsClient
 from trip_search_mcp.tools.search_cheapest_dates import (
@@ -38,6 +39,10 @@ from trip_search_mcp.tools.search_flights import TOOL_DESCRIPTION, search_flight
 from trip_search_mcp.tools.cancel_watch import (
     TOOL_DESCRIPTION as CANCEL_WATCH_DESCRIPTION,
     cancel_watch,
+)
+from trip_search_mcp.tools.convert_currency import (
+    TOOL_DESCRIPTION as CONVERT_CURRENCY_DESCRIPTION,
+    convert_currency,
 )
 from trip_search_mcp.tools.get_stay_details import (
     TOOL_DESCRIPTION as STAY_DETAILS_DESCRIPTION,
@@ -87,6 +92,8 @@ _HOTELS_CLIENT = _build_hotels_client()
 _AIRBNB_CLIENT = AirbnbClient()
 # Open-Meteo client is always available — free, no API key.
 _WEATHER_CLIENT = OpenMeteoClient()
+# ECB client is always available — free, no API key, daily XML feed.
+_ECB_CLIENT = EcbClient()
 
 mcp = FastMCP("trip-search-mcp")
 
@@ -219,6 +226,20 @@ async def get_stay_details_tool(
 
 
 # ----- trip-planning context tools -------------------------------------------
+
+
+@mcp.tool(name="convert_currency", description=CONVERT_CURRENCY_DESCRIPTION)
+async def convert_currency_tool(
+    amount: float,
+    from_currency: str,
+    to_currency: str,
+) -> dict[str, Any]:
+    return await convert_currency(
+        client=_ECB_CLIENT,
+        amount=amount,
+        from_currency=from_currency,
+        to_currency=to_currency,
+    )
 
 
 @mcp.tool(name="get_weather_forecast", description=WEATHER_DESCRIPTION)

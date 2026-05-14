@@ -139,7 +139,26 @@ What you'll get back:
 
 ---
 
-## 5. Check the weather
+## 5. Convert currencies
+
+*(uses `convert_currency`)*
+
+Convert any amount between major currencies using the [European Central Bank's daily reference rates](https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml) — free, no API key, updates once a day.
+
+**You can ask Claude:**
+
+- *"How much is ¥30,000 in euros?"*
+- *"What's $200 in pounds?"*
+- *"Convert €450 (the hotel) plus $180 (the activity) to GBP for me."* → two calls + sum
+- *"My total trip is €1240 flights + $890 hotel + £120 activities. What's that in CAD?"* → three calls + sum
+
+Supports 29+ currencies: USD, EUR, JPY, GBP, CAD, AUD, CHF, SEK, NOK, DKK, INR, MXN, BRL, SGD, KRW, CNY, THB, HKD, NZD, plus CZK, HUF, IDR, ILS, ISK, MYR, PHP, PLN, RON, TRY, ZAR.
+
+> Weekend / holiday queries return the previous business day's rates — Claude discloses the date in its reply. Same-currency conversions short-circuit instantly without hitting the ECB feed.
+
+---
+
+## 6. Check the weather
 
 *(uses `get_weather_forecast`)*
 
@@ -159,7 +178,7 @@ Each day comes back with: max/min temp, condition summary (clear / partly cloudy
 
 ---
 
-## 6. Track flight prices — "tell me if it gets cheaper"
+## 7. Track flight prices — "tell me if it gets cheaper"
 
 *(uses `watch_flight_price`)*
 
@@ -173,7 +192,7 @@ Register a price threshold on a specific route + date. The watch persists foreve
 
 Claude tells you a `watch_id` you can use to cancel later.
 
-### 6a. Check on your watches
+### 7a. Check on your watches
 
 *(uses `list_active_watches`)*
 
@@ -188,7 +207,7 @@ You'll see each watch's current price, how far it is from your threshold ("€53
 
 > **How fresh is "fresh"?** By default, watches refresh every 6 hours. Within that window, the answer comes from cache (no extra API calls). If you want a forced refresh, ask "force a refresh on all my watches".
 
-### 6b. Cancel a watch
+### 7b. Cancel a watch
 
 *(uses `cancel_watch`)*
 
@@ -252,6 +271,16 @@ Claude naturally chains the tools when you give it a trip-planning problem inste
 3. *"Want me to find a hotel in DC for May 18–22 to go with it?"* → `search_stays(location="Washington DC", check_in_date="2026-05-18", ...)`.
 4. Quotes the combined trip cost.
 
+### Workflow H: "What's the total in one currency"
+
+**You ask:** *"My trip cost is €450 flights, $180 stay, ¥6000 in activities. What's that all in pounds?"*
+
+**Claude does:**
+1. Calls `convert_currency(450, "EUR", "GBP")`.
+2. Calls `convert_currency(180, "USD", "GBP")`.
+3. Calls `convert_currency(6000, "JPY", "GBP")`.
+4. Sums them and presents the total with the ECB rate date once.
+
 ### Workflow G: "Bias the plan by weather"
 
 **You ask:** *"Two-week trip to Lisbon in October — which week looks better weather-wise?"*
@@ -294,6 +323,7 @@ Claude naturally chains the tools when you give it a trip-planning problem inste
 | "Find me a vacation rental" | `search_stays(category="vacation_rentals")` |
 | "Tell me more about [hotel]" | `get_stay_details` |
 | "Will it rain in X?" / "weather for [dates]" | `get_weather_forecast` |
+| "How much is X in Y?" / "convert price to my currency" | `convert_currency` |
 | "Watch this route for me" | `watch_flight_price` |
 | "Any deals on my watches?" | `list_active_watches` |
 | "Stop watching the [...] one" | `cancel_watch` |
@@ -306,6 +336,7 @@ Claude naturally chains the tools when you give it a trip-planning problem inste
 - **Hotels & vacation rentals** → [SerpAPI's google_hotels endpoint](https://serpapi.com/google-hotels-api). Free tier 100 searches/month.
 - **Airbnb** → [pyairbnb](https://github.com/johnbalvin/pyairbnb), a community library that talks to Airbnb's GraphQL search endpoint. No API key required.
 - **Weather** → [Open-Meteo](https://open-meteo.com/). Free, no API key, global coverage, 7-day daily forecast.
+- **Currency rates** → [European Central Bank daily reference rates](https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml). Free, no API key, 29+ currencies, updates daily ~16:00 CET.
 - **Geocoding** (for `category="airbnb"` and `get_weather_forecast`) → [OpenStreetMap Nominatim](https://nominatim.openstreetmap.org/). Free, no key.
 
 All providers are queried live — no stale cached results from yesterday's prices.

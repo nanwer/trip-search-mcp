@@ -539,3 +539,22 @@ class GetWeatherForecastInput(BaseModel):
         if self.end_date is None:
             self.end_date = end.isoformat()
         return self
+
+
+# ----- convert_currency ------------------------------------------------------
+
+
+class ConvertCurrencyInput(BaseModel):
+    amount: float = Field(gt=0.0)
+    from_currency: IsoCurrency
+    to_currency: IsoCurrency
+
+
+class ConvertCurrencyResult(BaseModel):
+    amount: float
+    from_currency: IsoCurrency
+    to_currency: IsoCurrency
+    converted_amount: float
+    rate: float                          # 1 from_currency = `rate` to_currency
+    rate_date: str                       # ECB publishes per-day; ISO date string
+    source: str = "ECB"
