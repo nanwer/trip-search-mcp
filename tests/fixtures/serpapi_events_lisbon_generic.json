@@ -1,0 +1,426 @@
+{
+  "search_metadata": {
+    "id": "6a058dacd3982cb9bfbd40e9",
+    "status": "Success",
+    "json_endpoint": "https://serpapi.com/searches/Sww7b7rCT4y0FSmOHb-3Eg/6a058dacd3982cb9bfbd40e9.json",
+    "created_at": "2026-05-14 08:54:04 UTC",
+    "processed_at": "2026-05-14 08:54:04 UTC",
+    "google_events_url": "https://www.google.com/search?q=Events+in+Lisbon&ibp=htl;events&hl=en",
+    "raw_html_file": "https://serpapi.com/searches/Sww7b7rCT4y0FSmOHb-3Eg/6a058dacd3982cb9bfbd40e9.html",
+    "total_time_taken": 1.38
+  },
+  "search_parameters": {
+    "q": "Events in Lisbon",
+    "engine": "google_events",
+    "hl": "en"
+  },
+  "search_information": {
+    "events_results_state": "Results for exact spelling"
+  },
+  "events_results": [
+    {
+      "title": "Fogo Fogo",
+      "date": {
+        "start_date": "May 15",
+        "when": "Fri, May 15, 11 PM \u2013 Sat, May 16, 2 AM GMT+1"
+      },
+      "address": [
+        "B.Leza Club, Cais do G\u00e1s 1",
+        "Lisbon, Portugal"
+      ],
+      "link": "https://www.viagogo.com/Concert-Tickets/Alternative-Music/Fogo-Fogo-Tickets/E-160768546",
+      "event_location_map": {
+        "image": "https://www.google.com/maps/vt/data=dg8w3QSXpsxKu-3KvD3kCc7z0JzqczgeUp5nLaS1cGL6gDo7Jrkl5WbLybZxrVTmb3OCobbR0m7mvbtIikJNBVqjYF9-NuOwJ2a4Fu-WMsBWyj3gAgg",
+        "link": "https://www.google.com/maps/place//data=!4m2!3m1!1s0xd193487129d06a1:0xe6339513a055b04b?sa=X&ved=2ahUKEwixjZ_os7iUAxWQGVkFHTA5JokQ9eIBegQIAxAA&hl=en",
+        "serpapi_link": "https://serpapi.com/search.json?data=%214m2%213m1%211s0xd193487129d06a1%3A0xe6339513a055b04b&engine=google_maps&google_domain=google.com&hl=en&q=Events+in+Lisbon&type=place"
+      },
+      "description": "Ticket listings for Fogo Fogo at B.Leza in Lisboa on 05/15/2026",
+      "ticket_info": [
+        {
+          "source": "Viagogo",
+          "link": "https://www.viagogo.com/Concert-Tickets/Alternative-Music/Fogo-Fogo-Tickets/E-160768546",
+          "link_type": "more info"
+        },
+        {
+          "source": "StubHub",
+          "link": "https://www.stubhub.com/fogo-fogo-tickets/performer/138293369",
+          "link_type": "more info"
+        }
+      ],
+      "venue": {
+        "name": "B.Leza Club",
+        "rating": 4.4,
+        "reviews": 1252,
+        "link": "https://www.google.com/search?sca_esv=23181f9f9c0f0df0&hl=en&q=B.Leza+Club&ludocid=16587765764062556235&ibp=gwp%3B0,7"
+      },
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAokRknzwu6bsuhJsVZ0zyZpscTVnawzIBdHeV6ADuvJ-jsfPK_izPgXppzWe7ZR0&s&ec=121691717",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREi4WZ7rM4ziyC8hUuWV5hNr3TrM-FWiZLn-D5joHSSrXw-TmQ6Jm92AOrMeODCzx1lOBPIFhGa6341SbpaELoOUmisKm98Cog7Tnc&s=10&ec=121691717"
+    },
+    {
+      "title": "Slam",
+      "date": {
+        "start_date": "May 16",
+        "when": "Sat, May 16, 11:59 PM \u2013 Sun, May 17, 8:00 AM GMT+1"
+      },
+      "address": [
+        "Ministerium Cantina, Terreiro do Pa\u00e7o 71",
+        "Lisbon, Portugal"
+      ],
+      "link": "https://open.spotify.com/concert/44NtQfvtUOj2rWbxVLPMzl",
+      "event_location_map": {
+        "image": "https://www.google.com/maps/vt/data=ZxY0IcRbzQYa2LdurodY2637rEgb5hmazB6FegEW-PoCJ1IlxDW5njHIfwc2LEIYoZiNCjcQGsd08kzj0sJF9voyb25OQhaAW7v1ln8zOZKT5BD2muE",
+        "link": "https://www.google.com/maps/place//data=!4m2!3m1!1s0xd19347a1c28a793:0x2bde70fb2bebfa36?sa=X&ved=2ahUKEwixjZ_os7iUAxWQGVkFHTA5JokQ9eIBegQICxAA&hl=en",
+        "serpapi_link": "https://serpapi.com/search.json?data=%214m2%213m1%211s0xd19347a1c28a793%3A0x2bde70fb2bebfa36&engine=google_maps&google_domain=google.com&hl=en&q=Events+in+Lisbon&type=place"
+      },
+      "description": "Find tickets for Slam at Ministerium in Lisboa on 5/16/2026 at 11:59 PM",
+      "ticket_info": [
+        {
+          "source": "Spotify.com",
+          "link": "https://open.spotify.com/concert/44NtQfvtUOj2rWbxVLPMzl",
+          "link_type": "tickets"
+        },
+        {
+          "source": "Shotgun",
+          "link": "https://shotgun.live/en/events/adrena-w-impulsive-behaviour-ketarina",
+          "link_type": "more info"
+        },
+        {
+          "source": "Resident Advisor",
+          "link": "https://ra.co/events/2388810",
+          "link_type": "more info"
+        }
+      ],
+      "venue": {
+        "name": "Ministerium Cantina",
+        "rating": 3.5,
+        "reviews": 287,
+        "link": "https://www.google.com/search?sca_esv=23181f9f9c0f0df0&hl=en&q=Ministerium+Cantina&ludocid=3161088212536654390&ibp=gwp%3B0,7"
+      },
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCA7u--le8HdYC2PqzUCRlLL4T-9iUcuqB59oCHFcUJOnctW4Q0i5OAu_q5jMykXY&s&ec=121691717",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcPM-BZn0OFE_3OdElpG1RhDdZqQ468Do6xCsyAJRUWrIax3HBz1EJX8q25t3V6NI_qnsFpqSIAWozFug5SB-wB3T3eyMhipRIIe39W9oXiCYpJIYC28lU&s=10&ec=121691717"
+    },
+    {
+      "title": "Lisbon Boat Party",
+      "date": {
+        "start_date": "May 16",
+        "when": "Sat, May 16, 7 \u2013 11 PM GMT+1"
+      },
+      "address": [
+        "Lisbarco - Lisbon's Grooviest Boat Party, Doca de Santo Amaro",
+        "Lisbon, Portugal"
+      ],
+      "link": "https://ra.co/events/2281807",
+      "event_location_map": {
+        "image": "https://www.google.com/maps/vt/data=AMZZWDbxBhNc02ApQgpCn3OYcCl_Kjk2c0QnAPrkdr4o-WTSiBZxh2W-Jeq3fkDYilX2Tx5OUahSTuPozMDGZXBCFKQelRhbhj2Y9VKVDMg9nUgk3s4",
+        "link": "https://www.google.com/maps/place//data=!4m2!3m1!1s0xd193599c9a65331:0x8078a5322b8b1eea?sa=X&ved=2ahUKEwixjZ_os7iUAxWQGVkFHTA5JokQ9eIBegQIExAA&hl=en",
+        "serpapi_link": "https://serpapi.com/search.json?data=%214m2%213m1%211s0xd193599c9a65331%3A0x8078a5322b8b1eea&engine=google_maps&google_domain=google.com&hl=en&q=Events+in+Lisbon&type=place"
+      },
+      "description": "Boat. DJ. Cocktails. Sunset. And a full night of fun. Every Thursday, Friday, and Saturday at 7 pm, jump onboard for 4 hours of non-stop partying on the Tagus. Feel the bass, enjoy the drinks, and...",
+      "ticket_info": [
+        {
+          "source": "Resident Advisor",
+          "link": "https://ra.co/events/2281807",
+          "link_type": "more info"
+        }
+      ],
+      "venue": {
+        "name": "Lisbarco - Lisbon's Grooviest Boat Party",
+        "rating": 5.0,
+        "reviews": 1,
+        "link": "https://www.google.com/search?sca_esv=23181f9f9c0f0df0&hl=en&q=Lisbarco+-+Lisbon%27s+Grooviest+Boat+Party&ludocid=9257330668957540074&ibp=gwp%3B0,7"
+      },
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7y7XVean12phiHHVt2MHS3_kP5pmTI90DJ5buG0FnUsz4reDJe2LgLuLARWbKJHw&s&ec=121691717",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRIjEKszgi2BOrf4mkqLLffdLmvVQA8s4utFfFux5fpNZq9BvpcHkiDRRsxKvxgy7_PfXK7EqL7FQrNdgLJ42DY5eqJemuZHIAdfuayrRAvb5xewHTMHLo&s=10&ec=121691717"
+    },
+    {
+      "title": "CHI WOW WAH CITY & VUL present: Uone's The Doors & Jim Morrison \u2014 Lisboa Debut",
+      "date": {
+        "start_date": "May 16",
+        "when": "Sat, May 16, 5 PM \u2013 Sun, May 17, 6 AM GMT+1"
+      },
+      "address": [
+        "Village Underground Lisboa, Av. da \u00cdndia 52",
+        "Lisbon, Portugal"
+      ],
+      "link": "https://ra.co/events/2384343",
+      "event_location_map": {
+        "image": "https://www.google.com/maps/vt/data=k0cwU7QP2dAi8ODnT1Vw3f-D1O65snV6lg05WA_xzEpKQZqxTy-yAC71OpeqUsbhuamh2m_YuSrrvlUgYuNzqEuzYDIYnIVvqOkwnSUNH9zVXAAJgNg",
+        "link": "https://www.google.com/maps/place//data=!4m2!3m1!1s0xd19328312322219:0x4695b8262b3b6c4?sa=X&ved=2ahUKEwixjZ_os7iUAxWQGVkFHTA5JokQ9eIBegQIGxAA&hl=en",
+        "serpapi_link": "https://serpapi.com/search.json?data=%214m2%213m1%211s0xd19328312322219%3A0x4695b8262b3b6c4&engine=google_maps&google_domain=google.com&hl=en&q=Events+in+Lisbon&type=place"
+      },
+      "description": "CHI WOW WAH CITY, in collaboration with Village Underground Lisboa, proudly presents the Portuguese debut of Uone\u2019s The Doors & Jim Morrison Tribute Experience, landing in Lisboa on Saturday, 16th...",
+      "ticket_info": [
+        {
+          "source": "Shotgun.live",
+          "link": "https://shotgun.live/events/chi-wow-wah-city-uone-tribute-doors-and-jim-morrison",
+          "link_type": "tickets"
+        },
+        {
+          "source": "Resident Advisor",
+          "link": "https://ra.co/events/2384343",
+          "link_type": "more info"
+        },
+        {
+          "source": "Facebook",
+          "link": "https://www.facebook.com/events/village-underground-lisboa/chi-wow-wah-city-vul-present-uones-tribute-to-the-doors-jim-morrison-lisboa-debu/2297433810734469/",
+          "link_type": "more info"
+        },
+        {
+          "source": "Events in Lisbon",
+          "link": "https://ma.to/event/uone-the-doors-tribute-16-may-2026",
+          "link_type": "more info"
+        },
+        {
+          "source": "FestScanner",
+          "link": "http://festscanner.com/en/event/chi-wow-wah-city-uones-tribute-to-the-doors-jim-morrison-lisboa-2026-05-16",
+          "link_type": "more info"
+        }
+      ],
+      "venue": {
+        "name": "Village Underground Lisboa",
+        "rating": 4.2,
+        "reviews": 2279,
+        "link": "https://www.google.com/search?sca_esv=23181f9f9c0f0df0&hl=en&q=Village+Underground+Lisboa&ludocid=317885864266151620&ibp=gwp%3B0,7"
+      },
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7y7XVean12phiHHVt2MHS3_kP5pmTI90DJ5buG0FnUsz4reDJe2LgLuLARWbKJHw&s&ec=121691717",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRIjEKszgi2BOrf4mkqLLffdLmvVQA8s4utFfFux5fpNZq9BvpcHkiDRRsxKvxgy7_PfXK7EqL7FQrNdgLJ42DY5eqJemuZHIAdfuayrRAvb5xewHTMHLo&s=10&ec=121691717"
+    },
+    {
+      "title": "Rogier Bak",
+      "date": {
+        "start_date": "May 15",
+        "when": "Fri, May 15, 7:00 \u2013 8:20 PM GMT+1"
+      },
+      "address": [
+        "Republic of Comedy, Xafarix Bar, Av. Dom Carlos I 69",
+        "Lisbon, Portugal"
+      ],
+      "link": "https://fienta.com/index.php/to-the-rescue-lisbon",
+      "event_location_map": {
+        "image": "https://www.google.com/maps/vt/data=ZGT7eBMlaPPabyI2Ean6B2ioFhAPtgYBC7bK_LZbicVE6Ol0f7uRwu7eNcAV0zTwm2tNc0vv0BaMereQhFWwDEME5IH4sTRAvubTF31y6dg36XhmGss",
+        "link": "https://www.google.com/maps/place//data=!4m2!3m1!1s0xd19358b5730296d:0xf6ff43f512d6f11?sa=X&ved=2ahUKEwixjZ_os7iUAxWQGVkFHTA5JokQ9eIBegQIIxAA&hl=en",
+        "serpapi_link": "https://serpapi.com/search.json?data=%214m2%213m1%211s0xd19358b5730296d%3A0xf6ff43f512d6f11&engine=google_maps&google_domain=google.com&hl=en&q=Events+in+Lisbon&type=place"
+      },
+      "description": "\ud83e\udde0 ABOUT THE SHOW For the first time in history Rogier is back with a second (brand new) show: Rogier Bak To The Rescue! In an age of tension and turmoil, Rogier daringly and openly jokes about...",
+      "ticket_info": [
+        {
+          "source": "Fienta.com",
+          "link": "https://fienta.com/to-the-rescue-lisbon",
+          "link_type": "tickets"
+        },
+        {
+          "source": "Facebook",
+          "link": "https://www.facebook.com/rogierbak/posts/1862992664383867/",
+          "link_type": "more info"
+        },
+        {
+          "source": "Republic of Comedy",
+          "link": "https://republic.show/2026/05/15/rogier-bak-to-the-rescue",
+          "link_type": "more info"
+        }
+      ],
+      "venue": {
+        "name": "Republic of Comedy",
+        "rating": 4.9,
+        "reviews": 216,
+        "link": "https://www.google.com/search?sca_esv=23181f9f9c0f0df0&hl=en&q=Republic+of+Comedy&ludocid=1112376185765850897&ibp=gwp%3B0,7"
+      },
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnZ1on9DRAxzYl3GNphTlPGCdS6kM_MPUQqZ6GUa0ai8NAj2WFc4it67NqD5fg_CY&s&ec=121691717",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHatfQWgwoXOLQvoYaOu_WLM4C9o2crYc3NQAdNtTaM_YiK0zeoOgXXJ8Glb33sw0Fz05PAesrjVT0A-trsJHOC86iHQ-BoUnHTxqL&s=10&ec=121691717"
+    },
+    {
+      "title": "Lisbon Boat Party",
+      "date": {
+        "start_date": "May 15",
+        "when": "Fri, May 15, 7 \u2013 11 PM GMT+1"
+      },
+      "address": [
+        "Lisbon Boat Party, Cais Rocha Conde de \u00d3bidos",
+        "Lisbon, Portugal"
+      ],
+      "link": "https://shotgun.live/en/events/lisbon-boat-party-15-may",
+      "event_location_map": {
+        "image": "https://www.google.com/maps/vt/data=hKz2CUk_VTHwzFRXkG_b-WQQSmEIPE6UXmFlHlE4vCjYBJ3FIi7flEyPe34KXvLdPeLlvrkPaOk-Ox_CH_hkCdF0kkC1heNPZHQ8r_gZyX9dKkssLes",
+        "link": "https://www.google.com/maps/place//data=!4m2!3m1!1s0xd19358344532d8b:0xdf0806972fd27303?sa=X&ved=2ahUKEwixjZ_os7iUAxWQGVkFHTA5JokQ9eIBegQIKxAA&hl=en",
+        "serpapi_link": "https://serpapi.com/search.json?data=%214m2%213m1%211s0xd19358344532d8b%3A0xdf0806972fd27303&engine=google_maps&google_domain=google.com&hl=en&q=Events+in+Lisbon&type=place"
+      },
+      "description": "Lisbon Boat Party is an open air event during sunset cruising the Tagus river - the most unique experience in Lisbon! What\u2019s Included: \ud83e\udd42 1 welcome drink + 1 long drink included \ud83d\udc83\ud83c\udffc 4 hours of...",
+      "ticket_info": [
+        {
+          "source": "Shotgun.live",
+          "link": "https://shotgun.live/en/events/lisbon-boat-party-15-may",
+          "link_type": "tickets"
+        },
+        {
+          "source": "Resident Advisor",
+          "link": "https://ra.co/events/2288213",
+          "link_type": "more info"
+        }
+      ],
+      "venue": {
+        "name": "Lisbon Boat Party",
+        "rating": 4.7,
+        "reviews": 1365,
+        "link": "https://www.google.com/search?sca_esv=23181f9f9c0f0df0&hl=en&q=Lisbon+Boat+Party&ludocid=16071102516683764483&ibp=gwp%3B0,7"
+      },
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTy9YnKUGh6GFDh0AvPM6MlwVSa4uOpV4Fe8sRORgPNpsu0giOOA13Waq_IXsnyDaQ&s&ec=121691717",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaSxCLhzjbV_cyS8L-SjgQ5ep7kxhDHSZdzNA4B5WUQe6_WykNICKjQETFIjRBijj8ia-sp8v3kYYMS7Xxpns1YTSeBTW8JUZwHpfjJYs4ojGeOXLBu__g&s=10&ec=121691717"
+    },
+    {
+      "title": "H\u00d6R ON TOUR LISBON W/ VIBR8",
+      "date": {
+        "start_date": "May 16",
+        "when": "Sat, May 16, 10 PM \u2013 Sun, May 17, 6 AM GMT+1"
+      },
+      "address": [
+        "8 Marvila, Pra\u00e7a David Leandro da Silva 8",
+        "Lisbon, Portugal"
+      ],
+      "link": "https://open.spotify.com/concert/5uH5hL94J5QK6q4zlI0Pkq",
+      "event_location_map": {
+        "image": "https://www.google.com/maps/vt/data=6eTs9Ued-rI7nmLGGHL4-Tky5IZ8uBoEJ5oayqnXGtaX9USP4tK1QyKONchu5y-o_F61_gptMgcyI4Xo5KKcrb-wNeyO1EGsJMDeJ8rvRvwtiEyObuk",
+        "link": "https://www.google.com/maps/place//data=!4m2!3m1!1s0xd19338c8ea3ba2b:0xf172cab9dad6d35d?sa=X&ved=2ahUKEwixjZ_os7iUAxWQGVkFHTA5JokQ9eIBegQIMxAA&hl=en",
+        "serpapi_link": "https://serpapi.com/search.json?data=%214m2%213m1%211s0xd19338c8ea3ba2b%3A0xf172cab9dad6d35d&engine=google_maps&google_domain=google.com&hl=en&q=Events+in+Lisbon&type=place"
+      },
+      "ticket_info": [
+        {
+          "source": "Spotify.com",
+          "link": "https://open.spotify.com/concert/5uH5hL94J5QK6q4zlI0Pkq",
+          "link_type": "tickets"
+        },
+        {
+          "source": "Shotgun.live",
+          "link": "https://shotgun.live/en/events/hor-x-vibr-8",
+          "link_type": "tickets"
+        },
+        {
+          "source": "Resident Advisor",
+          "link": "https://ra.co/events/2419994",
+          "link_type": "more info"
+        }
+      ],
+      "venue": {
+        "name": "8 Marvila",
+        "rating": 4.6,
+        "reviews": 1962,
+        "link": "https://www.google.com/search?sca_esv=23181f9f9c0f0df0&hl=en&q=8+Marvila&ludocid=17398191210074919773&ibp=gwp%3B0,7"
+      },
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTh-Z48zqDbeZSnF7aVYWXMihzcARydvWCXHXx61N6SwUompoD4ZFsbsju1qM43nCo&s&ec=121691717",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-rgWSqTDxCz0HGCzipATogoR49vJiRGndtagy8O61-b6zAyqA6voip8Mxmm_S03Y4Gf2oht87BZXiwfpLocT-pRMHCmJpUtqKpRRB0l-L64MyC5Qyu7I_&s=10&ec=121691717"
+    },
+    {
+      "title": "Djosinha",
+      "date": {
+        "start_date": "May 16",
+        "when": "Sat, May 16, 11 PM GMT+1"
+      },
+      "address": [
+        "B.Leza Club, Cais do G\u00e1s 1",
+        "Lisbon, Portugal"
+      ],
+      "link": "https://www.viagogo.com/Concert-Tickets/Other-Concerts/Djosinha-Tickets/E-160775601",
+      "event_location_map": {
+        "image": "https://www.google.com/maps/vt/data=dg8w3QSXpsxKu-3KvD3kCc7z0JzqczgeUp5nLaS1cGL6gDo7Jrkl5WbLybZxrVTmb3OCobbR0m7mvbtIikJNBVqjYF9-NuOwJ2a4Fu-WMsBWyj3gAgg",
+        "link": "https://www.google.com/maps/place//data=!4m2!3m1!1s0xd193487129d06a1:0xe6339513a055b04b?sa=X&ved=2ahUKEwixjZ_os7iUAxWQGVkFHTA5JokQ9eIBegQIOxAA&hl=en",
+        "serpapi_link": "https://serpapi.com/search.json?data=%214m2%213m1%211s0xd193487129d06a1%3A0xe6339513a055b04b&engine=google_maps&google_domain=google.com&hl=en&q=Events+in+Lisbon&type=place"
+      },
+      "description": "Ticket listings for Djosinha at B.Leza in Lisboa on 05/16/2026",
+      "ticket_info": [
+        {
+          "source": "Stubhub.com",
+          "link": "https://www.stubhub.com/djosinha-lisbon-tickets-5-16-2026/event/160775601/",
+          "link_type": "tickets"
+        },
+        {
+          "source": "Viagogo",
+          "link": "https://www.viagogo.com/Concert-Tickets/Other-Concerts/Djosinha-Tickets",
+          "link_type": "more info"
+        }
+      ],
+      "venue": {
+        "name": "B.Leza Club",
+        "rating": 4.4,
+        "reviews": 1252,
+        "link": "https://www.google.com/search?sca_esv=23181f9f9c0f0df0&hl=en&q=B.Leza+Club&ludocid=16587765764062556235&ibp=gwp%3B0,7"
+      },
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShycPZBaAtOIynVgAB85jxBT0cKrJkX6EVOZfryudhhsizdif_ur9EVDqLcTyhXhg&s&ec=121691717",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuh5eZI92-EUbO_01A86DqQDo5pvTiMaW-voXKdyHYD5lLQqfalbOIa1PUhf-Cy56X2zMg8cHoDwX7BfgIJzKNbNvE_vSdZKeH0Zg_&s=10&ec=121691717"
+    },
+    {
+      "title": "Bad Advice",
+      "date": {
+        "start_date": "May 14",
+        "when": "Thu, May 14, 8:30 \u2013 11:00 PM GMT+1"
+      },
+      "address": [
+        "Xafarix Bar, Av. Dom Carlos I 69",
+        "Lisbon, Portugal"
+      ],
+      "link": "https://www.eventbrite.com/e/bad-advice-interactive-comedy-about-your-life-tickets-1988636455170",
+      "event_location_map": {
+        "image": "https://www.google.com/maps/vt/data=a-aorxvPMq5mb9PwK5vOM0e-dCwivRIRVpyvw45bXCQ6D6-iovkjLKGgd4p63JXsataHC7fBhf4hqwAw7uUOZ8EJTK9vqH73yRLES0eLy5UZmsVJTLs",
+        "link": "https://www.google.com/maps/place//data=!4m2!3m1!1s0xd193483a44a8ebd:0xb7297457a5abd98c?sa=X&ved=2ahUKEwixjZ_os7iUAxWQGVkFHTA5JokQ9eIBegQIQxAA&hl=en",
+        "serpapi_link": "https://serpapi.com/search.json?data=%214m2%213m1%211s0xd193483a44a8ebd%3A0xb7297457a5abd98c&engine=google_maps&google_domain=google.com&hl=en&q=Events+in+Lisbon&type=place"
+      },
+      "description": "Lisbon\u2019s first and only interactive comedy show is a wild ride! Bring your problems, get the worst and funniest life advice possible! Lisbon's first and only interactive comedy show is a wild...",
+      "ticket_info": [
+        {
+          "source": "Eventbrite.com",
+          "link": "https://www.eventbrite.com/e/bad-advice-interactive-comedy-about-your-life-tickets-1988636455170",
+          "link_type": "tickets"
+        },
+        {
+          "source": "Republic of Comedy",
+          "link": "https://republic.show/2026/05/14/bad-advice",
+          "link_type": "more info"
+        }
+      ],
+      "venue": {
+        "name": "Xafarix Bar",
+        "rating": 4.4,
+        "reviews": 467,
+        "link": "https://www.google.com/search?sca_esv=23181f9f9c0f0df0&hl=en&q=Xafarix+Bar&ludocid=13198208102776428940&ibp=gwp%3B0,7"
+      },
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzF_p9O-gaf2Ug3FoM0rOZmfAgqQxWLs_7EM8pEGbhE1M0TcKfGV-IawrTSOYRVS0&s&ec=121691717",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdMQ3bE0jhIAvYQy5hNMwiwWu4dBnaKUJs1ezoTta7R_1JwkF_Og&s&ec=121691717"
+    },
+    {
+      "title": "Concerto | Lisboa",
+      "date": {
+        "start_date": "May 17",
+        "when": "Sun, May 17, 5 \u2013 9 PM GMT+1"
+      },
+      "address": [
+        "Time Out Market, Mercado da Ribeira, Av. 24 de Julho",
+        "Lisbon, Portugal"
+      ],
+      "link": "https://open.spotify.com/concert/0VsXFuU2RoHtwpxN2ATa8O",
+      "event_location_map": {
+        "image": "https://www.google.com/maps/vt/data=uyhS-Kra8UHTuOhqT0k4hfhu5JBVnjBC2Vgi0v4pNeBS8zEGdWAhEqXx4n1mZoVARpSt-PmcyOrPL0-LbGnq8iHXgUZufM4Q4Z4mOG0dT0cKT9j3CN0",
+        "link": "https://www.google.com/maps/place//data=!4m2!3m1!1s0xd193487595e6075:0x138fe14e4972dc92?sa=X&ved=2ahUKEwixjZ_os7iUAxWQGVkFHTA5JokQ9eIBegQISxAA&hl=en",
+        "serpapi_link": "https://serpapi.com/search.json?data=%214m2%213m1%211s0xd193487595e6075%3A0x138fe14e4972dc92&engine=google_maps&google_domain=google.com&hl=en&q=Events+in+Lisbon&type=place"
+      },
+      "description": "Find tickets for HMB at Time Out Market Lisbon in Lisboa on 5/17/2026 at 5:00 PM",
+      "ticket_info": [
+        {
+          "source": "Spotify.com",
+          "link": "https://open.spotify.com/concert/0VsXFuU2RoHtwpxN2ATa8O",
+          "link_type": "tickets"
+        },
+        {
+          "source": "Events in Lisbon",
+          "link": "https://ma.to/event/hmb-12-aniversario-time-out-market-17-05-2026",
+          "link_type": "more info"
+        }
+      ],
+      "venue": {
+        "name": "Time Out Market",
+        "rating": 4.4,
+        "reviews": 73559,
+        "link": "https://www.google.com/search?sca_esv=23181f9f9c0f0df0&hl=en&q=Time+Out+Market&ludocid=1409592934746217618&ibp=gwp%3B0,7"
+      },
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVlDW6sc1qaNC38iwFWykvQlZYar9kL4gRQVaNLdFQA4jSETgoRayndsqpjSIDYnU&s&ec=121691717",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNsy-G1pq0H1yX-2t2awREgdKGsURsjSDnMn4-S0BOiGcQQ36LaepMhOwj_kzcO_1E4topnuvnGZxJFWu_mSeiimxxEGX97cMOC3o6qQiMIfbStPMT2yHA&s=10&ec=121691717"
+    }
+  ]
+}

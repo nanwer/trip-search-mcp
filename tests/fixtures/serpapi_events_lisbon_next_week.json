@@ -1,0 +1,274 @@
+{
+  "search_metadata": {
+    "id": "6a058db3998aad69b30cd0a5",
+    "status": "Success",
+    "json_endpoint": "https://serpapi.com/searches/pwLkEGKZKunNnzY3MJwjPA/6a058db3998aad69b30cd0a5.json",
+    "created_at": "2026-05-14 08:54:11 UTC",
+    "processed_at": "2026-05-14 08:54:11 UTC",
+    "google_events_url": "https://www.google.com/search?q=Events+in+Lisbon&ibp=htl;events&hl=en&chips=date:next_week",
+    "raw_html_file": "https://serpapi.com/searches/pwLkEGKZKunNnzY3MJwjPA/6a058db3998aad69b30cd0a5.html",
+    "total_time_taken": 0.6
+  },
+  "search_parameters": {
+    "q": "Events in Lisbon",
+    "engine": "google_events",
+    "htichips": "date:next_week",
+    "hl": "en"
+  },
+  "search_information": {
+    "events_results_state": "Results for exact spelling"
+  },
+  "events_results": [
+    {
+      "title": "Oxxxymiron Tour 2026 \u2018Nationality: No\u2019",
+      "date": {
+        "start_date": "May 17",
+        "when": "Sun, May 17, 8 PM \u2013 Mon, May 18, 12 AM GMT+1"
+      },
+      "address": [
+        "LAV - Lisboa ao Vivo, Av. Mar. Gomes da Costa 29 B1",
+        "Lisbon, Portugal"
+      ],
+      "link": "https://open.spotify.com/concert/2xEDPlobCivDerZ73eFojT",
+      "event_location_map": {
+        "image": "https://www.google.com/maps/vt/data=xNQMzuwIYmJ_P28qRr1K94OA69lzQNQ4Asc3_7qntyEtM1SuzKKxybnzMz9lDv5LMgooRV_h-qS2iMnHzcPU-nscVn2gu6ACf-9bEyfkBzV5IXWgDco",
+        "link": "https://www.google.com/maps/place//data=!4m2!3m1!1s0xd1933df6006e373:0xc741ed627d6fb5a0?sa=X&ved=2ahUKEwjixMTrs7iUAxW_MVkFHeMJBoIQ9eIBegQIAxAA&hl=en",
+        "serpapi_link": "https://serpapi.com/search.json?data=%214m2%213m1%211s0xd1933df6006e373%3A0xc741ed627d6fb5a0&engine=google_maps&google_domain=google.com&hl=en&q=Events+in+Lisbon&type=place"
+      },
+      "description": "Find tickets for Oxxxymiron at LAV - Lisboa Ao Vivo in Lisboa on 5/17/2026 at 8:00 PM",
+      "ticket_info": [
+        {
+          "source": "Spotify.com",
+          "link": "https://open.spotify.com/concert/2xEDPlobCivDerZ73eFojT",
+          "link_type": "tickets"
+        },
+        {
+          "source": "Discover Events",
+          "link": "https://discover.events.com/pt/lisbon/bairro-das-amendoeiras/e/musica/oxxxymiron-lisboa-ao-vivo-lav-lisbon-17-2026-456311463",
+          "link_type": "more info"
+        }
+      ],
+      "venue": {
+        "name": "LAV - Lisboa ao Vivo",
+        "rating": 4.5,
+        "reviews": 3843,
+        "link": "https://www.google.com/search?sca_esv=23181f9f9c0f0df0&hl=en&q=LAV+-+Lisboa+ao+Vivo&ludocid=14358018094300902816&ibp=gwp%3B0,7"
+      },
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfPWGg4mEStQCrQVpuHDsYbowe5jBX2RQ2euKfsawaxoG6Z2sMFh-Wmhk&s",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSb3opOBLptjqx06r82HFRUB1ss_F6Wasq3zxEMEakqPwWCsxHo_4C_7PRp90uR&s"
+    },
+    {
+      "title": "Acoustic concert in Lisbon",
+      "date": {
+        "start_date": "May 17",
+        "when": "Sun, May 17, 8 PM \u2013 Mon, May 18, 12 AM GMT+1"
+      },
+      "address": [
+        "In Impetus, R. de Campolide 27A",
+        "Lisbon, Portugal"
+      ],
+      "link": "https://open.spotify.com/concert/1QF8YCLXWmCbpgorXY4GE5",
+      "event_location_map": {
+        "image": "https://www.google.com/maps/vt/data=0oWv_3mRoh8VReFUEgHbrCiuIyQJYXZgAzPjz-HUmRC8-GOsrreYUgg6m8ihVnIlMEEjMa3bbFOlhDOk7UVcZERpNmfMyizgRbEE00P6g3rWRyF2Sng",
+        "link": "https://www.google.com/maps/place//data=!4m2!3m1!1s0xd19349f07ef6e65:0xdbe8786ae3e2944b?sa=X&ved=2ahUKEwjixMTrs7iUAxW_MVkFHeMJBoIQ9eIBegQICxAA&hl=en",
+        "serpapi_link": "https://serpapi.com/search.json?data=%214m2%213m1%211s0xd19349f07ef6e65%3A0xdbe8786ae3e2944b&engine=google_maps&google_domain=google.com&hl=en&q=Events+in+Lisbon&type=place"
+      },
+      "description": "Find tickets for Rushana at In Impetus in Lisboa on 5/17/2026 at 8:00 PM",
+      "ticket_info": [
+        {
+          "source": "Spotify.com",
+          "link": "https://open.spotify.com/concert/1QF8YCLXWmCbpgorXY4GE5",
+          "link_type": "tickets"
+        }
+      ],
+      "venue": {
+        "name": "In Impetus",
+        "rating": 4.5,
+        "reviews": 53,
+        "link": "https://www.google.com/search?sca_esv=23181f9f9c0f0df0&hl=en&q=In+Impetus&ludocid=15846047689388233803&ibp=gwp%3B0,7"
+      },
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjV7woNdyzo9ilW34wxpJRQoXshw8KBBO5r_X46yr0hTZZwZoFjBfbNzM&s",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRigzCuKhA3QrYqzc2dagflC_DttrtSEBE6cZ102_tNzmYteVRl01ARHYWQCg&s=10"
+    },
+    {
+      "title": "The Lisbon Night Pubcrawl: 1h Open Bar, Shots & VIP Club Entry",
+      "date": {
+        "start_date": "May 17",
+        "when": "Sun, May 17, 10 PM \u2013 Mon, May 18, 3 AM GMT+1"
+      },
+      "address": [
+        "Pra\u00e7a Lu\u00eds de Cam\u00f5es, Largo Lu\u00eds de Cam\u00f5es",
+        "Lisbon, Portugal"
+      ],
+      "link": "https://festscanner.com/en/event/eb66872c-e35d-4940-bd07-b5e08b3e7773",
+      "event_location_map": {
+        "image": "https://www.google.com/maps/vt/data=N9iv6ZJiUlz9A4jTkEXEFhnWEWXyHeBGjs906GhQHEl9NOl2L7UvQ3zq8VGB_RHU58ZukYFq6UuJV2EMXR4lF77oTwtbJgAUejnsgtpuVm283F_emqw",
+        "link": "https://www.google.com/maps/place//data=!4m2!3m1!1s0xd19347fadaa5d5d:0x1567d31205cbe5e?sa=X&ved=2ahUKEwjixMTrs7iUAxW_MVkFHeMJBoIQ9eIBegQIExAA&hl=en",
+        "serpapi_link": "https://serpapi.com/search.json?data=%214m2%213m1%211s0xd19347fadaa5d5d%3A0x1567d31205cbe5e&engine=google_maps&google_domain=google.com&hl=en&q=Events+in+Lisbon&type=place"
+      },
+      "description": "Discover everything about The Lisbon Night Pubcrawl: 1h Open Bar, Shots & VIP Club Entry in Lisboa. Full lineup, schedule and official ticket links in one place. Plan your perfect night with...",
+      "ticket_info": [
+        {
+          "source": "Eventbrite.co.uk",
+          "link": "https://www.eventbrite.co.uk/e/the-lisbon-night-pubcrawl-1h-open-bar-shots-vip-club-entry-tickets-1965400666300",
+          "link_type": "tickets"
+        },
+        {
+          "source": "FestScanner",
+          "link": "https://festscanner.com/en/event/eb66872c-e35d-4940-bd07-b5e08b3e7773",
+          "link_type": "more info"
+        }
+      ],
+      "venue": {
+        "name": "Pra\u00e7a Lu\u00eds de Cam\u00f5es",
+        "rating": 4.5,
+        "reviews": 29174,
+        "link": "https://www.google.com/search?sca_esv=23181f9f9c0f0df0&hl=en&q=Pra%C3%A7a+Lu%C3%ADs+de+Cam%C3%B5es&ludocid=96402091984862814&ibp=gwp%3B0,7"
+      },
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGQzl96ypYHfJIkKBSX5lXY9W1Oq7icoSd9CLKi_9Z5AEPxT5Epq11NPo&s",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMYhPNxonJC_hLqahPOKPQi80pzTzsir7zZXWZDhu8XUG6RDiMXwCgm6ovSA&s=10"
+    },
+    {
+      "title": "50 Madrugadas",
+      "date": {
+        "start_date": "May 14",
+        "when": "May 13, 9:00 PM \u2013 May 27, 7:22 PM GMT+1"
+      },
+      "address": [
+        "Teatro Armando Cortez, Estr. da Pontinha 7",
+        "Lisbon, Portugal"
+      ],
+      "link": "http://www.stubhub.com/nz/50-dawns-lisbon-tickets-5-13-2026/event/160674134",
+      "event_location_map": {
+        "image": "https://www.google.com/maps/vt/data=dTIbkvTC2DyBea6upKMxkH9ZxVti2ru6Uvg59bh5DN32daMngLG4nUPdLEw84u_uN1qCPTR7ypOEVB73pgzrdgp25q438HDQMwpfdMC2NVgFNU_phuE",
+        "link": "https://www.google.com/maps/place//data=!4m2!3m1!1s0xd1ecd326bdef781:0x62cf10d7a7cd46b1?sa=X&ved=2ahUKEwjixMTrs7iUAxW_MVkFHeMJBoIQ9eIBegQIGxAA&hl=en",
+        "serpapi_link": "https://serpapi.com/search.json?data=%214m2%213m1%211s0xd1ecd326bdef781%3A0x62cf10d7a7cd46b1&engine=google_maps&google_domain=google.com&hl=en&q=Events+in+Lisbon&type=place"
+      },
+      "description": "Ticket listings for 50 Madrugadas at Teatro Armando Cortez in Lisboa on 13/05/2026",
+      "ticket_info": [
+        {
+          "source": "StubHub",
+          "link": "http://www.stubhub.com/nz/50-dawns-lisbon-tickets-5-13-2026/event/160674134",
+          "link_type": "more info"
+        },
+        {
+          "source": "TodoWeekend",
+          "link": "https://www.todoweekend.com/lisboa/events/theatre/50-madrugadas-4b75ab",
+          "link_type": "more info"
+        }
+      ],
+      "venue": {
+        "name": "Teatro Armando Cortez",
+        "rating": 4.5,
+        "reviews": 1753,
+        "link": "https://www.google.com/search?sca_esv=23181f9f9c0f0df0&hl=en&q=Teatro+Armando+Cortez&ludocid=7119928054315304625&ibp=gwp%3B0,7"
+      },
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRbxPAOhRJIHZ16Brxom6csVhus7nZ4p7g3D1soVCkYHWvdzxGFjSVKfE&s",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcRmkCpmMtPpFjYuApFJzO9NgWkL93Pe4zTiwPwJYJRaGg6HTq2oq1g1l-4Q&s=10"
+    },
+    {
+      "title": "Peer Gynt",
+      "date": {
+        "start_date": "May 17",
+        "when": "Sun, May 17, 1 AM \u2013 Mon, May 18, 1 AM GMT+1"
+      },
+      "address": [
+        "Calouste Gulbenkian Foundation, Av. de Berna 45A",
+        "Lisbon, Portugal"
+      ],
+      "link": "https://bachtrack.com/concert-event/peer-gynt-orquestra-gulbenkian-fundacao-calouste-gulbenkian-main-auditorium-17-may-2026/431625",
+      "event_location_map": {
+        "image": "https://www.google.com/maps/vt/data=oCi04U6UTfDobTthrh8ko-DiE6Iwtj56WfK0qNlPQUxfW2ZnU4UDKtNWT11IZR_ry0uJeQT70yjM1A-invSsnMX0EggWYM8N9nY2hEhbKo3Isi6E8SA",
+        "link": "https://www.google.com/maps/place//data=!4m2!3m1!1s0xd19330ddab493b5:0x7de5692fbde87e3?sa=X&ved=2ahUKEwjixMTrs7iUAxW_MVkFHeMJBoIQ9eIBegQIIxAA&hl=en",
+        "serpapi_link": "https://serpapi.com/search.json?data=%214m2%213m1%211s0xd19330ddab493b5%3A0x7de5692fbde87e3&engine=google_maps&google_domain=google.com&hl=en&q=Events+in+Lisbon&type=place"
+      },
+      "description": "Grieg, Saint-Sa\u00ebns, Dukas, Tchaikovsky | Anton Holmer, Orquestra Gulbenkian",
+      "ticket_info": [
+        {
+          "source": "Bachtrack",
+          "link": "https://bachtrack.com/concert-event/peer-gynt-orquestra-gulbenkian-fundacao-calouste-gulbenkian-main-auditorium-17-may-2026/431625",
+          "link_type": "more info"
+        },
+        {
+          "source": "Operabase",
+          "link": "https://www.operabase.com/productions/peer-gynt-368087/en",
+          "link_type": "more info"
+        }
+      ],
+      "venue": {
+        "name": "Calouste Gulbenkian Foundation",
+        "rating": 4.8,
+        "reviews": 2204,
+        "link": "https://www.google.com/search?sca_esv=23181f9f9c0f0df0&hl=en&q=Calouste+Gulbenkian+Foundation&ludocid=566985792386140131&ibp=gwp%3B0,7"
+      },
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTM2FEli3tqmosgA2uPZKT1SYQPBzCYZv292ZlhVjQ&s",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT76WaZ1FyjHmDTHRE2qwgMYO-f9f6YPUHFEWce2VTU2u4R&s=10"
+    },
+    {
+      "title": "Verdadeiro Oeste",
+      "date": {
+        "start_date": "May 14",
+        "when": "May 9, 7 PM \u2013 Jun 7, 7 PM GMT+1"
+      },
+      "address": [
+        "Teatro da Trindade INATEL, R. Nova da Trindade 9",
+        "Lisbon, Portugal"
+      ],
+      "link": "https://www.viagogo.com/sg/Theater-Tickets/Shows/Verdadeiro-Oeste-Tickets/E-159596905?lt=37.751&lg=-97.822",
+      "event_location_map": {
+        "image": "https://www.google.com/maps/vt/data=pOUuJDtGfTgpnE2f-OyvB9vEWKBThzNEE4Z8mbPAV29SRcYdQO265TijbADOMS9-LCJXQEpQ1Mmo1xdSTqbQ5ZHxT6u4Fuc8T9xcyszMUYrj14IYKGs",
+        "link": "https://www.google.com/maps/place//data=!4m2!3m1!1s0xd19347f75a1d8bd:0xc53f917cc09c7b37?sa=X&ved=2ahUKEwjixMTrs7iUAxW_MVkFHeMJBoIQ9eIBegQIKxAA&hl=en",
+        "serpapi_link": "https://serpapi.com/search.json?data=%214m2%213m1%211s0xd19347f75a1d8bd%3A0xc53f917cc09c7b37&engine=google_maps&google_domain=google.com&hl=en&q=Events+in+Lisbon&type=place"
+      },
+      "description": "Ticket listings for Verdadeiro Oeste at Teatro da Trindade INATEL in Lisbon on 09/05/2026",
+      "ticket_info": [
+        {
+          "source": "Viagogo",
+          "link": "https://www.viagogo.com/sg/Theater-Tickets/Shows/Verdadeiro-Oeste-Tickets/E-159592876?lt=37.751&lg=-97.822",
+          "link_type": "more info"
+        }
+      ],
+      "venue": {
+        "name": "Teatro da Trindade INATEL",
+        "rating": 4.6,
+        "reviews": 3545,
+        "link": "https://www.google.com/search?sca_esv=23181f9f9c0f0df0&hl=en&q=Teatro+da+Trindade+INATEL&ludocid=14213238913998027575&ibp=gwp%3B0,7"
+      },
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLkkpVtUCbVbnnUk2NpVL9-OfmFVJRconFB48GL0slJ9WZdJsIphEaMMI&s",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_DlLaWjvN21xRY7MiF_pu4BX60DM_E0oSTSldjWdPnA&s=10"
+    },
+    {
+      "title": "Um Interrogat\u00f3rio | Teatro Paulo Claro | Teatro in Lisboa",
+      "date": {
+        "start_date": "May 14",
+        "when": "May 7, 9 PM \u2013 May 23, 9 PM GMT+1"
+      },
+      "address": [
+        "Artistas Unidos | Teatro Paulo Claro, Rua do A\u00e7\u00facar 37",
+        "Lisbon, Portugal"
+      ],
+      "link": "https://ma.to/event/um-interrogatorio-teatro-paulo-claro-07-may-2026",
+      "event_location_map": {
+        "image": "https://www.google.com/maps/vt/data=xL41FdEJ44JDn_97qXdbsKv5bQLe6g-cnYYA9I8kH-r1pbCRHzwTXiOotqZ2MchqyP0euMgoUNo_7nxmkbNR00R3CkQeyyZrFBNFOb5heiRfbSJs0eo",
+        "link": "https://www.google.com/maps/place//data=!4m2!3m1!1s0xd1933ef367668df:0xa66a5184504b3cea?sa=X&ved=2ahUKEwjixMTrs7iUAxW_MVkFHeMJBoIQ9eIBegQIMxAA&hl=en",
+        "serpapi_link": "https://serpapi.com/search.json?data=%214m2%213m1%211s0xd1933ef367668df%3A0xa66a5184504b3cea&engine=google_maps&google_domain=google.com&hl=en&q=Events+in+Lisbon&type=place"
+      },
+      "description": "Detective Ruth Palmer conducts a voluntary interview with Cameron Andrews, a respected local businessman, in a mundane interrogation room. Under the cold watch of surveillance cameras, every...",
+      "ticket_info": [
+        {
+          "source": "Events in Lisbon",
+          "link": "https://ma.to/event/um-interrogatorio-teatro-paulo-claro-07-may-2026",
+          "link_type": "more info"
+        }
+      ],
+      "venue": {
+        "name": "Artistas Unidos | Teatro Paulo Claro",
+        "rating": 4.9,
+        "reviews": 13,
+        "link": "https://www.google.com/search?sca_esv=23181f9f9c0f0df0&hl=en&q=Artistas+Unidos+%7C+Teatro+Paulo+Claro&ludocid=11991486586552007914&ibp=gwp%3B0,7"
+      },
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFkzse7EwesNLbj-7TSJoYhDlxjOGbPCND3TCdUL8Cc7e-vPtsJ7hCX5k&s",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREeK1FJ9IXvfhr2pG0wvfAHknF_kZvs0PXNdEqR6LKHA&s=10"
+    }
+  ]
+}

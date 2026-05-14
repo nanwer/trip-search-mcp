@@ -558,3 +558,51 @@ class ConvertCurrencyResult(BaseModel):
     rate: float                          # 1 from_currency = `rate` to_currency
     rate_date: str                       # ECB publishes per-day; ISO date string
     source: str = "ECB"
+
+
+# ----- search_events ---------------------------------------------------------
+
+
+class EventDateFilter(str, Enum):
+    """Maps to SerpAPI's `htichips` parameter values. None passes nothing."""
+    TODAY = "today"
+    TOMORROW = "tomorrow"
+    THIS_WEEK = "week"
+    WEEKEND = "weekend"
+    NEXT_WEEK = "next_week"
+    THIS_MONTH = "month"
+    NEXT_MONTH = "next_month"
+
+
+class SearchEventsInput(BaseModel):
+    location: str = Field(min_length=1)
+    query: str | None = None         # event type: "concerts", "festivals", ...
+    date_filter: EventDateFilter | None = None
+    max_results: int = Field(default=15, ge=1, le=50)
+
+
+class TicketSource(BaseModel):
+    """One entry from SerpAPI's `ticket_info` array (Viagogo, StubHub, etc.)."""
+    source: str                       # OTA / vendor name
+    link: str                         # third-party ticket page
+    link_type: str | None = None      # SerpAPI's "more info" / "tickets" / etc.
+
+
+class EventOffer(BaseModel):
+    offer_id: str                    # hash of (title, start_date_raw, venue_name)
+    title: str
+    start_date_raw: str | None       # SerpAPI's `date.start_date`, e.g. "Jun 21"
+    when_text: str | None            # SerpAPI's `date.when` — formatted display string
+    venue_name: str | None
+    venue_rating: float | None
+    venue_review_count: int | None
+    address: str | None              # flattened from SerpAPI's address list
+    description: str | None
+    thumbnail: str | None
+    image: str | None
+    ticket_url: str                  # SerpAPI's `link` field (primary)
+    ticket_sources: list[TicketSource] = Field(default_factory=list)
+
+
+class SearchEventsResult(BaseModel):
+    results: list[EventOffer]

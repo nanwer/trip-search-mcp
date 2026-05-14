@@ -30,10 +30,15 @@ from trip_search_mcp.logging_config import configure_logging, log_event
 from trip_search_mcp.airbnb_backend.client import AirbnbClient
 from trip_search_mcp.ecb_backend.client import EcbClient
 from trip_search_mcp.open_meteo_backend.client import OpenMeteoClient
+from trip_search_mcp.serpapi_events_backend.client import SerpAPIEventsClient
 from trip_search_mcp.serpapi_hotels_backend.client import SerpAPIHotelsClient
 from trip_search_mcp.tools.search_cheapest_dates import (
     TOOL_DESCRIPTION as CHEAPEST_DATES_DESCRIPTION,
     search_cheapest_dates,
+)
+from trip_search_mcp.tools.search_events import (
+    TOOL_DESCRIPTION as EVENTS_DESCRIPTION,
+    search_events,
 )
 from trip_search_mcp.tools.search_flights import TOOL_DESCRIPTION, search_flights
 from trip_search_mcp.tools.cancel_watch import (
@@ -86,7 +91,17 @@ def _build_hotels_client() -> SerpAPIHotelsClient | None:
     return SerpAPIHotelsClient(http=http, api_key=api_key)
 
 
+def _build_events_client() -> SerpAPIEventsClient | None:
+    """Same lazy pattern as hotels — events also need SERPAPI_KEY."""
+    api_key = os.environ.get("SERPAPI_KEY")
+    if not api_key:
+        return None
+    http = httpx.AsyncClient(timeout=httpx.Timeout(30.0))
+    return SerpAPIEventsClient(http=http, api_key=api_key)
+
+
 _HOTELS_CLIENT = _build_hotels_client()
+_EVENTS_CLIENT = _build_events_client()
 # Airbnb client is always available — pyairbnb is a hard dependency and
 # has no API key requirement. Geocoding uses Nominatim (also key-free).
 _AIRBNB_CLIENT = AirbnbClient()
@@ -226,6 +241,23 @@ async def get_stay_details_tool(
 
 
 # ----- trip-planning context tools -------------------------------------------
+
+
+@mcp.tool(name="search_events", description=EVENTS_DESCRIPTION)
+async def search_events_tool(
+    location: str,
+    query: str | None = None,
+    date_filter: str | None = None,
+    max_results: int = 15,
+) -> dict[str, Any]:
+    return await search_events(
+        client=_EVENTS_CLIENT,
+        cache=_CACHE,
+        location=location,
+        query=query,
+        date_filter=date_filter,
+        max_results=max_results,
+    )
 
 
 @mcp.tool(name="convert_currency", description=CONVERT_CURRENCY_DESCRIPTION)

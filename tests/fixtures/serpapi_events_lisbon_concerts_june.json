@@ -1,0 +1,480 @@
+{
+  "search_metadata": {
+    "id": "6a058dadb7942fa5b6bed7e5",
+    "status": "Success",
+    "json_endpoint": "https://serpapi.com/searches/PoY5GoGwEEmd_SUd3Tfmsw/6a058dadb7942fa5b6bed7e5.json",
+    "created_at": "2026-05-14 08:54:05 UTC",
+    "processed_at": "2026-05-14 08:54:05 UTC",
+    "google_events_url": "https://www.google.com/search?q=Concerts+in+Lisbon+June+2026&ibp=htl;events&hl=en",
+    "raw_html_file": "https://serpapi.com/searches/PoY5GoGwEEmd_SUd3Tfmsw/6a058dadb7942fa5b6bed7e5.html",
+    "total_time_taken": 0.83
+  },
+  "search_parameters": {
+    "q": "Concerts in Lisbon June 2026",
+    "engine": "google_events",
+    "hl": "en"
+  },
+  "search_information": {
+    "events_results_state": "Results for exact spelling"
+  },
+  "events_results": [
+    {
+      "title": "Rock in Rio Lisboa 2026",
+      "date": {
+        "start_date": "Jun 21",
+        "when": "Sun, Jun 21, 7 PM \u2013 Sun, Jun 28, 1 PM GMT+1"
+      },
+      "address": [
+        "Parque Tejo, Passeio do Tejo",
+        "Lisbon, Portugal"
+      ],
+      "link": "https://www.visitlisboa.com/de/veranstaltungen/rock-in-rio-lisboa26",
+      "event_location_map": {
+        "image": "https://www.google.com/maps/vt/data=GFbEqaRQ4Q1J8j4nZIck0mBdFyTqKlU8uAUjRFyDFvFTAD35bJs9L1klbb0WOuE3hA3gpQGLVT9uwWXkLvt_-EL4sUUbiB86NkhG-s3JGogcYsuD1sc",
+        "link": "https://www.google.com/maps/place//data=!4m2!3m1!1s0xd193171c280674f:0xdd76fddf3271cb8f?sa=X&ved=2ahUKEwi7g_Xos7iUAxUgK1kFHZt1HogQ9eIBegQIAxAA&hl=en",
+        "serpapi_link": "https://serpapi.com/search.json?data=%214m2%213m1%211s0xd193171c280674f%3A0xdd76fddf3271cb8f&engine=google_maps&google_domain=google.com&hl=en&q=Concerts+in+Lisbon+June+2026&type=place"
+      },
+      "description": "20/21 & 27/28 JUN | Rock in Rio is the largest music and entertainment festival in the world | At Parque Tejo",
+      "ticket_info": [
+        {
+          "source": "Visit Lisboa",
+          "link": "https://www.visitlisboa.com/en/events/rock-in-rio-lisboa26",
+          "link_type": "more info"
+        },
+        {
+          "source": "Music Festival Wizard",
+          "link": "https://www.musicfestivalwizard.com/festivals/rock-in-rio-lisbon-2026/",
+          "link_type": "more info"
+        },
+        {
+          "source": "Skiddle",
+          "link": "https://www.skiddle.com/festivals/rock-in-rio-lisbon/",
+          "link_type": "more info"
+        },
+        {
+          "source": "Ticombo \u2013 world of events - world\u2019s No. 1 Ticket Marketplace",
+          "link": "https://www.ticombo.com/en/music-tickets/festival-tickets/rock-in-rio-lisbon",
+          "link_type": "more info"
+        },
+        {
+          "source": "Concerts Metal",
+          "link": "https://en.concerts-metal.com/g-3123__The_Pretty_Reckless--pt.html",
+          "link_type": "more info"
+        }
+      ],
+      "venue": {
+        "name": "Parque Tejo",
+        "rating": 4.6,
+        "reviews": 3595,
+        "link": "https://www.google.com/search?sca_esv=23181f9f9c0f0df0&hl=en&q=Parque+Tejo&ludocid=15958221464699784079&ibp=gwp%3B0,7"
+      },
+      "thumbnail": "https://www.google.com/maps/vt/data=GFbEqaRQ4Q1J8j4nZIck0mBdFyTqKlU8uAUjRFyDFvFTAD35bJs9L1klbb0WOuE3hA3gpQGLVT9uwWXkLvt_-EL4sUUbiB86NkhG-s3JGogcYsuD1sc",
+      "image": "https://www.google.com/maps/vt/data=GFbEqaRQ4Q1J8j4nZIck0mBdFyTqKlU8uAUjRFyDFvFTAD35bJs9L1klbb0WOuE3hA3gpQGLVT9uwWXkLvt_-EL4sUUbiB86NkhG-s3JGogcYsuD1sc"
+    },
+    {
+      "title": "Conan Gray",
+      "date": {
+        "start_date": "Jun 7",
+        "when": "Sun, Jun 7, 7 \u2013 10 PM GMT+1"
+      },
+      "address": [
+        "MEO Arena, Rossio dos Olivais",
+        "Lisbon, Portugal"
+      ],
+      "link": "https://open.spotify.com/concert/4MS5zoq3sqLZZv8Sqn8SBp",
+      "event_location_map": {
+        "image": "https://www.google.com/maps/vt/data=LD3xGZrP2fVxAUP34C9RNSIxOS-fK6jmj26suxBix19zTkVfpG4uRq6KHjn98ych_CKkhFBJrSEoa5evu57oqzS88drjpUkWKDrl7Z89T6In2nVGc6U",
+        "link": "https://www.google.com/maps/place//data=!4m2!3m1!1s0xd19318570a93b63:0x1c465f5bdc842e42?sa=X&ved=2ahUKEwi7g_Xos7iUAxUgK1kFHZt1HogQ9eIBegQICxAA&hl=en",
+        "serpapi_link": "https://serpapi.com/search.json?data=%214m2%213m1%211s0xd19318570a93b63%3A0x1c465f5bdc842e42&engine=google_maps&google_domain=google.com&hl=en&q=Concerts+in+Lisbon+June+2026&type=place"
+      },
+      "description": "Find tickets for Esha Tewari at MEO Arena in Lisboa on 6/7/2026 at 7:00 PM",
+      "ticket_info": [
+        {
+          "source": "Spotify.com",
+          "link": "https://open.spotify.com/concert/4MS5zoq3sqLZZv8Sqn8SBp",
+          "link_type": "tickets"
+        },
+        {
+          "source": "Sapo.pt",
+          "link": "https://ticketline.sapo.pt/evento/98318",
+          "link_type": "tickets"
+        },
+        {
+          "source": "Tixel.com",
+          "link": "https://tixel.com/music-tickets/2026/06/07/conan-gray-meo-arena-lisbon",
+          "link_type": "tickets"
+        },
+        {
+          "source": "Twickets.live",
+          "link": "https://www.twickets.live/en/event/2036101803073871872",
+          "link_type": "tickets"
+        },
+        {
+          "source": "Viagogo",
+          "link": "https://www.viagogo.com/Concert-Tickets/Rock-and-Pop/Conan-Gray-Tickets/E-159674830",
+          "link_type": "more info"
+        }
+      ],
+      "venue": {
+        "name": "MEO Arena",
+        "rating": 4.5,
+        "reviews": 37607,
+        "link": "https://www.google.com/search?sca_esv=23181f9f9c0f0df0&hl=en&q=MEO+Arena&ludocid=2037420729578040898&ibp=gwp%3B0,7"
+      },
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMG7yFyCm07A63vlRnNXgeJLSTMiplOR5jwtGO3cLNPpo8SQ3a4Ny_iog&s",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEBn0CXxBDj0GSvTNvUOL8rWmuPsgw9ffJlJ4T65ylqmdVmPbmG4_QJCheMg&s=10"
+    },
+    {
+      "title": "Men I Trust",
+      "date": {
+        "start_date": "Jun 2",
+        "when": "Tue, Jun 2, 7:00 \u2013 11:30 PM GMT+1"
+      },
+      "address": [
+        "LAV - Lisboa ao Vivo, Av. Mar. Gomes da Costa 29 B1",
+        "Lisbon, Portugal"
+      ],
+      "link": "https://feverup.com/m/476615/en",
+      "event_location_map": {
+        "image": "https://www.google.com/maps/vt/data=xNQMzuwIYmJ_P28qRr1K94OA69lzQNQ4Asc3_7qntyEtM1SuzKKxybnzMz9lDv5LMgooRV_h-qS2iMnHzcPU-nscVn2gu6ACf-9bEyfkBzV5IXWgDco",
+        "link": "https://www.google.com/maps/place//data=!4m2!3m1!1s0xd1933df6006e373:0xc741ed627d6fb5a0?sa=X&ved=2ahUKEwi7g_Xos7iUAxUgK1kFHZt1HogQ9eIBegQIExAA&hl=en",
+        "serpapi_link": "https://serpapi.com/search.json?data=%214m2%213m1%211s0xd1933df6006e373%3A0xc741ed627d6fb5a0&engine=google_maps&google_domain=google.com&hl=en&q=Concerts+in+Lisbon+June+2026&type=place"
+      },
+      "description": "\ud83c\udf1f Men I Trust will perform on June 2 nd at LAV in Lisbon. The Canadian dream-pop trio will perform tracks that have become a comforting escape for listeners around the world. \ud83d\udcb5Special price for...",
+      "ticket_info": [
+        {
+          "source": "Feverup.com",
+          "link": "https://feverup.com/m/476615",
+          "link_type": "tickets"
+        },
+        {
+          "source": "Viagogo",
+          "link": "https://www.viagogo.com/Concert-Tickets/Electronic/Men-I-Trust-Tickets/E-160833982",
+          "link_type": "more info"
+        },
+        {
+          "source": "Last.fm",
+          "link": "https://www.last.fm/event/4990367+Men+I+Trust",
+          "link_type": "more info"
+        },
+        {
+          "source": "StubHub",
+          "link": "https://www.stubhub.com/men-i-trust-lisbon-tickets-6-2-2026/event/160833982/",
+          "link_type": "more info"
+        },
+        {
+          "source": "Discover Events",
+          "link": "https://discover.events.com/pt/lisbon/bairro-das-amendoeiras/e/musica/men-trust-lisboa-ao-vivo-lav-lisbon-02-jun-2026-456311277",
+          "link_type": "more info"
+        }
+      ],
+      "venue": {
+        "name": "LAV - Lisboa ao Vivo",
+        "rating": 4.5,
+        "reviews": 3843,
+        "link": "https://www.google.com/search?sca_esv=23181f9f9c0f0df0&hl=en&q=LAV+-+Lisboa+ao+Vivo&ludocid=14358018094300902816&ibp=gwp%3B0,7"
+      },
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYqrSxLXbvlcYvuK5oLSE0XmP2jIswYW2iKycQRVM&s",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0P9dxelEwp3wBPKL_-VT5tcRQGHDrwiwSb_pvI4QHsQ&s=10"
+    },
+    {
+      "title": "Rock in Rio Lisboa 2026",
+      "date": {
+        "start_date": "Jun 21",
+        "when": "Sun, Jun 21, 2 PM \u2013 Mon, Jun 22, 2 AM GMT+1"
+      },
+      "address": [
+        "Parque Papa Francisco",
+        "Lisbon, Portugal"
+      ],
+      "link": "https://open.spotify.com/concert/1Q1sfeIVkx2QbrqOBhGfqy",
+      "event_location_map": {
+        "image": "https://www.google.com/maps/vt/data=G9eONWn5b7rMeeVO6bWj-XiJgLQAfgpSGAV2guDZyCK0AyvWexBnQvzyAemLQWHgrhe4BG-6XXl1PRKLupkdzXbXHM35Q7EJccluXeNvEXr0iuCbVcY",
+        "link": "https://www.google.com/maps/place//data=!4m2!3m1!1s0xd1931d65210bb6d:0xe402a4e147b2a0fe?sa=X&ved=2ahUKEwi7g_Xos7iUAxUgK1kFHZt1HogQ9eIBegQIGxAA&hl=en",
+        "serpapi_link": "https://serpapi.com/search.json?data=%214m2%213m1%211s0xd1931d65210bb6d%3A0xe402a4e147b2a0fe&engine=google_maps&google_domain=google.com&hl=en&q=Concerts+in+Lisbon+June+2026&type=place"
+      },
+      "description": "Find tickets for Linkin Park at Parque Tejo-Tranc\u00e3o (Lisboa) in Lisbon on 6/21/2026 at 7:00 PM",
+      "ticket_info": [
+        {
+          "source": "Spotify.com",
+          "link": "https://open.spotify.com/concert/1Q1sfeIVkx2QbrqOBhGfqy",
+          "link_type": "tickets"
+        },
+        {
+          "source": "Viagogo",
+          "link": "https://www.viagogo.com/au/Concert-Tickets/Rock-and-Pop/Tara-Perdida-Tickets",
+          "link_type": "more info"
+        },
+        {
+          "source": "My Guide Lisbon",
+          "link": "https://www.myguidelisbon.com/events/linkin-park",
+          "link_type": "more info"
+        },
+        {
+          "source": "Stereoboard.com",
+          "link": "https://www.stereoboard.com/rock-in-rio-lisboa-tickets/lisbon/2026-06-21",
+          "link_type": "more info"
+        },
+        {
+          "source": "pedro-go",
+          "link": "https://pedro-go.com/en/events/events-detail/rock-in-rio-lisboa.html",
+          "link_type": "more info"
+        }
+      ],
+      "venue": {
+        "name": "Parque Papa Francisco",
+        "rating": 4.3,
+        "reviews": 176,
+        "link": "https://www.google.com/search?sca_esv=23181f9f9c0f0df0&hl=en&q=Parque+Papa+Francisco&ludocid=16429875678078476542&ibp=gwp%3B0,7"
+      },
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCJHstzv9GIxZy96WIMVH_L9VB3cdXjtRJbwmgrQiB071b2hW592esy80&s",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThGHkxUCEThkMa2rsz9deOeplp1cC1fnkn7RIMV3mbLRFUTnoJrkxa0ht8bg&s=10"
+    },
+    {
+      "title": "Rock in Rio Lisboa 2026",
+      "date": {
+        "start_date": "Jun 27",
+        "when": "Sat, Jun 27, 12 PM \u2013 Sun, Jun 28, 2 AM GMT+1"
+      },
+      "address": [
+        "Parque Tejo, Passeio do Tejo",
+        "Lisbon, Portugal"
+      ],
+      "link": "https://pedro-go.com/en/events/events-detail/rock-in-rio.html",
+      "event_location_map": {
+        "image": "https://www.google.com/maps/vt/data=GFbEqaRQ4Q1J8j4nZIck0mBdFyTqKlU8uAUjRFyDFvFTAD35bJs9L1klbb0WOuE3hA3gpQGLVT9uwWXkLvt_-EL4sUUbiB86NkhG-s3JGogcYsuD1sc",
+        "link": "https://www.google.com/maps/place//data=!4m2!3m1!1s0xd193171c280674f:0xdd76fddf3271cb8f?sa=X&ved=2ahUKEwi7g_Xos7iUAxUgK1kFHZt1HogQ9eIBegQIIxAA&hl=en",
+        "serpapi_link": "https://serpapi.com/search.json?data=%214m2%213m1%211s0xd193171c280674f%3A0xdd76fddf3271cb8f&engine=google_maps&google_domain=google.com&hl=en&q=Concerts+in+Lisbon+June+2026&type=place"
+      },
+      "ticket_info": [
+        {
+          "source": "pedro-go",
+          "link": "https://pedro-go.com/en/events/events-detail/rock-in-rio.html",
+          "link_type": "more info"
+        }
+      ],
+      "venue": {
+        "name": "Parque Tejo",
+        "rating": 4.6,
+        "reviews": 3595,
+        "link": "https://www.google.com/search?sca_esv=23181f9f9c0f0df0&hl=en&q=Parque+Tejo&ludocid=15958221464699784079&ibp=gwp%3B0,7"
+      },
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5yPA_7-ZAeH9RTv468LCxMuVUqPNuCIBORfqRHVaI_xI9Kn3hE3bNYPo&s",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEXBUxtJpEUJ4_rhNprZ-YxmzAmROuEgiAaCurdIPeFRhLI3-aJz_8QDbO4Q&s=10"
+    },
+    {
+      "title": "Doja Cat",
+      "date": {
+        "start_date": "Jun 2",
+        "when": "Tue, Jun 2, 7 \u2013 10 PM GMT+1"
+      },
+      "address": [
+        "MEO Arena, Rossio dos Olivais",
+        "Lisbon, Portugal"
+      ],
+      "link": "https://blueticket.meo.pt/en/event/15520/doja-cat-ma-vie-world-tour",
+      "event_location_map": {
+        "image": "https://www.google.com/maps/vt/data=LD3xGZrP2fVxAUP34C9RNSIxOS-fK6jmj26suxBix19zTkVfpG4uRq6KHjn98ych_CKkhFBJrSEoa5evu57oqzS88drjpUkWKDrl7Z89T6In2nVGc6U",
+        "link": "https://www.google.com/maps/place//data=!4m2!3m1!1s0xd19318570a93b63:0x1c465f5bdc842e42?sa=X&ved=2ahUKEwi7g_Xos7iUAxUgK1kFHZt1HogQ9eIBegQIKxAA&hl=en",
+        "serpapi_link": "https://serpapi.com/search.json?data=%214m2%213m1%211s0xd19318570a93b63%3A0x1c465f5bdc842e42&engine=google_maps&google_domain=google.com&hl=en&q=Concerts+in+Lisbon+June+2026&type=place"
+      },
+      "description": "GRAMMY\u00ae Award-winning global superstar Doja Cat has announced new 2026 tour dates across Latin America, Europe, the UK, and North America, as part of her ma",
+      "ticket_info": [
+        {
+          "source": "Spotify.com",
+          "link": "https://open.spotify.com/concert/72oL9Cce96uMHfxr5D1BAP",
+          "link_type": "tickets"
+        },
+        {
+          "source": "Twickets.live",
+          "link": "https://www.twickets.live/en/event/2049835483537612800",
+          "link_type": "tickets"
+        },
+        {
+          "source": "Ticketiq.com",
+          "link": "https://www.ticketiq.com/buy-doja-cat-tickets-meo-arena-6-2-26-8pm/7771658/",
+          "link_type": "tickets"
+        },
+        {
+          "source": "Barrystickets.com",
+          "link": "https://www.barrystickets.com/buy-doja-cat-tickets-meo-arena-6-2-26-8pm/7771658/",
+          "link_type": "tickets"
+        },
+        {
+          "source": "Timeout.pt",
+          "link": "https://www.timeout.pt/lisboa/pt/musica/doja-cat",
+          "link_type": "tickets"
+        }
+      ],
+      "venue": {
+        "name": "MEO Arena",
+        "rating": 4.5,
+        "reviews": 37607,
+        "link": "https://www.google.com/search?sca_esv=23181f9f9c0f0df0&hl=en&q=MEO+Arena&ludocid=2037420729578040898&ibp=gwp%3B0,7"
+      },
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUk_9_pfLIfZj60UZF1oz-01_S8O-xdXojlrBTIRWhLqkNXjpfCgUXPEk&s",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgs9hkN1jmSHS6vh3i6IYSf1wEzHjQYP80uS_exi1kbEzy7c9s2TX9J30tcw&s=10"
+    },
+    {
+      "title": "Superchunk",
+      "date": {
+        "start_date": "Jun 18",
+        "when": "Thu, Jun 18, 9:00 PM \u2013 Fri, Jun 19, 12:30 AM GMT+1"
+      },
+      "address": [
+        "LAV - Lisboa ao Vivo, Av. Mar. Gomes da Costa 29 B1",
+        "Lisbon, Portugal"
+      ],
+      "link": "https://open.spotify.com/concert/7JIilQg1BEBvpKC5L0uSS2",
+      "event_location_map": {
+        "image": "https://www.google.com/maps/vt/data=xNQMzuwIYmJ_P28qRr1K94OA69lzQNQ4Asc3_7qntyEtM1SuzKKxybnzMz9lDv5LMgooRV_h-qS2iMnHzcPU-nscVn2gu6ACf-9bEyfkBzV5IXWgDco",
+        "link": "https://www.google.com/maps/place//data=!4m2!3m1!1s0xd1933df6006e373:0xc741ed627d6fb5a0?sa=X&ved=2ahUKEwi7g_Xos7iUAxUgK1kFHZt1HogQ9eIBegQIMxAA&hl=en",
+        "serpapi_link": "https://serpapi.com/search.json?data=%214m2%213m1%211s0xd1933df6006e373%3A0xc741ed627d6fb5a0&engine=google_maps&google_domain=google.com&hl=en&q=Concerts+in+Lisbon+June+2026&type=place"
+      },
+      "description": "Find tickets for Superchunk at LAV - Lisboa Ao Vivo in Lisboa on 6/18/2026 at 9:00 PM",
+      "ticket_info": [
+        {
+          "source": "Spotify.com",
+          "link": "https://open.spotify.com/concert/7JIilQg1BEBvpKC5L0uSS2",
+          "link_type": "tickets"
+        },
+        {
+          "source": "Fever",
+          "link": "https://feverup.com/m/589877/en",
+          "link_type": "more info"
+        },
+        {
+          "source": "Events in Lisbon",
+          "link": "https://ma.to/event/superchunk-18-jun-2026",
+          "link_type": "more info"
+        }
+      ],
+      "venue": {
+        "name": "LAV - Lisboa ao Vivo",
+        "rating": 4.5,
+        "reviews": 3843,
+        "link": "https://www.google.com/search?sca_esv=23181f9f9c0f0df0&hl=en&q=LAV+-+Lisboa+ao+Vivo&ludocid=14358018094300902816&ibp=gwp%3B0,7"
+      },
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQi_KSyHgQ9x0pDLh5jq_aZKexHb8ht98BUSZ8SbYw9J_2A1qvqfZxslgM&s",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNirqEiClNzdIA4ggfVOlZfBLIyELxggFUcV5bU-FC4SIUkH9Ei-1LnHvPYA&s=10"
+    },
+    {
+      "title": "TV Girl",
+      "date": {
+        "start_date": "Jun 1",
+        "when": "Mon, Jun 1, 7 PM GMT+1"
+      },
+      "address": [
+        "LAV - Lisboa ao Vivo, Av. Mar. Gomes da Costa 29 B1",
+        "Lisbon, Portugal"
+      ],
+      "link": "https://feverup.com/music/en/artist/131e9430-tv-girl",
+      "event_location_map": {
+        "image": "https://www.google.com/maps/vt/data=xNQMzuwIYmJ_P28qRr1K94OA69lzQNQ4Asc3_7qntyEtM1SuzKKxybnzMz9lDv5LMgooRV_h-qS2iMnHzcPU-nscVn2gu6ACf-9bEyfkBzV5IXWgDco",
+        "link": "https://www.google.com/maps/place//data=!4m2!3m1!1s0xd1933df6006e373:0xc741ed627d6fb5a0?sa=X&ved=2ahUKEwi7g_Xos7iUAxUgK1kFHZt1HogQ9eIBegQIOxAA&hl=en",
+        "serpapi_link": "https://serpapi.com/search.json?data=%214m2%213m1%211s0xd1933df6006e373%3A0xc741ed627d6fb5a0&engine=google_maps&google_domain=google.com&hl=en&q=Concerts+in+Lisbon+June+2026&type=place"
+      },
+      "ticket_info": [
+        {
+          "source": "Fever",
+          "link": "https://feverup.com/music/en/artist/131e9430-tv-girl",
+          "link_type": "more info"
+        }
+      ],
+      "venue": {
+        "name": "LAV - Lisboa ao Vivo",
+        "rating": 4.5,
+        "reviews": 3843,
+        "link": "https://www.google.com/search?sca_esv=23181f9f9c0f0df0&hl=en&q=LAV+-+Lisboa+ao+Vivo&ludocid=14358018094300902816&ibp=gwp%3B0,7"
+      },
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvB8s_zVBBQNPNV_CAvBCe5kqobsVBqkBVGK64072kaCW0aSt3LaLWFgo&s",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfTOTKg0TyHLI-fFOobU7MsuCgVa1oPe8U8-r2cDpCrsfP9i4y3D_vqc4c-Q&s=10"
+    },
+    {
+      "title": "Linkin Park Concert in Lisbon",
+      "date": {
+        "start_date": "Jun 21",
+        "when": "Sun, Jun 21, 9:00 \u2013 11:59 PM GMT+1"
+      },
+      "address": [
+        "Parque Tejo, Passeio do Tejo",
+        "Lisbon, Portugal"
+      ],
+      "link": "https://www.guidetolisbon.com/events/linkin-park-concert-in-lisbon/",
+      "event_location_map": {
+        "image": "https://www.google.com/maps/vt/data=GFbEqaRQ4Q1J8j4nZIck0mBdFyTqKlU8uAUjRFyDFvFTAD35bJs9L1klbb0WOuE3hA3gpQGLVT9uwWXkLvt_-EL4sUUbiB86NkhG-s3JGogcYsuD1sc",
+        "link": "https://www.google.com/maps/place//data=!4m2!3m1!1s0xd193171c280674f:0xdd76fddf3271cb8f?sa=X&ved=2ahUKEwi7g_Xos7iUAxUgK1kFHZt1HogQ9eIBegQIQxAA&hl=en",
+        "serpapi_link": "https://serpapi.com/search.json?data=%214m2%213m1%211s0xd193171c280674f%3A0xdd76fddf3271cb8f&engine=google_maps&google_domain=google.com&hl=en&q=Concerts+in+Lisbon+June+2026&type=place"
+      },
+      "description": "When Linkin Park returns to Portugal as part of the legendary Rock in Rio Lisboa festival, it won\u2019t just be another concert. It will be a full-scale summer explosion of guitars, nostalgia, new...",
+      "ticket_info": [
+        {
+          "source": "Guide to Lisbon",
+          "link": "https://www.guidetolisbon.com/events/linkin-park-concert-in-lisbon/",
+          "link_type": "more info"
+        }
+      ],
+      "venue": {
+        "name": "Parque Tejo",
+        "rating": 4.6,
+        "reviews": 3595,
+        "link": "https://www.google.com/search?sca_esv=23181f9f9c0f0df0&hl=en&q=Parque+Tejo&ludocid=15958221464699784079&ibp=gwp%3B0,7"
+      },
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3Df22pHZUMr47k2-9a_-BkE8GFIMD0kg54B6LIiMeLeJd6btiap3D9po&s",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfKAdlLTkYF_2E3R0k7074zdFAA6FeeeWqpYaw02RQlw&s=10"
+    },
+    {
+      "title": "Father John Misty at Sagres Campo Pequeno",
+      "date": {
+        "start_date": "Jun 1",
+        "when": "Mon, Jun 1, 7 \u2013 10 PM GMT+1"
+      },
+      "address": [
+        "Sagres Campo Pequeno, Centro de Lazer do, Campo Pequeno",
+        "Lisbon, Portugal"
+      ],
+      "link": "https://open.spotify.com/concert/1SactrdIPQBmTm4YeL9sXY",
+      "event_location_map": {
+        "image": "https://www.google.com/maps/vt/data=rBM5gmpzk0fY4qXATiVjaSNwu9c1l0lN6e5htNkFONCeFqmyfXUKJi-dV_0sxoWBQg0k6cgH2cIoCCTCKcQ2I-eIC_rs5ecr2Ze2oE6PLZclaC6OuY0",
+        "link": "https://www.google.com/maps/place//data=!4m2!3m1!1s0xd193375ed4fa277:0x2bbc5759aad6b824?sa=X&ved=2ahUKEwi7g_Xos7iUAxUgK1kFHZt1HogQ9eIBegQISxAA&hl=en",
+        "serpapi_link": "https://serpapi.com/search.json?data=%214m2%213m1%211s0xd193375ed4fa277%3A0x2bbc5759aad6b824&engine=google_maps&google_domain=google.com&hl=en&q=Concerts+in+Lisbon+June+2026&type=place"
+      },
+      "description": "Find tickets for J.MYSTERY at Sagres Campo Pequeno in Lisboa on 6/1/2026 at 8:30 PM",
+      "ticket_info": [
+        {
+          "source": "Spotify.com",
+          "link": "https://open.spotify.com/concert/1SactrdIPQBmTm4YeL9sXY",
+          "link_type": "tickets"
+        },
+        {
+          "source": "All Events",
+          "link": "https://www.seetickets.com/pt/search/all/699/1?search-order=Date&lang=en-GB",
+          "link_type": "more info"
+        },
+        {
+          "source": "Viagogo",
+          "link": "https://www.viagogo.com/Concert-Tickets/Pop-Music/Father-John-Misty-Tickets/E-159911393",
+          "link_type": "more info"
+        },
+        {
+          "source": "StubHub",
+          "link": "https://www.stubhub.com/father-john-misty-lisbon-tickets-6-1-2026/event/159911393/",
+          "link_type": "more info"
+        },
+        {
+          "source": "New York Concerts",
+          "link": "https://www.eventworld.co/lisbon/father-john-misty-tickets-2026-06-01-513628/",
+          "link_type": "more info"
+        }
+      ],
+      "venue": {
+        "name": "Sagres Campo Pequeno",
+        "rating": 4.3,
+        "reviews": 9685,
+        "link": "https://www.google.com/search?sca_esv=23181f9f9c0f0df0&hl=en&q=Sagres+Campo+Pequeno&ludocid=3151489881882408996&ibp=gwp%3B0,7"
+      },
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqC9mcnABFy2OQFFj925KmRH15ZoFRcto5dsqCSUt5BFh-SDxfdLZLNKE&s",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQySLUx4rdGFrg1g8ouEbv7FOk_10RCV2FN_27fAhP_2OLEMYkdxDQZzRCCdw&s=10"
+    }
+  ]
+}

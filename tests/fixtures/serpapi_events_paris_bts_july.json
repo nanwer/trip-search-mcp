@@ -1,0 +1,179 @@
+{
+  "search_metadata": {
+    "id": "6a058daefd81c8f3977b948a",
+    "status": "Success",
+    "json_endpoint": "https://serpapi.com/searches/gXj2cjzM5LZJLLiimhL6fw/6a058daefd81c8f3977b948a.json",
+    "created_at": "2026-05-14 08:54:06 UTC",
+    "processed_at": "2026-05-14 08:54:06 UTC",
+    "google_events_url": "https://www.google.com/search?q=BTS+tour+Paris+July+2026&ibp=htl;events&hl=en",
+    "raw_html_file": "https://serpapi.com/searches/gXj2cjzM5LZJLLiimhL6fw/6a058daefd81c8f3977b948a.html",
+    "total_time_taken": 4.39
+  },
+  "search_parameters": {
+    "q": "BTS tour Paris July 2026",
+    "engine": "google_events",
+    "hl": "en"
+  },
+  "search_information": {
+    "events_results_state": "Results for exact spelling"
+  },
+  "events_results": [
+    {
+      "title": "BTS",
+      "date": {
+        "start_date": "Jul 17",
+        "when": "Fri, Jul 17, 8 \u2013 11 PM GMT+2"
+      },
+      "address": [
+        "Stade de France",
+        "Saint-Denis, France"
+      ],
+      "link": "https://open.spotify.com/concert/2vtWUf3Y1aOo6t5c64bRL9",
+      "event_location_map": {
+        "image": "https://www.google.com/maps/vt/data=YtgbXNtS3692y7owX7jpDEpbHWtQiB1B2KGKpVTMHCJfduAbD3p4-Fml1haOORObiemqcxRmluilPbTVRYp0mzldApZtStOkaZEygCNACa8A1gGjawU",
+        "link": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x47e66ebadd2263bf:0x70c04f7109156311?sa=X&ved=2ahUKEwicl_jqs7iUAxUhRzABHTZEFLEQ9eIBegQIAxAA&hl=en",
+        "serpapi_link": "https://serpapi.com/search.json?data=%214m2%213m1%211s0x47e66ebadd2263bf%3A0x70c04f7109156311&engine=google_maps&google_domain=google.com&hl=en&q=BTS+tour+Paris+July+2026&type=place"
+      },
+      "description": "Find tickets for BTS at STADE DE FRANCE in St Denis on 7/17/2026 at 8:00 PM",
+      "ticket_info": [
+        {
+          "source": "Spotify.com",
+          "link": "https://open.spotify.com/concert/2vtWUf3Y1aOo6t5c64bRL9",
+          "link_type": "tickets"
+        },
+        {
+          "source": "Festivaly.eu",
+          "link": "https://festivaly.eu/en/bts-world-tour-arirang-in-paris-stade-de-france-st-denis-2026",
+          "link_type": "tickets"
+        },
+        {
+          "source": "Ticketmaster.fr",
+          "link": "https://www.ticketmaster.fr/en/manifestation/bts-world-tour-arirang-in-paris-ticket/idmanif/647899",
+          "link_type": "more info"
+        },
+        {
+          "source": "Billetterie Leclerc",
+          "link": "https://www.leclercbilletterie.com/en/manifestation/bts-world-tour-arirang-in-paris-ticket/idmanif/647775",
+          "link_type": "more info"
+        },
+        {
+          "source": "Billetterie Carrefour Spectacles - Carrefour",
+          "link": "https://www.spectacles.carrefour.fr/en/manifestation/bts-world-tour-arirang-in-paris-ticket/idmanif/647899",
+          "link_type": "more info"
+        }
+      ],
+      "venue": {
+        "name": "Stade de France",
+        "rating": 4.5,
+        "reviews": 48469,
+        "link": "https://www.google.com/search?sca_esv=23181f9f9c0f0df0&hl=en&q=Stade+de+France&ludocid=8124581074678670097&ibp=gwp%3B0,7"
+      },
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOFXPSuG-5ZaNdQ59SmK9Y3TLnRIsseXnj7YqlpdToPYky8g56EEb9bj4&s",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCzE1d7BhyFUS8MEqLC_nPyr63TM_6RrsWJX9LMXUmGQBhU7GdlpDq4SZpxA&s=10"
+    },
+    {
+      "title": "Bts Day Party-Grand Festival Army Paris",
+      "date": {
+        "start_date": "Jul 19",
+        "when": "Sun, Jul 19, 11 AM \u2013 7 PM GMT+2"
+      },
+      "address": [
+        "Le palais Shah Nawaz, 15 Av. Salvador Allende",
+        "\u00c9pinay-sur-Seine, France"
+      ],
+      "link": "https://www.facebook.com/events/1457916639348516/?acontext=%7B%22action_history%22%3A%22null%22%7D&ref_source=newsfeed&ref_mechanism=feed_attachment",
+      "event_location_map": {
+        "image": "https://www.google.com/maps/vt/data=eAIVEhD0hm1eJiHONFEqUMSB9gFqhBRw_woexRUJxPxt19zMUG-3YAuUyJk6aAy9kR_A-gCpuecD6KpV2OdZL21FEUVuyDuZNUOd_AUQyyUbrBx7tb4",
+        "link": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x47e6690c84ee5499:0x4a9ce76e58f979a8?sa=X&ved=2ahUKEwicl_jqs7iUAxUhRzABHTZEFLEQ9eIBegQICxAA&hl=en",
+        "serpapi_link": "https://serpapi.com/search.json?data=%214m2%213m1%211s0x47e6690c84ee5499%3A0x4a9ce76e58f979a8&engine=google_maps&google_domain=google.com&hl=en&q=BTS+tour+Paris+July+2026&type=place"
+      },
+      "description": "BTS FAN DAY FRANCE Hello , Bonjour Une journ\u00e9e 100% d\u00e9di\u00e9e \u00e0 BTS et aux ARMY de France Viens vibrer, partager et c\u00e9l\u00e9brer ta passion avec d\u2019autres fans ! Karaok\u00e9 \u2022 Nail Art \u2022 Blind...",
+      "ticket_info": [
+        {
+          "source": "Facebook",
+          "link": "https://www.facebook.com/events/shah-nawaz-restaurant/bts-fan-day/979304448123795/",
+          "link_type": "more info"
+        }
+      ],
+      "venue": {
+        "name": "Le palais Shah Nawaz",
+        "rating": 4.4,
+        "reviews": 44,
+        "link": "https://www.google.com/search?sca_esv=23181f9f9c0f0df0&hl=en&q=Le+palais+Shah+Nawaz&ludocid=5376426516298693032&ibp=gwp%3B0,7"
+      },
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdL8ruzG0iyPcMgowCu1OrTxYnzQcswOLjgrbJfTdPhmlo2ZNeLYPSsMw&s",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN1_IK4L9nqD8NNMkXRk6mKU1-Z96e3J4dadG55sIxqQArGY7l-3pz9go5IQ&s"
+    },
+    {
+      "title": "BTS K-Pop After Party Paris - Palais de Tokyo",
+      "date": {
+        "start_date": "Jul 17",
+        "when": "Fri, Jul 17, 11 PM \u2013 Sat, Jul 18, 5 AM GMT+2"
+      },
+      "address": [
+        "Palais de Tokyo, 13 Av. du Pr\u00e9sident Wilson",
+        "Paris, France"
+      ],
+      "link": "https://festscanner.com/event/bts-k-pop-after-party-paris-palais-de-paris-2026-07-17",
+      "event_location_map": {
+        "image": "https://www.google.com/maps/vt/data=zTr-r0J_MM6FmhC9kVRdqhvadvuTrka0ryPoxY9OIb-uxLdAw2M5Ydw-0i_0KRGTBH2g7GMOQcBZrPvpbWanbEmmaRPKK3PmXJ688f51z_-4B-M0yss",
+        "link": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x47e66fe6f937420b:0xc92ed17a5e1ca31d?sa=X&ved=2ahUKEwicl_jqs7iUAxUhRzABHTZEFLEQ9eIBegQIExAA&hl=en",
+        "serpapi_link": "https://serpapi.com/search.json?data=%214m2%213m1%211s0x47e66fe6f937420b%3A0xc92ed17a5e1ca31d&engine=google_maps&google_domain=google.com&hl=en&q=BTS+tour+Paris+July+2026&type=place"
+      },
+      "description": "The concert doesn\u2019t end at the Stade de France\u2026 It continues here. Still not ready to go home? Yeah\u2026 same. Let\u2019s dive together into the night. \ud83d\udc33 Join hundreds of ARMY for the ultimate K-pop club...",
+      "ticket_info": [
+        {
+          "source": "Shotgun.live",
+          "link": "https://shotgun.live/events/bts-after-party-paris",
+          "link_type": "tickets"
+        },
+        {
+          "source": "FestScanner",
+          "link": "https://festscanner.com/event/bts-k-pop-after-party-paris-palais-de-paris-2026-07-17",
+          "link_type": "more info"
+        }
+      ],
+      "venue": {
+        "name": "Palais de Tokyo",
+        "rating": 4.4,
+        "reviews": 11603,
+        "link": "https://www.google.com/search?sca_esv=23181f9f9c0f0df0&hl=en&q=Palais+de+Tokyo&ludocid=14496754574047355677&ibp=gwp%3B0,7"
+      },
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUDa1d-Dw_ws_qJd13TxMHG-55ZsPv3GuJlWh0QIOBlvSTvB5I6lI3u5I&s",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_QSKhH_xGSXfQ6K6kLA7dgRJbkolYIEwvSAgh_HjoVw&s=10"
+    },
+    {
+      "title": "OfficialKEvents | PARIS: KPOP & KHIPHOP Night in July \ud83d\udc9c BTS EDITION \ud83d\udc9c",
+      "date": {
+        "start_date": "Jul 17",
+        "when": "Fri, Jul 17, 11 PM \u2013 Sat, Jul 18, 5 AM GMT+2"
+      },
+      "address": [
+        "Club Haussmann, 23 Rue Taitbout",
+        "Paris, France"
+      ],
+      "link": "https://www.facebook.com/Officialkevents/posts/2061466321447092/",
+      "event_location_map": {
+        "image": "https://www.google.com/maps/vt/data=KltiF5YY3-HHE30B1kvndnbuqcNL6P-KyxF4LkipnGexg4OcjLZhZx3gCUZAg83VAuVc86ZsGFQwb8IbZWx6uwigkLJEeVHkGPRGyoA3VI8QrpZxe2o",
+        "link": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x47e66e39ea33cb25:0x2cc24262ec1d8bf2?sa=X&ved=2ahUKEwicl_jqs7iUAxUhRzABHTZEFLEQ9eIBegQIGxAA&hl=en",
+        "serpapi_link": "https://serpapi.com/search.json?data=%214m2%213m1%211s0x47e66e39ea33cb25%3A0x2cc24262ec1d8bf2&engine=google_maps&google_domain=google.com&hl=en&q=BTS+tour+Paris+July+2026&type=place"
+      },
+      "description": "Event in Paris, France by KEvents on Friday, July 17 2026",
+      "ticket_info": [
+        {
+          "source": "Facebook",
+          "link": "https://www.facebook.com/Officialkevents/posts/2061466321447092/",
+          "link_type": "more info"
+        }
+      ],
+      "venue": {
+        "name": "Club Haussmann",
+        "rating": 3.1,
+        "reviews": 1004,
+        "link": "https://www.google.com/search?sca_esv=23181f9f9c0f0df0&hl=en&q=Club+Haussmann&ludocid=3225213275786284018&ibp=gwp%3B0,7"
+      },
+      "thumbnail": "https://www.google.com/maps/vt/data=KltiF5YY3-HHE30B1kvndnbuqcNL6P-KyxF4LkipnGexg4OcjLZhZx3gCUZAg83VAuVc86ZsGFQwb8IbZWx6uwigkLJEeVHkGPRGyoA3VI8QrpZxe2o",
+      "image": "https://www.google.com/maps/vt/data=KltiF5YY3-HHE30B1kvndnbuqcNL6P-KyxF4LkipnGexg4OcjLZhZx3gCUZAg83VAuVc86ZsGFQwb8IbZWx6uwigkLJEeVHkGPRGyoA3VI8QrpZxe2o"
+    }
+  ]
+}

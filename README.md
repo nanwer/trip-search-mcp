@@ -1,6 +1,6 @@
 # trip-search-mcp
 
-**Let Claude plan trips for you, in plain English.** Live searches against Google Flights, Google Hotels, vacation rentals, and Airbnb — plus weather forecasts, currency conversion, persistent price watches, and per-property detail drill-downs. Nine tools, one config block.
+**Let Claude plan trips for you, in plain English.** Live searches against Google Flights, Google Hotels, vacation rentals, Airbnb, and event ticket vendors — plus weather forecasts, currency conversion, persistent price watches, and per-property detail drill-downs. Ten tools, one config block.
 
 ```
 You:   Find me round-trip flights Helsinki → Washington DC for May 18,
@@ -145,7 +145,7 @@ Save the file.
 
 ### 7. Test it
 
-Open a new chat in Claude Desktop. Click the hammer/tools icon at the bottom of the message box — you should see `trip-search` with **7 always-on tools** plus 2 more after step 8 below:
+Open a new chat in Claude Desktop. Click the hammer/tools icon at the bottom of the message box — you should see `trip-search` with **7 always-on tools** plus 3 more after step 8 below:
 
 | Tool | Needs SERPAPI_KEY? |
 |---|---|
@@ -157,6 +157,7 @@ Open a new chat in Claude Desktop. Click the hammer/tools icon at the bottom of 
 | `watch_flight_price` / `list_active_watches` / `cancel_watch` | No |
 | `search_stays` (default / hotels / vacation_rentals) | **Yes** |
 | `get_stay_details` | **Yes** |
+| `search_events` | **Yes** |
 
 Ask Claude:
 
@@ -266,7 +267,7 @@ Older installs used the module name `flights_mcp` (now `trip_search_mcp`). If yo
 ## For developers
 
 ```bash
-.venv/bin/pytest -q          # 301 tests, all fixture-driven, no live API calls
+.venv/bin/pytest -q          # 325 tests, all fixture-driven, no live API calls
 ```
 
 Source layout:
@@ -289,6 +290,7 @@ src/trip_search_mcp/
 │   └── cancel_watch.py
 ├── fli_backend/             flights — via fli library, no auth
 ├── serpapi_hotels_backend/  hotels + vacation rentals — SerpAPI
+├── serpapi_events_backend/  concerts + festivals + sports — SerpAPI google_events
 ├── airbnb_backend/          Airbnb direct — pyairbnb + Nominatim geocoding
 ├── open_meteo_backend/      weather forecasts — Open-Meteo, no auth
 ├── ecb_backend/             currency conversion — ECB daily feed, no auth
