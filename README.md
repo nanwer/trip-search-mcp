@@ -91,6 +91,16 @@ Copy what it prints — looks like `/Users/you/trip-search-mcp/.venv/bin/python`
 
 ### 5. Add a `trip-search` entry to Claude Desktop's config
 
+This is the one step where you have to edit a text file by hand (or get Claude to edit it for you — see the callout below). The file is JSON; if you've never edited JSON before, just be careful with commas and quotes.
+
+**Where is the file?**
+
+| OS | Path | Quickest way to find it |
+|---|---|---|
+| **macOS** | `~/Library/Application Support/Claude/claude_desktop_config.json` | In Finder, hit `⌘+Shift+G` and paste `~/Library/Application Support/Claude/`. Or run the `open -e` command below. |
+| **Windows** | `%APPDATA%\Claude\claude_desktop_config.json` | In File Explorer, paste `%APPDATA%\Claude\` into the address bar. Or run the `notepad` command below. |
+| **Linux** | `~/.config/Claude/claude_desktop_config.json` | Open in your favorite text editor. |
+
 Open the config file:
 
 ```bash
@@ -103,25 +113,25 @@ open -e "$HOME/Library/Application Support/Claude/claude_desktop_config.json"
 notepad "$env:APPDATA\Claude\claude_desktop_config.json"
 ```
 
-If the file doesn't exist:
+### 5a. Pick your scenario
+
+The config file is shared across every MCP server Claude Desktop knows about. **Read the right scenario below before editing — adding trip-search to a file that already has other servers in it is different from setting it up from scratch.**
+
+> 🛟 **Not sure which scenario you're in or worried about breaking things?**
+> Take a screenshot of your current config file (or copy-paste its contents) into a Claude chat and ask:
+> *"Merge a trip-search block into this MCP config without removing my existing servers. My venv Python path is /PASTE/PATH/FROM/STEP-4/HERE."*
+> Claude will hand back the full merged JSON. Paste that back into the file. No JSON wrangling required.
+
+---
+
+#### Scenario A — You've never set up an MCP server before (fresh file)
+
+The file probably doesn't exist yet. Create it:
 
 ```bash
-# macOS — create then reopen
+# macOS
 mkdir -p "$HOME/Library/Application Support/Claude"
-echo '{}' > "$HOME/Library/Application Support/Claude/claude_desktop_config.json"
-open -e "$HOME/Library/Application Support/Claude/claude_desktop_config.json"
-```
-
-```powershell
-# Windows — create then reopen
-New-Item -ItemType Directory -Path "$env:APPDATA\Claude" -Force | Out-Null
-'{"mcpServers": {}}' | Out-File -Encoding utf8 "$env:APPDATA\Claude\claude_desktop_config.json"
-notepad "$env:APPDATA\Claude\claude_desktop_config.json"
-```
-
-Add a `trip-search` entry inside `mcpServers`. If you already have other MCP servers, place this one alongside them (comma-separated):
-
-```json
+cat > "$HOME/Library/Application Support/Claude/claude_desktop_config.json" << 'JSON'
 {
   "mcpServers": {
     "trip-search": {
@@ -130,14 +140,85 @@ Add a `trip-search` entry inside `mcpServers`. If you already have other MCP ser
     }
   }
 }
+JSON
 ```
 
-**Windows users:** use double backslashes in the `command` path:
+```powershell
+# Windows
+New-Item -ItemType Directory -Path "$env:APPDATA\Claude" -Force | Out-Null
+@'
+{
+  "mcpServers": {
+    "trip-search": {
+      "command": "C:\\PASTE\\PATH\\FROM\\STEP-4\\python.exe",
+      "args": ["-m", "trip_search_mcp.server"]
+    }
+  }
+}
+'@ | Out-File -Encoding utf8 "$env:APPDATA\Claude\claude_desktop_config.json"
+```
+
+Then open it in a text editor and replace `/PASTE/PATH/FROM/STEP-4/HERE` with the path you copied in step 4. **Windows users:** every `\` in the path must be doubled to `\\`.
+
+---
+
+#### Scenario B — You already have other MCP servers configured
+
+Your file looks something like this (the names will differ — yours might have Outline, Slack, Figma, etc.):
+
 ```json
-"command": "C:\\Users\\you\\trip-search-mcp\\.venv\\Scripts\\python.exe"
+{
+  "mcpServers": {
+    "outline": {
+      "command": "...",
+      "args": [...],
+      "env": {...}
+    }
+  }
+}
 ```
 
-Save the file.
+You need to **add** the trip-search block alongside your existing one(s). Open the file:
+
+```bash
+# macOS
+open -e "$HOME/Library/Application Support/Claude/claude_desktop_config.json"
+```
+
+```powershell
+# Windows
+notepad "$env:APPDATA\Claude\claude_desktop_config.json"
+```
+
+Then add `"trip-search": { ... }` inside `mcpServers`. The result should look like this:
+
+```json
+{
+  "mcpServers": {
+    "outline": {
+      "command": "...",
+      "args": [...],
+      "env": {...}
+    },
+    "trip-search": {
+      "command": "/PASTE/PATH/FROM/STEP-4/HERE",
+      "args": ["-m", "trip_search_mcp.server"]
+    }
+  }
+}
+```
+
+⚠️ **Two things to watch out for:**
+
+1. **Don't forget the comma** after the closing `}` of your existing server block, before `"trip-search":`. Without it, the file is invalid JSON and Claude Desktop will load *no* MCP servers.
+2. **Windows paths:** every `\` in the `command` field must be doubled (`\\`). Example:
+   ```json
+   "command": "C:\\Users\\you\\trip-search-mcp\\.venv\\Scripts\\python.exe"
+   ```
+
+Save the file when done.
+
+> **Lost the formatting?** Paste your file's current contents (and the path from step 4) into a Claude chat and ask it to add the trip-search block for you. Way safer than hand-editing if you're not comfortable with JSON.
 
 ### 6. Fully quit and reopen Claude Desktop
 
@@ -168,13 +249,15 @@ If you get a summary with prices and a "Book on Google Flights" link, you're don
 
 ---
 
-## Step 8 (optional) — turn on hotel search
+## Step 8 (optional) — turn on hotel + event + activity search
 
-Hotels and vacation-rental search use [SerpAPI](https://serpapi.com) — free tier 100 searches/month. The flight tools and the Airbnb category work without it.
+Hotels, vacation rentals, events, activities, and `get_stay_details` use [SerpAPI](https://serpapi.com) — free tier 100 searches/month. The flight tools, the Airbnb category, weather, currency, and watches all work without it.
 
 1. Sign up at [serpapi.com](https://serpapi.com) (Google login works).
 2. Copy your key from [serpapi.com/manage-api-key](https://serpapi.com/manage-api-key).
-3. Add an `env` block to your config (step 5):
+3. Open your config file again and **add** an `env` block to the trip-search entry. Two scenarios:
+
+   **If trip-search is your only MCP server**, your file becomes:
    ```json
    {
      "mcpServers": {
@@ -188,7 +271,29 @@ Hotels and vacation-rental search use [SerpAPI](https://serpapi.com) — free ti
      }
    }
    ```
-4. **⌘Q and reopen Claude Desktop.** `search_stays` (hotels/vacation rentals) and `get_stay_details` now work.
+
+   **If you have other MCP servers** alongside trip-search, only modify the trip-search block — leave the others untouched:
+   ```json
+   {
+     "mcpServers": {
+       "outline": { ... },        // leave alone
+       "slack":   { ... },        // leave alone
+       "trip-search": {
+         "command": "/PASTE/PATH/FROM/STEP-4/HERE",
+         "args": ["-m", "trip_search_mcp.server"],
+         "env": {                    // ← add this block
+           "SERPAPI_KEY": "paste-your-key-here"
+         }
+       }
+     }
+   }
+   ```
+
+   ⚠️ Don't forget the **comma** after `"args": [...]` before `"env":` — without it, the JSON is invalid.
+
+4. **⌘Q and reopen Claude Desktop.** The four SerpAPI-gated tools (`search_stays` hotels mode, `get_stay_details`, `search_events`, `search_activities`) now work.
+
+> 🛟 Again, if you'd rather not hand-edit JSON, paste your current config plus the API key into a Claude chat and ask it to add the SerpAPI env block for you. Faster than chasing missing commas.
 
 ---
 
