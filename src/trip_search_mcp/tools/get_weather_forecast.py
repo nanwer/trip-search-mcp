@@ -32,6 +32,8 @@ _LEVEL_FOR_CODE = {
 }
 
 TOOL_DESCRIPTION = """\
+🎯 **RENDERING DIRECTIVE — READ FIRST.** When this tool returns 3+ forecast days, render them as an **HTML/React artifact** — a horizontal day-strip or 7-day card grid with one tile per day (day name + emoji icon + high/low + precip%), NOT a paragraph or table-in-prose. 1-2 days may be prose. If used as context inside a trip plan, embed the strip inside the plan's artifact.
+
 Get a 7-day weather forecast for a city or specific coordinates. Powered by Open-Meteo (free, global, no API key required).
 
 USE THIS TOOL WHEN:

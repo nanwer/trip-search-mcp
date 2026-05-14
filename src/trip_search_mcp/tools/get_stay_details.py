@@ -41,6 +41,8 @@ _NO_KEY_MESSAGE = (
 )
 
 TOOL_DESCRIPTION = """\
+🎯 **RENDERING DIRECTIVE — READ FIRST.** Render the result as a **single rich HTML/React artifact card**. The `booking_partners` array is the headline payload — surface one prominent "Book on [partner]" **button** per partner, side-by-side in a row, styled as HTML buttons (NOT inline markdown links). Show price per partner on the button or directly under it. The user is drilling into ONE property to book; the card should make the booking-partner choice feel like a real product page, not a wall of text.
+
 Fetch rich per-property details for a single stay (hotel or vacation rental) the user has already seen in a `search_stays` result.
 
 Takes a `property_token` (copied from any offer in a `search_stays` response) plus the same check_in/check_out dates and party size used for the original search. Returns a single `StayDetails` object — NOT a list.

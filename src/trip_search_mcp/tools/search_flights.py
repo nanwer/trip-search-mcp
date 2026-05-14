@@ -33,6 +33,8 @@ _LEVEL_FOR_CODE = {
 }
 
 TOOL_DESCRIPTION = """\
+🎯 **RENDERING DIRECTIVE — READ FIRST.** When this tool returns 2+ flight offers, you MUST present them as an **interactive HTML/React artifact** (an Artifacts block, not flowing prose). Each offer is a visually distinct CARD with a prominent "Book on Google Flights" **button** styled as an HTML button or large rounded link, NOT an inline markdown hyperlink. Plain prose with `[text](url)` links is NOT acceptable for multi-result responses — the user can't click a paragraph. If this call is part of a larger trip-plan response, the trip plan ITSELF should be an artifact and contain the flight cards. Single-result responses may use prose.
+
 Search live flight offers for a given route and date range using Google Flights data.
 
 Returns a ranked list of flight options with prices, airlines, segment details, and total trip durations. Does not book flights, only searches.

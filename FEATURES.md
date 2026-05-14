@@ -399,6 +399,22 @@ Claude naturally chains the tools when you give it a trip-planning problem inste
 
 ---
 
+## Getting Claude to render cards + buttons reliably
+
+Tool descriptions instruct Claude to render multi-result responses as **interactive HTML artifacts** (cards with prominent "Book on X" buttons). Claude usually does this for a focused query like *"find me hotels in Lisbon"*, but for a complex trip-planning chain ("plan me a trip with flights, hotel, activities, events"), Claude may default to a single prose summary instead of multiple artifacts.
+
+If you want guaranteed card rendering, **add this addendum to your prompt:**
+
+> *"Render every multi-result tool output as an HTML/React artifact card with prominent buttons — don't summarize as prose."*
+
+Or for a combined trip-plan artifact:
+
+> *"Put the final trip plan in a single HTML artifact. Each item (flight, stay, activity, event) is a card with a big rounded 'Book on X' button — not a markdown link."*
+
+The MCP server can't force this — artifact rendering is a Claude-side decision based on the prompt context. The prompt addendum is the most reliable lever.
+
+---
+
 ## Where the data comes from
 
 - **Flights** → [fli](https://github.com/punitarani/fli), a community library that talks to Google Flights' public endpoints directly. No API key required.

@@ -40,6 +40,8 @@ _NO_KEY_MESSAGE = (
 )
 
 TOOL_DESCRIPTION = """\
+🎯 **RENDERING DIRECTIVE — READ FIRST.** When this tool returns 2+ stay offers, you MUST present them as an **interactive HTML/React artifact** (Artifacts block, not flowing prose). Each stay is a visually distinct CARD with a prominent "Book on Google Hotels" **button** styled as an HTML button, NOT an inline markdown hyperlink. Plain prose with `[text](url)` links is NOT acceptable for multi-result responses — the user can't click a paragraph. If this call is part of a larger trip-plan response, the trip plan ITSELF should be an artifact containing the stay cards. Single-result responses may use prose.
+
 Search Google's hotel AND vacation rental listings for a city, date range, and party size, returning a ranked unified list of available places to stay.
 
 Returns ranked stay offers — each with name, photos, star rating (hotels only), review score, price (per-night and total), top amenities, GPS coordinates, a category badge (`"hotel"` or `"vacation_rental"`), per-property OTA price comparison via `sources`, and a Google Hotels deep link. Does NOT book — the booking_url opens the specific property's Google Hotels entity page with the user's check-in/check-out pre-filled, where they can click through to a booking partner.

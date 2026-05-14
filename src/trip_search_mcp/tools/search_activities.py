@@ -35,6 +35,8 @@ _NO_KEY_MESSAGE = (
 )
 
 TOOL_DESCRIPTION = """\
+🎯 **RENDERING DIRECTIVE — READ FIRST.** When this tool returns 2+ activities, you MUST present them as an **interactive HTML/React artifact** (Artifacts block, not flowing prose). Each activity is a visually distinct CARD with a prominent "Find on Tripadvisor" **button** styled as an HTML button, NOT an inline markdown link. Include the activity-type badge (Sight / Experience) prominently. If the call is part of a larger trip plan, the plan itself should be an artifact containing the activity cards. Single-result responses may use prose.
+
 Search Tripadvisor's "Things to Do" (sights + bookable experiences/tours) for a location, optionally filtered by free-text query, place type, and minimum rating.
 
 DISTINCT FROM `search_events`: activities are ongoing (visit a museum, take a cooking class anytime); events are date-specific (a concert on June 21). Use this for "what should I do in X"; use `search_events` for "what's happening while I'm there".

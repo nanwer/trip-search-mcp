@@ -19,6 +19,8 @@ from trip_search_mcp.monitoring import db, refresh
 TOOL_NAME = "list_active_watches"
 
 TOOL_DESCRIPTION = """\
+🎯 **RENDERING DIRECTIVE — READ FIRST.** When 2+ watches come back, render them as an **HTML/React artifact** — one card per watch with a clear "Cancel" **button** (callable via `cancel_watch(watch_id)`) and, for alerted watches, a "Book now" **button** to the flight booking URL. Alerted watches must be visually flagged (e.g. green badge or 🎯 callout). 1 watch may be prose.
+
 List the user's active flight price watches. Re-runs any watch whose latest check is older than `refresh_after_hours` (default 6h) and flips status to "alerted" when the latest price is at or below the watch's threshold.
 
 USE THIS TOOL WHEN: the user asks "any deals?", "what's the price of [route] looking like?", "show my watches", "anything trigger yet?", "did the Lisbon trip get cheaper?". Also use it proactively at the start of a session if you know the user has watches set up.

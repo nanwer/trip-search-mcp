@@ -31,6 +31,8 @@ _LEVEL_FOR_CODE = {
 }
 
 TOOL_DESCRIPTION = """\
+🎯 **RENDERING DIRECTIVE — READ FIRST.** When this tool returns 5+ entries, render them as an **HTML/React artifact** — a small price-grid or chart, NOT a long flowing list. For 1-4 entries, prose is fine. The cheapest 1-2 dates should be visually highlighted. Offer to deep-dive into the cheapest date with `search_flights` once the user picks one.
+
 Find which travel dates are cheapest across a flexible range, using Google Flights data.
 
 Returns a list of (departure_date, return_date, price) entries sorted cheapest first. Does not return flight times, airlines, or layover details — for that, use `search_flights` once the user picks a date.

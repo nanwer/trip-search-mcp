@@ -206,6 +206,22 @@ Hotels and vacation-rental search use [SerpAPI](https://serpapi.com) — free ti
 
 ---
 
+## Forcing card / button rendering
+
+Each tool's description tells Claude to render multi-result responses as **interactive artifacts** with clickable booking buttons. Claude still has discretion — when several tools run in sequence ("plan me a trip"), Claude may default to one prose summary instead of N artifacts.
+
+If you want guaranteed card rendering, add this one-liner to the start of any trip-planning prompt:
+
+> *"Render every multi-result tool output as an HTML/React artifact card with prominent buttons — don't summarize as prose."*
+
+Or, for an even stronger directive when you want a single combined artifact:
+
+> *"Put the final trip plan in a single HTML artifact. Each item (flight, stay, activity, event) is a card with a big rounded 'Book on X' button — not a markdown link."*
+
+You can also save this as a Claude Desktop Style or memory so it applies everywhere.
+
+---
+
 ## Updating to the latest version
 
 Claude Desktop spawns the MCP subprocess **once** at launch and keeps running it. Pulling new code doesn't reload the running process — you have to ⌘Q and reopen Claude Desktop after every update.

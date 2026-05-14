@@ -36,6 +36,8 @@ _NO_KEY_MESSAGE = (
 )
 
 TOOL_DESCRIPTION = """\
+🎯 **RENDERING DIRECTIVE — READ FIRST.** When this tool returns 2+ events, you MUST present them as an **interactive HTML/React artifact** (Artifacts block, not flowing prose). Each event is a visually distinct CARD with one "Tickets on [vendor]" **button** per `ticket_sources` entry (or a single button on `ticket_url` if no extras), styled as HTML buttons, NOT inline markdown links. If the call is part of a larger trip plan, the plan itself should be an artifact containing event cards. Single-result responses may use prose.
+
 Search Google for time-bound events — concerts, festivals, sports games, comedy shows, conferences — happening at a location, optionally filtered by event type and date range.
 
 DISTINCT FROM `search_activities`: events are time-bound (a specific date or window); activities (tours, attractions) are ongoing. Use this tool for "what's on while I'm there"; use `search_activities` for "what should I do".
